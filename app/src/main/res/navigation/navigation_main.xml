@@ -5,7 +5,64 @@
     app:startDestination="@id/splashFragment">
 
     <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.depromeet.knockknock.ui.editprofile.EditProfileFragment"
+        android:label="EditProfileFragment" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.depromeet.knockknock.ui.home.HomeFragment"
+        android:label="HomeFragment" />
+
+    <fragment
+        android:id="@+id/alarmRoomFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroom.AlarmRoomFragment"
+        android:label="AlarmRoomFragment" />
+
+
+    <fragment
         android:id="@+id/myPageFragment"
         android:name="com.depromeet.knockknock.ui.mypage.MypageFragment"
-        android:label="MypageFragment" />
+        android:label="MypageFragment" >
+        <action
+            android:id="@+id/action_myPageFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_alarmSettingFragment"
+            app:destination="@id/alarmSettingFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_bookmarkFragment"
+            app:destination="@id/bookmarkFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_friendListFragment"
+            app:destination="@id/friendListFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.depromeet.knockknock.ui.editprofile.EditProfileFragment"
+        android:label="EditProfileFragment" />
+
+    <fragment
+        android:id="@+id/alarmSettingFragment"
+        android:name="com.depromeet.knockknock.ui.alarmsetting.AlarmSettingFragment"
+        android:label="AlarmSettingFragment" />
+
+    <fragment
+        android:id="@+id/bookmarkFragment"
+        android:name="com.depromeet.knockknock.ui.bookmark.BookmarkFragment"
+        android:label="BookmarkFragment" />
+
+    <fragment
+        android:id="@+id/friendListFragment"
+        android:name="com.depromeet.knockknock.ui.friendlist.FriendListFragment"
+        android:label="FriendListFragment" />
+
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.depromeet.knockknock.ui.information.InformationFragment"
+        android:label="InformationFragment" />
 </navigation>
