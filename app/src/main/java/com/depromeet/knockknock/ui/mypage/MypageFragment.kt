@@ -30,11 +30,11 @@ class MypageFragment : BaseFragment<FragmentMypageBinding, MypageViewModel>(R.la
         lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collect {
                 when(it) {
-                    is MypageNavigationAction.NavigateToProfileEdit -> {}
-                    is MypageNavigationAction.NavigateToAlarmSetting -> {}
-                    is MypageNavigationAction.NavigateToBookmark -> {}
-                    is MypageNavigationAction.NavigateToFriendList -> {}
-                    is MypageNavigationAction.NavigateToInformation -> {}
+                    is MypageNavigationAction.NavigateToProfileEdit -> navigate(MypageFragmentDirections.actionMyPageFragmentToEditProfileFragment())
+                    is MypageNavigationAction.NavigateToAlarmSetting -> navigate(MypageFragmentDirections.actionMyPageFragmentToAlarmSettingFragment())
+                    is MypageNavigationAction.NavigateToBookmark -> navigate(MypageFragmentDirections.actionMyPageFragmentToBookmarkFragment())
+                    is MypageNavigationAction.NavigateToFriendList -> navigate(MypageFragmentDirections.actionMyPageFragmentToFriendListFragment())
+                    is MypageNavigationAction.NavigateToInformation -> navigate(MypageFragmentDirections.actionMyPageFragmentToInformationFragment())
                 }
             }
         }
