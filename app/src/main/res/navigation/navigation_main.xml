@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/splashFragment">
+
+    <action
+        android:id="@+id/action_main_fragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpTo="@id/navigation_graph"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.depromeet.knockknock.ui.editprofile.EditProfileFragment"
+        android:label="EditProfileFragment" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.depromeet.knockknock.ui.home.HomeFragment"
+        android:label="HomeFragment" />
+
+    <fragment
+        android:id="@+id/alarmRoomFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroom.AlarmRoomFragment"
+        android:label="AlarmRoomFragment" />
+
+
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.depromeet.knockknock.ui.mypage.MypageFragment"
+        android:label="MypageFragment" >
+        <action
+            android:id="@+id/action_myPageFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_graph" />
+        <action
+            android:id="@+id/action_myPageFragment_to_alarmSettingFragment"
+            app:destination="@id/alarmSettingFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_graph" />
+        <action
+            android:id="@+id/action_myPageFragment_to_bookmarkFragment"
+            app:destination="@id/bookmarkFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_graph" />
+        <action
+            android:id="@+id/action_myPageFragment_to_friendListFragment"
+            app:destination="@id/friendListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_graph" />
+        <action
+            android:id="@+id/action_myPageFragment_to_informationFragment"
+            app:destination="@id/informationFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_graph" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.depromeet.knockknock.ui.editprofile.EditProfileFragment"
+        android:label="EditProfileFragment" />
+
+    <fragment
+        android:id="@+id/alarmSettingFragment"
+        android:name="com.depromeet.knockknock.ui.alarmsetting.AlarmSettingFragment"
+        android:label="AlarmSettingFragment" />
+
+    <fragment
+        android:id="@+id/bookmarkFragment"
+        android:name="com.depromeet.knockknock.ui.bookmark.BookmarkFragment"
+        android:label="BookmarkFragment" />
+
+    <fragment
+        android:id="@+id/friendListFragment"
+        android:name="com.depromeet.knockknock.ui.friendlist.FriendListFragment"
+        android:label="FriendListFragment" />
+
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.depromeet.knockknock.ui.information.InformationFragment"
+        android:label="InformationFragment" />
+</navigation>

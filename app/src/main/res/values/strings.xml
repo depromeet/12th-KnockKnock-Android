@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">knockknock</string>
+
+    <!--홈화면-->
+    <string name="onBackPressed_Message">뒤로가기 버튼을\n한번 더 누르면 종료됩니다.</string>
+
+    <!--네베게이션 메뉴-->
+    <string name="bottom_home">홈</string>
+    <string name="bottom_alarm_room">알림방</string>
+    <string name="bottom_my">MY</string>
+
+
 </resources>
