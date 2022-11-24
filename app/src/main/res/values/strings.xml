@@ -4,10 +4,22 @@
     <!--홈화면-->
     <string name="onBackPressed_Message">뒤로가기 버튼을\n한번 더 누르면 종료됩니다.</string>
 
-    <!--네베게이션 메뉴-->
+    <!--네비게이션 메뉴-->
     <string name="bottom_home">홈</string>
     <string name="bottom_alarm_room">알림방</string>
     <string name="bottom_my">MY</string>
+
+    <!--알림설정-->
+    <string name="alarm_settings_title">알림 설정</string>
+
+    <string name="alarm_settings_new_push">새로운 푸시알림 도착 알림</string>
+    <string name="alarm_settings_new_push_description">소속 그룹 내 신규 푸시알림</string>
+
+    <string name="alarm_settings_reaction_push">푸시알림 리액션 알림</string>
+    <string name="alarm_settings_reaction_push_description">내 푸시알림에 리액션이 남겨졌을 때 알림</string>
+
+    <string name="alarm_settings_not_receive_push_at_night">야간 푸시알림</string>
+    <string name="alarm_settings_not_receive_push_at_night_description">오후 9시부터 다음날 오전 8시까지의 알림</string>
 
 
 </resources>
