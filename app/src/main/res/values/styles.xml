@@ -7,4 +7,20 @@
         <item name="android:textSize">18dp</item>
         <item name="actionMenuTextColor">@color/gray09</item>
     </style>
+
+    <style name="Theme.AppCompat.Alarm.Settings.Margin" parent="Theme.AppCompat">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+    </style>
+
+    <style name="Theme.AppCompat.Alarm.Settings.Title" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.AppCompat.Alarm.Settings.Description" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/gray07</item>
+    </style>
 </resources>

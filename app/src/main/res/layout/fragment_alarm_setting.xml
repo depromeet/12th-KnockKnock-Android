@@ -20,6 +20,37 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:titleTextAppearance="@style/ToolBarStyle"/>
+
+        <include
+            android:id="@+id/alarm_settings_new_push"
+            layout="@layout/include_alarm_settings_switch"
+            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:title="@{String.format(@string/alarm_settings_new_push)}"
+            app:description="@{String.format(@string/alarm_settings_new_push_description)}"/>
+
+        <include
+            android:id="@+id/alarm_settings_reaction_push"
+            layout="@layout/include_alarm_settings_switch"
+            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/alarm_settings_new_push"
+            app:title="@{String.format(@string/alarm_settings_reaction_push)}"
+            app:description="@{String.format(@string/alarm_settings_reaction_push_description)}"/>
+
+        <include
+            android:id="@+id/alarm_settings_not_receive_push_at_night"
+            layout="@layout/include_alarm_settings_switch"
+            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/alarm_settings_reaction_push"
+            app:title="@{String.format(@string/alarm_settings_not_receive_push_at_night)}"
+            app:description="@{String.format(@string/alarm_settings_not_receive_push_at_night_description)}"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 
