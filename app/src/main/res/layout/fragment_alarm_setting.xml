@@ -6,13 +6,97 @@
 
     <data>
         <variable
-            name="vm"
+            name="viewmodel"
             type="com.depromeet.knockknock.ui.alarmsetting.AlarmSettingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/ToolBarStyle"/>
+
+        <include
+            android:id="@+id/alarm_settings_new_push"
+            layout="@layout/include_alarm_settings_contents"
+            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:title="@{String.format(@string/alarm_settings_new_push)}"
+            app:description="@{String.format(@string/alarm_settings_new_push_description)}"/>
+
+
+        <Switch
+            android:id="@+id/alarm_settings_new_push_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
+            app:layout_constraintTop_toTopOf="@id/alarm_settings_new_push"
+            app:layout_constraintBottom_toBottomOf="@id/alarm_settings_new_push"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:track="@drawable/switch_track_selector"
+            android:thumb="@drawable/switch_thumb"
+            android:checked="@{viewmodel.alarmPushPermitted}"
+            android:onCheckedChanged="@{(view, checked) -> viewmodel.onNewPushToggled(checked)}">
+        </Switch>
+
+        <include
+            android:id="@+id/alarm_settings_reaction_push"
+            layout="@layout/include_alarm_settings_contents"
+            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/alarm_settings_new_push"
+            app:layout_constraintStart_toStartOf="parent"
+            app:title="@{String.format(@string/alarm_settings_reaction_push)}"
+            app:description="@{String.format(@string/alarm_settings_reaction_push_description)}"/>
+
+        <Switch
+            android:id="@+id/alarm_settings_reaction_push_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
+            app:layout_constraintTop_toTopOf="@id/alarm_settings_reaction_push"
+            app:layout_constraintBottom_toBottomOf="@id/alarm_settings_reaction_push"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:track="@drawable/switch_track_selector"
+            android:thumb="@drawable/switch_thumb"
+            android:checked="@{viewmodel.reactionPushPermitted}"
+            android:onCheckedChanged="@{(view, checked) -> viewmodel.onReactionPushToggled(checked)}">
+        </Switch>
+
+        <include
+            android:id="@+id/alarm_settings_not_receive_push_at_night"
+            layout="@layout/include_alarm_settings_contents"
+            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/alarm_settings_reaction_push"
+            app:layout_constraintStart_toStartOf="parent"
+            app:title="@{String.format(@string/alarm_settings_not_receive_push_at_night)}"
+            app:description="@{String.format(@string/alarm_settings_not_receive_push_at_night_description)}"/>
+
+        <Switch
+            android:id="@+id/alarm_settings_not_receive_push_at_night_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
+            app:layout_constraintTop_toTopOf="@id/alarm_settings_not_receive_push_at_night"
+            app:layout_constraintBottom_toBottomOf="@id/alarm_settings_not_receive_push_at_night"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:track="@drawable/switch_track_selector"
+            android:thumb="@drawable/switch_thumb"
+            android:checked="@{viewmodel.notReceivedPushAtNightPermitted}"
+            android:onCheckedChanged="@{(view, checked) -> viewmodel.onNotReceivedPushAtNight(checked)}">
+        </Switch>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="description"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_alarm_setting_switch_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <TextView
+            android:id="@+id/layout_alarm_setting_switch_title"
+            style="@style/Theme.AppCompat.Alarm.Settings.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{title}">
+        </TextView>
+
+        <TextView
+            android:id="@+id/layout_alarm_setting_switch_description"
+            style="@style/Theme.AppCompat.Alarm.Settings.Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_alarm_setting_switch_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{description}">
+        </TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
