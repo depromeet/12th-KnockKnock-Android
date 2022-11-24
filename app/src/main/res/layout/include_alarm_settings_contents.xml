@@ -14,7 +14,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_alarm_setting_switch_main"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
@@ -37,14 +37,5 @@
             app:layout_constraintStart_toStartOf="parent"
             android:text="@{description}">
         </TextView>
-
-        <Switch
-            android:id="@+id/layout_alarm_setting_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-        </Switch>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

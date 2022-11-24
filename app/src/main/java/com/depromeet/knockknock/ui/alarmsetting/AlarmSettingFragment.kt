@@ -23,7 +23,7 @@ class AlarmSettingFragment : BaseFragment<FragmentAlarmSettingBinding, AlarmSett
 
     override fun initStartView() {
         binding.apply {
-            this.vm = viewModel
+            this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
@@ -38,6 +38,8 @@ class AlarmSettingFragment : BaseFragment<FragmentAlarmSettingBinding, AlarmSett
 
     private fun initToolbar() {
         with(binding.toolbar) {
+            this.title = getString(R.string.alarm_settings_title)
+
             // 뒤로가기 버튼
 //            this.setNavigationIcon(R.drawable.ic_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
