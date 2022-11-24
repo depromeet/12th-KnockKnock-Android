@@ -41,6 +41,8 @@
             app:layout_constraintTop_toTopOf="@id/alarm_settings_new_push"
             app:layout_constraintBottom_toBottomOf="@id/alarm_settings_new_push"
             app:layout_constraintEnd_toEndOf="parent"
+            android:track="@drawable/switch_track_selector"
+            android:thumb="@drawable/switch_thumb"
             android:checked="@{viewmodel.alarmPushPermitted}"
             android:onCheckedChanged="@{(view, checked) -> viewmodel.onNewPushToggled(checked)}">
         </Switch>
@@ -64,6 +66,8 @@
             app:layout_constraintTop_toTopOf="@id/alarm_settings_reaction_push"
             app:layout_constraintBottom_toBottomOf="@id/alarm_settings_reaction_push"
             app:layout_constraintEnd_toEndOf="parent"
+            android:track="@drawable/switch_track_selector"
+            android:thumb="@drawable/switch_thumb"
             android:checked="@{viewmodel.reactionPushPermitted}"
             android:onCheckedChanged="@{(view, checked) -> viewmodel.onReactionPushToggled(checked)}">
         </Switch>
@@ -87,6 +91,8 @@
             app:layout_constraintTop_toTopOf="@id/alarm_settings_not_receive_push_at_night"
             app:layout_constraintBottom_toBottomOf="@id/alarm_settings_not_receive_push_at_night"
             app:layout_constraintEnd_toEndOf="parent"
+            android:track="@drawable/switch_track_selector"
+            android:thumb="@drawable/switch_thumb"
             android:checked="@{viewmodel.notReceivedPushAtNightPermitted}"
             android:onCheckedChanged="@{(view, checked) -> viewmodel.onNotReceivedPushAtNight(checked)}">
         </Switch>
