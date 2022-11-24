@@ -9,5 +9,9 @@
     <string name="bottom_alarm_room">알림방</string>
     <string name="bottom_my">MY</string>
 
+    <!--보관함-->
+    <string name="bookmark_title">보관함</string>
+    <string name="bookmark_edit_btn">편집</string>
+
 
 </resources>
