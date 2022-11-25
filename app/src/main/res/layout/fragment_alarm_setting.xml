@@ -25,10 +25,11 @@
             android:id="@+id/alarm_settings_new_push"
             layout="@layout/include_alarm_settings_contents"
             style="@style/Theme.AppCompat.Alarm.Settings.Margin"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/alarm_settings_new_push_switch"
             app:title="@{String.format(@string/alarm_settings_new_push)}"
             app:description="@{String.format(@string/alarm_settings_new_push_description)}"/>
 
@@ -36,8 +37,8 @@
         <Switch
             android:id="@+id/alarm_settings_new_push_switch"
             android:layout_width="wrap_content"
+            style="@style/Theme.AppCompat.Alarm.Settings.MarginEnd"
             android:layout_height="wrap_content"
-            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
             app:layout_constraintTop_toTopOf="@id/alarm_settings_new_push"
             app:layout_constraintBottom_toBottomOf="@id/alarm_settings_new_push"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,18 +52,19 @@
             android:id="@+id/alarm_settings_reaction_push"
             layout="@layout/include_alarm_settings_contents"
             style="@style/Theme.AppCompat.Alarm.Settings.Margin"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/alarm_settings_new_push"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/alarm_settings_reaction_push_switch"
             app:title="@{String.format(@string/alarm_settings_reaction_push)}"
             app:description="@{String.format(@string/alarm_settings_reaction_push_description)}"/>
 
         <Switch
             android:id="@+id/alarm_settings_reaction_push_switch"
+            style="@style/Theme.AppCompat.Alarm.Settings.MarginEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
             app:layout_constraintTop_toTopOf="@id/alarm_settings_reaction_push"
             app:layout_constraintBottom_toBottomOf="@id/alarm_settings_reaction_push"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,18 +78,19 @@
             android:id="@+id/alarm_settings_not_receive_push_at_night"
             layout="@layout/include_alarm_settings_contents"
             style="@style/Theme.AppCompat.Alarm.Settings.Margin"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/alarm_settings_reaction_push"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/alarm_settings_not_receive_push_at_night_switch"
             app:title="@{String.format(@string/alarm_settings_not_receive_push_at_night)}"
             app:description="@{String.format(@string/alarm_settings_not_receive_push_at_night_description)}"/>
 
         <Switch
             android:id="@+id/alarm_settings_not_receive_push_at_night_switch"
+            style="@style/Theme.AppCompat.Alarm.Settings.MarginEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Theme.AppCompat.Alarm.Settings.Margin"
             app:layout_constraintTop_toTopOf="@id/alarm_settings_not_receive_push_at_night"
             app:layout_constraintBottom_toBottomOf="@id/alarm_settings_not_receive_push_at_night"
             app:layout_constraintEnd_toEndOf="parent"
