@@ -18,7 +18,9 @@
     <color name="gray03">#EEEEEE</color>
     <color name="gray02">#F5F5F5</color>
     <color name="gray01">#FAFAFA</color>
-    
+
+    <color name="background_white_mode">#F6F6F6</color>
+
     <color name="main_yellow_light_mode">#FFEC8A</color>
     <color name="main_yellow2_text">#FFD260</color>
     <color name="main_yellow_dark_mode">#FFF285</color>
