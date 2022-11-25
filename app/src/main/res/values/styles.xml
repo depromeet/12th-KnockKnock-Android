@@ -20,24 +20,28 @@
     <style name="Theme.AppCompat.Yellow.Alert.TextView.Button.Negative" parent="Theme.AppCompat.Alert.Padding.Radius16">
         <item name="android:background">@drawable/custom_backgroundwhite_radius16</item>
         <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textColor">@color/gray08</item>
     </style>
 
     <style name="Theme.AppCompat.Yellow.Alert.TextView.Button.Positive" parent="Theme.AppCompat.Alert.Padding.Radius16">
         <item name="android:background">@drawable/custom_yellow_radius16</item>
         <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Theme.AppCompat.Red.Alert.TextView.Button.Negative" parent="Theme.AppCompat.Alert.Padding.Radius16">
         <item name="android:background">@drawable/custom_backgroundwhite_radius16</item>
         <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textColor">@color/gray08</item>
     </style>
 
     <style name="Theme.AppCompat.Red.Alert.TextView.Button.Positive" parent="Theme.AppCompat.Alert.Padding.Radius16">
         <item name="android:background">@drawable/custom_red_corner_radius16</item>
         <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -51,13 +55,14 @@
 
     <style name="Theme.AppCompat.Alarm.Settings.Title" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Theme.AppCompat.Alarm.Settings.Description" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textColor">@color/gray07</item>
     </style>
-
 
 </resources>
