@@ -8,6 +8,41 @@
         <item name="actionMenuTextColor">@color/gray09</item>
     </style>
 
+
+    <!-- Alert 관련 -->
+    <style name="Theme.AppCompat.Alert.Padding.Radius16" parent="Theme.AppCompat">
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingStart">40dp</item>
+        <item name="android:paddingEnd">40dp</item>
+    </style>
+
+    <style name="Theme.AppCompat.Yellow.Alert.TextView.Button.Negative" parent="Theme.AppCompat.Alert.Padding.Radius16">
+        <item name="android:background">@drawable/custom_backgroundwhite_radius16</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/gray08</item>
+    </style>
+
+    <style name="Theme.AppCompat.Yellow.Alert.TextView.Button.Positive" parent="Theme.AppCompat.Alert.Padding.Radius16">
+        <item name="android:background">@drawable/custom_yellow_radius16</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.AppCompat.Red.Alert.TextView.Button.Negative" parent="Theme.AppCompat.Alert.Padding.Radius16">
+        <item name="android:background">@drawable/custom_backgroundwhite_radius16</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/gray08</item>
+    </style>
+
+    <style name="Theme.AppCompat.Red.Alert.TextView.Button.Positive" parent="Theme.AppCompat.Alert.Padding.Radius16">
+        <item name="android:background">@drawable/custom_red_corner_radius16</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <!-- 알림 설정 관련 -->
     <style name="Theme.AppCompat.Alarm.Settings.Margin" parent="Theme.AppCompat">
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginStart">16dp</item>
@@ -23,4 +58,6 @@
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/gray07</item>
     </style>
+
+
 </resources>
