@@ -25,7 +25,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@{title}">
+            android:text="@{title}"
+            android:gravity="left">
         </TextView>
 
         <TextView
@@ -35,7 +36,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/layout_alarm_setting_switch_title"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@{description}">
+            android:text="@{description}"
+            android:gravity="left">
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
