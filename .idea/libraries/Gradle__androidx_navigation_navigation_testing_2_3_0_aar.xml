@@ -2,8 +2,8 @@
   <library name="Gradle: androidx.navigation:navigation-testing:2.3.0@aar">
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e9717e9a5cf1fd70e59d34b7ff87f3fc/transformed/navigation-testing-2.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b621428decdd61c3c03564a724339fe9/transformed/navigation-testing-2.3.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b621428decdd61c3c03564a724339fe9/transformed/navigation-testing-2.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1c85e0844277e501e92163ad5de3716e/transformed/navigation-testing-2.3.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/1c85e0844277e501e92163ad5de3716e/transformed/navigation-testing-2.3.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
