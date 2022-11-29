@@ -23,7 +23,6 @@ class OnboardAdapter(private val onboardData: List<OnboardData>) :
         fun bind(onboardData: OnboardData) {
             descriptionText.text = onboardData.description
             onboardImgSrc.setImageResource(onboardData.onboardImgPath)
-
         }
     }
 
