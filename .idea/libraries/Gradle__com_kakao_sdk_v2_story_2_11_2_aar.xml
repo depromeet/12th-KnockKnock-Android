@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.kakao.sdk:v2-story:2.11.2@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/f94aaa608d32fe0f59c2311fa2025bd5/transformed/v2-story-2.11.2/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/f94aaa608d32fe0f59c2311fa2025bd5/transformed/v2-story-2.11.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/f94aaa608d32fe0f59c2311fa2025bd5/transformed/v2-story-2.11.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

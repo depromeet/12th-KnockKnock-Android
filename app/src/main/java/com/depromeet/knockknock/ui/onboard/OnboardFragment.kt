@@ -9,8 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.FragmentOnboardBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class OnboardFragment : Fragment() {
     private lateinit var binding : FragmentOnboardBinding
     private val onboardAdapter = OnboardAdapter(

@@ -5,8 +5,8 @@
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/8e273deff6b16ef705c31b3f9735140e/transformed/material-1.7.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/8e273deff6b16ef705c31b3f9735140e/transformed/material-1.7.0/AndroidManifest.xml" />
       <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/8e273deff6b16ef705c31b3f9735140e/transformed/material-1.7.0/res" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/8e273deff6b16ef705c31b3f9735140e/transformed/material-1.7.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

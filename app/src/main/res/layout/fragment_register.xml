@@ -24,6 +24,7 @@
         android:orientation="vertical"
         tools:context=".RegisterFragment">
 
+
         <TextView
             android:id="@+id/intro_text"
             android:layout_width="wrap_content"
@@ -31,89 +32,110 @@
             android:layout_marginTop="80dp"
             android:fontFamily="@font/pretendard_bold"
             android:text="똑똑 미리 체험하기"
-
+            android:textColor="@color/black"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="vertical"
+
+        <ImageView
+            android:id="@+id/onboard_experience_door"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/onboard_experience_door"
+            app:layout_constraintBottom_toTopOf="@+id/example_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/intro_text">
+            app:layout_constraintTop_toBottomOf="@+id/intro_text"
+            app:layout_constraintVertical_bias="0.0" />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/onboard_experience_star"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:src="@drawable/onboard_experience_star"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.366"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/onboard_experience_door" />
 
-            <!--        <EditText-->
-            <!--            android:id="@+id/example_content"-->
-            <!--            android:background="@drawable/edittext_border"-->
-            <!--            android:layout_width="300dp"-->
-            <!--            android:layout_height="100dp"-->
-            <!--            android:layout_centerInParent="true"-->
-            <!--            android:ellipsize="start"-->
-            <!--            android:gravity="center"-->
-            <!--            android:hint="상세내용을 적어보세요"-->
-            <!--            android:text="@={testAlarmViewModel.inputContent}" />-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/example_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/gray08"
+            app:boxBackgroundColor="@color/gray03"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="80"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@+id/test_alarm_button">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:hint="메시지를 작성해보세요"
+                android:privateImeOptions="defaultInputMode=korean"
+                android:text="@={testAlarmViewModel.inputContent}"
+                android:textSize="25sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/example_content"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:hint="메시지를 작성해보세요"
-                    android:text="@={testAlarmViewModel.inputContent}"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-        </LinearLayout>
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/test_alarm_button"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="send"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/kakao_register_button"
+            android:text="보내기"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:background="@drawable/custom_white_radius20"
+            android:backgroundTint="#F6F6F6"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            style="?android:attr/borderlessButtonStyle"
+            app:layout_constraintVertical_bias="0.573" />
 
         <ImageButton
             android:id="@+id/kakao_register_button"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:adjustViewBounds="true"
             android:padding="0dp"
             android:scaleType="fitCenter"
             android:src="@drawable/onboard_kakao_register"
-            app:layout_constraintBottom_toTopOf="@id/google_register_button"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/google_register_button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/google_register_button"
-            android:layout_width="300dp"
-            android:layout_height="55dp"
-            android:layout_marginBottom="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="50dp"
             android:adjustViewBounds="true"
             android:padding="0dp"
             android:scaleType="fitCenter"

@@ -13,6 +13,11 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_onboard_fragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="alarmRoomFragment">
                     <value>
                       <LayoutPositions>
@@ -78,8 +83,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="291" />
-                            <option name="y" value="3" />
+                            <option name="x" value="267" />
+                            <option name="y" value="-76" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -185,8 +190,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="50" />
-                            <option name="y" value="8" />
+                            <option name="x" value="-29" />
+                            <option name="y" value="-93" />
                           </Point>
                         </option>
                       </LayoutPositions>

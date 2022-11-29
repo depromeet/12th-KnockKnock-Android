@@ -1,7 +1,9 @@
 package com.depromeet.knockknock.ui.splash
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentMypageBinding
@@ -32,4 +34,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(R.la
 
     override fun initAfterBinding() {
     }
+
+
 }

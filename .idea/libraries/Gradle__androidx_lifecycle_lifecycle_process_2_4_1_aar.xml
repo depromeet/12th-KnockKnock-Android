@@ -1,12 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.lifecycle:lifecycle-process:2.4.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f4faccdfbe32223b80f1e367fa7acd53/transformed/lifecycle-process-2.4.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f4faccdfbe32223b80f1e367fa7acd53/transformed/lifecycle-process-2.4.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f4faccdfbe32223b80f1e367fa7acd53/transformed/lifecycle-process-2.4.1/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/c8e0de95a8c9b68fb8265c12ea402f09/transformed/lifecycle-process-2.4.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/c8e0de95a8c9b68fb8265c12ea402f09/transformed/lifecycle-process-2.4.1/AndroidManifest.xml" />
       <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/c8e0de95a8c9b68fb8265c12ea402f09/transformed/lifecycle-process-2.4.1/res" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/c8e0de95a8c9b68fb8265c12ea402f09/transformed/lifecycle-process-2.4.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
