@@ -8,6 +8,6 @@ import javax.inject.Inject
 class AlarmCreateViewModel @Inject constructor(
 ) : BaseViewModel() {
 
-    private val TAG = "AlarmRoomViewModel"
+    private val TAG = "AlarmCreateViewModel"
 
 }
