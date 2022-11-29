@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="kakaoRegisterViewModel"
+            type="com.depromeet.knockknock.ui.onboard." />
+
+        <variable
+            name="googleRegisterViewModel"
+            type="com.example.onboardingdemo.GoogleAuthViewModel" />
+
+        <variable
+            name="testAlarmViewModel"
+            type="com.example.onboardingdemo.TestAlarmViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".RegisterFragment">
+
+        <TextView
+            android:id="@+id/intro_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:fontFamily="@font/pretendardbold"
+            android:text="똑똑 미리 체험하기"
+
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/intro_text">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/onboard_message" />
+
+            <!--        <EditText-->
+            <!--            android:id="@+id/example_content"-->
+            <!--            android:background="@drawable/edittext_border"-->
+            <!--            android:layout_width="300dp"-->
+            <!--            android:layout_height="100dp"-->
+            <!--            android:layout_centerInParent="true"-->
+            <!--            android:ellipsize="start"-->
+            <!--            android:gravity="center"-->
+            <!--            android:hint="상세내용을 적어보세요"-->
+            <!--            android:text="@={testAlarmViewModel.inputContent}" />-->
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/example_content"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:hint="메시지를 작성해보세요"
+                    android:text="@={testAlarmViewModel.inputContent}"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/test_alarm_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/kakao_register_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+        <ImageButton
+            android:id="@+id/kakao_register_button"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/onboard_kakao_register"
+            app:layout_constraintBottom_toTopOf="@id/google_register_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/google_register_button"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="100dp"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/onboard_google_register"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -100,4 +100,8 @@
         android:id="@+id/informationFragment"
         android:name="com.depromeet.knockknock.ui.information.InformationFragment"
         android:label="InformationFragment" />
+    <fragment
+        android:id="@+id/onboardFragment"
+        android:name="com.depromeet.knockknock.ui.onboard.OnboardFragment"
+        android:label="OnboardFragment" />
 </navigation>

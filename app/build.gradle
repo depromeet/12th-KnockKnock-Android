@@ -97,4 +97,18 @@ dependencies {
     // Preferences Data Store
     implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation "androidx.datastore:datastore-core:1.0.0"
+
+    //ViewPager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    //MaterialDesign
+    implementation 'com.google.android.material:material:1.7.0'
+    //dotsindicator
+    implementation("com.tbuonomo:dotsindicator:4.3")
+    //kakao sdk login
+    implementation "com.kakao.sdk:v2-all:2.11.2"
+    //google sdk login
+    implementation platform('com.google.firebase:firebase-bom:31.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 }
