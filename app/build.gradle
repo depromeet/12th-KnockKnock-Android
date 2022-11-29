@@ -77,9 +77,9 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
     // life cycle scope
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     // viewmodel scope
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 
     // Testing Navigation
     androidTestImplementation("androidx.navigation:navigation-testing:2.3.0")
