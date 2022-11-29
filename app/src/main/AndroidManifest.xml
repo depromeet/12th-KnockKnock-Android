@@ -4,6 +4,7 @@
     package="com.depromeet.knockknock">
 
     <application
+        android:name=".di.PresentationApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
