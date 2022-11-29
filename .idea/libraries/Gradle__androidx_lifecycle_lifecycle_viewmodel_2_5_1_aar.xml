@@ -4,9 +4,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6ad9355ff2b0f645013044963a316b20/transformed/lifecycle-viewmodel-2.5.1/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6ad9355ff2b0f645013044963a316b20/transformed/lifecycle-viewmodel-2.5.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6ad9355ff2b0f645013044963a316b20/transformed/lifecycle-viewmodel-2.5.1/res" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/6ad9355ff2b0f645013044963a316b20/transformed/lifecycle-viewmodel-2.5.1/res" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/6ad9355ff2b0f645013044963a316b20/transformed/lifecycle-viewmodel-2.5.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/6ad9355ff2b0f645013044963a316b20/transformed/lifecycle-viewmodel-2.5.1/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/9ea59d756255707b474968d869136d73/transformed/lifecycle-viewmodel-2.5.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/9ea59d756255707b474968d869136d73/transformed/lifecycle-viewmodel-2.5.1/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/9ea59d756255707b474968d869136d73/transformed/lifecycle-viewmodel-2.5.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

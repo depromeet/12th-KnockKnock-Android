@@ -2,15 +2,15 @@
   <library name="Gradle: androidx.recyclerview:recyclerview:1.1.0@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ef38477a7f74d773ee1ccfd9a5169791/transformed/recyclerview-1.1.0/annotations.zip!/" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/ef38477a7f74d773ee1ccfd9a5169791/transformed/recyclerview-1.1.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/e38b0b15d88f773a2d4efcb4409fedf0/transformed/recyclerview-1.1.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ef38477a7f74d773ee1ccfd9a5169791/transformed/recyclerview-1.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ef38477a7f74d773ee1ccfd9a5169791/transformed/recyclerview-1.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ef38477a7f74d773ee1ccfd9a5169791/transformed/recyclerview-1.1.0/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/ef38477a7f74d773ee1ccfd9a5169791/transformed/recyclerview-1.1.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/ef38477a7f74d773ee1ccfd9a5169791/transformed/recyclerview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/ef38477a7f74d773ee1ccfd9a5169791/transformed/recyclerview-1.1.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/e38b0b15d88f773a2d4efcb4409fedf0/transformed/recyclerview-1.1.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/e38b0b15d88f773a2d4efcb4409fedf0/transformed/recyclerview-1.1.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/e38b0b15d88f773a2d4efcb4409fedf0/transformed/recyclerview-1.1.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

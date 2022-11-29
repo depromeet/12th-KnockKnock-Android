@@ -5,8 +5,8 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/831a8604661ff22a449132b0a36e572e/transformed/storage-1.4.0/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/831a8604661ff22a449132b0a36e572e/transformed/storage-1.4.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/831a8604661ff22a449132b0a36e572e/transformed/storage-1.4.0/AndroidManifest.xml" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/831a8604661ff22a449132b0a36e572e/transformed/storage-1.4.0/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/831a8604661ff22a449132b0a36e572e/transformed/storage-1.4.0/jars/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/5e13fa260e0e0d002ef012e03d0285b8/transformed/storage-1.4.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/5e13fa260e0e0d002ef012e03d0285b8/transformed/storage-1.4.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

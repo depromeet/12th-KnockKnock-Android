@@ -4,9 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c880d71ed09daffe4a01e65dde34a300/transformed/Android-SpinKit-1.4.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c880d71ed09daffe4a01e65dde34a300/transformed/Android-SpinKit-1.4.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c880d71ed09daffe4a01e65dde34a300/transformed/Android-SpinKit-1.4.0/AndroidManifest.xml" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/c880d71ed09daffe4a01e65dde34a300/transformed/Android-SpinKit-1.4.0/res" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/c880d71ed09daffe4a01e65dde34a300/transformed/Android-SpinKit-1.4.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/c880d71ed09daffe4a01e65dde34a300/transformed/Android-SpinKit-1.4.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/39d01ed03cc0442d3a10dd551e076378/transformed/Android-SpinKit-1.4.0/res" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/39d01ed03cc0442d3a10dd551e076378/transformed/Android-SpinKit-1.4.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/39d01ed03cc0442d3a10dd551e076378/transformed/Android-SpinKit-1.4.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/modules-2/files-2.1/com.github.ybq/Android-SpinKit/1.4.0/14afc64edd24f71f975e874c683bfb00ad13097c/Android-SpinKit-1.4.0-javadoc.jar!/" />

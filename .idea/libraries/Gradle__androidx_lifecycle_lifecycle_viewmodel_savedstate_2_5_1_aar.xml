@@ -4,9 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/7b1203fb067a816513f3478f62799480/transformed/lifecycle-viewmodel-savedstate-2.5.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7b1203fb067a816513f3478f62799480/transformed/lifecycle-viewmodel-savedstate-2.5.1/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7b1203fb067a816513f3478f62799480/transformed/lifecycle-viewmodel-savedstate-2.5.1/res" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/7b1203fb067a816513f3478f62799480/transformed/lifecycle-viewmodel-savedstate-2.5.1/res" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/7b1203fb067a816513f3478f62799480/transformed/lifecycle-viewmodel-savedstate-2.5.1/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/7b1203fb067a816513f3478f62799480/transformed/lifecycle-viewmodel-savedstate-2.5.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/b9512cb925ac5d755b02e8fb8e94f7d8/transformed/lifecycle-viewmodel-savedstate-2.5.1/res" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/b9512cb925ac5d755b02e8fb8e94f7d8/transformed/lifecycle-viewmodel-savedstate-2.5.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/b9512cb925ac5d755b02e8fb8e94f7d8/transformed/lifecycle-viewmodel-savedstate-2.5.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

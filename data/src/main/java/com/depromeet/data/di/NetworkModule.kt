@@ -1,13 +1,6 @@
 package com.depromeet.data.di
 
 import android.content.Context
-import com.dida.data.BuildConfig
-import com.dida.data.api.ApiClient.BASE_URL
-import com.dida.data.api.MainAPIService
-import com.dida.data.interceptor.BearerInterceptor
-import com.dida.data.interceptor.ErrorResponseInterceptor
-import com.dida.data.interceptor.XAccessTokenInterceptor
-import com.dida.domain.usecase.main.RefreshTokenAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

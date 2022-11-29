@@ -7,15 +7,15 @@
 
         <variable
             name="kakaoRegisterViewModel"
-            type="com.depromeet.knockknock.ui.onboard." />
+            type="com.depromeet.knockknock.ui.register.KakaoAuthViewModel" />
 
         <variable
             name="googleRegisterViewModel"
-            type="com.example.onboardingdemo.GoogleAuthViewModel" />
+            type="com.depromeet.knockknock.ui.register.GoogleAuthViewModel" />
 
         <variable
             name="testAlarmViewModel"
-            type="com.example.onboardingdemo.TestAlarmViewModel" />
+            type="com.depromeet.knockknock.ui.register.TestAlarmViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:fontFamily="@font/pretendardbold"
+            android:fontFamily="@font/pretendard_bold"
             android:text="똑똑 미리 체험하기"
 
             android:textSize="25sp"
@@ -51,8 +51,7 @@
 
             <ImageView
                 android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/onboard_message" />
+                android:layout_height="wrap_content" />
 
             <!--        <EditText-->
             <!--            android:id="@+id/example_content"-->

@@ -2,14 +2,14 @@
   <library name="Gradle: androidx.exifinterface:exifinterface:1.2.0@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/552b907ddcf51d0db33bf047fab9c28f/transformed/exifinterface-1.2.0/annotations.zip!/" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/552b907ddcf51d0db33bf047fab9c28f/transformed/exifinterface-1.2.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/225801072fadfbf3a51f2d56670906f6/transformed/exifinterface-1.2.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/552b907ddcf51d0db33bf047fab9c28f/transformed/exifinterface-1.2.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/552b907ddcf51d0db33bf047fab9c28f/transformed/exifinterface-1.2.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/552b907ddcf51d0db33bf047fab9c28f/transformed/exifinterface-1.2.0/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/552b907ddcf51d0db33bf047fab9c28f/transformed/exifinterface-1.2.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/552b907ddcf51d0db33bf047fab9c28f/transformed/exifinterface-1.2.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/225801072fadfbf3a51f2d56670906f6/transformed/exifinterface-1.2.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/225801072fadfbf3a51f2d56670906f6/transformed/exifinterface-1.2.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

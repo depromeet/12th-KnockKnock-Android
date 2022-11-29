@@ -2,15 +2,15 @@
   <library name="Gradle: androidx.activity:activity:1.5.1@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2d891b6f0a46264a84f1fade93915f43/transformed/activity-1.5.1/annotations.zip!/" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/2d891b6f0a46264a84f1fade93915f43/transformed/activity-1.5.1/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/df1b2ae1f3e48fccdddf859e356fa21e/transformed/activity-1.5.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2d891b6f0a46264a84f1fade93915f43/transformed/activity-1.5.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2d891b6f0a46264a84f1fade93915f43/transformed/activity-1.5.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2d891b6f0a46264a84f1fade93915f43/transformed/activity-1.5.1/AndroidManifest.xml" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/2d891b6f0a46264a84f1fade93915f43/transformed/activity-1.5.1/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/2d891b6f0a46264a84f1fade93915f43/transformed/activity-1.5.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/2d891b6f0a46264a84f1fade93915f43/transformed/activity-1.5.1/res" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/df1b2ae1f3e48fccdddf859e356fa21e/transformed/activity-1.5.1/res" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/df1b2ae1f3e48fccdddf859e356fa21e/transformed/activity-1.5.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/df1b2ae1f3e48fccdddf859e356fa21e/transformed/activity-1.5.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

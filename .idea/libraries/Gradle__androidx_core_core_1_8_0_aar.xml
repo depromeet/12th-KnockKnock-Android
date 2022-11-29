@@ -2,15 +2,15 @@
   <library name="Gradle: androidx.core:core:1.8.0@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/63c8ce50dd7f324795dacb991aa2070d/transformed/core-1.8.0/annotations.zip!/" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/63c8ce50dd7f324795dacb991aa2070d/transformed/core-1.8.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/f13a5f4ba1d2cd4dbec2804b9d94c128/transformed/core-1.8.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/63c8ce50dd7f324795dacb991aa2070d/transformed/core-1.8.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/63c8ce50dd7f324795dacb991aa2070d/transformed/core-1.8.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/63c8ce50dd7f324795dacb991aa2070d/transformed/core-1.8.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/63c8ce50dd7f324795dacb991aa2070d/transformed/core-1.8.0/res" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/63c8ce50dd7f324795dacb991aa2070d/transformed/core-1.8.0/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/63c8ce50dd7f324795dacb991aa2070d/transformed/core-1.8.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/f13a5f4ba1d2cd4dbec2804b9d94c128/transformed/core-1.8.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/f13a5f4ba1d2cd4dbec2804b9d94c128/transformed/core-1.8.0/res" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/f13a5f4ba1d2cd4dbec2804b9d94c128/transformed/core-1.8.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

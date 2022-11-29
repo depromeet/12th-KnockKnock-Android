@@ -2,15 +2,15 @@
   <library name="Gradle: com.facebook.shimmer:shimmer:0.5.0@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/39b065e593fb58243395bdd28c55d897/transformed/shimmer-0.5.0/annotations.zip!/" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/39b065e593fb58243395bdd28c55d897/transformed/shimmer-0.5.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/869e368304834fb680ee1cb16649c652/transformed/shimmer-0.5.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/39b065e593fb58243395bdd28c55d897/transformed/shimmer-0.5.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/39b065e593fb58243395bdd28c55d897/transformed/shimmer-0.5.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/39b065e593fb58243395bdd28c55d897/transformed/shimmer-0.5.0/AndroidManifest.xml" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/39b065e593fb58243395bdd28c55d897/transformed/shimmer-0.5.0/AndroidManifest.xml" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/39b065e593fb58243395bdd28c55d897/transformed/shimmer-0.5.0/res" />
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/39b065e593fb58243395bdd28c55d897/transformed/shimmer-0.5.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/869e368304834fb680ee1cb16649c652/transformed/shimmer-0.5.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/869e368304834fb680ee1cb16649c652/transformed/shimmer-0.5.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/869e368304834fb680ee1cb16649c652/transformed/shimmer-0.5.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/modules-2/files-2.1/com.facebook.shimmer/shimmer/0.5.0/8f2cac7f46a15f00f1ee997fe744d0b16677cc30/shimmer-0.5.0-javadoc.jar!/" />

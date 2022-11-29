@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.kakao.sdk:v2-common:2.11.2@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/38312750dde4c8fecc91c94330583757/transformed/v2-common-2.11.2/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/38312750dde4c8fecc91c94330583757/transformed/v2-common-2.11.2/res" />
-      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/38312750dde4c8fecc91c94330583757/transformed/v2-common-2.11.2/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/2550802d7cc180315055f7eaecdf6055/transformed/v2-common-2.11.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/2550802d7cc180315055f7eaecdf6055/transformed/v2-common-2.11.2/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/2550802d7cc180315055f7eaecdf6055/transformed/v2-common-2.11.2/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
