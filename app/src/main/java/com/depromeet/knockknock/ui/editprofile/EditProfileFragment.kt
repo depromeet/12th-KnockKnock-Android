@@ -34,7 +34,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
 
     override fun initStartView() {
         binding.apply {
-            this.viewmodel = viewModel
+            this.viewmodel  = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent

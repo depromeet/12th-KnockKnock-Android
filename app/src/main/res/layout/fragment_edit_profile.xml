@@ -44,6 +44,19 @@
             android:text="@string/profile_name_title">
         </TextView>
 
+        <TextView
+            android:id="@+id/edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/user_name_title"
+            app:layout_constraintBottom_toBottomOf="@id/user_name_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="12dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/update"
+            app:editBtnVisibie="@{viewmodel.editBtnState}">
+        </TextView>
+
         <EditText
             android:id="@+id/user_name_contents"
             style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
