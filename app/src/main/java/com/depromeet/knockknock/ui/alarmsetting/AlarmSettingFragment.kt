@@ -38,10 +38,10 @@ class AlarmSettingFragment : BaseFragment<FragmentAlarmSettingBinding, AlarmSett
 
     private fun initToolbar() {
         with(binding.toolbar) {
-            this.title = getString(R.string.alarm_settings_title)
+            this.title = getString(R.string.profile_title)
 
             // 뒤로가기 버튼
-//            this.setNavigationIcon(R.drawable.ic_back)
+            this.setNavigationIcon(R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
     }
