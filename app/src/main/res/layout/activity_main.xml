@@ -43,6 +43,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:itemIconTint="@drawable/menu_selector_icon_color"
+            app:itemTextColor="@drawable/menu_selector_text_color"
             app:menu="@menu/menu_main_bottom">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
