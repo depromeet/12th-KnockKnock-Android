@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.depromeet.knockknock.ui.alarmcreate.AlarmCreateViewModel" />
@@ -13,14 +13,31 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="31dp"
+                android:text=""
+                android:fontFamily="@font/pretendard_regular"
+                android:lineSpacingExtra="5sp"
+                android:translationY="-2.27sp"
+                android:gravity="center_horizontal|top"
+                />
+
+
+
+
         </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -28,13 +45,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="33dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
@@ -52,10 +70,10 @@
                         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="15.27dp"
+                        android:layout_height="15.27dp"
                         android:layout_marginStart="4dp"
-                        android:background="@drawable/switch_track_on"
+                        android:background="@drawable/ic_baseline_create_24"
                         app:layout_constraintStart_toEndOf="@+id/some_id"
                         app:layout_constraintTop_toTopOf="parent">
 
@@ -83,34 +101,43 @@
                         android:elevation="1dp"
                         android:orientation="vertical">
 
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_gravity="right"
                             android:layout_marginTop="15dp"
                             android:layout_marginEnd="19dp"
                             android:background="@null"
-                            android:src="@drawable/switch_track_on"
+                            android:src="@drawable/ic_baseline_cancel_24"
+                            app:onSingleClick="@{() -> vm.onDeleteEditTextMessageClicked()}"
                             android:visibility="visible" />
 
                         <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/edit_text_message"
+                            android:text="@={vm.editTextMessageEvent}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
                             android:layout_marginTop="3dp"
+                            android:layout_marginEnd="16dp"
                             android:background="@android:color/transparent"
                             android:drawablePadding="8dp"
                             android:fontFamily="@font/pretendard_regular"
                             android:hint="메시지를 작성해주세요!"
+                            android:maxHeight="110dp"
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"
                             android:textAlignment="center"
                             android:textColor="#000000"
                             android:textColorHint="#757575"
-                            android:textSize="22dp" />
+                            android:textSize="22dp"
+                            android:maxLength="200"
+                            />
 
 
                         <TextView
+                            android:id="@+id/edit_text_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -119,7 +146,7 @@
                             android:fontFamily="@font/pretendard_regular"
                             android:gravity="right|top"
                             android:lineSpacingExtra="3sp"
-                            android:text="0/80"
+                            android:text="0/200"
                             android:textColor="#BDBDBD"
                             android:textSize="16dp"
                             android:translationY="-1.6sp" />
@@ -130,6 +157,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/add_image_card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -138,7 +166,8 @@
                     android:layout_marginBottom="150dp"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintTop_toBottomOf="@+id/cardView"
-                    tools:layout_editor_absoluteX="-30dp">
+                    tools:layout_editor_absoluteX="-30dp"
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -146,13 +175,13 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <ImageButton
+                        <ImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:layout_gravity="center"
                             android:layout_marginEnd="4dp"
                             android:gravity="center"
-                            android:src="@drawable/switch_track_on" />
+                            android:src="@drawable/ic_baseline_add_24" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -169,6 +198,15 @@
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/img_load"
+                    android:layout_gravity="center"
+                    android:layout_width="122dp"
+                    android:layout_height="106dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="150dp"
+                    android:visibility="gone"/>
             </LinearLayout>
 
         </ScrollView>
@@ -176,11 +214,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:fontFamily="@font/pretendard_regular"
             android:gravity="center_horizontal|top"
             android:lineSpacingExtra="3sp"
             android:text="추천 메시지"
-            android:background="@color/white"
             android:textColor="#000000"
             android:textSize="16dp"
             android:translationY="-1.6sp"
@@ -192,11 +230,12 @@
             android:id="@+id/rv_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:background="@color/white"
             android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"        app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
