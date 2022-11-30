@@ -1,6 +1,5 @@
 package com.depromeet.knockknock.ui.editprofile
 
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.depromeet.knockknock.R
@@ -11,8 +10,6 @@ import com.depromeet.knockknock.base.DefaultYellowAlertDialog
 import com.depromeet.knockknock.databinding.FragmentEditProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import kotlin.math.log
 
 
 @AndroidEntryPoint

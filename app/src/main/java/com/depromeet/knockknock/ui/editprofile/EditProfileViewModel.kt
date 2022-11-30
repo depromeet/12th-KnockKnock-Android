@@ -1,7 +1,6 @@
 package com.depromeet.knockknock.ui.editprofile
 
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.mypage.MypageNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
