@@ -20,6 +20,7 @@ import com.depromeet.knockknock.databinding.FragmentAlarmCreateBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AlarmCreateFragment :
@@ -40,32 +41,34 @@ class AlarmCreateFragment :
         }
         exception = viewModel.errorEvent
 
-
-        binding.toolbar.inflateMenu(R.menu.alarm_create_toolbar_menu)
-        binding.toolbar.title = "취준생을 위한 방"
-
         initToolbar()
+        setupEvent()
         setOnTouchListenerEditText()
         countEditTextMessage()
+    }
 
-        /**
-         * 버튼을 눌러 image를 불러오는 로직을 viewModel로 보내고 싶지만 어떻게 분리해야할지 모르겠네요..
-         * */
-        binding.addImageCardView.setOnClickListener {
-            readImage.launch("image/*")
-            binding.imgLoad.visibility = View.VISIBLE
-            binding.addImageCardView.visibility = View.GONE
-        }
-
-        binding.imgLoad.setOnClickListener {
-            readImage.launch("image/*")
+    private fun setupEvent() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.navigationEvent.collectLatest {
+                when (it) {
+                    is AlarmCreateNavigationAction.NavigateToGallery -> readImage.launch("image/*")
+                }
+            }
         }
     }
 
     private val readImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        Glide.with(this)
-            .load(uri)
-            .into(binding.imgLoad)
+
+        Log.d("ttt", uri.toString())
+        if (uri != null) {
+            Glide.with(this)
+                .load(uri)
+                .into(binding.imgLoad)
+
+            lifecycleScope.launchWhenStarted {
+                viewModel.imgState.emit(true)
+            }
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -75,7 +78,6 @@ class AlarmCreateFragment :
                 MotionEvent.ACTION_DOWN -> {
                     binding.scrollView.requestDisallowInterceptTouchEvent(true)
                     binding.scrollView.requestDisallowInterceptTouchEvent(true)
-
                 }
                 MotionEvent.ACTION_UP -> binding.scrollView.requestDisallowInterceptTouchEvent(true)
                 MotionEvent.ACTION_MOVE -> binding.scrollView.requestDisallowInterceptTouchEvent(
@@ -97,24 +99,6 @@ class AlarmCreateFragment :
         }
     }
 
-    private fun textChangeColor(
-        text: TextView,
-        color: String,
-        start: Int,
-        end: Int
-    ): SpannableStringBuilder {
-        val builder = SpannableStringBuilder(text.text.toString())
-
-        builder.setSpan(
-            ForegroundColorSpan(Color.parseColor(color)),
-            start,
-            end,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-
-        return builder
-    }
-
     override fun initDataBinding() {
     }
 
@@ -127,6 +111,9 @@ class AlarmCreateFragment :
             this.setNavigationOnClickListener {
                 findNavController().popBackStack()
             }
+            this.inflateMenu(R.menu.alarm_create_toolbar_menu)
+            this.title = "취준생을 위한 방"
+
         }
     }
 
