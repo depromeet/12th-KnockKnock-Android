@@ -9,6 +9,15 @@
     <string name="bottom_alarm_room">알림방</string>
     <string name="bottom_my">MY</string>
 
+    <!--팝업 모달-->
+    <string name="logout_title">로그아웃 하시겠어요?</string>
+    <string name="logout_description">언제든 다시 돌아올 수 있어요!</string>
+    <string name="no">아니요</string>
+
+    <string name="user_delete_title">정말 탈퇴하시겠어요?</string>
+    <string name="user_delete_description">탈퇴시 모든 알림방과\n푸시메세지가 사라져요.</string>
+    <string name="user_delete_yes">회원 탈퇴</string>
+
     <!--알림설정-->
     <string name="alarm_settings_title">알림 설정</string>
 
@@ -24,4 +33,21 @@
     <!--보관함-->
     <string name="bookmark_title">보관함</string>
     <string name="bookmark_edit_btn">편집</string>
+
+    <!--마이페이지-->
+    <string name="mypage_profile_btn">프로필</string>
+    <string name="mypage_alarm_setting_btn">알림설정</string>
+    <string name="mypage_bookmark_btn">보관함</string>
+    <string name="mypage_friend_list_btn">친구목록</string>
+    <string name="mypage_information_btn">정보</string>
+
+    <!--프로필-->
+    <string name="profile_title">프로필</string>
+    <string name="profile_name_title">닉네임</string>
+    <string name="profile_email_title">이메일</string>
+    <string name="update">수정</string>
+
+    <string name="logout">로그아웃</string>
+    <string name="user_delete">탈퇴하기</string>
+
 </resources>

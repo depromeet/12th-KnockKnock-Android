@@ -6,13 +6,113 @@
 
     <data>
         <variable
-            name="vm"
+            name="viewmodel"
             type="com.depromeet.knockknock.ui.editprofile.EditProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/ToolBarStyle"/>
+
+        <ImageView
+            android:id="@+id/user_profile_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/img_user_profile_default_with_add"
+            android:layout_marginTop="32dp"
+            android:onClick="@{() -> viewmodel.onProfileEditClicked()}">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/user_name_title"
+            style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+            android:layout_marginTop="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/user_profile_edit"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/profile_name_title">
+        </TextView>
+
+        <TextView
+            android:id="@+id/edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/user_name_title"
+            app:layout_constraintBottom_toBottomOf="@id/user_name_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="12dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/update"
+            app:editBtnVisibie="@{viewmodel.editBtnState}">
+        </TextView>
+
+        <EditText
+            android:id="@+id/user_name_contents"
+            style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/user_name_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/custom_backgroundwhite_radius10">
+        </EditText>
+
+        <TextView
+            android:id="@+id/user_email_title"
+            style="@style/Theme.AppCompat.TextView.Profile.Email.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            app:layout_constraintTop_toBottomOf="@id/user_name_contents"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/profile_email_title">
+        </TextView>
+
+        <TextView
+            android:id="@+id/user_email_contents"
+            style="@style/Theme.AppCompat.TextView.Profile.Email.Contents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/user_email_title"
+            app:layout_constraintStart_toStartOf="parent">
+        </TextView>
+
+        <TextView
+            android:id="@+id/logout_btn"
+            style="@style/Theme.AppCompat.TextView.Profile.Menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="12dp"
+            app:layout_constraintBottom_toTopOf="@id/delete_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="4dp"
+            android:text="@string/logout">
+        </TextView>
+
+        <TextView
+            android:id="@+id/delete_btn"
+            style="@style/Theme.AppCompat.TextView.Profile.Menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="32dp"
+            android:text="@string/user_delete">
+        </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

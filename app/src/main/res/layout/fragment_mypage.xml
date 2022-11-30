@@ -6,13 +6,199 @@
 
     <data>
         <variable
-            name="vm"
+            name="viewmodel"
             type="com.depromeet.knockknock.ui.mypage.MypageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        
+        <ImageView
+            android:id="@+id/img_user_profile"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/img_default_user_profile"
+            android:scaleType="centerCrop">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/user_name_text"
+            style="@style/Theme.AppCompat.TextView.Mypage.Name.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/img_user_profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/user_email_text"
+            style="@style/Theme.AppCompat.TextView.Mypage.Email.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/user_name_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp">
+        </TextView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/user_email_text"
+            android:padding="16dp"
+            android:layout_marginTop="20dp"
+            android:onClick="@{() -> viewmodel.onProfileEditClicked()}">
+            <ImageView
+                android:id="@+id/profile_btn_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@mipmap/ic_user_profile_foreground"
+                android:scaleType="centerCrop">
+            </ImageView>
+
+            <TextView
+                style="@style/Theme.AppCompat.TextView.Mypage.Button.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/profile_btn_img"
+                android:layout_marginStart="12dp"
+                android:text="@string/mypage_profile_btn">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/alarm_settings_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/profile_btn"
+            android:padding="16dp"
+            android:onClick="@{() -> viewmodel.onAlarmSettingClicked()}">
+            <ImageView
+                android:id="@+id/alarm_settings_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_notification"
+                android:scaleType="centerCrop">
+            </ImageView>
+
+            <TextView
+                style="@style/Theme.AppCompat.TextView.Mypage.Button.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/alarm_settings_img"
+                android:layout_marginStart="12dp"
+                android:text="@string/mypage_alarm_setting_btn">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bookmark_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/alarm_settings_btn"
+            android:padding="16dp"
+            android:onClick="@{() -> viewmodel.onBookmarkClicked()}">
+            <ImageView
+                android:id="@+id/bookmark_btn_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_bookmark"
+                android:scaleType="centerCrop">
+            </ImageView>
+
+            <TextView
+                style="@style/Theme.AppCompat.TextView.Mypage.Button.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/bookmark_btn_img"
+                android:layout_marginStart="12dp"
+                android:text="@string/mypage_bookmark_btn">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/friend_list_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/bookmark_btn"
+            android:padding="16dp"
+            android:onClick="@{() -> viewmodel.onFriendListClicked()}">
+            <ImageView
+                android:id="@+id/friend_list_btn_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_friend_list"
+                android:scaleType="centerCrop">
+            </ImageView>
+
+            <TextView
+                style="@style/Theme.AppCompat.TextView.Mypage.Button.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/friend_list_btn_img"
+                android:layout_marginStart="12dp"
+                android:text="@string/mypage_friend_list_btn">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/information_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/friend_list_btn"
+            android:padding="16dp"
+            android:onClick="@{() -> viewmodel.onInformationClicked()}">
+            <ImageView
+                android:id="@+id/information_btn_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_information"
+                android:scaleType="centerCrop">
+            </ImageView>
+
+            <TextView
+                style="@style/Theme.AppCompat.TextView.Mypage.Button.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/information_btn_img"
+                android:layout_marginStart="12dp"
+                android:text="@string/mypage_information_btn">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 
