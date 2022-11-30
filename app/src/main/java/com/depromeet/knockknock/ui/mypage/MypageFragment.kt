@@ -20,7 +20,7 @@ class MypageFragment : BaseFragment<FragmentMypageBinding, MypageViewModel>(R.la
 
     override fun initStartView() {
         binding.apply {
-            this.vm = viewModel
+            this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent

@@ -34,6 +34,13 @@
     <string name="bookmark_title">보관함</string>
     <string name="bookmark_edit_btn">편집</string>
 
+    <!--마이페이지-->
+    <string name="mypage_profile_btn">프로필</string>
+    <string name="mypage_alarm_setting_btn">알림설정</string>
+    <string name="mypage_bookmark_btn">보관함</string>
+    <string name="mypage_friend_list_btn">친구목록</string>
+    <string name="mypage_information_btn">정보</string>
+
     <!--프로필-->
     <string name="profile_title">프로필</string>
     <string name="profile_name_title">닉네임</string>

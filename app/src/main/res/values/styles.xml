@@ -70,6 +70,25 @@
         <item name="android:textColor">@color/gray07</item>
     </style>
 
+    <!-- 마이페이지 -->
+    <style name="Theme.AppCompat.TextView.Mypage.Name.Title" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Mypage.Email.Title" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/gray07</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Mypage.Button.Title" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <!-- 프로필 -->
     <style name="Theme.AppCompat.TextView.Profile.Username.Title" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textSize">18dp</item>
