@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="vm"
+            name="viewmodel"
             type="com.depromeet.knockknock.ui.editprofile.EditProfileViewModel" />
     </data>
 
@@ -29,7 +29,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/img_user_profile_default_with_add"
-            android:layout_marginTop="32dp">
+            android:layout_marginTop="32dp"
+            android:onClick="@{() -> viewmodel.onProfileEditClicked()}">
         </ImageView>
 
         <TextView

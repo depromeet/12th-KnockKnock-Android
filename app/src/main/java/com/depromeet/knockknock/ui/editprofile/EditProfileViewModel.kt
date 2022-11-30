@@ -30,7 +30,9 @@ class EditProfileViewModel @Inject constructor(
     }
 
     override fun onProfileEditClicked() {
-        TODO("Not yet implemented")
+        baseViewModelScope.launch {
+            _navigationHandler.emit(EditProfileNavigationAction.NavigateToGallery)
+        }
     }
 
     fun onUserDelete() {
