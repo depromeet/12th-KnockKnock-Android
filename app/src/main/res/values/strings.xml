@@ -49,4 +49,10 @@
     <string name="logout">로그아웃</string>
     <string name="user_delete">탈퇴하기</string>
 
+    <!--정보-->
+    <string name="information_title">정보</string>
+    <string name="information_user_consent">이용약관</string>
+    <string name="information_user_privacy">개인정보 정책</string>
+    <string name="information_app_makers">만든 사람들</string>
+
 </resources>
