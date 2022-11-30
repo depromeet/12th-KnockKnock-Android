@@ -90,7 +90,8 @@
                 app:counterEnabled="true"
                 app:counterMaxLength="15"
                 app:endIconMode="clear_text"
-                app:layout_constraintBottom_toTopOf="@+id/test_alarm_button">
+                app:layout_constraintBottom_toTopOf="@+id/test_alarm_button"
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -99,6 +100,7 @@
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/pretendard_medium"
                     android:hint="닉네임을 입력해주세요"
+                    android:paddingTop="10dp"
                     android:privateImeOptions="defaultInputMode=korean"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
@@ -190,7 +192,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/kakao_register_button"
+            android:id="@+id/setprofile_start_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

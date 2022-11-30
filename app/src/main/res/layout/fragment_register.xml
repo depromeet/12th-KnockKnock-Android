@@ -78,6 +78,7 @@
             app:counterEnabled="true"
             app:counterMaxLength="80"
             app:endIconMode="clear_text"
+            app:hintEnabled="false"
             app:layout_constraintBottom_toTopOf="@+id/test_alarm_button">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -88,6 +89,7 @@
                 android:fontFamily="@font/pretendard_medium"
                 android:gravity="center"
                 android:textColor="@color/black"
+                android:paddingTop="10dp"
                 android:hint="메시지를 작성해보세요"
                 android:privateImeOptions="defaultInputMode=korean"
                 android:text="@={testAlarmViewModel.inputContent}"
