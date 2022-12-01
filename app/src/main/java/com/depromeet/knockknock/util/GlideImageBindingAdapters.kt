@@ -21,3 +21,11 @@ fun ImageView.bindBookmarkContentsImage(contentsImageUri: String) {
         .transform(CenterCrop(), RoundedCorners(100))
         .into(this)
 }
+
+@BindingAdapter("roomImageImage")
+fun ImageView.bindRoomImageImage(roomImgUri: String) {
+    Glide.with(context)
+        .load(roomImgUri)
+        .transform(CenterCrop(), RoundedCorners(300))
+        .into(this)
+}

@@ -38,6 +38,8 @@
     <string name="three_month">3개월</string>
     <string name="reaction">리액션</string>
 
+    <string name="room_select">알림방 선택</string>
+
     <!--마이페이지-->
     <string name="mypage_profile_btn">프로필</string>
     <string name="mypage_alarm_setting_btn">알림설정</string>
