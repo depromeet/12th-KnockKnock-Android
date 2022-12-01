@@ -200,4 +200,9 @@
         <item name="fontFamily">@font/pretendard_medium</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.Period.Filter" parent="@style/Widget.AppCompat.TextView">\
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
 </resources>
