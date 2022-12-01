@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.BindingAdapter
 import com.depromeet.knockknock.R
+import com.depromeet.knockknock.ui.bookmark.model.Bookmark
 import com.depromeet.knockknock.ui.bookmark.model.FilterType
 
 @SuppressLint("UseCompatLoadingForDrawables")
@@ -48,4 +49,10 @@ fun View.bindFilterPeriodBackground(type: FilterType) {
 fun TextView.bindFilterPeriodTextColor(type: FilterType) {
     if(type == FilterType.PERIOD) this.setTextColor(getColor(this.context, R.color.black))
     else this.setTextColor(getColor(this.context, R.color.gray08))
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("reactionCount")
+fun TextView.bindReactionCount(bookmark: Bookmark) {
+    this.text = bookmark.reactionContents+" "+bookmark.reactionCount.toString()
 }

@@ -1,31 +1,35 @@
-package com.dida.android.presentation.adapter.home
+package com.depromeet.knockknock.ui.bookmark.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dida.android.R
-import com.dida.android.databinding.HolderHotsBinding
-import com.dida.android.presentation.views.nav.home.HomeActionHandler
-import com.dida.domain.model.nav.home.Hots
+import com.depromeet.knockknock.R
+import com.depromeet.knockknock.databinding.HolderBookmarkBinding
+import com.depromeet.knockknock.ui.bookmark.BookmarkActionHandler
+import com.depromeet.knockknock.ui.bookmark.model.Bookmark
+import com.depromeet.knockknock.util.ToggleAnimation
+import com.depromeet.knockknock.util.toggleLayout
 
-class HotsAdapter(
-    private val eventListener: HomeActionHandler
-) : ListAdapter<Hots, HotsAdapter.ViewHolder>(HotsItemDiffCallback){
+class BookmarkAdapter(
+    private val eventListener: BookmarkActionHandler
+) : ListAdapter<Bookmark, BookmarkAdapter.ViewHolder>(BookmarkItemDiffCallback){
 
     init { setHasStableIds(true) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewDataBinding: HolderHotsBinding = DataBindingUtil.inflate(
+        val viewDataBinding: HolderBookmarkBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.holder_hots,
+            R.layout.holder_bookmark,
             parent,
             false
         )
         viewDataBinding.root.setOnClickListener {
-            eventListener.onHotItemClicked(viewDataBinding.holderModel!!.cardId.toLong())
+            eventListener.onReactionClicked(viewDataBinding.holder.bookmarkId)
         }
         return ViewHolder(viewDataBinding)
     }
@@ -34,20 +38,24 @@ class HotsAdapter(
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: HolderHotsBinding) :
+    class ViewHolder(private val binding: HolderBookmarkBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Hots) {
-            binding.holderModel = item
+        fun bind(item: Bookmark) {
+            binding.holder = item
             binding.executePendingBindings()
+            binding.expandBtn.setOnClickListener {
+                val show = toggleLayout(!item.isExpanded, it, binding.layoutExpand)
+                item.isExpanded = show
+            }
         }
     }
 
-    internal object HotsItemDiffCallback : DiffUtil.ItemCallback<Hots>() {
-        override fun areItemsTheSame(oldItem: Hots, newItem: Hots) =
-            oldItem.cardId == newItem.cardId
+    internal object BookmarkItemDiffCallback : DiffUtil.ItemCallback<Bookmark>() {
+        override fun areItemsTheSame(oldItem: Bookmark, newItem: Bookmark) =
+            oldItem.bookmarkId == newItem.bookmarkId
 
-        override fun areContentsTheSame(oldItem: Hots, newItem: Hots) =
+        override fun areContentsTheSame(oldItem: Bookmark, newItem: Bookmark) =
             oldItem == newItem
     }
 }

@@ -36,6 +36,7 @@
     <string name="all">전체</string>
     <string name="room">모든방</string>
     <string name="three_month">3개월</string>
+    <string name="reaction">리액션</string>
 
     <!--마이페이지-->
     <string name="mypage_profile_btn">프로필</string>

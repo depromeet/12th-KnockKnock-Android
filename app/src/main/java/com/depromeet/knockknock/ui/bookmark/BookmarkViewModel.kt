@@ -47,4 +47,10 @@ class BookmarkViewModel @Inject constructor(
             _navigationHandler.emit(BookmarkNavigationAction.NavigateToBookmarkFilterPeriod)
         }
     }
+
+    override fun onReactionClicked(bookmarkIdx: Int) {
+        baseViewModelScope.launch {
+            _navigationHandler.emit(BookmarkNavigationAction.NavigateToReaction(bookmarkIdx))
+        }
+    }
 }
