@@ -29,7 +29,7 @@
             android:id="@+id/intro_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="44dp"
             android:fontFamily="@font/pretendard_bold"
             android:text="똑똑 미리 체험하기"
             android:textColor="@color/black"
@@ -37,8 +37,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
 
         <ImageView
             android:id="@+id/onboard_experience_door"
@@ -49,8 +47,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/intro_text"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/intro_text" />
 
         <ImageView
             android:id="@+id/onboard_experience_star"
@@ -66,7 +63,7 @@
             android:id="@+id/example_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/gray08"
+            android:textColorHint="@color/gray07"
             app:boxBackgroundColor="@color/gray03"
             app:boxBackgroundMode="filled"
             app:boxCornerRadiusBottomEnd="10dp"
@@ -93,19 +90,19 @@
                 android:hint="메시지를 작성해보세요"
                 android:privateImeOptions="defaultInputMode=korean"
                 android:text="@={testAlarmViewModel.inputContent}"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/test_alarm_button"
-            android:layout_width="150dp"
+            android:layout_width="127dp"
             android:layout_height="wrap_content"
             android:text="보내기"
             android:fontFamily="@font/pretendard_medium"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="18sp"
             android:background="@drawable/custom_white_radius20"
             android:backgroundTint="#F6F6F6"
             app:layout_constraintBottom_toBottomOf="parent"
