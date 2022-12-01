@@ -8,6 +8,8 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentBookmarkBinding
 import com.depromeet.knockknock.ui.bookmark.adapter.BookmarkAdapter
+import com.depromeet.knockknock.ui.bookmark.bottom.BottomPeriodFilter
+import com.depromeet.knockknock.ui.bookmark.bottom.BottomRoomFilter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -38,11 +40,9 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
                 when(it) {
                     is BookmarkNavigationAction.NavigateToBookmarkEdit -> {}
                     is BookmarkNavigationAction.NavigateToBookmarkFilterAll -> {}
-                    is BookmarkNavigationAction.NavigateToBookmarkFilterRoom -> {}
-                    is BookmarkNavigationAction.NavigateToBookmarkFilterPeriod -> {}
-                    is BookmarkNavigationAction.NavigateToReaction -> {
-
-                    }
+                    is BookmarkNavigationAction.NavigateToBookmarkFilterRoom -> roomFilter()
+                    is BookmarkNavigationAction.NavigateToBookmarkFilterPeriod -> periodFilter()
+                    is BookmarkNavigationAction.NavigateToReaction -> {}
                 }
             }
         }
@@ -59,5 +59,19 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
             this.setNavigationIcon(R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
+    }
+
+    private fun roomFilter() {
+//        val bottomSheet: BottomRoomFilter = BottomRoomFilter() {
+//
+//        }
+//        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
+    }
+
+    private fun periodFilter() {
+//        val bottomSheet: BottomRoomFilter = BottomPeriodFilter() {
+//
+//        }
+//        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 }
