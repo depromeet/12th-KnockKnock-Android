@@ -99,5 +99,5 @@ dependencies {
     implementation "androidx.datastore:datastore-core:1.0.0"
 
     // Flex Box
-    implementation 'com.google.android:flexbox:2.0.1'
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 }

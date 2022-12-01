@@ -30,6 +30,110 @@
             app:layout_constraintEnd_toEndOf="@id/toolbar"
             android:text="@string/bookmark_edit_btn">
         </TextView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filter_all"
+            style="@style/Theme.AppCompat.Bookmark.Filter.View"
+            app:filterAllBackground="@{viewmodel.filterTypeState}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="@{() -> viewmodel.onFilterAllClicked()}">
+            <TextView
+                android:id="@+id/filter_all_contents"
+                style="@style/Theme.AppCompat.TextView.Bookmark.Filter.Button"
+                app:filterAllTextColor="@{viewmodel.filterTypeState}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/all">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filter_room"
+            style="@style/Theme.AppCompat.Bookmark.Filter.View"
+            app:filterRoomBackground="@{viewmodel.filterTypeState}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/filter_all"
+            app:layout_constraintBottom_toBottomOf="@id/filter_all"
+            app:layout_constraintStart_toEndOf="@id/filter_all"
+            android:layout_marginStart="8dp"
+            android:onClick="@{() -> viewmodel.onFilterAllClicked()}">
+
+            <TextView
+                android:id="@+id/filter_room_contents"
+                style="@style/Theme.AppCompat.TextView.Bookmark.Filter.Button"
+                app:filterRoomTextColor="@{viewmodel.filterTypeState}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/room">
+            </TextView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/filter_room_contents"
+                app:layout_constraintBottom_toBottomOf="@id/filter_room_contents"
+                app:layout_constraintStart_toEndOf="@id/filter_room_contents"
+                android:src="@drawable/ic_filter_btn"
+                android:layout_marginStart="10dp">
+            </ImageView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filter_period"
+            style="@style/Theme.AppCompat.Bookmark.Filter.View"
+            app:filterPeriodBackground="@{viewmodel.filterTypeState}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/filter_all"
+            app:layout_constraintBottom_toBottomOf="@id/filter_all"
+            app:layout_constraintStart_toEndOf="@id/filter_room"
+            android:layout_marginStart="8dp"
+            android:onClick="@{() -> viewmodel.onFilterAllClicked()}">
+
+            <TextView
+                android:id="@+id/filter_period_contents"
+                style="@style/Theme.AppCompat.TextView.Bookmark.Filter.Button"
+                app:filterPeriodTextColor="@{viewmodel.filterTypeState}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/three_month">
+            </TextView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/filter_period_contents"
+                app:layout_constraintBottom_toBottomOf="@id/filter_period_contents"
+                app:layout_constraintStart_toEndOf="@id/filter_period_contents"
+                android:src="@drawable/ic_filter_btn"
+                android:layout_marginStart="10dp">
+            </ImageView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bookmark_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/filter_all"
+            android:layout_marginTop="20dp">
+        </androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

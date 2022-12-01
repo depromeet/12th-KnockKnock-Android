@@ -33,6 +33,9 @@
     <!--보관함-->
     <string name="bookmark_title">보관함</string>
     <string name="bookmark_edit_btn">편집</string>
+    <string name="all">전체</string>
+    <string name="room">모든방</string>
+    <string name="three_month">3개월</string>
 
     <!--마이페이지-->
     <string name="mypage_profile_btn">프로필</string>
