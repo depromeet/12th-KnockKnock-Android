@@ -131,4 +131,12 @@
         <item name="android:layout_marginStart">4dp</item>
     </style>
 
+    <!-- 보관함 -->
+    <style name="Theme.AppCompat.TextView.Bookmark.Edit.Button" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/gray07</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
 </resources>

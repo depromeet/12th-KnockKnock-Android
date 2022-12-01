@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="vm"
+            name="viewmodel"
             type="com.depromeet.knockknock.ui.bookmark.BookmarkViewModel" />
     </data>
 
@@ -22,15 +22,13 @@
 
         <TextView
             android:id="@+id/edit_btn"
+            style="@style/Theme.AppCompat.TextView.Bookmark.Edit.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/toolbar"
             app:layout_constraintBottom_toBottomOf="@id/toolbar"
             app:layout_constraintEnd_toEndOf="@id/toolbar"
-            android:text="@string/bookmark_edit_btn"
-            android:layout_margin="16dp"
-            android:textSize="16dp"
-            android:textColor="@color/gray07">
+            android:text="@string/bookmark_edit_btn">
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
