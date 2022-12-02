@@ -68,4 +68,21 @@
     <string name="information_user_privacy">개인정보 정책</string>
     <string name="information_app_makers">만든 사람들</string>
 
+    <!--친구목록-->
+    <string name="friend_list_title">친구 목록</string>
+    <string name="friend_list_search_hint">닉네임 검색하기</string>
+    <string name="friend_list_my_title">내 친구 목록</string>
+    <string name="friend_list_link_description1">똑똑에 친구 초대하기</string>
+    <string name="link">링크</string>
+
+    <string name="delete">삭제하기</string>
+    <string name="black">신고</string>
+    <string name="close">닫기</string>
+
+    <string name="add_friend_popup_title">%s님께 친구추가를\n요청할까요?</string>
+    <string name="add_friend_popup_positive">요청하기</string>
+
+    <string name="friend_approve_invite">요청하기</string>
+
+
 </resources>

@@ -205,4 +205,36 @@
         <item name="fontFamily">@font/pretendard_semi_bold</item>
     </style>
 
+    <!-- 친구목록 -->
+    <style name="Theme.AppCompat.EditText.Friend.List.Search" parent="@style/Widget.AppCompat.EditText">
+        <item name="hintTextColor">@color/gray05</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Friend.List.Link.Description1" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Friend.List.Link.Description2" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray05</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Friend.List.My.Title" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray08_1</item>
+        <item name="android:textSize">20dp</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Friend.More" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray10</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
 </resources>

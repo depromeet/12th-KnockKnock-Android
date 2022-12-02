@@ -71,10 +71,22 @@ class BottomPeriodFilter(
             is PeriodType.Year -> clickedPeriod(year)
         }
 
-        one.setOnClickListener { callback.invoke(1) }
-        three.setOnClickListener { callback.invoke(3) }
-        six.setOnClickListener { callback.invoke(6) }
-        year.setOnClickListener { callback.invoke(12) }
+        one.setOnClickListener {
+            callback.invoke(1)
+            dismiss()
+        }
+        three.setOnClickListener {
+            callback.invoke(3)
+            dismiss()
+        }
+        six.setOnClickListener {
+            callback.invoke(6)
+            dismiss()
+        }
+        year.setOnClickListener {
+            callback.invoke(12)
+            dismiss()
+        }
     }
 
     private fun clickedPeriod(clicked: TextView) {

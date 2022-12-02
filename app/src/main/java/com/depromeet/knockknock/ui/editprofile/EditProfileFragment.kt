@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
@@ -34,6 +35,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
         get() = R.layout.fragment_edit_profile
 
     override val viewModel : EditProfileViewModel by viewModels()
+    private val navController by lazy { findNavController() }
 
     private lateinit var requestUpdateProfile: ActivityResultLauncher<Intent>
 
@@ -45,6 +47,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
         exception = viewModel.errorEvent
         initRegisterForActivityResult()
         initHideKeyboard()
+        initToolbar()
     }
 
     override fun initDataBinding() {
@@ -61,6 +64,15 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
     }
 
     override fun initAfterBinding() {
+    }
+
+    private fun initToolbar() {
+        with(binding.toolbar) {
+            this.title = getString(R.string.profile_title)
+            // 뒤로가기 버튼
+            this.setNavigationIcon(R.drawable.ic_allow_back)
+            this.setNavigationOnClickListener { navController.popBackStack() }
+        }
     }
 
     private fun logOutDialog() {
