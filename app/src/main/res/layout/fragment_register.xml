@@ -87,7 +87,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:paddingTop="10dp"
-                android:hint="메시지를 작성해보세요"
+                android:hint="@string/register_message_hint"
                 android:privateImeOptions="defaultInputMode=korean"
                 android:text="@={testAlarmViewModel.inputContent}"
                 android:textSize="22sp" />
@@ -99,7 +99,7 @@
             android:id="@+id/test_alarm_button"
             android:layout_width="127dp"
             android:layout_height="wrap_content"
-            android:text="보내기"
+            android:text="@string/register_send"
             android:fontFamily="@font/pretendard_medium"
             android:textColor="@color/black"
             android:textSize="18sp"

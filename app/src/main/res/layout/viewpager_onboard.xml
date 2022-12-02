@@ -15,7 +15,6 @@
         android:fontFamily="@font/pretendard_bold"
         android:gravity="center|top"
         android:lineSpacingMultiplier="1.4"
-        android:text="푸시알림으로\n많은 사람에게 나의 말을\n 전해보세요"
         android:textColor="@color/black"
         android:textSize="25sp" />
 
