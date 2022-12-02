@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.friendlist
+package com.depromeet.knockknock.ui.addfriend
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -7,7 +7,9 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.base.DefaultYellowAlertDialog
+import com.depromeet.knockknock.databinding.FragmentAddFriendBinding
 import com.depromeet.knockknock.databinding.FragmentFriendListBinding
+import com.depromeet.knockknock.ui.addfriend.adapter.FriendAddAdapter
 import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
 import com.depromeet.knockknock.ui.friendlist.bottom.BottomFriendMore
 import com.depromeet.knockknock.ui.friendlist.bottom.FriendMoreType
@@ -16,14 +18,14 @@ import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
-class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListViewModel>(R.layout.fragment_friend_list) {
+class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewModel>(R.layout.fragment_add_friend) {
 
     private val TAG = "FriendListFragment"
 
     override val layoutResourceId: Int
-        get() = R.layout.fragment_friend_list
+        get() = R.layout.fragment_add_friend
 
-    override val viewModel : FriendListViewModel by viewModels()
+    override val viewModel : AddFriendViewModel by viewModels()
     private val navController by lazy { findNavController() }
 
     override fun initStartView() {
@@ -40,8 +42,7 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is FriendListNavigationAction.NavigateToLink -> {}
-                    is FriendListNavigationAction.NavigateToFriendMore -> { moreFriendPopUp(userIdx = it.userIdx) }
+                    is AddFriendNavigationAction.NavigateToAddFriend -> { addFriendPopUp(it.userIdx) }
                 }
             }
         }
@@ -52,24 +53,31 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
 
     private fun initToolbar() {
         with(binding.toolbar) {
-            this.title = getString(R.string.friend_list_title)
+            this.title = getString(R.string.friend_search_title)
             // 뒤로가기 버튼
             this.setNavigationIcon(R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
     }
 
-    private fun moreFriendPopUp(userIdx: Int) {
-        val dialog: BottomFriendMore = BottomFriendMore {
-            when(it) {
-                is FriendMoreType.Black -> {}
-                is FriendMoreType.Delete -> {}
-            }
-        }
-        dialog.show(requireActivity().supportFragmentManager, TAG)
+    private fun initAdapter() {
+        binding.friendRecycler.adapter = FriendAddAdapter(viewModel)
     }
 
-    private fun initAdapter() {
-        binding.friendRecycler.adapter = FriendListAdapter(viewModel)
+    private fun addFriendPopUp(userIdx: Int) {
+        val res = AlertDialogModel(
+            title = getString(R.string.add_friend_popup_title),
+            description = null,
+            positiveContents = getString(R.string.add_friend_popup_positive),
+            negativeContents = getString(R.string.no)
+        )
+        val dialog: DefaultYellowAlertDialog = DefaultYellowAlertDialog(
+            alertDialogModel = res,
+            clickToPositive = {
+                // 친구 추가 API
+                userIdx},
+            clickToNegative = {}
+        )
+        dialog.show(requireActivity().supportFragmentManager, TAG)
     }
 }

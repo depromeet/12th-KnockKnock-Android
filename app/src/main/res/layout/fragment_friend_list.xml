@@ -42,7 +42,6 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_link"
-            app:viewVisible="@{viewmodel.searchQuery}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -98,7 +97,7 @@
         </TextView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/bookmark_recycler"
+            android:id="@+id/friend_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/my_friend_list_title"

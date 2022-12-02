@@ -84,5 +84,7 @@
 
     <string name="friend_approve_invite">요청하기</string>
 
+    <!--친구검색-->
+    <string name="friend_search_title">친구 검색</string>
 
 </resources>
