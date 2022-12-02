@@ -18,23 +18,35 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="31dp"
-                android:text=""
-                android:fontFamily="@font/pretendard_regular"
-                android:lineSpacingExtra="5sp"
-                android:translationY="-2.27sp"
-                android:gravity="center_horizontal|top"
-                />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:padding="16dp"
+            android:textColor="@color/gray07"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toStartOf="@+id/edit_btn"
+            app:layout_constraintTop_toTopOf="@+id/toolbar"
+            android:text="미리보기"/>
 
-
-        </androidx.appcompat.widget.Toolbar>
+        <TextView
+            android:id="@+id/edit_btn"
+            android:textSize="16dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:textColor="@color/black"
+            android:padding="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar"
+            app:layout_constraintEnd_toEndOf="@id/toolbar"
+            app:onSingleClick="@{() -> vm.onAlarmPushClicked()}"
+            android:text="완료">
+        </TextView>
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -209,7 +221,7 @@
                     android:layout_height="106dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="150dp"
-                    android:visibility="gone"/>
+                    android:visibility="visible"/>
             </LinearLayout>
 
         </ScrollView>

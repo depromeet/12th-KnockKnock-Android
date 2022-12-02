@@ -42,4 +42,10 @@ class AlarmCreateViewModel @Inject constructor(
             _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToGallery)
         }
     }
+
+    override fun onAlarmPushClicked() {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToAlarmSend)
+        }
+    }
 }

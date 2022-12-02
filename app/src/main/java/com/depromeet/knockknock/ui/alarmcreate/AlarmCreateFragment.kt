@@ -1,15 +1,9 @@
 package com.depromeet.knockknock.ui.alarmcreate
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.ForegroundColorSpan
 import android.util.Log
-import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -20,7 +14,6 @@ import com.depromeet.knockknock.databinding.FragmentAlarmCreateBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import androidx.navigation.fragment.findNavController
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AlarmCreateFragment :
@@ -52,14 +45,54 @@ class AlarmCreateFragment :
             viewModel.navigationEvent.collectLatest {
                 when (it) {
                     is AlarmCreateNavigationAction.NavigateToGallery -> readImage.launch("image/*")
+                    is AlarmCreateNavigationAction.NavigateToAlarmSend -> alarmSend()
                 }
             }
         }
     }
 
+    /**
+     * 바텀 시트 삭제 로직 만들어야 함.
+     *
+     * */
+    private fun alarmSend() {
+        val bottomSheet = BottomAlarmSend(
+            callback = {
+                when (it) {
+                    0 -> {
+                        // 예약 보내가 버튼 클릭
+                        alarmReservationSend()
+                    }
+                    1 -> {
+                        // 푸쉬알림을 발송했습니다!
+                    }
+                }
+            }
+        )
+        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
+    }
+
+    private fun alarmReservationSend() {
+        val bottomSheet = BottomAlarmReservationPicker(
+            callback = {
+                when (it) {
+                    0 -> {
+                        // 예약 보내가 버튼 클릭
+
+                    }
+                    1 -> {
+                        // 푸쉬알림을 발송했습니다!
+                    }
+                }
+            }
+        )
+        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
+
+    }
+
+
     private val readImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
 
-        Log.d("ttt", uri.toString())
         if (uri != null) {
             Glide.with(this)
                 .load(uri)
@@ -108,26 +141,8 @@ class AlarmCreateFragment :
     private fun initToolbar() {
         with(binding.toolbar) {
             this.setNavigationIcon(R.drawable.ic_baseline_close_24)
-            this.setNavigationOnClickListener {
-                findNavController().popBackStack()
-            }
-            this.inflateMenu(R.menu.alarm_create_toolbar_menu)
+            this.setNavigationOnClickListener { navController.popBackStack() }
             this.title = "취준생을 위한 방"
-
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_completion -> {
-                Log.d("ttt", "완료 버튼 누르기 완료")
-                true
-            }
-            R.id.action_preview -> {
-                Log.d("ttt", "미리보기 버튼 누르기 완료")
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 }
