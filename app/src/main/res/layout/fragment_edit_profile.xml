@@ -11,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_edit_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -21,17 +22,31 @@
             app:layout_constraintTop_toTopOf="parent"
             app:titleTextAppearance="@style/ToolBarStyle"/>
 
-        <ImageView
-            android:id="@+id/user_profile_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/user_profile_edit_btn"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/img_user_profile_default_with_add"
             android:layout_marginTop="32dp"
             android:onClick="@{() -> viewmodel.onProfileEditClicked()}">
-        </ImageView>
+            <ImageView
+                android:id="@+id/user_profile_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/img_default_user_profile"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/ic_profile_edit_add_btn"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/user_name_title"
@@ -39,21 +54,24 @@
             android:layout_marginTop="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/user_profile_edit"
+            app:layout_constraintTop_toBottomOf="@id/user_profile_edit_btn"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/profile_name_title">
         </TextView>
 
         <TextView
             android:id="@+id/edit_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/user_name_title"
-            app:layout_constraintBottom_toBottomOf="@id/user_name_title"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:padding="12dp"
-            android:layout_marginEnd="4dp"
-            android:text="@string/update"
+            android:padding="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/save"
+            android:gravity="center"
+            app:editBtnBackgroundTextColor="@{viewmodel.editPossibleState}"
             app:editBtnVisibie="@{viewmodel.editBtnState}">
         </TextView>
 
@@ -64,7 +82,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/user_name_title"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/custom_backgroundwhite_radius10">
+            app:onFocusBackground="@{null}">
         </EditText>
 
         <TextView
