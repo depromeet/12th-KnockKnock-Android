@@ -9,6 +9,15 @@
     <string name="bottom_alarm_room">알림방</string>
     <string name="bottom_my">MY</string>
 
+    <!--팝업 모달-->
+    <string name="logout_title">로그아웃 하시겠어요?</string>
+    <string name="logout_description">언제든 다시 돌아올 수 있어요!</string>
+    <string name="no">아니요</string>
+
+    <string name="user_delete_title">정말 탈퇴하시겠어요?</string>
+    <string name="user_delete_description">탈퇴시 모든 알림방과\n푸시메세지가 사라져요.</string>
+    <string name="user_delete_yes">회원 탈퇴</string>
+
     <!--알림설정-->
     <string name="alarm_settings_title">알림 설정</string>
 
@@ -20,11 +29,63 @@
 
     <string name="alarm_settings_not_receive_push_at_night">야간 푸시알림</string>
     <string name="alarm_settings_not_receive_push_at_night_description">오후 9시부터 다음날 오전 8시까지의 알림</string>
-    
+
     <!--보관함-->
     <string name="bookmark_title">보관함</string>
     <string name="bookmark_edit_btn">편집</string>
+    <string name="all">전체</string>
+    <string name="room">모든방</string>
+    <string name="reaction">리액션</string>
 
+    <string name="room_select">알림방 선택</string>
+    <string name="period_select">기간 선택</string>
+
+    <string name="one_month">1개월</string>
+    <string name="three_month">3개월</string>
+    <string name="six_month">6개월</string>
+    <string name="one_year">1년</string>
+
+    <!--마이페이지-->
+    <string name="mypage_profile_btn">프로필</string>
+    <string name="mypage_alarm_setting_btn">알림설정</string>
+    <string name="mypage_bookmark_btn">보관함</string>
+    <string name="mypage_friend_list_btn">친구목록</string>
+    <string name="mypage_information_btn">정보</string>
+
+    <!--프로필-->
+    <string name="profile_title">프로필</string>
+    <string name="profile_name_title">닉네임</string>
+    <string name="profile_email_title">이메일</string>
+    <string name="update">수정</string>
+    <string name="save">저장</string>
+
+    <string name="logout">로그아웃</string>
+    <string name="user_delete">탈퇴하기</string>
+
+    <!--정보-->
+    <string name="information_title">정보</string>
+    <string name="information_user_consent">이용약관</string>
+    <string name="information_user_privacy">개인정보 정책</string>
+    <string name="information_app_makers">만든 사람들</string>
+
+    <!--친구목록-->
+    <string name="friend_list_title">친구 목록</string>
+    <string name="friend_list_search_hint">닉네임 검색하기</string>
+    <string name="friend_list_my_title">내 친구 목록</string>
+    <string name="friend_list_link_description1">똑똑에 친구 초대하기</string>
+    <string name="link">링크</string>
+
+    <string name="delete">삭제하기</string>
+    <string name="black">신고</string>
+    <string name="close">닫기</string>
+
+    <string name="add_friend_popup_title">%s님께 친구추가를\n요청할까요?</string>
+    <string name="add_friend_popup_positive">요청하기</string>
+
+    <string name="friend_approve_invite">요청하기</string>
+
+    <!--친구검색-->
+    <string name="friend_search_title">친구 검색</string>
 
     <!--온보딩-->
     <string name="onboard_description_one">"푸시알림으로\n많은 사람에게 내 생각을\n전해보세요"</string>
@@ -36,4 +97,5 @@
     <string name="setprofile_nickname_hint">닉네임을 입력해주세요</string>
     <string name="setprofile_nickname">닉네임</string>
     <string name="setprofile_profile_pic">프로필 사진</string>
+
 </resources>
