@@ -117,7 +117,8 @@
             app:layout_constraintBottom_toTopOf="@id/delete_btn"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="4dp"
-            android:text="@string/logout">
+            android:text="@string/logout"
+            android:onClick="@{() -> viewmodel.onLogoutClicked()}">
         </TextView>
 
         <TextView
@@ -130,7 +131,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="32dp"
-            android:text="@string/user_delete">
+            android:text="@string/user_delete"
+            android:onClick="@{() -> viewmodel.onUserDeleteClicked()}">
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

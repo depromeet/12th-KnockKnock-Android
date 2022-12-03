@@ -92,7 +92,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
                 toastMessage("취소")
             }
         )
-        dialog.show(requireActivity().supportFragmentManager, TAG)
+        dialog.show(childFragmentManager, TAG)
     }
 
     private fun userDeleteDialog() {
@@ -111,7 +111,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
                 toastMessage("취소")
             }
         )
-        dialog.show(requireActivity().supportFragmentManager, TAG)
+        dialog.show(childFragmentManager, TAG)
     }
 
     private fun initRegisterForActivityResult() {

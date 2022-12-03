@@ -18,6 +18,7 @@
 
         <TextView
             android:id="@+id/alert_title"
+            style="@style/Theme.AppCompat.Alert.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +29,7 @@
 
         <TextView
             android:id="@+id/alert_description"
+            style="@style/Theme.AppCompat.Alert.Description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
