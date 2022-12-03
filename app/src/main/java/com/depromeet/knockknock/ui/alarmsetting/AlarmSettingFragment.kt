@@ -41,7 +41,7 @@ class AlarmSettingFragment : BaseFragment<FragmentAlarmSettingBinding, AlarmSett
             this.title = getString(R.string.alarm_settings_title)
 
             // 뒤로가기 버튼
-//            this.setNavigationIcon(R.drawable.ic_back)
+            this.setNavigationIcon(R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
     }
