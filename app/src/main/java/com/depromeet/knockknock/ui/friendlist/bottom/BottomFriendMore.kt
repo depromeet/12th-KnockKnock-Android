@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.bookmark.bottom
+package com.depromeet.knockknock.ui.friendlist.bottom
 
 import android.app.Dialog
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.ui.bookmark.adapter.FilterRoomAdapter
@@ -13,10 +14,10 @@ import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.w3c.dom.Text
 
-class BottomRoomFilter(
-    val roomList: List<Room>,
-    val itemClick: (roomId: Int) -> Unit
+class BottomFriendMore(
+    val callback: (type: FriendMoreType) -> Unit
 ) : BottomSheetDialogFragment(){
     private lateinit var dlg : BottomSheetDialog
 
@@ -42,18 +43,32 @@ class BottomRoomFilter(
         savedInstanceState: Bundle?,
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.dialog_bottom_room_filter, container, false)
+        return inflater.inflate(R.layout.dialog_bottom_friend_more, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val roomRecycler = requireView().findViewById<RecyclerView>(R.id.room_recycler)
-        val filterAdapter = FilterRoomAdapter { roomId ->
-            itemClick.invoke(roomId)
+        val delete = requireView().findViewById<TextView>(R.id.delete_btn)
+        val black = requireView().findViewById<TextView>(R.id.black_btn)
+        val close = requireView().findViewById<TextView>(R.id.close_btn)
+
+        delete.setOnClickListener {
+            callback.invoke(FriendMoreType.Delete)
             dismiss()
         }
-        filterAdapter.submitList(roomList)
-        roomRecycler.adapter = filterAdapter
+        black.setOnClickListener {
+            callback.invoke(FriendMoreType.Black)
+            dismiss()
+        }
+        close.setOnClickListener {
+            dismiss()
+        }
+
     }
+}
+
+sealed class FriendMoreType {
+    object Delete: FriendMoreType()
+    object Black: FriendMoreType()
 }
