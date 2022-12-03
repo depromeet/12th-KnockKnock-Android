@@ -3,8 +3,7 @@ package com.depromeet.knockknock.ui.editprofile
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.view.MotionEvent
-import android.view.View
+import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -57,7 +56,8 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
                     is EditProfileNavigationAction.NavigateToLogout -> logOutDialog()
                     is EditProfileNavigationAction.NavigateToUserDelete -> userDeleteDialog()
                     is EditProfileNavigationAction.NavigateToSplash -> Unit
-                    is EditProfileNavigationAction.NavigateToGallery -> getImageToGallery()
+                    is EditProfileNavigationAction.NavigateToGallery -> getGalleryImage()
+                    is EditProfileNavigationAction.NavigateToCamera -> getCaptureImage()
                 }
             }
         }
@@ -134,8 +134,14 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
         }
     }
 
-    private fun getImageToGallery() {
+    private fun getGalleryImage() {
         val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        requestUpdateProfile.launch(intent)
+    }
+
+    private fun getCaptureImage() {
+        val intent = Intent(ACTION_IMAGE_CAPTURE)
         intent.type = "image/*"
         requestUpdateProfile.launch(intent)
     }
@@ -159,4 +165,5 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
             )
         }
     }
+
 }
