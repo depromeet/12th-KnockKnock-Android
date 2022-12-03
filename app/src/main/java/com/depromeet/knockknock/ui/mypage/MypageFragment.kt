@@ -27,7 +27,7 @@ class MypageFragment : BaseFragment<FragmentMypageBinding, MypageViewModel>(R.la
     }
 
     override fun initDataBinding() {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collect {
                 when(it) {
                     is MypageNavigationAction.NavigateToProfileEdit -> navigate(MypageFragmentDirections.actionMyPageFragmentToEditProfileFragment())
