@@ -131,4 +131,78 @@
         <item name="android:layout_marginStart">4dp</item>
     </style>
 
+    <!-- 보관함 -->
+    <style name="Theme.AppCompat.TextView.Bookmark.Edit.Button" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/gray07</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="Theme.AppCompat.Bookmark.Filter.View" parent="Theme.AppCompat">
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Bookmark.Filter.Button" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Item.UserName" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray09</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Item.Date" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray07</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Item.Contents" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Item.RoomName" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray07</item>
+        <item name="android:textSize">12dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Item.Reaction" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Item.Reaction.Count" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray10</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+
+    <style name="Theme.AppCompat.TextView.Room.Filter.Title" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Filter.Room.Name" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray10</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Period.Filter" parent="@style/Widget.AppCompat.TextView">\
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
 </resources>
