@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.base
 
+import android.view.View
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.DialogRedDefaultAlertBinding
 import com.depromeet.knockknock.databinding.DialogYellowDefaultAlertBinding
@@ -28,6 +29,13 @@ class DefaultYellowAlertDialog(
     override fun initDataBinding() = Unit
 
     override fun initAfterBinding() {
+        if(alertDialogModel.title == null) {
+            binding.alertTitle.visibility = View.GONE
+        }
+        if(alertDialogModel.description == null) {
+            binding.alertDescription.visibility = View.GONE
+        }
+
         binding.negativeBtn.setOnClickListener {
             clickToNegative.invoke()
             dismiss()
