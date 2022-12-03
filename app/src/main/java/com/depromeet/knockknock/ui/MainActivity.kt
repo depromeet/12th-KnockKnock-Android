@@ -10,6 +10,7 @@ import com.depromeet.knockknock.NavigationGraphDirections
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseActivity
 import com.depromeet.knockknock.databinding.ActivityMainBinding
+import com.depromeet.knockknock.service.MyFirebaseMessagingService
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +27,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun initStartView() {
         initNavController()
+        /** FCM설정, Token값 가져오기 */
+        MyFirebaseMessagingService().getFirebaseToken()
+
+        /** DynamicLink 수신확인 */
+        initDynamicLink()
     }
 
     override fun initDataBinding() {
@@ -87,6 +93,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
         } catch (e: Exception) {
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /** DynamicLink */
+    private fun initDynamicLink() {
+        val dynamicLinkData = intent.extras
+        if (dynamicLinkData != null) {
+            var dataStr = "DynamicLink 수신받은 값\n"
+            for (key in dynamicLinkData.keySet()) {
+                dataStr += "key: $key / value: ${dynamicLinkData.getString(key)}\n"
+            }
+
         }
     }
 }

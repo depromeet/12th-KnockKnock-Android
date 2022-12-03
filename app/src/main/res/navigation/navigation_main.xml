@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/alarmCreateFragment">
 
     <action
         android:id="@+id/action_main_fragment"
@@ -33,6 +33,11 @@
         android:id="@+id/homeFragment"
         android:name="com.depromeet.knockknock.ui.home.HomeFragment"
         android:label="HomeFragment" />
+
+    <fragment
+        android:id="@+id/alarmCreateFragment"
+        android:name="com.depromeet.knockknock.ui.alarmcreate.AlarmCreateFragment"
+        android:label="AlarmCreateFragment"/>
 
     <fragment
         android:id="@+id/alarmRoomFragment"

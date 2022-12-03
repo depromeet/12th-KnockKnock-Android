@@ -1,7 +1,7 @@
 package com.depromeet.knockknock.ui.alarmroom
 
 import com.depromeet.knockknock.base.BaseViewModel
-import com.dida.android.presentation.views.nav.home.HomeNavigationAction
+//import com.dida.android.presentation.views.nav.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

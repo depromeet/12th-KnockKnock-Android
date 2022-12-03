@@ -7,6 +7,9 @@ import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentBookmarkBinding
+import com.depromeet.knockknock.ui.bookmark.adapter.BookmarkAdapter
+import com.depromeet.knockknock.ui.bookmark.bottom.BottomPeriodFilter
+import com.depromeet.knockknock.ui.bookmark.bottom.BottomRoomFilter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -24,7 +27,7 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
 
     override fun initStartView() {
         binding.apply {
-            this.vm = viewModel
+            this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
@@ -32,25 +35,43 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
     }
 
     override fun initDataBinding() {
-    }
-
-    override fun initAfterBinding() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is BookmarkNavigationAction.NavigateToBookmarkFilter -> {}
                     is BookmarkNavigationAction.NavigateToBookmarkEdit -> {}
+                    is BookmarkNavigationAction.NavigateToBookmarkFilterAll -> {}
+                    is BookmarkNavigationAction.NavigateToBookmarkFilterRoom -> roomFilter()
+                    is BookmarkNavigationAction.NavigateToBookmarkFilterPeriod -> periodFilter()
+                    is BookmarkNavigationAction.NavigateToReaction -> {}
                 }
             }
         }
+    }
+
+    override fun initAfterBinding() {
+        binding.bookmarkRecycler.adapter = BookmarkAdapter(viewModel)
     }
 
     private fun initToolbar() {
         with(binding.toolbar) {
             this.title = getString(R.string.bookmark_title)
             // 뒤로가기 버튼
-//            this.setNavigationIcon(R.drawable.ic_back)
+            this.setNavigationIcon(R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
+    }
+
+    private fun roomFilter() {
+//        val bottomSheet: BottomRoomFilter = BottomRoomFilter() {
+//
+//        }
+//        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
+    }
+
+    private fun periodFilter() {
+//        val bottomSheet: BottomRoomFilter = BottomPeriodFilter() {
+//
+//        }
+//        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 }

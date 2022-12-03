@@ -3,6 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/drawable-v24/custom_bottom_sheet.xml" value="0.294" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/drawable/custom_backgroundwhite_radius16.xml" value="0.294" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/drawable/custom_red_corner_radius16.xml" value="0.294" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/drawable/custom_white_radius20.xml" value="0.294" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/drawable/custom_yellow_radius16.xml" value="0.294" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.294" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/drawable/switch_thumb.xml" value="0.294" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/drawable/switch_track_off.xml" value="0.294" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/layout/alarm_create_ui_practice.xml" value="0.33" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/layout/alarm_ui_practicexml.xml" value="0.27219202898550726" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/layout/fragment_alarm_room.xml" value="0.27219202898550726" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/12th-KnockKnock-Android/app/src/main/res/menu/menu_main_bottom.xml" value="0.36614583333333334" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.16246215943491424" />
       </map>
     </option>

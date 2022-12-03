@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_preview"
+        android:title="미리보기"
+        android:fontFamily="@font/pretendard_regular"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_completion"
+        android:fontFamily="@font/pretendard_regular"
+        android:title="완료"
+        app:showAsAction="ifRoom" />
+</menu>
