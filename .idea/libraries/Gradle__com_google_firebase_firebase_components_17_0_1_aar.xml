@@ -3,12 +3,16 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/95eeb07892591eca90d7551ea1e1a9e2/transformed/firebase-components-17.0.1/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/95eeb07892591eca90d7551ea1e1a9e2/transformed/firebase-components-17.0.1/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/8847d84473515cd9558942eb43b90cfc/transformed/firebase-components-17.0.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/8847d84473515cd9558942eb43b90cfc/transformed/firebase-components-17.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-components/17.0.1/25dd870fd6dea1a3a5df01ce1a02127638a44751/firebase-components-17.0.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-components/17.0.1/25dd870fd6dea1a3a5df01ce1a02127638a44751/firebase-components-17.0.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-components/17.0.1/f0059600ec5c35df09ef78393e9b87e05a34ab45/firebase-components-17.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-components/17.0.1/f0059600ec5c35df09ef78393e9b87e05a34ab45/firebase-components-17.0.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

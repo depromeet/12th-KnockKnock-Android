@@ -3,10 +3,13 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/f94aaa608d32fe0f59c2311fa2025bd5/transformed/v2-story-2.11.2/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/f94aaa608d32fe0f59c2311fa2025bd5/transformed/v2-story-2.11.2/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/9740fbd39e1d294c753ff57f9f9abf76/transformed/v2-story-2.11.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/9740fbd39e1d294c753ff57f9f9abf76/transformed/v2-story-2.11.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/modules-2/files-2.1/com.kakao.sdk/v2-story/2.11.2/6c782239ef1f4aa3c8a4ba9c86622312c0c19373/v2-story-2.11.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.kakao.sdk/v2-story/2.11.2/6c782239ef1f4aa3c8a4ba9c86622312c0c19373/v2-story-2.11.2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -4,6 +4,9 @@
       <root url="jar://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/88594bb15956dd8226720d244dc00777/transformed/dotsindicator-4.3-debug/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/88594bb15956dd8226720d244dc00777/transformed/dotsindicator-4.3-debug/res" />
       <root url="file://$PROJECT_DIR$/../StarterProject/DIDemo/gradle/caches/transforms-3/88594bb15956dd8226720d244dc00777/transformed/dotsindicator-4.3-debug/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/9ebfc5c823f297dbc5686acabacc32a5/transformed/dotsindicator-4.3-debug/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-3/9ebfc5c823f297dbc5686acabacc32a5/transformed/dotsindicator-4.3-debug/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-3/9ebfc5c823f297dbc5686acabacc32a5/transformed/dotsindicator-4.3-debug/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
