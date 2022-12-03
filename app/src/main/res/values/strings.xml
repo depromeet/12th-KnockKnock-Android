@@ -29,7 +29,7 @@
 
     <string name="alarm_settings_not_receive_push_at_night">야간 푸시알림</string>
     <string name="alarm_settings_not_receive_push_at_night_description">오후 9시부터 다음날 오전 8시까지의 알림</string>
-    
+
     <!--보관함-->
     <string name="bookmark_title">보관함</string>
     <string name="bookmark_edit_btn">편집</string>

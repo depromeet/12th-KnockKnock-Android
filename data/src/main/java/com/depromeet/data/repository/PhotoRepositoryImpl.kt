@@ -1,7 +1,7 @@
 package com.depromeet.data.repository
 
 import androidx.paging.PagingData
-import com.example.data.datasource.remote.PhotoDataSource
+import com.depromeet.data.datasource.PhotoDataSource
 import com.example.domain.BaseResult
 import com.example.domain.model.Photo
 import com.example.domain.repository.PhotoRepository

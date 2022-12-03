@@ -31,10 +31,10 @@ abstract class BaseViewModel : ViewModel() {
         viewModelScope.launch(errorHandler) {
             e?.let {
                 when(it) {
-                    is HaveNotJwtTokenException -> {
-                        DataApplication.dataStorePreferences.removeAccessToken()
-                        _needLoginEvent.emit(true)
-                    }
+//                    is HaveNotJwtTokenException -> {
+//                        DataApplication.dataStorePreferences.removeAccessToken()
+//                        _needLoginEvent.emit(true)
+//                    }
                     else -> _errorEvent.emit(it)
                 }
             }
