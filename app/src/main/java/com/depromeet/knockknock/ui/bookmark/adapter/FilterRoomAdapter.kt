@@ -31,7 +31,7 @@ class FilterRoomAdapter(
             false
         )
         viewDataBinding.root.setOnClickListener {
-            callback.invoke(viewDataBinding.holder.roomId)
+            callback.invoke(viewDataBinding.holder!!.roomId)
         }
         return ViewHolder(viewDataBinding)
     }

@@ -27,12 +27,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     override val viewModel : HomeViewModel by viewModels()
 
     private val permissionManager = PermissionManagerImpl(this)
-    private val notificationPermissionRequest: PermissionRequester = permissionManager.forPermission(Permissions.PostNotification)
-        .onGranted { setFragmentResult(
-            KnockKnockIntent.RESULT_KEY_POST_NOTIFICATION_PERMISSION_GRANTED,
-            bundleOf(KnockKnockIntent.RESULT_KEY_POST_NOTIFICATION_PERMISSION_GRANTED to true)
-        ) }
-        .subscribe(this)
+//    private val notificationPermissionRequest: PermissionRequester = permissionManager.forPermission(Permissions.PostNotification)
+//        .onGranted { setFragmentResult(
+//            KnockKnockIntent.RESULT_KEY_POST_NOTIFICATION_PERMISSION_GRANTED,
+//            bundleOf(KnockKnockIntent.RESULT_KEY_POST_NOTIFICATION_PERMISSION_GRANTED to true)
+//        ) }
+//        .subscribe(this)
 
     override fun initStartView() {
         binding.apply {
@@ -40,7 +40,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
-        initNotificationPermission()
+//        initNotificationPermission()
     }
 
     override fun initDataBinding() {
@@ -49,11 +49,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     override fun initAfterBinding() {
     }
 
-    private fun initNotificationPermission() {
-        lifecycleScope.launch {
-            if(NotificationManagerCompat.from(requireContext()).areNotificationsEnabled().not()) {
-                notificationPermissionRequest.request()
-            }
-        }
-    }
+//    private fun initNotificationPermission() {
+//        lifecycleScope.launch {
+//            if(NotificationManagerCompat.from(requireContext()).areNotificationsEnabled().not()) {
+//                notificationPermissionRequest.request()
+//            }
+//        }
+//    }
 }

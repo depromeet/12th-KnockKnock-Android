@@ -141,6 +141,6 @@ object Permissions {
     object WriteExternalStorage : Permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     object FineLocation : Permission(Manifest.permission.ACCESS_FINE_LOCATION)
     object CoarseLocation : Permission(Manifest.permission.ACCESS_COARSE_LOCATION)
-    @RequiresApi(33)
-    object PostNotification : Permission(Manifest.permission.POST_NOTIFICATIONS)
+//    @RequiresApi(33)
+//    object PostNotification : Permission(Manifest.permission.POST_NOTIFICATIONS)
 }

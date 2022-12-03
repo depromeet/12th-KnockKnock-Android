@@ -26,7 +26,7 @@ class FriendAddAdapter(
             false
         )
         viewDataBinding.addBtn.setOnClickListener {
-            eventListener.onAddFriendClicked(viewDataBinding.holder.userIdx)
+            eventListener.onAddFriendClicked(viewDataBinding.holder!!.userIdx)
         }
         return ViewHolder(viewDataBinding)
     }

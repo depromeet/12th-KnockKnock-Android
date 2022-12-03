@@ -29,7 +29,7 @@ class BookmarkAdapter(
             false
         )
         viewDataBinding.root.setOnClickListener {
-            eventListener.onReactionClicked(viewDataBinding.holder.bookmarkId)
+            eventListener.onReactionClicked(viewDataBinding.holder!!.bookmarkId)
         }
         return ViewHolder(viewDataBinding)
     }

@@ -32,7 +32,7 @@ class FriendListAdapter(
             false
         )
         viewDataBinding.moreBtn.setOnClickListener {
-            eventListener.onFriendMoreClicked(viewDataBinding.holder.userIdx)
+            eventListener.onFriendMoreClicked(viewDataBinding.holder!!.userIdx)
         }
         return ViewHolder(viewDataBinding)
     }
