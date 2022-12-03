@@ -57,6 +57,7 @@
     <string name="profile_name_title">닉네임</string>
     <string name="profile_email_title">이메일</string>
     <string name="update">수정</string>
+    <string name="save">저장</string>
 
     <string name="logout">로그아웃</string>
     <string name="user_delete">탈퇴하기</string>

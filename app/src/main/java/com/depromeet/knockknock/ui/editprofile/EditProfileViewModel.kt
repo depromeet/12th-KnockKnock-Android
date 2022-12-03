@@ -19,6 +19,7 @@ class EditProfileViewModel @Inject constructor(
     val navigationHandler: SharedFlow<EditProfileNavigationAction> = _navigationHandler.asSharedFlow()
 
     val editBtnState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+    val editPossibleState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
 
     override fun onLogoutClicked() {
         baseViewModelScope.launch {

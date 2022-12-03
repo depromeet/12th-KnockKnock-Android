@@ -1,6 +1,11 @@
 package com.depromeet.knockknock.ui.editprofile
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -39,6 +44,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
         }
         exception = viewModel.errorEvent
         initRegisterForActivityResult()
+        initHideKeyboard()
     }
 
     override fun initDataBinding() {
@@ -120,5 +126,25 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         requestUpdateProfile.launch(intent)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initHideKeyboard() {
+        binding.profileEditMain.setOnTouchListener { _, _ ->
+            hideKeyboard()
+            false
+        }
+    }
+
+    private fun hideKeyboard() {
+        if (activity != null && activity!!.currentFocus != null) {
+            // 프래그먼트기 때문에 getActivity() 사용
+            val inputManager: InputMethodManager =
+                activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(
+                activity!!.currentFocus!!.windowToken,
+                InputMethodManager.HIDE_NOT_ALWAYS
+            )
+        }
     }
 }
