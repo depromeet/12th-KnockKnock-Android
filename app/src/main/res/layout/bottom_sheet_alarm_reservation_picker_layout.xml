@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="649dp"
@@ -11,7 +12,12 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextAppearance="@style/ToolBarStyle">
 
         <TextView
             android:layout_width="match_parent"
@@ -26,47 +32,65 @@
             android:translationY="-1.86sp"
             />
 
-    <TimePicker
+    </androidx.appcompat.widget.Toolbar>
+
+    <CalendarView
+        android:id="@+id/calendarview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
+    <View
         android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee"
+        app:layout_constraintBottom_toBottomOf="@+id/calendarview"
+        app:layout_constraintTop_toBottomOf="@+id/calendarview" />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:calendarViewShown="false"
-        android:spinnersShown="true"        >
+        android:spinnersShown="true"
+        android:timePickerMode="spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarview">
 
     </TimePicker>
 
-
-
-
-
-
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/send_card_view"
+        android:id="@+id/this_time_send_card_view"
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/main_yellow_light_mode"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker">
+
         <TextView
             android:id="@+id/some_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:fontFamily="@font/pretendard_regular"
-            android:textSize="18dp"
+            android:gravity="center"
+            android:lineSpacingExtra="4sp"
             android:text="이 시간에 보내기"
             android:textColor="@color/black"
-            android:lineSpacingExtra="4sp"
-            android:translationY="-1.86sp"
-            />
+            android:textSize="18dp"
+            android:translationY="-1.86sp" />
 
 
     </com.google.android.material.card.MaterialCardView>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
