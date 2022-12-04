@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -51,10 +52,6 @@ class AlarmCreateFragment :
         }
     }
 
-    /**
-     * 바텀 시트 삭제 로직 만들어야 함.
-     *
-     * */
     private fun alarmSend() {
         val bottomSheet = BottomAlarmSend(
             callback = {
@@ -64,7 +61,11 @@ class AlarmCreateFragment :
                         alarmReservationSend()
                     }
                     1 -> {
-                        // 푸쉬알림을 발송했습니다!
+                        /**
+                         * 푸쉬알림을 발송했습니다!
+                         * fcm API!!
+                         * */
+
                     }
                 }
             }
@@ -75,27 +76,21 @@ class AlarmCreateFragment :
     private fun alarmReservationSend() {
         val bottomSheet = BottomAlarmReservationPicker(
             callback = {
-                when (it) {
-                    0 -> {
-                        // 예약 보내가 버튼 클릭
-
-                    }
-                    1 -> {
-                        // 푸쉬알림을 발송했습니다!
-                    }
-                }
+                /**
+                 * 예약 푸쉬알림을 발송했습니다!
+                 * fcm API!!
+                 * */
+                Log.d("ttt", it.toString())
             }
         )
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
-
     }
 
 
     private val readImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-
-        if (uri != null) {
+        uri?.let {
             Glide.with(this)
-                .load(uri)
+                .load(it)
                 .into(binding.imgLoad)
 
             lifecycleScope.launchWhenStarted {
