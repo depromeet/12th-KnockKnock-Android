@@ -92,10 +92,7 @@ class AlarmCreateFragment :
             Glide.with(this)
                 .load(it)
                 .into(binding.imgLoad)
-
-            lifecycleScope.launchWhenStarted {
-                viewModel.imgState.emit(true)
-            }
+            viewModel.onImageStateChecked()
         }
     }
 

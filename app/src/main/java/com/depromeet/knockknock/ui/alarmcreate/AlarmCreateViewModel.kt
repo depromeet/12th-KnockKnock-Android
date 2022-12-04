@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.alarmcreate
 
+import androidx.lifecycle.lifecycleScope
 import com.depromeet.knockknock.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -46,6 +47,12 @@ class AlarmCreateViewModel @Inject constructor(
     override fun onAlarmPushClicked() {
         baseViewModelScope.launch {
             _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToAlarmSend)
+        }
+    }
+
+    fun onImageStateChecked() {
+        baseViewModelScope.launch {
+            imgState.emit(true)
         }
     }
 }
