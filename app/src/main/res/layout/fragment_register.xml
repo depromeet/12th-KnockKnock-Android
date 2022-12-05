@@ -44,7 +44,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/onboard_experience_door"
-            app:layout_constraintBottom_toTopOf="@+id/example_content"
+            app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,40 +60,78 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/onboard_experience_door" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/example_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/gray07"
-            app:boxBackgroundColor="@color/gray03"
-            app:boxBackgroundMode="filled"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="80"
-            app:endIconMode="clear_text"
-            app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/test_alarm_button">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#EEEEEE"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/test_alarm_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/onboard_experience_door">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/pretendard_medium"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:paddingTop="10dp"
-                android:hint="@string/register_message_hint"
-                android:privateImeOptions="defaultInputMode=korean"
-                android:text="@={testAlarmViewModel.inputContent}"
-                android:textSize="22sp" />
+                android:layout_height="match_parent"
+                android:elevation="1dp"
+                android:orientation="vertical">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="19dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_baseline_cancel_24"
+                    android:visibility="visible"
+                    android:onClick="@{_ -> testAlarmViewModel.onDeleteEditTextMessageClicked()}" />
+
+                <EditText
+                    android:id="@+id/edit_text_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/transparent"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:hint="메시지를 작성해주세요!"
+                    android:maxHeight="110dp"
+                    android:maxLength="200"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@={testAlarmViewModel.inputContent}"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575"
+                    android:textSize="22dp" />
+
+
+                <TextView
+                    android:id="@+id/edit_text_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:gravity="right|top"
+                    android:lineSpacingExtra="3sp"
+                    android:text="0/200"
+                    android:textColor="#BDBDBD"
+                    android:textSize="16dp"
+                    android:translationY="-1.6sp" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
         <androidx.appcompat.widget.AppCompatButton

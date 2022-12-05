@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class TestAlarmViewModel(application: Application, private val notificationManager: NotificationManager?) : AndroidViewModel(application) {
 
-    var inputTitle = MutableStateFlow<String>("")
     var inputContent = MutableStateFlow<String>("")
     var notificationId = 45
     var CHANNEL_ID = "com.example.depromeet.knockknock.ui.register.channel1"
@@ -50,6 +49,10 @@ class TestAlarmViewModel(application: Application, private val notificationManag
             notificationManager?.createNotificationChannel(channel)
         } else {
         }
+    }
+
+    fun onDeleteEditTextMessageClicked() {
+        inputContent.value = ""
     }
 }
 
