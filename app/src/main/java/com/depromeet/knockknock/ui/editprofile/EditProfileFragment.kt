@@ -1,17 +1,15 @@
 package com.depromeet.knockknock.ui.editprofile
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
-import android.view.View.OnFocusChangeListener
+import android.view.View.OnTouchListener
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -24,6 +22,7 @@ import com.depromeet.knockknock.databinding.FragmentEditProfileBinding
 import com.depromeet.knockknock.ui.editprofile.bottom.EditProfileImageBottomSheet
 import com.depromeet.knockknock.util.KnockKnockIntent
 import com.depromeet.knockknock.util.customOnFocusChangeListener
+import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.uriToFile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -52,9 +51,8 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
         }
         exception = viewModel.errorEvent
         initRegisterForActivityResult()
-        initHideKeyboard()
+        initEditText()
         initToolbar()
-        binding.userNameContents.customOnFocusChangeListener(requireContext())
     }
 
     override fun initDataBinding() {
@@ -80,6 +78,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
             this.setNavigationIcon(R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
+
     }
 
     private fun logOutDialog() {
@@ -165,23 +164,12 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun initHideKeyboard() {
+    private fun initEditText() {
+        binding.userNameContents.customOnFocusChangeListener(requireContext())
         binding.profileEditMain.setOnTouchListener { _, _ ->
-            hideKeyboard()
+            requireActivity().hideKeyboard()
+            binding.userNameContents.clearFocus()
             false
         }
     }
-
-    private fun hideKeyboard() {
-        if (activity != null && activity!!.currentFocus != null) {
-            // 프래그먼트기 때문에 getActivity() 사용
-            val inputManager: InputMethodManager =
-                activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputManager.hideSoftInputFromWindow(
-                activity!!.currentFocus!!.windowToken,
-                InputMethodManager.HIDE_NOT_ALWAYS
-            )
-        }
-    }
-
 }

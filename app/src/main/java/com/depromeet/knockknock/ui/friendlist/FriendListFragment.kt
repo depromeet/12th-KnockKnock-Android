@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.friendlist
 
+import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -10,6 +11,7 @@ import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
 import com.depromeet.knockknock.ui.friendlist.bottom.BottomFriendMore
 import com.depromeet.knockknock.ui.friendlist.bottom.FriendMoreType
 import com.depromeet.knockknock.util.customOnFocusChangeListener
+import com.depromeet.knockknock.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -33,7 +35,7 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
         exception = viewModel.errorEvent
         initToolbar()
         initAdapter()
-        binding.searchEditText.customOnFocusChangeListener(requireContext())
+        initEditText()
     }
 
     override fun initDataBinding() {
@@ -71,5 +73,15 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
 
     private fun initAdapter() {
         binding.friendRecycler.adapter = FriendListAdapter(viewModel)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditText() {
+        binding.searchEditText.customOnFocusChangeListener(requireContext())
+        binding.friendListMain.setOnTouchListener { _, _ ->
+            requireActivity().hideKeyboard()
+            binding.searchEditText.clearFocus()
+            false
+        }
     }
 }

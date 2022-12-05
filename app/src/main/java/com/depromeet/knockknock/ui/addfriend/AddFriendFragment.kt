@@ -15,6 +15,7 @@ import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
 import com.depromeet.knockknock.ui.friendlist.bottom.BottomFriendMore
 import com.depromeet.knockknock.ui.friendlist.bottom.FriendMoreType
 import com.depromeet.knockknock.util.customOnFocusChangeListener
+import com.depromeet.knockknock.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -38,7 +39,7 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
         exception = viewModel.errorEvent
         initToolbar()
         initAdapter()
-        binding.searchEditText.customOnFocusChangeListener(requireContext())
+        initEditText()
     }
 
     override fun initDataBinding() {
@@ -82,5 +83,15 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
             clickToNegative = {}
         )
         dialog.show(requireActivity().supportFragmentManager, TAG)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditText() {
+        binding.searchEditText.customOnFocusChangeListener(requireContext())
+        binding.addFriendMain.setOnTouchListener { _, _ ->
+            requireActivity().hideKeyboard()
+            binding.searchEditText.clearFocus()
+            false
+        }
     }
 }
