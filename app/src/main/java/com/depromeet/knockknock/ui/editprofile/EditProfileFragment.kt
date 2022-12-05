@@ -1,12 +1,15 @@
 package com.depromeet.knockknock.ui.editprofile
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
+import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -17,6 +20,7 @@ import com.depromeet.knockknock.base.DefaultRedAlertDialog
 import com.depromeet.knockknock.base.DefaultYellowAlertDialog
 import com.depromeet.knockknock.databinding.FragmentEditProfileBinding
 import com.depromeet.knockknock.util.KnockKnockIntent
+import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.uriToFile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -47,6 +51,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
         initRegisterForActivityResult()
         initHideKeyboard()
         initToolbar()
+        binding.userNameContents.customOnFocusChangeListener(requireContext())
     }
 
     override fun initDataBinding() {

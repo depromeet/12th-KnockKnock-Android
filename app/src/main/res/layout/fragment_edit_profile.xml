@@ -79,11 +79,11 @@
         <EditText
             android:id="@+id/user_name_contents"
             style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
+            android:background="@drawable/custom_backgroundwhite_radius16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/user_name_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:onFocusBackground="@{null}">
+            app:layout_constraintStart_toStartOf="parent">
         </EditText>
 
         <TextView
