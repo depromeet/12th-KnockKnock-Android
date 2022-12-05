@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.InputMethodManager
@@ -154,8 +156,11 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
     }
 
     private fun getCaptureImage() {
-        val intent = Intent(ACTION_IMAGE_CAPTURE)
-        intent.type = "image/*"
+        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE)
+        } else {
+            Intent(ACTION_IMAGE_CAPTURE)
+        }
         requestUpdateProfile.launch(intent)
     }
 
