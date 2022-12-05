@@ -20,14 +20,14 @@
         app:titleTextAppearance="@style/ToolBarStyle">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="예약 보내기"
             android:fontFamily="@font/pretendard_regular"
             android:textSize="18dp"
             android:textColor="#212121"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:lineSpacingExtra="4sp"
             android:translationY="-1.86sp"
             />
