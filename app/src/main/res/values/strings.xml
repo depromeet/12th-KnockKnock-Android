@@ -101,4 +101,11 @@
     <string name="setprofile_nickname">닉네임</string>
     <string name="setprofile_profile_pic">프로필 사진</string>
 
+    <!--온보딩-->
+    <string name="notification_title">알림</string>
+    <string name="allow">수락하기</string>
+    <string name="declare">거절하기</string>
+    <string name="invite_room_title">알림방 참여 요청이 도착했어요!</string>
+    <string name="invite_friend_title">친구 추가 요청이 도착했어요!</string>
+
 </resources>
