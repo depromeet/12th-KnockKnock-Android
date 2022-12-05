@@ -51,6 +51,7 @@ class EditProfileImageBottomSheet(
 
         val gallery = requireView().findViewById<TextView>(R.id.gallery_btn)
         val camera = requireView().findViewById<TextView>(R.id.camera_btn)
+        val close = requireView().findViewById<TextView>(R.id.close_btn)
 
         gallery.setOnClickListener {
             callback.invoke(true)
@@ -59,6 +60,10 @@ class EditProfileImageBottomSheet(
 
         camera.setOnClickListener {
             callback.invoke(false)
+            dismiss()
+        }
+
+        close.setOnClickListener {
             dismiss()
         }
     }
