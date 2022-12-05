@@ -92,7 +92,7 @@
     <string name="onboard_description_two">"친구를 초대하고\n같은 관심사를 가진\n그룹을 만들어요"</string>
     <string name="onboard_description_three">"이모지를 남기고\n푸시알림에\n생각을 표현해보세요"</string>
     <string name="onboard_start">시작하기</string>
-    <string name="register_message_hint">메시지를 작성해보세요</string>
+    <string name="register_message_hint">메시지를 작성해주세요</string>
     <string name="register_send">보내기</string>
     <string name="setprofile_nickname_hint">닉네임을 입력해주세요</string>
     <string name="setprofile_nickname">닉네임</string>
