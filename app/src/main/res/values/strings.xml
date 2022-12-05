@@ -62,6 +62,9 @@
     <string name="logout">로그아웃</string>
     <string name="user_delete">탈퇴하기</string>
 
+    <string name="gallery">내 사진첩</string>
+    <string name="camera">카메라</string>
+
     <!--정보-->
     <string name="information_title">정보</string>
     <string name="information_user_consent">이용약관</string>

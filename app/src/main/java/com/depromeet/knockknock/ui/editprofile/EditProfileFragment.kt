@@ -19,6 +19,7 @@ import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.base.DefaultRedAlertDialog
 import com.depromeet.knockknock.base.DefaultYellowAlertDialog
 import com.depromeet.knockknock.databinding.FragmentEditProfileBinding
+import com.depromeet.knockknock.ui.editprofile.bottom.EditProfileImageBottomSheet
 import com.depromeet.knockknock.util.KnockKnockIntent
 import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.uriToFile
@@ -61,8 +62,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
                     is EditProfileNavigationAction.NavigateToLogout -> logOutDialog()
                     is EditProfileNavigationAction.NavigateToUserDelete -> userDeleteDialog()
                     is EditProfileNavigationAction.NavigateToSplash -> Unit
-                    is EditProfileNavigationAction.NavigateToGallery -> getGalleryImage()
-                    is EditProfileNavigationAction.NavigateToCamera -> getCaptureImage()
+                    is EditProfileNavigationAction.NavigateToEditProfileImage -> editProfileImageBottomSheet()
                 }
             }
         }
@@ -116,6 +116,14 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
                 toastMessage("취소")
             }
         )
+        dialog.show(childFragmentManager, TAG)
+    }
+
+    private fun editProfileImageBottomSheet() {
+        val dialog = EditProfileImageBottomSheet {
+            if(it) getGalleryImage()
+            else getCaptureImage()
+        }
         dialog.show(childFragmentManager, TAG)
     }
 

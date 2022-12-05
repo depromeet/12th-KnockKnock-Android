@@ -1,13 +1,10 @@
 package com.depromeet.knockknock.ui.friendlist
 
-import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
-import com.depromeet.knockknock.base.DefaultYellowAlertDialog
 import com.depromeet.knockknock.databinding.FragmentFriendListBinding
 import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
 import com.depromeet.knockknock.ui.friendlist.bottom.BottomFriendMore
