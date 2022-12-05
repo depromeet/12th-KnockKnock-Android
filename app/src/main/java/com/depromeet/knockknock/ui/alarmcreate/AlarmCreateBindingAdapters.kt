@@ -7,9 +7,11 @@ import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
+import com.depromeet.knockknock.R
 
 @BindingAdapter("addImageCardViewVisible")
 fun CardView.bindAddImageCardViewVisible(enable: Boolean) {
@@ -32,6 +34,12 @@ fun TextView.bindDeleteTextVisible(textLength: Int) {
         this.setTextColor(Color.parseColor("#212121"))
         this.isClickable = true
     }
+}
+
+@BindingAdapter("linearLayoutColorChange")
+fun LinearLayout.bindLinearLayoutColorChange(textLength: Int) {
+    if (textLength == 0)  this.setBackgroundResource(R.drawable.custom_backgroundgray03_radius10)
+    else this.setBackgroundResource(R.drawable.custom_backgroundgray03_radius10_line_gray08)
 }
 
 fun textChangeColor(
