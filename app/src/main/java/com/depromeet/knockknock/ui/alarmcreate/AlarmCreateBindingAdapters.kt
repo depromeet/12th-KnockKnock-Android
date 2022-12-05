@@ -13,7 +13,6 @@ import androidx.databinding.BindingAdapter
 
 @BindingAdapter("addImageCardViewVisible")
 fun CardView.bindAddImageCardViewVisible(enable: Boolean) {
-    Log.d("ttt", enable.toString())
     if (enable) this.visibility = View.GONE
     else this.visibility = View.VISIBLE
 }
@@ -22,6 +21,17 @@ fun CardView.bindAddImageCardViewVisible(enable: Boolean) {
 fun ImageView.bindImgLoadVisible(enable: Boolean) {
     if (enable) this.visibility = View.VISIBLE
     else this.visibility = View.GONE
+}
+
+@BindingAdapter("deleteTextVisible")
+fun TextView.bindDeleteTextVisible(textLength: Int) {
+    if (textLength == 0) {
+        this.setTextColor(Color.parseColor("#BDBDBD"))
+        this.isClickable = false
+    } else {
+        this.setTextColor(Color.parseColor("#212121"))
+        this.isClickable = true
+    }
 }
 
 fun textChangeColor(
