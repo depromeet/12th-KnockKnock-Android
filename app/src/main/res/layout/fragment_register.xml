@@ -123,7 +123,6 @@
                     android:fontFamily="@font/pretendard_regular"
                     android:gravity="right|top"
                     android:lineSpacingExtra="3sp"
-                    android:text="0/200"
                     android:textColor="#BDBDBD"
                     android:textSize="16dp"
                     android:translationY="-1.6sp" />
