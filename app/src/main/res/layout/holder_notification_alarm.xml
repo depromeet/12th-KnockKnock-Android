@@ -7,14 +7,19 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.notification.model.NotificationAlarm" />
+            type="com.depromeet.knockknock.ui.notification.model.Notification" />
+
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.notification.NotificationActionHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@drawable/custom_white_radius08">
+        android:background="@drawable/custom_white_radius08"
+        android:onClick="@{() -> eventListener.onNotificationClicked(holder.notificationId)}">
 
         <ImageView
             android:id="@+id/user_img"

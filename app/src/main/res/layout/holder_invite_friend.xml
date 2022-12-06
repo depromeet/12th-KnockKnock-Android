@@ -7,7 +7,11 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.notification.model.InviteFriend" />
+            type="com.depromeet.knockknock.ui.notification.model.Notification" />
+
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.notification.NotificationActionHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,7 +75,8 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:text="@string/declare"
-                app:layout_constraintTop_toBottomOf="@+id/alert_description" />
+                app:layout_constraintTop_toBottomOf="@+id/alert_description"
+                android:onClick="@{() -> eventListener.onInviteFriendAllowClicked()}"/>
 
             <TextView
                 android:id="@+id/positive_btn"
@@ -81,7 +86,8 @@
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:text="@string/allow"
-                app:layout_constraintTop_toBottomOf="@+id/alert_description" />
+                app:layout_constraintTop_toBottomOf="@+id/alert_description"
+                android:onClick="@{() -> eventListener.onInviteFriendDeclareClicked()}"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

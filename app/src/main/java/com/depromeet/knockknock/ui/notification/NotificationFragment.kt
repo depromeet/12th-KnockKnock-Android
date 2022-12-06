@@ -7,6 +7,7 @@ import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomBinding
 import com.depromeet.knockknock.databinding.FragmentNotificationBinding
 import com.depromeet.knockknock.ui.alarmroom.AlarmRoomViewModel
+import com.depromeet.knockknock.ui.notification.adapter.NotificationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -43,6 +44,9 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
             this.setNavigationIcon(R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
+    }
 
+    private fun initAdapter() {
+        binding.friendRecycler.adapter = NotificationAdapter(viewModel)
     }
 }
