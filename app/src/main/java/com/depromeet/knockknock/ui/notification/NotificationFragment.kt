@@ -39,9 +39,9 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
                 when(it) {
                     is NotificationNavigationAction.NavigateToNotificationDetail -> {}
                     is NotificationNavigationAction.NavigateToInviteRoomAllow -> {}
-                    is NotificationNavigationAction.NavigateToInviteRoomDeclare -> {}
-                    is NotificationNavigationAction.NavigateToInviteFriendAllow -> {}
-                    is NotificationNavigationAction.NavigateToInviteFriendDeclare -> {}
+                    is NotificationNavigationAction.NavigateToInviteRoomDeclare -> toastMessage(getString(R.string.invite_room_declare_toast))
+                    is NotificationNavigationAction.NavigateToInviteFriendAllow -> toastMessage(getString(R.string.invite_friend_allow_toast))
+                    is NotificationNavigationAction.NavigateToInviteFriendDeclare -> toastMessage(getString(R.string.invite_friend_declare_toast))
                     is NotificationNavigationAction.NavigateToPushNotification -> {}
                 }
             }
