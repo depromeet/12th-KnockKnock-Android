@@ -73,9 +73,9 @@ class RegisterFragment : Fragment() {
             testAlarmViewModel.displayNotification(context!!)
         }
 
-        lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             kakaoAuthViewModel.message.collect{
-                view?.findNavController()?.navigate(R.id.action_registerFragment_to_homeFragment)
+                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
             }
 
         }
@@ -94,7 +94,7 @@ class RegisterFragment : Fragment() {
                 Log.d("MYTAG", account.idToken.toString())
                 Log.d("MYTAG", account.account.toString())
                 Log.d("MYTAG", account.email.toString())
-                view?.findNavController()?.navigate(R.id.action_registerFragment_to_homeFragment)
+                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
             } catch (e: ApiException) {
                 e.localizedMessage?.let { Log.d("MYTAG", it) }
             }
@@ -106,10 +106,15 @@ class RegisterFragment : Fragment() {
             testAlarmViewModel.editTextMessageCountEvent.collectLatest {
                 binding.editTextCount.text = "$it/200"
 
-                if (it == 0) {binding.editTextCount.text = textChangeColor(binding.editTextCount, "#ff0000", 0, 1)
+                if (it == 0) {
+                    binding.editTextCount.text =
+                        textChangeColor(binding.editTextCount, "#ff0000", 0, 1)
                     binding.testAlarmButton.setBackgroundTintList(resources.getColorStateList(R.color.background_white_mode))
+                    binding.onboardBeforeWrite.setImageDrawable(resources.getDrawable(R.drawable.onboard_before_write))
+                } else {
+                    binding.testAlarmButton.setBackgroundTintList(resources.getColorStateList(R.color.main_yellow_light_mode))
+                    binding.onboardBeforeWrite.setImageDrawable(resources.getDrawable(R.drawable.onboard_after_write))
                 }
-                else binding.testAlarmButton.setBackgroundTintList(resources.getColorStateList(R.color.main_yellow_light_mode))
             }
         }
     }

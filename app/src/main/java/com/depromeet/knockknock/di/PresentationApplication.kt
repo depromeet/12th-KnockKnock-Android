@@ -13,7 +13,7 @@ class PresentationApplication :Application(){
         super.onCreate()
         // 다크모드 비활성화
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        KakaoSdk.init(this, "8855edea7e857b1d74255151a86d8477")
+        KakaoSdk.init(this, "30f2e9f0a932561533c47548a6cc4b52")
 
 ////        mySharedPreferences = MySharedPreferences(applicationContext)
 //        dataStorePreferences = DataStorePreferences(applicationContext)
