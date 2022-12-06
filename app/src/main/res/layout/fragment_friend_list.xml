@@ -25,6 +25,7 @@
         <EditText
             android:id="@+id/search_edit_text"
             style="@style/Theme.AppCompat.EditText.Friend.List.Search"
+            android:background="@drawable/custom_backgroundwhite_radius16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -37,8 +38,7 @@
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="12dp"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
-            android:text="@={viewmodel.searchQuery}"
-            app:onFocusBackground="@{null}">
+            android:text="@={viewmodel.searchQuery}">
         </EditText>
 
         <androidx.constraintlayout.widget.ConstraintLayout

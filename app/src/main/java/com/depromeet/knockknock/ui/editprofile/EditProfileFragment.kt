@@ -1,12 +1,17 @@
 package com.depromeet.knockknock.ui.editprofile
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
+import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,7 +21,9 @@ import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.base.DefaultRedAlertDialog
 import com.depromeet.knockknock.base.DefaultYellowAlertDialog
 import com.depromeet.knockknock.databinding.FragmentEditProfileBinding
+import com.depromeet.knockknock.ui.editprofile.bottom.EditProfileImageBottomSheet
 import com.depromeet.knockknock.util.KnockKnockIntent
+import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.uriToFile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -47,6 +54,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
         initRegisterForActivityResult()
         initHideKeyboard()
         initToolbar()
+        binding.userNameContents.customOnFocusChangeListener(requireContext())
     }
 
     override fun initDataBinding() {
@@ -56,8 +64,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
                     is EditProfileNavigationAction.NavigateToLogout -> logOutDialog()
                     is EditProfileNavigationAction.NavigateToUserDelete -> userDeleteDialog()
                     is EditProfileNavigationAction.NavigateToSplash -> Unit
-                    is EditProfileNavigationAction.NavigateToGallery -> getGalleryImage()
-                    is EditProfileNavigationAction.NavigateToCamera -> getCaptureImage()
+                    is EditProfileNavigationAction.NavigateToEditProfileImage -> editProfileImageBottomSheet()
                 }
             }
         }
@@ -114,6 +121,14 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
         dialog.show(childFragmentManager, TAG)
     }
 
+    private fun editProfileImageBottomSheet() {
+        val dialog = EditProfileImageBottomSheet {
+            if(it) getGalleryImage()
+            else getCaptureImage()
+        }
+        dialog.show(childFragmentManager, TAG)
+    }
+
     private fun initRegisterForActivityResult() {
         requestUpdateProfile = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
             val isUpdateProfile = activityResult.data?.getBooleanExtra(KnockKnockIntent.RESULT_KEY_UPDATE_PROFILE, false) ?: false
@@ -141,8 +156,11 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
     }
 
     private fun getCaptureImage() {
-        val intent = Intent(ACTION_IMAGE_CAPTURE)
-        intent.type = "image/*"
+        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE)
+        } else {
+            Intent(ACTION_IMAGE_CAPTURE)
+        }
         requestUpdateProfile.launch(intent)
     }
 

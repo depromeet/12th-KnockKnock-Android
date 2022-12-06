@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.addfriend
 
+import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,7 @@ import com.depromeet.knockknock.ui.addfriend.adapter.FriendAddAdapter
 import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
 import com.depromeet.knockknock.ui.friendlist.bottom.BottomFriendMore
 import com.depromeet.knockknock.ui.friendlist.bottom.FriendMoreType
+import com.depromeet.knockknock.util.customOnFocusChangeListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -36,6 +38,7 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
         exception = viewModel.errorEvent
         initToolbar()
         initAdapter()
+        binding.searchEditText.customOnFocusChangeListener(requireContext())
     }
 
     override fun initDataBinding() {
