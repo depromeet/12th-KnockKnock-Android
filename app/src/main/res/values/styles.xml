@@ -74,7 +74,7 @@
 
     <style name="Theme.AppCompat.Alarm.Settings.Title" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_bold</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
