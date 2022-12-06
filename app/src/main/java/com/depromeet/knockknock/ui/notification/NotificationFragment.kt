@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.notification
 
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
@@ -9,6 +10,7 @@ import com.depromeet.knockknock.databinding.FragmentNotificationBinding
 import com.depromeet.knockknock.ui.alarmroom.AlarmRoomViewModel
 import com.depromeet.knockknock.ui.notification.adapter.NotificationAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
@@ -32,6 +34,18 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
     }
 
     override fun initDataBinding() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.navigationHandler.collectLatest {
+                when(it) {
+                    is NotificationNavigationAction.NavigateToNotificationDetail -> {}
+                    is NotificationNavigationAction.NavigateToInviteRoomAllow -> {}
+                    is NotificationNavigationAction.NavigateToInviteRoomDeclare -> {}
+                    is NotificationNavigationAction.NavigateToInviteFriendAllow -> {}
+                    is NotificationNavigationAction.NavigateToInviteFriendDeclare -> {}
+                    is NotificationNavigationAction.NavigateToPushNotification -> {}
+                }
+            }
+        }
     }
 
     override fun initAfterBinding() {

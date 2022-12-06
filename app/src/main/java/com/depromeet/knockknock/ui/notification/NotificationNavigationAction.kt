@@ -6,4 +6,5 @@ sealed class NotificationNavigationAction {
     object NavigateToInviteFriendAllow: NotificationNavigationAction()
     object NavigateToInviteFriendDeclare: NotificationNavigationAction()
     class NavigateToNotificationDetail(val notificationId: Int): NotificationNavigationAction()
+    object NavigateToPushNotification: NotificationNavigationAction()
 }

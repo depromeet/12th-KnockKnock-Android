@@ -6,4 +6,5 @@ interface NotificationActionHandler {
     fun onInviteFriendAllowClicked()
     fun onInviteFriendDeclareClicked()
     fun onNotificationClicked(notificationId: Int)
+    fun onEmptyBtnClicked()
 }

@@ -2,11 +2,10 @@ package com.depromeet.knockknock.ui.notification
 
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.friendlist.FriendListNavigationAction
+import com.depromeet.knockknock.ui.notification.model.Notification
 //import com.dida.android.presentation.views.nav.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,6 +17,9 @@ class NotificationViewModel @Inject constructor(
 
     private val _navigationHandler: MutableSharedFlow<NotificationNavigationAction> = MutableSharedFlow<NotificationNavigationAction>()
     val navigationHandler: SharedFlow<NotificationNavigationAction> = _navigationHandler.asSharedFlow()
+
+    private val _notificationList: MutableStateFlow<List<Notification>> = MutableStateFlow<List<Notification>>(emptyList())
+    val notificationList: StateFlow<List<Notification>> = _notificationList.asStateFlow()
 
     override fun onInviteRoomAllowClicked() {
         baseViewModelScope.launch {
@@ -46,6 +48,12 @@ class NotificationViewModel @Inject constructor(
     override fun onNotificationClicked(notificationId: Int) {
         baseViewModelScope.launch {
             _navigationHandler.emit(NotificationNavigationAction.NavigateToNotificationDetail(notificationId))
+        }
+    }
+
+    override fun onEmptyBtnClicked() {
+        baseViewModelScope.launch {
+            _navigationHandler.emit(NotificationNavigationAction.NavigateToPushNotification)
         }
     }
 

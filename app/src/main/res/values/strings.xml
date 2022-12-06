@@ -107,5 +107,8 @@
     <string name="declare">거절하기</string>
     <string name="invite_room_title">알림방 참여 요청이 도착했어요!</string>
     <string name="invite_friend_title">친구 추가 요청이 도착했어요!</string>
+    <string name="notification_empty_text">아직 받은 알림이 없어요</string>
+    <string name="notification_empty_description">내 친구들에게 먼저 알림을 보내보세요</string>
+    <string name="notification_empty_btn">푸시알림 작성하기</string>
 
 </resources>

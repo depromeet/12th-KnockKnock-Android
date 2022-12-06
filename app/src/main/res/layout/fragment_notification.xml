@@ -31,8 +31,60 @@
             android:layout_marginTop="12dp"
             android:overScrollMode="never"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:notificationIsNotEmptyView="@{viewmodel.notificationList}">
         </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:notificationIsEmptyView="@{viewmodel.notificationList}">
+
+            <TextView
+                android:id="@+id/empty_text"
+                style="@style/Theme.AppCompat.TextView.Notification.Empty.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/notification_empty_text">
+            </TextView>
+
+            <ImageView
+                android:id="@+id/empty_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/empty_text"
+                android:src="@drawable/ic_empty_notification"
+                android:layout_marginTop="32dp">
+            </ImageView>
+            
+            <TextView
+                android:id="@+id/empty_description"
+                style="@style/Theme.AppCompat.TextView.Notification.Empty.Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/empty_img"
+                android:layout_marginTop="32dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/notification_empty_btn"
+                style="@style/Theme.AppCompat.TextView.Notification.Empty.Button"
+                android:background="@drawable/custom_yellow_radius16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/empty_description"
+                android:text="@string/notification_empty_btn"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:onClick="@{() -> viewmodel.onNotificationClicked()}">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

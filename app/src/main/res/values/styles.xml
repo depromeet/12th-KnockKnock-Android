@@ -122,6 +122,7 @@
         <item name="android:paddingBottom">14dp</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
+        <item name="maxLines">1</item>
     </style>
 
     <style name="Theme.AppCompat.TextView.Profile.Email.Title" parent="@style/Widget.AppCompat.TextView">
@@ -225,6 +226,7 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16dp</item>
         <item name="fontFamily">@font/pretendard_semi_bold</item>
+        <item name="maxLines">1</item>
     </style>
 
     <style name="Theme.AppCompat.TextView.Friend.List.Link.Description1" parent="@style/Widget.AppCompat.TextView">
@@ -294,6 +296,28 @@
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Notification.Empty.Text" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">24dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Notification.Empty.Description" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/gray07</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Notification.Empty.Button" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">16dp</item>
     </style>
 
 </resources>

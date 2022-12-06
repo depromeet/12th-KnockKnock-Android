@@ -54,7 +54,7 @@ class NotificationAdapter(
 
     override fun getItemViewType(position: Int): Int =
         when(getItem(position).type) {
-            NotificationType.NOTIFICATIONALARM -> R.layout.holder_invite_room
+            NotificationType.INVITEROOM -> R.layout.holder_invite_room
             NotificationType.INVITEFRIEND -> R.layout.holder_invite_friend
             else -> R.layout.holder_notification_alarm
         }
