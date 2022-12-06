@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.depromeet.knockknock.ui.notification.NotificationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_white_mode">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/ToolBarStyle"
+            android:background="@color/white"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/friend_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_marginTop="12dp"
+            android:overScrollMode="never"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:notificationIsNotEmptyView="@{viewmodel.notificationList}">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:notificationIsEmptyView="@{viewmodel.notificationList}">
+
+            <TextView
+                android:id="@+id/empty_text"
+                style="@style/Theme.AppCompat.TextView.Notification.Empty.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/notification_empty_text">
+            </TextView>
+
+            <ImageView
+                android:id="@+id/empty_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/empty_text"
+                android:src="@drawable/ic_empty_notification"
+                android:layout_marginTop="32dp">
+            </ImageView>
+            
+            <TextView
+                android:id="@+id/empty_description"
+                style="@style/Theme.AppCompat.TextView.Notification.Empty.Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/empty_img"
+                android:layout_marginTop="32dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/notification_empty_btn"
+                style="@style/Theme.AppCompat.TextView.Notification.Empty.Button"
+                android:background="@drawable/custom_yellow_radius16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/empty_description"
+                android:text="@string/notification_empty_btn"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:onClick="@{() -> viewmodel.onNotificationClicked()}">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
