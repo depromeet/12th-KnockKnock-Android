@@ -6,19 +6,33 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.depromeet.knockknock.R
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.launch
 
 class TestAlarmViewModel(application: Application, private val notificationManager: NotificationManager?) : AndroidViewModel(application) {
 
-    var inputTitle = MutableStateFlow<String>("")
     var inputContent = MutableStateFlow<String>("")
+    var editTextMessageCountEvent = MutableStateFlow<Int>(0)
     var notificationId = 45
     var CHANNEL_ID = "com.example.depromeet.knockknock.ui.register.channel1"
+
+    init{
+        viewModelScope.launch {
+            inputContent.debounce(0).collectLatest {
+                onEditTextCount(it.length)
+            }
+        }
+    }
+
+    private fun onEditTextCount(count: Int) {
+        viewModelScope.launch {
+            editTextMessageCountEvent.value = count
+        }
+    }
 
 
     fun displayNotification(packageContext: Context){
@@ -50,6 +64,10 @@ class TestAlarmViewModel(application: Application, private val notificationManag
             notificationManager?.createNotificationChannel(channel)
         } else {
         }
+    }
+
+    fun onDeleteEditTextMessageClicked() {
+        inputContent.value = ""
     }
 }
 
