@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:background="@drawable/custom_white_radius08"
-        android:onClick="@{() -> eventListener.onNotificationClicked(holder.notificationId)}">
+        android:onClick="@{() -> eventListener.onNotificationClicked(holder.notificationId)}"
+        android:layout_marginTop="12dp">
 
         <ImageView
             android:id="@+id/user_img"

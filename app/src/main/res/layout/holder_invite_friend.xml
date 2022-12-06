@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@drawable/custom_white_radius08">
+        android:background="@drawable/custom_white_radius08"
+        android:layout_marginTop="12dp">
 
         <TextView
             android:id="@+id/invite_room_title"
