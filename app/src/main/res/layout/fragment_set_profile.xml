@@ -252,20 +252,32 @@
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/setprofile_start_button"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/send_card_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="59dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:adjustViewBounds="true"
-            android:padding="0dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/setprofile_startbutton"
-
+            android:backgroundTint="@color/main_yellow_light_mode"
+            app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+            <TextView
+                android:id="@+id/some_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:fontFamily="@font/pretendard_medium"
+                android:textSize="18dp"
+                android:text="선택 완료!"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4sp"
+                android:translationY="-1.86sp"
+                />
+
+
+        </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

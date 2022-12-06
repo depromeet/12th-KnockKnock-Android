@@ -28,13 +28,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:dampingRatio="0.5"
-                app:dotsColor="@color/gray04"
+                app:dotsColor="@color/main_yellow_light_mode"
+                app:dotsStrokeColor="@color/gray04"
                 app:dotsCornerRadius="8dp"
                 app:dotsSize="8dp"
                 app:dotsSpacing="6dp"
-                app:dotsStrokeColor="@color/main_yellow2_text"
-                app:dotsStrokeWidth="2dp"
-                app:stiffness="300" />
+                app:dotsStrokeWidth="6dp"
+                app:stiffness="300"
+                />
 
 
         </LinearLayout>
@@ -45,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:overScrollMode="never"
-            app:layout_constraintBottom_toTopOf="@id/start_text"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/indicators_container" />
