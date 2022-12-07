@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import com.depromeet.knockknock.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -49,8 +50,8 @@ class BottomImageAdd(
         super.onViewCreated(view, savedInstanceState)
 
         val sendReservationCardView =
-            requireView().findViewById<CardView>(R.id.choose_from_gallery_btn)
-        val sendCardView = requireView().findViewById<CardView>(R.id.launch_the_camera_btn)
+            requireView().findViewById<LinearLayout>(R.id.choose_from_gallery_btn)
+        val sendCardView = requireView().findViewById<LinearLayout>(R.id.launch_the_camera_btn)
 
         // 예약 보내기 버튼 클릭시
         sendReservationCardView.setOnClickListener {
@@ -63,6 +64,5 @@ class BottomImageAdd(
             callback.invoke(false)
             dismiss()
         }
-
     }
 }
