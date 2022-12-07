@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_yellow_radius10"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/iv_item_reservation_timer"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_reservation_timer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_item_reservation_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:paddingVertical="2.5dp"
+        android:text="오늘 19:00에 발송 예정"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_item_reservation_timer"
+        app:layout_constraintStart_toEndOf="@+id/iv_item_reservation_timer"
+        app:layout_constraintTop_toTopOf="@+id/iv_item_reservation_timer" />
+
+    <ImageView
+        android:id="@+id/iv_item_reservation_dot"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_dots_vertical"
+        app:layout_constraintBottom_toBottomOf="@id/iv_item_reservation_timer"
+        app:layout_constraintEnd_toStartOf="@id/iv_item_reservation_up"
+        app:layout_constraintTop_toTopOf="@id/iv_item_reservation_timer" />
+
+    <ImageView
+        android:id="@+id/iv_item_reservation_up"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_arrow_up"
+        app:layout_constraintBottom_toBottomOf="@id/iv_item_reservation_timer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_item_reservation_timer" />
+
+    <TextView
+        android:id="@+id/tv_item_reservation_content"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:maxLines="2"
+        android:text="기회는 사라지지 않는다.\n니가 놓친건 딴 놈이 잡는다."
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/iv_item_reservation_dot"
+        app:layout_constraintStart_toStartOf="@id/iv_item_reservation_timer"
+        app:layout_constraintTop_toBottomOf="@id/tv_item_reservation_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
