@@ -66,7 +66,7 @@
                     android:orientation="horizontal"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginTop="33dp">
+                    android:layout_marginTop="42dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -138,16 +138,6 @@
                         android:elevation="1dp"
                         android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="right"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginEnd="19dp"
-                            android:background="@null"
-                            android:src="@drawable/ic_baseline_cancel_24"
-                            android:visibility="visible" />
-
                         <EditText
                             android:id="@+id/edit_text_message"
                             android:text="@={vm.editTextMessageEvent}"
@@ -155,11 +145,16 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_marginStart="16dp"
-                            android:layout_marginTop="3dp"
+                            android:layout_marginTop="26dp"
                             android:layout_marginEnd="16dp"
-                            android:background="@android:color/transparent"
                             android:drawablePadding="8dp"
                             android:fontFamily="@font/pretendard_regular"
+                            android:background="@null"
+                            android:textCursorDrawable="@color/black"
+                            android:textColorHighlight="@color/main_yellow2_text"
+                            android:textSelectHandle="@color/main_yellow2_text"
+                            android:textSelectHandleLeft="@color/main_yellow2_text"
+                            android:textSelectHandleRight="@color/main_yellow2_text"
                             android:hint="메시지를 작성해주세요!"
                             android:maxHeight="110dp"
                             android:paddingStart="8dp"
@@ -180,6 +175,7 @@
                             android:layout_marginTop="14dp"
                             android:layout_marginBottom="16dp"
                             android:fontFamily="@font/pretendard_regular"
+                            app:editTextCountColorChange="@{vm.editTextMessageCountEvent}"
                             android:gravity="right|top"
                             android:lineSpacingExtra="3sp"
                             android:text="0/200"
@@ -210,6 +206,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:background="@drawable/custom_backgroundwhite_radius10_line_gray05"
                         android:orientation="horizontal">
 
                         <ImageView
