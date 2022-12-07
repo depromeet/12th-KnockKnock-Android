@@ -115,4 +115,7 @@
     <string name="notification_empty_description">내 친구들에게 먼저 알림을 보내보세요</string>
     <string name="notification_empty_btn">푸시알림 작성하기</string>
 
+    <!--홈-->
+    <string name="home_create_push_text">푸시알림 작성하기</string>
+    <string name="home_recent_push_title">최신 푸시알림</string>
 </resources>

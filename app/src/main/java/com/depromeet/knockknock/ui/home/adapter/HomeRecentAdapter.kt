@@ -10,23 +10,25 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderBookmarkBinding
+import com.depromeet.knockknock.databinding.HolderHomeRecentBinding
 import com.depromeet.knockknock.databinding.HolderHomeRoomBinding
 import com.depromeet.knockknock.databinding.HolderRoomFilterBinding
 import com.depromeet.knockknock.ui.bookmark.BookmarkActionHandler
 import com.depromeet.knockknock.ui.bookmark.model.Bookmark
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.home.HomeActionHandler
+import com.depromeet.knockknock.ui.home.model.Alarm
 import com.depromeet.knockknock.util.ToggleAnimation
 import com.depromeet.knockknock.util.toggleLayout
 
-class HomeRoomAdapter(
+class HomeRecentAdapter(
     private val eventLister: HomeActionHandler
-) : ListAdapter<Room, HomeRoomAdapter.ViewHolder>(FilterHomeRoomItemDiffCallback) {
+) : ListAdapter<Alarm, HomeRecentAdapter.ViewHolder>(FilterHomeRecentItemDiffCallback) {
 
     init { setHasStableIds(true) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewDataBinding: HolderHomeRoomBinding = DataBindingUtil.inflate(
+        val viewDataBinding: HolderHomeRecentBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.holder_home_room,
             parent,
@@ -40,20 +42,20 @@ class HomeRoomAdapter(
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: HolderHomeRoomBinding) :
+    class ViewHolder(private val binding: HolderHomeRecentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Room) {
+        fun bind(item: Alarm) {
             binding.holder = item
             binding.executePendingBindings()
         }
     }
 
-    internal object FilterHomeRoomItemDiffCallback : DiffUtil.ItemCallback<Room>() {
-        override fun areItemsTheSame(oldItem: Room, newItem: Room) =
-            oldItem.roomId == newItem.roomId
+    internal object FilterHomeRecentItemDiffCallback : DiffUtil.ItemCallback<Alarm>() {
+        override fun areItemsTheSame(oldItem: Alarm, newItem: Alarm) =
+            oldItem.alarmId == newItem.alarmId
 
-        override fun areContentsTheSame(oldItem: Room, newItem: Room) =
+        override fun areContentsTheSame(oldItem: Alarm, newItem: Alarm) =
             oldItem == newItem
     }
 }

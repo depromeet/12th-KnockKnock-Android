@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentHomeBinding
+import com.depromeet.knockknock.ui.home.adapter.HomeRecentAdapter
 import com.depromeet.knockknock.ui.home.bottom.BottomHomeRoom
 import com.depromeet.knockknock.util.KnockKnockIntent
 import com.depromeet.knockknock.util.permission.PermissionManagerImpl
@@ -63,6 +64,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     }
 
     private fun initAdapter() {
+        binding.recentRecycle.adapter = HomeRecentAdapter(viewModel)
     }
 
     private fun roomBottomSheet() {
