@@ -5,4 +5,5 @@ sealed class HomeNavigationAction {
     class NavigateToRoom(roomId: Int): HomeNavigationAction()
     class NavigateToRecentAlarm(alarmId: Int): HomeNavigationAction()
     object NavigateToNotification: HomeNavigationAction()
+    class NavigateToAlarmReaction(alarmId: Int): HomeNavigationAction()
 }

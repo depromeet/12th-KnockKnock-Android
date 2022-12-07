@@ -37,6 +37,12 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    override fun onReactionClicked(alarmId: Int) {
+        baseViewModelScope.launch {
+            _navigationHandler.emit(HomeNavigationAction.NavigateToRecentAlarm(alarmId = alarmId))
+        }
+    }
+
     override fun onNotificationClicked() {
         baseViewModelScope.launch {
             _navigationHandler.emit(HomeNavigationAction.NavigateToNotification)

@@ -51,10 +51,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is HomeNavigationAction.NavigateToNotification -> {}
+                    is HomeNavigationAction.NavigateToNotification -> navigate(HomeFragmentDirections.actionHomeFragmentToNotificationFragment())
                     is HomeNavigationAction.NavigateToCreatePush -> roomBottomSheet()
                     is HomeNavigationAction.NavigateToRoom -> {}
                     is HomeNavigationAction.NavigateToRecentAlarm -> {}
+                    is HomeNavigationAction.NavigateToAlarmReaction -> {}
                 }
             }
         }

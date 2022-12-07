@@ -41,7 +41,8 @@
                     android:src="@drawable/ic_notification"
                     android:background="@color/transparent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:onClick="@{() -> viewmodel.onNotificationClicked()}">
                 </ImageButton>
 
                 <TextView
