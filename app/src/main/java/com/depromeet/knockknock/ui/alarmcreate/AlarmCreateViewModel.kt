@@ -2,6 +2,7 @@ package com.depromeet.knockknock.ui.alarmcreate
 
 import androidx.lifecycle.lifecycleScope
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.editprofile.EditProfileNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -40,7 +41,7 @@ class AlarmCreateViewModel @Inject constructor(
 
     override fun onAddImageClicked() {
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToGallery)
+            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToAddImage)
         }
     }
 
