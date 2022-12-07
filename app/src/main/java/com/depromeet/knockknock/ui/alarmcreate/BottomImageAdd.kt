@@ -54,13 +54,13 @@ class BottomImageAdd(
 
         // 예약 보내기 버튼 클릭시
         sendReservationCardView.setOnClickListener {
-            callback.invoke(0)
+            callback.invoke(true)
             dismiss()
         }
 
         // 보내기 버튼 클릭시
         sendCardView.setOnClickListener {
-            callback.invoke(1)
+            callback.invoke(false)
             dismiss()
         }
 
