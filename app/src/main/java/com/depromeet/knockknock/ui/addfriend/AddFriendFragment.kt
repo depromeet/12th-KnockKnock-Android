@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.addfriend
 
+import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,8 @@ import com.depromeet.knockknock.ui.addfriend.adapter.FriendAddAdapter
 import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
 import com.depromeet.knockknock.ui.friendlist.bottom.BottomFriendMore
 import com.depromeet.knockknock.ui.friendlist.bottom.FriendMoreType
+import com.depromeet.knockknock.util.customOnFocusChangeListener
+import com.depromeet.knockknock.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -36,6 +39,7 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
         exception = viewModel.errorEvent
         initToolbar()
         initAdapter()
+        initEditText()
     }
 
     override fun initDataBinding() {
@@ -79,5 +83,15 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
             clickToNegative = {}
         )
         dialog.show(requireActivity().supportFragmentManager, TAG)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditText() {
+        binding.searchEditText.customOnFocusChangeListener(requireContext())
+        binding.addFriendMain.setOnTouchListener { _, _ ->
+            requireActivity().hideKeyboard()
+            binding.searchEditText.clearFocus()
+            false
+        }
     }
 }

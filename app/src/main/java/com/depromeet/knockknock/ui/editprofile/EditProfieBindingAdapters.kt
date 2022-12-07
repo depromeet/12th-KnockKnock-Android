@@ -27,10 +27,3 @@ fun TextView.bindEditBtnBackground(possible: Boolean) {
         this.setTextColor(context.getColor(R.color.gray08))
     }
 }
-
-@SuppressLint("UseCompatLoadingForDrawables")
-@BindingAdapter("onFocusBackground")
-fun EditText.bindOnFocusBackground(required: Boolean? = false) {
-    if(this.hasFocus()) this.background = context.getDrawable(R.drawable.custom_backgroundwhite_radius16_line_gray06)
-    else this.background = context.getDrawable(R.drawable.custom_backgroundwhite_radius16)
-}
