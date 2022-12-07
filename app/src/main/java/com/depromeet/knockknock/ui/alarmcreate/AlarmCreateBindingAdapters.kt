@@ -54,7 +54,7 @@ fun TextView.textChangeColor(
     start: Int,
     end: Int
 ): SpannableStringBuilder {
-    val builder = SpannableStringBuilder(text.text.toString())
+    val builder = SpannableStringBuilder(this.text.toString())
 
     builder.setSpan(
         ForegroundColorSpan(Color.parseColor(color)),
