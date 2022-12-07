@@ -65,6 +65,8 @@ class BottomAlarmReservationPicker(
 
         val sendReservationToolbar = requireView().findViewById<Toolbar>(R.id.toolbar)
         sendReservationToolbar.setNavigationIcon(R.drawable.ic_allow_back)
+        sendReservationToolbar.setNavigationOnClickListener { dismiss() }
+
 
         val current = LocalDateTime.now()
         reservationDate = current.format(DateTimeFormatter.ISO_DATE)
