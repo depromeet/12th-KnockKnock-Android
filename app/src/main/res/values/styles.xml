@@ -251,4 +251,14 @@
         <item name="fontFamily">@font/pretendard_semi_bold</item>
     </style>
 
+    <!-- 선택한 날짜를 표시할 색상 -->
+    <style name="CalenderViewDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorControlActivated">@color/main_yellow_light_mode</item>
+        <item name="colorControlHighlight">@color/main_yellow_light_mode</item>
+    </style>
+
+    <!-- 달력 안의 숫자들에 적용되는 스타일 -->
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+    </style>
+
 </resources>
