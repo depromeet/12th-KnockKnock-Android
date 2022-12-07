@@ -9,6 +9,7 @@
     app:behavior_draggable="true"
     app:behavior_hideable="true"
     android:background="@drawable/custom_bottom_sheet"
+    android:theme="@style/CalenderViewDatePickerStyle"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 
@@ -38,6 +39,7 @@
         android:id="@+id/calendarview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:dateTextAppearance="@style/CalenderViewDateCustomText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
