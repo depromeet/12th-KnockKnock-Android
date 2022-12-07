@@ -30,3 +30,11 @@ fun View.bindNotificationIsNotEmptyView(notificationList: List<Notification>) {
     if(notificationList.isEmpty()) this.visibility = View.GONE
     else this.visibility = View.VISIBLE
 }
+
+
+@SuppressLint("UseCompatLoadingForDrawables")
+@BindingAdapter("notificationIsEmptyBackground")
+fun View.bindNotificationIsEmptyBackground(notificationList: List<Notification>) {
+    if(notificationList.isEmpty()) this.background = context.getDrawable(R.color.white)
+    else this.background = context.getDrawable(R.color.background_white_mode)
+}
