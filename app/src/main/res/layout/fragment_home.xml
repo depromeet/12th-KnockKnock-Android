@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="vm"
+            name="viewmodel"
             type="com.depromeet.knockknock.ui.home.HomeViewModel" />
     </data>
 
