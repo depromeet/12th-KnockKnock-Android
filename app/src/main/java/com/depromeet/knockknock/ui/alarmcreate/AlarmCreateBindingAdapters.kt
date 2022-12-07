@@ -42,8 +42,14 @@ fun LinearLayout.bindLinearLayoutColorChange(textLength: Int) {
     else this.setBackgroundResource(R.drawable.custom_backgroundgray03_radius10_line_gray08)
 }
 
-fun textChangeColor(
-    text: TextView,
+@BindingAdapter("editTextCountColorChange")
+fun TextView.bindEditTextCountColorChange(textLength: Int) {
+    this.text = "$textLength/200"
+    if (textLength == 0) this.text = this.textChangeColor( "#ff0000", 0, 1)
+    else this.text = this.textChangeColor( "#616161", 0, textLength.toString().length)
+}
+
+fun TextView.textChangeColor(
     color: String,
     start: Int,
     end: Int
