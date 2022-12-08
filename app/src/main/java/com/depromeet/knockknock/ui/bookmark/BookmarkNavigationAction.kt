@@ -5,5 +5,5 @@ sealed class BookmarkNavigationAction {
     object NavigateToBookmarkFilterAll: BookmarkNavigationAction()
     object NavigateToBookmarkFilterRoom: BookmarkNavigationAction()
     object NavigateToBookmarkFilterPeriod: BookmarkNavigationAction()
-    class NavigateToReaction(bookmarkIdx: Int) : BookmarkNavigationAction()
+    class NavigateToReaction(val bookmarkIdx: Int) : BookmarkNavigationAction()
 }
