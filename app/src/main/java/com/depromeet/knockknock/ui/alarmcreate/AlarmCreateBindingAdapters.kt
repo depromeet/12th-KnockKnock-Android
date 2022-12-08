@@ -71,3 +71,12 @@ fun EditText.customOnFocusChangeListener(context: Context, linearLayout: LinearL
         else linearLayout.background = context.getDrawable(R.drawable.custom_backgroundgray03_radius10)
     }
 }
+
+@SuppressLint("UseCompatLoadingForDrawables")
+fun EditText.imageOnFocusChangeListener(imageView: ImageView) {
+    this.onFocusChangeListener = View.OnFocusChangeListener { view, gainFocus ->
+        //포커스가 주어졌을 때
+        if (gainFocus) imageView.visibility = View.GONE
+        else imageView.visibility = View.VISIBLE
+    }
+}
