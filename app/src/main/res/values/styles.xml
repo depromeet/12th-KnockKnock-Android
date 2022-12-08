@@ -154,6 +154,12 @@
         <item name="fontFamily">@font/pretendard_regular</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.Regular.Black.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
 
 
 
@@ -307,9 +313,13 @@
 
     <style name="Theme.AppCompat.TextView.Filter.Room.Name" parent="Theme.AppCompat.TextView.Medium.Gray10.Size18"/>
 
-    <style name="Theme.AppCompat.TextView.Period.Filter" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    <style name="Theme.AppCompat.TextView.Period.Filter" parent="Theme.AppCompat.TextView.Regular.Black.Size18"/>
+
+    <style name="Theme.AppCompat.TextView.Period.Save.Btn" parent="Theme.AppCompat.TextView.Medium.Black.Size18">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
     </style>
 
     <!-- 친구목록 -->
