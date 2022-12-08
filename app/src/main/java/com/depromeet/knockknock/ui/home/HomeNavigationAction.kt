@@ -6,4 +6,6 @@ sealed class HomeNavigationAction {
     class NavigateToRecentAlarm(alarmId: Int): HomeNavigationAction()
     object NavigateToNotification: HomeNavigationAction()
     class NavigateToAlarmReaction(alarmId: Int): HomeNavigationAction()
+    object NavigateToSearchRoom: HomeNavigationAction()
+    object NavigateToCreateRoom: HomeNavigationAction()
 }

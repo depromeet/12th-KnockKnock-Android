@@ -24,6 +24,12 @@
         <item name="android:layout_marginStart">16dp</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.SemiBold.Gray08.Size18" parent="Theme.AppCompat.TextView.Medium.Black.Size18">
+        <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textColor">@color/gray08</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
     <style name="Theme.AppCompat.TextView.SemiBold.Gray09.Size18" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/gray09</item>
         <item name="android:textSize">18dp</item>
@@ -63,6 +69,12 @@
 
     <style name="Theme.AppCompat.TextView.SemiBold.Gray10.Size18" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/gray10</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Medium.Gray08.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray08</item>
         <item name="android:textSize">18dp</item>
         <item name="fontFamily">@font/pretendard_semi_bold</item>
     </style>
@@ -354,10 +366,22 @@
         <item name="android:background">@drawable/custom_yellow_radius40</item>
     </style>
 
+
+
     <style name="Theme.AppCompat.TextView.Home.Recent.Title" parent="Theme.AppCompat.TextView.SemiBold.Black.Size18"/>
     <style name="Theme.AppCompat.TextView.Home.Recent.UserName" parent="Theme.AppCompat.TextView.SemiBold.Gray09.Size18"/>
     <style name="Theme.AppCompat.TextView.Home.Recent.Contents" parent="Theme.AppCompat.TextView.Regular.Black.Size14"/>
     <style name="Theme.AppCompat.TextView.Home.Recent.DateTime" parent="Theme.AppCompat.TextView.Regular.Gray07.Size14"/>
     <style name="Theme.AppCompat.TextView.Home.Recent.Reaction" parent="Theme.AppCompat.TextView.Regular.BackgroundWhite.Size14"/>
+
+    <style name="Theme.AppCompat.TextView.Home.Room.Empty.Text" parent="Theme.AppCompat.TextView.SemiBold.Gray08.Size18"/>
+    <style name="Theme.AppCompat.TextView.Home.Room.Search.Btn" parent="Theme.AppCompat.TextView.Medium.Black.Size18">
+        <item name="background">@drawable/custom_yellow_radius10</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="Theme.AppCompat.TextView.Home.Room.Create.Btn" parent="Theme.AppCompat.TextView.Medium.Gray08.Size18">
+        <item name="background">@drawable/custom_backgroundwhite_radius10</item>
+        <item name="android:gravity">center</item>
+    </style>
 
 </resources>

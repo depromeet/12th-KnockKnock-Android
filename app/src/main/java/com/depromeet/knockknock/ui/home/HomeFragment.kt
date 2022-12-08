@@ -52,10 +52,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             viewModel.navigationHandler.collectLatest {
                 when(it) {
                     is HomeNavigationAction.NavigateToNotification -> navigate(HomeFragmentDirections.actionHomeFragmentToNotificationFragment())
-                    is HomeNavigationAction.NavigateToCreatePush -> roomBottomSheet()
+                    is HomeNavigationAction.NavigateToCreatePush -> initRoomBottomSheet()
                     is HomeNavigationAction.NavigateToRoom -> {}
                     is HomeNavigationAction.NavigateToRecentAlarm -> {}
                     is HomeNavigationAction.NavigateToAlarmReaction -> {}
+                    is HomeNavigationAction.NavigateToSearchRoom -> {}
+                    is HomeNavigationAction.NavigateToCreateRoom -> {}
                 }
             }
         }
@@ -68,8 +70,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         binding.recentRecycle.adapter = HomeRecentAdapter(viewModel)
     }
 
-    private fun roomBottomSheet() {
-        val dialog = BottomHomeRoom(viewModel)
+    private fun initRoomBottomSheet() {
+        val dialog = BottomHomeRoom(
+            roomList = viewModel.roomList.value,
+            eventListener = viewModel
+        )
         dialog.show(childFragmentManager, TAG)
     }
 
