@@ -62,4 +62,10 @@ class HomeViewModel @Inject constructor(
             _navigationHandler.emit(HomeNavigationAction.NavigateToCreateRoom)
         }
     }
+
+    override fun onRecentAlarmMoreClicked(alarmId: Int) {
+        baseViewModelScope.launch {
+            _navigationHandler.emit(HomeNavigationAction.NavigateToRecentAlarmMore(alarmId = alarmId))
+        }
+    }
 }

@@ -8,4 +8,5 @@ interface HomeActionHandler {
     fun onNotificationClicked()
     fun onSearchRoomClicked()
     fun onCreateRoomClicked()
+    fun onRecentAlarmMoreClicked(alarmId: Int)
 }
