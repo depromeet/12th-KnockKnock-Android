@@ -39,7 +39,7 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
             viewModel.navigationHandler.collectLatest {
                 when(it) {
                     is BookmarkNavigationAction.NavigateToBookmarkEdit -> {}
-                    is BookmarkNavigationAction.NavigateToBookmarkFilterAll -> {}
+                    is BookmarkNavigationAction.NavigateToBookmarkFilterReset -> {}
                     is BookmarkNavigationAction.NavigateToBookmarkFilterRoom -> roomFilter()
                     is BookmarkNavigationAction.NavigateToBookmarkFilterPeriod -> periodFilter()
                     is BookmarkNavigationAction.NavigateToReaction -> {}
@@ -62,16 +62,21 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
     }
 
     private fun roomFilter() {
-//        val bottomSheet: BottomRoomFilter = BottomRoomFilter() {
-//
-//        }
-//        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
+        val bottomSheet = BottomRoomFilter(
+            roomList = emptyList(),
+            beforeClickedRoom = emptyList()
+        ) { clickedRoom ->
+            viewModel.setRoomFilter(clickedRoom.size)
+        }
+        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 
     private fun periodFilter() {
-//        val bottomSheet: BottomRoomFilter = BottomPeriodFilter() {
-//
-//        }
-//        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
+        val bottomSheet = BottomPeriodFilter(
+            period = 0
+        ) { clickedPeriod ->
+            viewModel.setPeriodFilter(clickedPeriod)
+        }
+        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 }

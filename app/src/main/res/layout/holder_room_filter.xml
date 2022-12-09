@@ -33,21 +33,21 @@
             app:layout_constraintTop_toTopOf="@id/room_img"
             app:layout_constraintBottom_toBottomOf="@id/room_img"
             app:layout_constraintStart_toEndOf="@id/room_img"
-            app:layout_constraintEnd_toStartOf="@id/next_img"
+            app:layout_constraintEnd_toStartOf="@id/room_check"
             android:layout_marginStart="16dp"
             android:text="@{holder.roomName}">
         </TextView>
 
-        <ImageView
-            android:id="@+id/next_img"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="12dp"
+        <CheckBox
+            android:id="@+id/room_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_next">
-        </ImageView>
+            android:button="@drawable/custom_square_checkbox"
+            android:checked="@={holder.checkd}">
+        </CheckBox>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

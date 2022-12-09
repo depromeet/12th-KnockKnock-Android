@@ -1,8 +1,6 @@
 package com.depromeet.knockknock.ui.bookmark
 
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.bookmark.model.FilterType
-import com.depromeet.knockknock.ui.mypage.MypageNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -17,8 +15,14 @@ class BookmarkViewModel @Inject constructor(
     private val _navigationHandler: MutableSharedFlow<BookmarkNavigationAction> = MutableSharedFlow<BookmarkNavigationAction>()
     val navigationHandler: SharedFlow<BookmarkNavigationAction> = _navigationHandler.asSharedFlow()
 
-    private val _filterTypeState: MutableStateFlow<FilterType> = MutableStateFlow<FilterType>(FilterType.ALL)
-    val filterTypeState: StateFlow<FilterType> = _filterTypeState.asStateFlow()
+    private val _roomClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
+    val roomClicked: StateFlow<Int> = _roomClicked
+
+    private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
+    val periodClicked: StateFlow<Int> = _periodClicked
+
+    private val _filterChecked: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+    val filterChecked: StateFlow<Boolean> = _filterChecked
 
     override fun onBookmarkEditClicked() {
         baseViewModelScope.launch {
@@ -27,24 +31,43 @@ class BookmarkViewModel @Inject constructor(
     }
 
 
-    override fun onFilterAllClicked() {
+    override fun onFilterResetClicked() {
         baseViewModelScope.launch {
-            _filterTypeState.value = FilterType.ALL
-            _navigationHandler.emit(BookmarkNavigationAction.NavigateToBookmarkFilterAll)
+            _roomClicked.emit(0)
+            _periodClicked.emit(0)
+            _navigationHandler.emit(BookmarkNavigationAction.NavigateToBookmarkFilterReset)
         }
     }
 
     override fun onFilterRoomClicked() {
         baseViewModelScope.launch {
-            _filterTypeState.value = FilterType.ROOM
             _navigationHandler.emit(BookmarkNavigationAction.NavigateToBookmarkFilterRoom)
+        }
+    }
+
+    fun setRoomFilter(roomCheckCount: Int) = baseViewModelScope.launch {
+        _roomClicked.emit(roomCheckCount)
+
+        if(roomClicked.value == 0 && periodClicked.value == 0) {
+            _filterChecked.emit(false)
+        } else {
+            _filterChecked.emit(true)
         }
     }
 
     override fun onFilterPeriodClicked() {
         baseViewModelScope.launch {
-            _filterTypeState.value = FilterType.PERIOD
             _navigationHandler.emit(BookmarkNavigationAction.NavigateToBookmarkFilterPeriod)
+        }
+    }
+
+    fun setPeriodFilter(periodCheckCount: Int) = baseViewModelScope.launch {
+        _periodClicked.emit(periodCheckCount)
+
+        if(roomClicked.value == 0 && periodClicked.value == 0) {
+            _filterChecked.emit(false)
+        } else {
+            _filterChecked.emit(true)
         }
     }
 

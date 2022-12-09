@@ -63,7 +63,7 @@ class BottomPeriodFilter(
         savedInstanceState: Bundle?,
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.dialog_bottom_room_filter, container, false)
+        return inflater.inflate(R.layout.dialog_bottom_period_filter, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

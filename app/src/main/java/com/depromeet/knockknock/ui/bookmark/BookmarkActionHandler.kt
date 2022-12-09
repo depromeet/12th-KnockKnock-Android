@@ -2,7 +2,7 @@ package com.depromeet.knockknock.ui.bookmark
 
 interface BookmarkActionHandler {
     fun onBookmarkEditClicked()
-    fun onFilterAllClicked()
+    fun onFilterResetClicked()
     fun onFilterRoomClicked()
     fun onFilterPeriodClicked()
     fun onReactionClicked(bookmarkIdx: Int)
