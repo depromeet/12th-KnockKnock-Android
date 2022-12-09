@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.bookmark
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -10,6 +11,7 @@ import com.depromeet.knockknock.databinding.FragmentBookmarkBinding
 import com.depromeet.knockknock.ui.bookmark.adapter.BookmarkAdapter
 import com.depromeet.knockknock.ui.bookmark.bottom.BottomPeriodFilter
 import com.depromeet.knockknock.ui.bookmark.bottom.BottomRoomFilter
+import com.depromeet.knockknock.ui.bookmark.model.Bookmark
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -49,7 +51,46 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
     }
 
     override fun initAfterBinding() {
-        binding.bookmarkRecycler.adapter = BookmarkAdapter(viewModel)
+        val adapter = BookmarkAdapter(viewModel)
+        binding.bookmarkRecycler.adapter = adapter
+        val test1 = Bookmark(
+            bookmarkId = 1,
+            userIdx = 1,
+            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            userName = "라이언",
+            time = "2022-12-09",
+            contents = "테스트테스트테스트",
+            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            roomName = "테스트1호점",
+            reactionContents = "",
+            reactionCount = 0,
+        )
+        val test2 = Bookmark(
+            bookmarkId = 1,
+            userIdx = 1,
+            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            userName = "라이언",
+            time = "2022-12-09",
+            contents = "테스트테스트테스트",
+            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            roomName = "테스트1호점",
+            reactionContents = "",
+            reactionCount = 0,
+        )
+        val test3 = Bookmark(
+            bookmarkId = 1,
+            userIdx = 1,
+            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            userName = "라이언",
+            time = "2022-12-09",
+            contents = "테스트테스트테스트",
+            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            roomName = "테스트1호점",
+            reactionContents = "",
+            reactionCount = 0,
+        )
+        val testList = listOf(test1, test2, test3)
+        adapter.submitList(testList)
     }
 
     private fun initToolbar() {
@@ -73,7 +114,7 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
 
     private fun periodFilter() {
         val bottomSheet = BottomPeriodFilter(
-            period = 0
+            period = viewModel.periodClicked.value
         ) { clickedPeriod ->
             viewModel.setPeriodFilter(clickedPeriod)
         }

@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.bookmark
 
+import android.util.Log
 import com.depromeet.knockknock.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -33,8 +34,9 @@ class BookmarkViewModel @Inject constructor(
 
     override fun onFilterResetClicked() {
         baseViewModelScope.launch {
-            _roomClicked.emit(0)
-            _periodClicked.emit(0)
+            _roomClicked.value = 0
+            _periodClicked.value = 0
+            _filterChecked.value = false
             _navigationHandler.emit(BookmarkNavigationAction.NavigateToBookmarkFilterReset)
         }
     }
@@ -48,11 +50,8 @@ class BookmarkViewModel @Inject constructor(
     fun setRoomFilter(roomCheckCount: Int) = baseViewModelScope.launch {
         _roomClicked.emit(roomCheckCount)
 
-        if(roomClicked.value == 0 && periodClicked.value == 0) {
-            _filterChecked.emit(false)
-        } else {
-            _filterChecked.emit(true)
-        }
+        if(roomClicked.value == 0 && periodClicked.value == 0) _filterChecked.value = false
+        else _filterChecked.value = true
     }
 
     override fun onFilterPeriodClicked() {
@@ -62,13 +61,10 @@ class BookmarkViewModel @Inject constructor(
     }
 
     fun setPeriodFilter(periodCheckCount: Int) = baseViewModelScope.launch {
-        _periodClicked.emit(periodCheckCount)
+        _periodClicked.value = periodCheckCount
 
-        if(roomClicked.value == 0 && periodClicked.value == 0) {
-            _filterChecked.emit(false)
-        } else {
-            _filterChecked.emit(true)
-        }
+        if(roomClicked.value == 0 && periodClicked.value == 0) _filterChecked.value = false
+        else _filterChecked.value = true
     }
 
     override fun onReactionClicked(bookmarkIdx: Int) {

@@ -35,12 +35,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/reset_btn"
             style="@style/Theme.AppCompat.Bookmark.Filter.View"
+            android:background="@drawable/custom_backgroundwhite_radius80"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintTop_toTopOf="@id/filter_room"
+            app:layout_constraintBottom_toBottomOf="@id/filter_room"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:onClick="@{() -> viewmodel.onFilterResetClicked()}"
             app:resetVisible="@{viewmodel.filterChecked}">
             <TextView
@@ -68,8 +69,8 @@
             style="@style/Theme.AppCompat.Bookmark.Filter.View"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/reset_btn"
-            app:layout_constraintBottom_toBottomOf="@id/reset_btn"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toEndOf="@id/reset_btn"
             android:layout_marginStart="8dp"
             android:onClick="@{() -> viewmodel.onFilterRoomClicked()}"
@@ -102,8 +103,8 @@
             style="@style/Theme.AppCompat.Bookmark.Filter.View"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/reset_btn"
-            app:layout_constraintBottom_toBottomOf="@id/reset_btn"
+            app:layout_constraintTop_toTopOf="@id/filter_room"
+            app:layout_constraintBottom_toBottomOf="@id/filter_room"
             app:layout_constraintStart_toEndOf="@id/filter_room"
             android:layout_marginStart="8dp"
             android:onClick="@{() -> viewmodel.onFilterPeriodClicked()}"
@@ -117,7 +118,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:periodCountChecked="@{viewmodel.roomClicked}">
+                app:periodCountChecked="@{viewmodel.periodClicked}">
             </TextView>
 
             <ImageView
@@ -137,7 +138,7 @@
             android:id="@+id/bookmark_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/reset_btn"
+            app:layout_constraintTop_toBottomOf="@id/filter_room"
             android:layout_marginTop="4dp"
             android:overScrollMode="never"
             android:orientation="vertical"

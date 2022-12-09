@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.knockknock.R
@@ -23,7 +24,7 @@ class BottomRoomFilter(
 ) : BottomSheetDialogFragment(){
     private lateinit var dlg : BottomSheetDialog
 
-    val clickedRoom: ArrayList<Int> = ArrayList()
+    private val clickedRoom: ArrayList<Int> = ArrayList()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // 이 코드를 실행하지 않으면 XML에서 round 처리를 했어도 적용되지 않는다.
@@ -68,7 +69,7 @@ class BottomRoomFilter(
             dismiss()
         }
 
-        val closeBtn = requireView().findViewById<TextView>(R.id.close_btn)
+        val closeBtn = requireView().findViewById<ImageView>(R.id.close_btn)
         closeBtn.setOnClickListener {
             dismiss()
         }

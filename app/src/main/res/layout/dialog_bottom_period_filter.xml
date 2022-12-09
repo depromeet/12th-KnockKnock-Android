@@ -38,8 +38,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/title"
         android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:layout_marginTop="32dp">
         <TextView
             style="@style/Theme.AppCompat.TextView.Period.Filter"
@@ -51,12 +51,15 @@
             android:text="@string/all_period"/>
         <CheckBox
             android:id="@+id/all_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:button="@android:color/transparent"
+            android:background="@drawable/custom_round_checkbox"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:button="@drawable/custom_round_checkbox">
+            android:clickable="false">
         </CheckBox>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -66,8 +69,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/all_btn"
         android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
         <TextView
             style="@style/Theme.AppCompat.TextView.Period.Filter"
             android:layout_width="wrap_content"
@@ -78,12 +81,15 @@
             android:text="@string/one_month"/>
         <CheckBox
             android:id="@+id/one_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:button="@android:color/transparent"
+            android:background="@drawable/custom_round_checkbox"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:button="@drawable/custom_round_checkbox">
+            android:clickable="false">
         </CheckBox>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,8 +99,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/one_btn"
         android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
         <TextView
             style="@style/Theme.AppCompat.TextView.Period.Filter"
             android:layout_width="wrap_content"
@@ -105,12 +111,15 @@
             android:text="@string/three_month"/>
         <CheckBox
             android:id="@+id/three_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:button="@android:color/transparent"
+            android:background="@drawable/custom_round_checkbox"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:button="@drawable/custom_round_checkbox">
+            android:clickable="false">
         </CheckBox>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -120,8 +129,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/three_btn"
         android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
         <TextView
             style="@style/Theme.AppCompat.TextView.Period.Filter"
             android:layout_width="wrap_content"
@@ -132,12 +141,15 @@
             android:text="@string/six_month"/>
         <CheckBox
             android:id="@+id/six_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:button="@android:color/transparent"
+            android:background="@drawable/custom_round_checkbox"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:button="@drawable/custom_round_checkbox">
+            android:clickable="false">
         </CheckBox>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -147,8 +159,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/six_btn"
         android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
         <TextView
             style="@style/Theme.AppCompat.TextView.Period.Filter"
             android:layout_width="wrap_content"
@@ -159,12 +171,15 @@
             android:text="@string/one_year"/>
         <CheckBox
             android:id="@+id/year_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:button="@android:color/transparent"
+            android:background="@drawable/custom_round_checkbox"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:button="@drawable/custom_round_checkbox">
+            android:clickable="false">
         </CheckBox>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -31,7 +31,7 @@ class FilterRoomAdapter(
             false
         )
         viewDataBinding.roomCheck.setOnClickListener {
-            viewDataBinding.holder.isCheckd = !viewDataBinding.holder.isCheckd
+            viewDataBinding.holder!!.isCheckd = !viewDataBinding.holder!!.isCheckd
             callback.invoke(
                 viewDataBinding.holder!!.roomId,
                 viewDataBinding.holder!!.isCheckd

@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.bookmark
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
