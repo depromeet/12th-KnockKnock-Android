@@ -20,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
@@ -78,6 +79,7 @@ class RegisterFragment : Fragment() {
             }
 
         }
+        countEditTextMessage()
         return binding.root
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -98,4 +100,18 @@ class RegisterFragment : Fragment() {
             }
         }
     }
+
+    private fun countEditTextMessage() {
+        lifecycleScope.launchWhenStarted {
+            testAlarmViewModel.editTextMessageCountEvent.collectLatest {
+                binding.editTextCount.text = "$it/200"
+
+                if (it == 0) {binding.editTextCount.text = textChangeColor(binding.editTextCount, "#ff0000", 0, 1)
+                    binding.testAlarmButton.setBackgroundTintList(resources.getColorStateList(R.color.background_white_mode))
+                }
+                else binding.testAlarmButton.setBackgroundTintList(resources.getColorStateList(R.color.main_yellow_light_mode))
+            }
+        }
+    }
+
 }

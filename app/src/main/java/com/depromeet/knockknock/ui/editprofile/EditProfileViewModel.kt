@@ -33,15 +33,9 @@ class EditProfileViewModel @Inject constructor(
         }
     }
 
-    override fun onProfileImageGalleryClicked() {
+    override fun onProfileImageEditClicked() {
         baseViewModelScope.launch {
-            _navigationHandler.emit(EditProfileNavigationAction.NavigateToGallery)
-        }
-    }
-
-    override fun onProfileImageCameraClicked() {
-        baseViewModelScope.launch {
-            _navigationHandler.emit(EditProfileNavigationAction.NavigateToCamera)
+            _navigationHandler.emit(EditProfileNavigationAction.NavigateToEditProfileImage)
         }
     }
 

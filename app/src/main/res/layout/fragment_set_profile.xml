@@ -41,7 +41,7 @@
                 android:id="@+id/profile_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/setprofile_happy" />
+                android:src="@drawable/img_user_profile_happy" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/add_profile_button"
@@ -136,25 +136,35 @@
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_happy"
+                    android:id="@+id/profile_happy_dim"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
-                    android:src="@drawable/setprofile_happy" />
+                    android:src="@drawable/img_user_profile_happy_dim" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_disgust"
+                    android:id="@+id/profile_disgusting"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
-                    android:src="@drawable/setprofile_disgust" />
+                    android:src="@drawable/img_user_profile_disgusting" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_sunglass"
+                    android:id="@+id/profile_cry"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
-                    android:src="@drawable/setprofile_sunglass" />
+                    android:src="@drawable/img_user_profile_sad" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_angry"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/img_user_profile_angry" />
+
+
+
             </LinearLayout>
 
 
@@ -163,30 +173,80 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_vomit"
+                    android:id="@+id/profile_pray"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
-                    android:src="@drawable/setprofile_vomit" />
+                    android:src="@drawable/img_user_profile_pray" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_boast"
+                    android:id="@+id/profile_wink"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
-                    android:src="@drawable/setprofile_boast" />
+                    android:src="@drawable/img_user_profile_wink" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_cry"
+                    android:id="@+id/profile_greedy"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
-                    android:src="@drawable/setprofile_cry" />
+                    android:src="@drawable/img_user_profile_greedy" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_sunglass"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/img_user_profile_sunglass" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/profile_choose_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_hear"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/img_user_profile_heart" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_fire"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/img_user_profile_fire" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_firecrackers"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/img_user_profile_firecrackers" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_eyes"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/img_user_profile_eyes" />
+
+
             </LinearLayout>
 
 
