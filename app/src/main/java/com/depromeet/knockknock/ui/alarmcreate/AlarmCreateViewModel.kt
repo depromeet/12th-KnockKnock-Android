@@ -17,15 +17,20 @@ class AlarmCreateViewModel @Inject constructor(
     private val _navigationEvent: MutableSharedFlow<AlarmCreateNavigationAction> =
         MutableSharedFlow<AlarmCreateNavigationAction>()
     val navigationEvent: SharedFlow<AlarmCreateNavigationAction> = _navigationEvent.asSharedFlow()
+    var editTextTitleEvent = MutableStateFlow<String>("")
     var editTextMessageEvent = MutableStateFlow<String>("")
     var editTextMessageCountEvent = MutableStateFlow<Int>(0)
-    val imgState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+    val messageImgState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
 
     init {
         baseViewModelScope.launch {
             editTextMessageEvent.debounce(0).collectLatest {
                 onEditTextCount(it.length)
             }
+        }
+
+        baseViewModelScope.launch {
+            editTextTitleEvent.emit("주호민")
         }
     }
 
@@ -53,7 +58,7 @@ class AlarmCreateViewModel @Inject constructor(
 
     fun onImageStateChecked() {
         baseViewModelScope.launch {
-            imgState.emit(true)
+            messageImgState.emit(true)
         }
     }
 }

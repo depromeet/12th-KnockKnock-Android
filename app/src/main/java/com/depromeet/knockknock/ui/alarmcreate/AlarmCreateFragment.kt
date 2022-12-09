@@ -8,28 +8,27 @@ import android.os.Build
 import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.util.Log
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmCreateBinding
+import com.depromeet.knockknock.util.KnockKnockIntent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import androidx.navigation.fragment.findNavController
-import com.depromeet.knockknock.util.KnockKnockIntent
-import com.depromeet.knockknock.util.uriToFile
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
+
 
 @AndroidEntryPoint
 class AlarmCreateFragment :
@@ -101,21 +100,33 @@ class AlarmCreateFragment :
     }
 
     private fun addImageBottomSheet() {
+        binding.editTextMessage.customOnFocusChangeListener(
+            requireContext(),
+            binding.linearLayoutEditText
+        )
+        requireActivity().hideKeyboard()
+        binding.editTextMessage.clearFocus()
+        binding.editTextTitle.clearFocus()
+
         val dialog = BottomImageAdd {
-            if(it) getGalleryImage()
+            if (it) getGalleryImage()
             else getCaptureImage()
         }
         dialog.show(childFragmentManager, TAG)
     }
 
     private fun initRegisterForActivityResult() {
-        requestUpdateProfile = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-            val isUpdateProfile = activityResult.data?.getBooleanExtra(KnockKnockIntent.RESULT_KEY_UPDATE_PROFILE, false) ?: false
-            Log.d("ttt", isUpdateProfile.toString())
-            if (true) {
-                val intent = activityResult.data
-                if (intent != null) {
-                    val uri = intent.data
+        requestUpdateProfile =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+                val isUpdateProfile = activityResult.data?.getBooleanExtra(
+                    KnockKnockIntent.RESULT_KEY_UPDATE_PROFILE,
+                    false
+                ) ?: false
+                Log.d("ttt", isUpdateProfile.toString())
+                if (true) {
+                    val intent = activityResult.data
+                    if (intent != null) {
+                        val uri = intent.data
 //                    val file = uriToFile(uri!!,requireContext())
 //                    val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
 //                    val requestBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
@@ -123,13 +134,13 @@ class AlarmCreateFragment :
 //                    //TODO : 이후에 설명도 입력한걸로 넣기
 //                    val nicknamePart: MultipartBody.Part = MultipartBody.Part.createFormData("description", "테스트 설명")
 
-                    Log.d("ttt uri ", intent.toString())
-                    // Update Profile API
-                    Glide.with(this).load(uri).into(binding.imgLoad)
-                    viewModel.onImageStateChecked()
+                        Log.d("ttt uri ", intent.toString())
+                        // Update Profile API
+                        Glide.with(this).load(uri).into(binding.imgLoad)
+                        viewModel.onImageStateChecked()
+                    }
                 }
             }
-        }
     }
 
     private fun getGalleryImage() {
@@ -149,18 +160,27 @@ class AlarmCreateFragment :
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initEditText() {
-        binding.editTextMessage.customOnFocusChangeListener(requireContext(), binding.linearLayoutEditText)
+        binding.editTextMessage.customOnFocusChangeListener(
+            requireContext(),
+            binding.linearLayoutEditText
+        )
         binding.alarmCreateMain.setOnTouchListener { _, _ ->
             requireActivity().hideKeyboard()
             binding.editTextMessage.clearFocus()
+            binding.editTextTitle.clearFocus()
             false
         }
 
-//        binding.scrollView.setOnTouchListener { _, _ ->
-//            requireActivity().hideKeyboard()
-//            binding.editTextMessage.clearFocus()
-//            false
-//        }
+        binding.editTextTitle.imageOnFocusChangeListener(binding.editTextTitleImg)
+        binding.editTextTitle.setOnKeyListener { view, i, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KEYCODE_ENTER) {
+                // 엔터 눌렀을때 행동
+                requireActivity().hideKeyboard()
+                binding.editTextTitle.clearFocus()
+                true
+
+            } else false
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
