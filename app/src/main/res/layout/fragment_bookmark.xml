@@ -41,7 +41,7 @@
             android:paddingStart="8dp">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/reset_btn"
-                style="@style/Theme.AppCompat.Bookmark.Filter.View"
+                style="@style/Theme.AppCompat.Bookmark.Filter.Reset"
                 android:background="@drawable/custom_backgroundwhite_radius80"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

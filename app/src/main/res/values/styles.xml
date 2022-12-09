@@ -283,6 +283,13 @@
         <item name="android:padding">16dp</item>
     </style>
 
+    <style name="Theme.AppCompat.Bookmark.Filter.Reset" parent="Theme.AppCompat">
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+    </style>
+
     <style name="Theme.AppCompat.Bookmark.Filter.View" parent="Theme.AppCompat">
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
