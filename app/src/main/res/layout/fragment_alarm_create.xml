@@ -155,11 +155,6 @@
                             android:drawablePadding="8dp"
                             android:fontFamily="@font/pretendard_regular"
                             android:background="@null"
-                            android:textCursorDrawable="@color/black"
-                            android:textColorHighlight="@color/main_yellow2_text"
-                            android:textSelectHandle="@color/main_yellow2_text"
-                            android:textSelectHandleLeft="@color/main_yellow2_text"
-                            android:textSelectHandleRight="@color/main_yellow2_text"
                             android:hint="메시지를 작성해주세요!"
                             android:maxHeight="110dp"
                             android:paddingStart="8dp"
@@ -251,32 +246,34 @@
         </ScrollView>
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="22.5dp"
             android:background="@color/white"
             android:fontFamily="@font/pretendard_regular"
             android:gravity="center_horizontal|top"
             android:lineSpacingExtra="3sp"
-            android:text="추천 메시지"
+            android:text="추천"
             android:textColor="#000000"
             android:textSize="16dp"
-            android:translationY="-1.6sp"
-            app:layout_constraintBottom_toTopOf="@+id/rv_list"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="22.5dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:background="@color/white"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
