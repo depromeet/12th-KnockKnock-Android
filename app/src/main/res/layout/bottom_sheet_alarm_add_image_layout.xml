@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="205dp"
+    android:orientation="vertical"
+    app:behavior_draggable="true"
+    app:behavior_hideable="true"
+    android:background="@drawable/custom_bottom_sheet"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="사진 추가하기"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="18dp"
+            android:textColor="#212121"
+            android:gravity="center"
+            android:lineSpacingExtra="4sp"
+            android:translationY="-1.86sp"
+            />
+
+
+
+        <LinearLayout
+            android:id="@+id/choose_from_gallery_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <ImageView
+                android:layout_marginStart="18.5dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_baseline_close_24"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:textSize="18dp"
+                android:text="앨범에서 선택하기"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4sp"
+                />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/launch_the_camera_btn"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp"
+        >
+
+        <ImageView
+            android:layout_marginStart="18.5dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_close_24"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="18dp"
+            android:text="카메라 실행하기"
+            android:textColor="@color/black"
+            android:lineSpacingExtra="4sp"
+            />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
