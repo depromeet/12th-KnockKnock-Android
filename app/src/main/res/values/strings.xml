@@ -121,4 +121,10 @@
     <string name="home_empty_tile">참여중인 알림방이 없어요</string>
     <string name="home_search_room">알림방 탐색하기</string>
     <string name="home_create_room">알림방 생성하기</string>
+
+    <string name="home_more_copy">이 알림 복사 붙이기</string>
+    <string name="bookmark_save">보관함 저장</string>
+    <string name="user_declare">유저 차단하기</string>
+    <string name="report">신고하기</string>
+
 </resources>

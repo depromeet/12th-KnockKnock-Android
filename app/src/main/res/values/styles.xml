@@ -67,6 +67,12 @@
         <item name="fontFamily">@font/pretendard_medium</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.Medium.SystemRedCaution.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/system_red_caution</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
     <style name="Theme.AppCompat.TextView.SemiBold.Gray10.Size18" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/gray10</item>
         <item name="android:textSize">18dp</item>
@@ -324,6 +330,9 @@
 
     <style name="Theme.AppCompat.TextView.Friend.More" parent="Theme.AppCompat.TextView.SemiBold.Gray10.Size18"/>
 
+
+    <style name="Theme.AppCompat.TextView.Report" parent="Theme.AppCompat.TextView.Medium.SystemRedCaution.Size18"/>
+
     <!-- 선택한 날짜를 표시할 색상 -->
     <style name="CalenderViewDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorControlActivated">@color/main_yellow_light_mode</item>
@@ -332,6 +341,7 @@
 
     <!-- 달력 안의 숫자들에 적용되는 스타일 -->
     <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+
     <!-- Notification -->
     <style name="Theme.AppCompat.TextView.Notification.UserName" parent="Theme.AppCompat.TextView.SemiBold.Gray09.Size18"/>
 
