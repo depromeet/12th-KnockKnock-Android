@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.ui.bookmark.adapter.FilterRoomAdapter
@@ -19,6 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.w3c.dom.Text
 
 class BottomHomeRoom(
+    val roomList: List<Room>,
     val eventListener: HomeActionHandler
 ) : BottomSheetDialogFragment(){
     private lateinit var dlg : BottomSheetDialog
@@ -50,11 +52,31 @@ class BottomHomeRoom(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = HomeRoomAdapter(eventListener)
-    }
-}
 
-sealed class FriendMoreType {
-    object Delete: FriendMoreType()
-    object Black: FriendMoreType()
+        val layoutEmpty = requireView().findViewById<ConstraintLayout>(R.id.layout_empty)
+        val recycler = requireView().findViewById<RecyclerView>(R.id.room_recycler)
+        val searchBtn = requireView().findViewById<TextView>(R.id.search_btn)
+        val createBtn = requireView().findViewById<TextView>(R.id.create_btn)
+
+        val adapter = HomeRoomAdapter(eventListener)
+        adapter.submitList(roomList)
+        recycler.adapter = adapter
+
+        if(roomList.isEmpty()) {
+            layoutEmpty.visibility = View.VISIBLE
+            recycler.visibility = View.GONE
+        } else {
+            layoutEmpty.visibility = View.GONE
+            recycler.visibility = View.VISIBLE
+        }
+
+        searchBtn.setOnClickListener {
+            eventListener.onSearchRoomClicked()
+            dismiss()
+        }
+        createBtn.setOnClickListener {
+            eventListener.onCreateRoomClicked()
+            dismiss()
+        }
+    }
 }
