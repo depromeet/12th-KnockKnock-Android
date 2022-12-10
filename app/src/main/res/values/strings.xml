@@ -36,10 +36,12 @@
     <string name="all">전체</string>
     <string name="room">모든방</string>
     <string name="reaction">리액션</string>
+    <string name="reset">초기화</string>
 
     <string name="room_select">알림방 선택</string>
     <string name="period_select">기간 선택</string>
 
+    <string name="all_period">전체 기간</string>
     <string name="one_month">1개월</string>
     <string name="three_month">3개월</string>
     <string name="six_month">6개월</string>
@@ -58,6 +60,7 @@
     <string name="profile_email_title">이메일</string>
     <string name="update">수정</string>
     <string name="save">저장</string>
+    <string name="accept">적용하기</string>
 
     <string name="logout">로그아웃</string>
     <string name="user_delete">탈퇴하기</string>

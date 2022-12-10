@@ -18,7 +18,7 @@ import com.depromeet.knockknock.util.ToggleAnimation
 import com.depromeet.knockknock.util.toggleLayout
 
 class FilterRoomAdapter(
-    val callback: (roomId: Int) -> Unit
+    val callback: (roomId: Int, isChecked: Boolean) -> Unit
 ) : ListAdapter<Room, FilterRoomAdapter.ViewHolder>(FilterRoomItemDiffCallback){
 
     init { setHasStableIds(true) }
@@ -30,8 +30,12 @@ class FilterRoomAdapter(
             parent,
             false
         )
-        viewDataBinding.root.setOnClickListener {
-            callback.invoke(viewDataBinding.holder!!.roomId)
+        viewDataBinding.roomCheck.setOnClickListener {
+            viewDataBinding.holder!!.isCheckd = !viewDataBinding.holder!!.isCheckd
+            callback.invoke(
+                viewDataBinding.holder!!.roomId,
+                viewDataBinding.holder!!.isCheckd
+            )
         }
         return ViewHolder(viewDataBinding)
     }
