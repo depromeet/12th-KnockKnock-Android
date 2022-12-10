@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="holder"
+            type="com.depromeet.knockknock.ui.home.model.Alarm" />
+
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.home.HomeActionHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> eventListener.onRecentAlarmClicked(holder.alarmId)}">
+
+            <ImageView
+                android:id="@+id/user_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:userProfile="@{holder.userImg}">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/user_name"
+                style="@style/Theme.AppCompat.TextView.Home.Recent.UserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/user_img"
+                app:layout_constraintBottom_toBottomOf="@id/user_img"
+                app:layout_constraintStart_toEndOf="@id/user_img"
+                android:layout_marginStart="8dp"
+                android:text="@{holder.userName}">
+            </TextView>
+
+            <TextView
+                android:id="@+id/date_time_text"
+                style="@style/Theme.AppCompat.TextView.Home.Recent.DateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/user_img"
+                app:layout_constraintBottom_toBottomOf="@id/user_img"
+                app:layout_constraintStart_toEndOf="@id/user_img"
+                android:layout_marginStart="8dp"
+                android:text="@{holder.datetime}">
+            </TextView>
+
+            <ImageView
+                android:id="@+id/more_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                app:layout_constraintTop_toTopOf="@id/user_img"
+                app:layout_constraintBottom_toBottomOf="@id/user_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ic_more_black">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/contents"
+                style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/user_img"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@{holder.contents}"
+                android:layout_marginTop="8dp">
+            </TextView>
+
+            <ImageView
+                android:id="@+id/contents_img"
+                android:layout_width="88dp"
+                android:layout_height="64dp"
+                app:layout_constraintTop_toTopOf="@id/contents"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:bookmarkContentsImage="@{holder.contentsImg}"
+                android:layout_marginEnd="12dp">
+            </ImageView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/reaction_text"
+            style="@style/Theme.AppCompat.TextView.Home.Recent.Reaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_main"
+            app:layout_constraintEnd_toStartOf="@id/reaction_btn"
+            android:background="@drawable/custom_gray08_radius100"
+            android:text="@{holder.reaction}"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="6dp"
+            android:padding="6dp">
+        </TextView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/reaction_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/reaction_text"
+            app:layout_constraintBottom_toBottomOf="@id/reaction_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:onClick="@{() -> eventListener.onReactionClicked(holder.alarmId)}">
+            <TextView
+                style="@style/Theme.AppCompat.TextView.Item.Reaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/img_add"
+                android:layout_marginEnd="4dp"
+                android:text="@string/reaction">
+            </TextView>
+
+            <ImageView
+                android:id="@+id/img_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ic_plus">
+            </ImageView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

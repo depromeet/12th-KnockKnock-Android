@@ -32,7 +32,21 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.depromeet.knockknock.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.depromeet.knockknock.ui.notification.NotificationFragment"
+        android:label="NotificationFragment" />
 
     <fragment
         android:id="@+id/alarmCreateFragment"
