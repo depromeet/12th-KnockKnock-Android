@@ -357,7 +357,7 @@
     </style>
 
     <!-- 달력 안의 숫자들에 적용되는 스타일 -->
-    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small"/>
 
     <!-- Notification -->
     <style name="Theme.AppCompat.TextView.Notification.UserName" parent="Theme.AppCompat.TextView.SemiBold.Gray09.Size18"/>
