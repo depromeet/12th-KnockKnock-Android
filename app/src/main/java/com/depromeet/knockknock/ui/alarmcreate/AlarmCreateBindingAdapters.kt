@@ -14,7 +14,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.knockknock.R
+import com.depromeet.knockknock.ui.alarmcreate.adapter.RecommendationAdapter
+import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
 
 @BindingAdapter("addImageCardViewVisible")
 fun CardView.bindAddImageCardViewVisible(enable: Boolean) {
@@ -36,6 +39,14 @@ fun TextView.bindDeleteTextVisible(textLength: Int) {
     } else {
         this.setTextColor(Color.parseColor("#212121"))
         this.isClickable = true
+    }
+}
+
+@BindingAdapter("recommendationAdapter")
+fun RecyclerView.bindTodo(itemList: List<RecommendationMessage>) {
+    val boundAdapter = this.adapter
+    if (boundAdapter is RecommendationAdapter) {
+        boundAdapter.submitList(itemList)
     }
 }
 

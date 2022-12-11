@@ -15,18 +15,25 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmCreateBinding
+import com.depromeet.knockknock.ui.alarmcreate.adapter.RecommendationAdapter
 import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomAlarmReservationPicker
 import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomAlarmSend
 import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomImageAdd
+import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
+import com.depromeet.knockknock.ui.alarmcreate.model.ReservationAlarm
+import com.depromeet.knockknock.ui.bookmark.adapter.BookmarkAdapter
+import com.depromeet.knockknock.ui.bookmark.model.Bookmark
 import com.depromeet.knockknock.util.KnockKnockIntent
 import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -42,8 +49,7 @@ class AlarmCreateFragment :
     private val navController by lazy { findNavController() }
 
     override val viewModel: AlarmCreateViewModel by viewModels()
-
-    private val tempList  = mutableListOf(Character.toChars(0x1F4AA)+Character.toChars(0x1F4AA)+Character.toChars(0x1F4AA), "탈락?오히려좋아")
+    private val recommendationAdapter by lazy { RecommendationAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -55,6 +61,7 @@ class AlarmCreateFragment :
         initEditText()
         initRegisterForActivityResult()
         initToolbar()
+        initAdapter()
         setupEvent()
         setOnTouchListenerEditText()
     }
@@ -70,6 +77,10 @@ class AlarmCreateFragment :
                 }
             }
         }
+    }
+
+    private fun initAdapter() {
+        binding.rvList.adapter = recommendationAdapter
     }
 
     private fun focusTitleText() = binding.editTextTitle.let {

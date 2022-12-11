@@ -1,6 +1,8 @@
 package com.depromeet.knockknock.ui.alarmcreate
 
+import android.util.Log
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -20,6 +22,10 @@ class AlarmCreateViewModel @Inject constructor(
     var editTextMessageCountEvent = MutableStateFlow<Int>(0)
     val messageImgState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
 
+    private val _recommendationMessageEvent: MutableStateFlow<List<RecommendationMessage>> = MutableStateFlow(emptyList())
+    val recommendationMessageEvent: StateFlow<List<RecommendationMessage>> = _recommendationMessageEvent
+
+
     init {
         baseViewModelScope.launch {
             editTextMessageEvent.debounce(0).collectLatest {
@@ -30,6 +36,28 @@ class AlarmCreateViewModel @Inject constructor(
         baseViewModelScope.launch {
             editTextTitleEvent.emit("주호민")
         }
+
+        getTempList()
+
+    }
+
+    private fun getTempList() {
+
+        val test1 = RecommendationMessage("dd")
+
+        val test2 = RecommendationMessage(
+            "${String(Character.toChars(0x1F4AA))}${String(Character.toChars(0x1F4AA))}${String(Character.toChars(0x1F4AA))}"
+        )
+
+        val testList = listOf(test1, test2, test2, test2, test2, test2, test2, test2, test2)
+
+        baseViewModelScope.launch {
+
+            _recommendationMessageEvent.value = testList
+
+        }
+
+
     }
 
     private fun onEditTextCount(count: Int) {

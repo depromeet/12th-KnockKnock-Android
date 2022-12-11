@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage" />
+
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.alarmcreate.AlarmCreateActionHandler" />
+    </data>
+
+
+<com.google.android.material.card.MaterialCardView
     android:id="@+id/recommendation_message_card_view"
     android:layout_width="wrap_content"
     android:layout_height="36dp"
@@ -18,10 +33,11 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/pretendard_regular"
         android:gravity="center"
-        android:text="탈락? 오히려 좋아"
+        android:text="@{model.message}"
         android:textColor="@color/black"
         android:textSize="18dp" />
 
 
 </com.google.android.material.card.MaterialCardView>
 
+</layout>
