@@ -1,8 +1,6 @@
 package com.depromeet.knockknock.ui.alarmcreate
 
-import androidx.lifecycle.lifecycleScope
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.editprofile.EditProfileNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -40,8 +38,16 @@ class AlarmCreateViewModel @Inject constructor(
         }
     }
 
-    fun onDeleteEditTextMessageClicked() {
-        editTextMessageEvent.value = ""
+    override fun onDeleteEditTextMessageClicked() {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToDeleteMessageText)
+        }
+    }
+
+    override fun onFocusEditTextTitleClicked() {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToFocusTitleText)
+        }
     }
 
     override fun onAddImageClicked() {

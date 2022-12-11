@@ -71,12 +71,15 @@
 
                     <LinearLayout
                         android:id="@+id/linear_layout_title_edit_text"
+                        app:onSingleClick="@{() -> vm.onFocusEditTextTitleClicked()}"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-
-                        >
+                        android:orientation="horizontal">
 
                         <EditText
                             android:id="@+id/edit_text_title"
@@ -84,13 +87,13 @@
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:fontFamily="@font/pretendard_regular"
+                            android:hint=" "
                             android:lineSpacingExtra="4sp"
                             android:lines="1"
-                            android:hint=" "
                             android:maxLength="15"
                             android:text="@={vm.editTextTitleEvent}"
                             android:textColor="#212121"
-                            android:textSize="22dp"/>
+                            android:textSize="22dp" />
 
                         <ImageView
                             android:id="@+id/edit_text_title_img"

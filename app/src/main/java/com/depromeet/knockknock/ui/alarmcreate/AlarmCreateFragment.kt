@@ -1,8 +1,6 @@
 package com.depromeet.knockknock.ui.alarmcreate
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.MediaStore
@@ -12,12 +10,8 @@ import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.MotionEvent
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -26,6 +20,8 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmCreateBinding
 import com.depromeet.knockknock.util.KnockKnockIntent
+import com.depromeet.knockknock.util.hideKeyboard
+import com.depromeet.knockknock.util.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -43,6 +39,8 @@ class AlarmCreateFragment :
     private val navController by lazy { findNavController() }
 
     override val viewModel: AlarmCreateViewModel by viewModels()
+
+    private val tempList  = mutableListOf(Character.toChars(0x1F4AA)+Character.toChars(0x1F4AA)+Character.toChars(0x1F4AA), "탈락?오히려좋아")
 
     override fun initStartView() {
         binding.apply {
@@ -64,9 +62,24 @@ class AlarmCreateFragment :
                 when (it) {
                     is AlarmCreateNavigationAction.NavigateToAddImage -> addImageBottomSheet()
                     is AlarmCreateNavigationAction.NavigateToAlarmSend -> alarmSend()
+                    is AlarmCreateNavigationAction.NavigateToFocusTitleText -> focusTitleText()
+                    is AlarmCreateNavigationAction.NavigateToDeleteMessageText -> deleteMessageText()
                 }
             }
         }
+    }
+
+    private fun focusTitleText() = binding.editTextTitle.let {
+            it.requestFocus()
+            it.setSelection(it.text.length)
+            requireActivity().showKeyboard(it)
+    }
+
+    private fun deleteMessageText(){
+        viewModel.editTextMessageEvent.value = ""
+        binding.editTextMessage.requestFocus()
+        requireActivity().showKeyboard(binding.editTextMessage)
+
     }
 
     private fun alarmSend() {
@@ -160,10 +173,8 @@ class AlarmCreateFragment :
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initEditText() {
-        binding.editTextMessage.customOnFocusChangeListener(
-            requireContext(),
-            binding.linearLayoutEditText
-        )
+
+        binding.editTextMessage.customOnFocusChangeListener(requireContext(), binding.linearLayoutEditText)
         binding.alarmCreateMain.setOnTouchListener { _, _ ->
             requireActivity().hideKeyboard()
             binding.editTextMessage.clearFocus()
@@ -210,21 +221,5 @@ class AlarmCreateFragment :
             this.setNavigationOnClickListener { navController.popBackStack() }
             this.title = "취준생을 위한 방"
         }
-    }
-}
-
-/**
- * 일단 임시적으로 만들었습니다 pr 하고 머지한 후에 삭제하겠습니다.
- *
- * */
-fun Activity.hideKeyboard() {
-    if (this.currentFocus != null) {
-        // 프래그먼트기 때문에 getActivity() 사용
-        val inputManager: InputMethodManager =
-            this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.hideSoftInputFromWindow(
-            this.currentFocus!!.windowToken,
-            InputMethodManager.HIDE_NOT_ALWAYS
-        )
     }
 }
