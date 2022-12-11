@@ -19,6 +19,9 @@ import com.bumptech.glide.Glide
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmCreateBinding
+import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomAlarmReservationPicker
+import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomAlarmSend
+import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomImageAdd
 import com.depromeet.knockknock.util.KnockKnockIntent
 import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.showKeyboard
@@ -94,6 +97,10 @@ class AlarmCreateFragment :
                      * 푸쉬알림을 발송했습니다!
                      * fcm API!!
                      * */
+                    /**
+                     * 푸쉬알림을 발송했습니다!
+                     * fcm API!!
+                     * */
 
                 }
             }
@@ -103,6 +110,10 @@ class AlarmCreateFragment :
 
     private fun alarmReservationSend() {
         val bottomSheet = BottomAlarmReservationPicker(callback = {
+            /**
+             * 예약 푸쉬알림을 발송했습니다!
+             * fcm API!!
+             * */
             /**
              * 예약 푸쉬알림을 발송했습니다!
              * fcm API!!
