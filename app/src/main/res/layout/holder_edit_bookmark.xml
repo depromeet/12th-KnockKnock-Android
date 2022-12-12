@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="holder"
+            type="com.depromeet.knockknock.ui.editbookmark.model.EditBookmark" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <CheckBox
+            android:id="@+id/check_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:button="@android:color/transparent"
+            android:background="@drawable/custom_square_checkbox"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:clickable="false">
+        </CheckBox>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/check_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:padding="16dp"
+            android:background="@drawable/custom_backgroundwhite_radius10">
+
+            <ImageView
+                android:id="@+id/user_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:userProfile="@{holder.userImg}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/user_name"
+                style="@style/Theme.AppCompat.TextView.EditBookmark.UserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/user_img"
+                app:layout_constraintBottom_toBottomOf="@id/user_img"
+                app:layout_constraintStart_toEndOf="@id/user_img"
+                android:layout_marginStart="8dp"
+                android:text="@{holder.userName}">
+            </TextView>
+
+            <TextView
+                android:id="@+id/date_time"
+                style="@style/Theme.AppCompat.TextView.EditBookmark.DateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@id/user_img"
+                app:layout_constraintBottom_toBottomOf="@id/user_name"
+                app:layout_constraintStart_toEndOf="@id/user_img"
+                android:text="@{holder.dateTime}">
+            </TextView>
+
+            <TextView
+                android:id="@+id/bookmark_contents"
+                style="@style/Theme.AppCompat.TextView.EditBookmark.Contents"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                app:layout_constraintTop_toBottomOf="@id/user_img"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/contents_img"
+                android:text="@{holder.contents}"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp">
+            </TextView>
+
+            <ImageView
+                android:id="@+id/contents_img"
+                android:layout_width="67dp"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="@id/bookmark_contents"
+                app:layout_constraintBottom_toBottomOf="@id/bookmark_contents"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                app:bookmarkContentsImage="@{holder.contentsImg}">
+            </ImageView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

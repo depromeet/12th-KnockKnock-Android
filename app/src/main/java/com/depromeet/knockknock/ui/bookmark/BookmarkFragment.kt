@@ -40,7 +40,7 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is BookmarkNavigationAction.NavigateToBookmarkEdit -> {}
+                    is BookmarkNavigationAction.NavigateToBookmarkEdit -> navigate(BookmarkFragmentDirections.actionBookmarkFragmentToEditBookmarkFragment())
                     is BookmarkNavigationAction.NavigateToBookmarkFilterReset -> {}
                     is BookmarkNavigationAction.NavigateToBookmarkFilterRoom -> roomFilter()
                     is BookmarkNavigationAction.NavigateToBookmarkFilterPeriod -> periodFilter()
