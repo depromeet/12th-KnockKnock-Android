@@ -98,4 +98,30 @@ class MainRepositoryImpl @Inject constructor(
     override suspend fun getOpenGroups(category: Int): NetworkResult<OpenGroupsResponse> {
         return handleApi { mainAPIService.getOpenGroups(category = category).toDomain() }
     }
+
+    override suspend fun postOpenGroups(
+        title: String,
+        description: String,
+        publicAccess: Boolean,
+        thumbnailPath: String,
+        backgroundImagePath: String,
+        categoryId: Int,
+        members: List<Int>
+    ): NetworkResult<GroupResponse> {
+        val body = PostOpenGroupRequest(
+            title = title,
+            description = description,
+            publicAccess = publicAccess,
+            thumbnailPath = thumbnailPath,
+            backgroundImagePath = backgroundImagePath,
+            categoryId = categoryId,
+            memberIds = members
+        )
+        return handleApi { mainAPIService.postOpenGroups(body).toDomain() }
+    }
+
+    override suspend fun postFriendGroups(members: List<Int>): NetworkResult<GroupResponse> {
+        val body = PostFriendGroupRequest(memberIds = members)
+        return handleApi { mainAPIService.postFriendGroups(body).toDomain() }
+    }
 }

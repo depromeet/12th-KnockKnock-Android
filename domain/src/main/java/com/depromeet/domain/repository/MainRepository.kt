@@ -30,7 +30,7 @@ interface  MainRepository {
 
     suspend fun deleteGroup(id: Int): NetworkResult<Unit>
 
-    suspend fun addGroupMember(id: Int, members: List<Int>): NetworkResult<GroupResponse>
+    suspend fun postAddGroupMember(id: Int, members: List<Int>): NetworkResult<GroupResponse>
 
     suspend fun getGroupAdmissions(id: Int): NetworkResult<GroupAdmissionsResponse>
 
@@ -41,4 +41,16 @@ interface  MainRepository {
     suspend fun postAllowGroupAdmissions(id: Int, admissionsId: Int): NetworkResult<Admissions>
 
     suspend fun getOpenGroups(category: Int): NetworkResult<OpenGroupsResponse>
+
+    suspend fun postOpenGroups(
+        title: String,
+        description: String,
+        publicAccess: Boolean,
+        thumbnailPath: String,
+        backgroundImagePath: String,
+        categoryId: Int,
+        members: List<Int>
+    ): NetworkResult<GroupResponse>
+
+    suspend fun postFriendGroups(members: List<Int>): NetworkResult<GroupResponse>
 }

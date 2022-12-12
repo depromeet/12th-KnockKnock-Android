@@ -70,4 +70,12 @@ interface MainAPIService {
     @GET("/groups/open")
     suspend fun getOpenGroups(@Query("category") category: Int): GetOpenGroupsResponse
 
+    // 공개 그룹 만들기
+    @POST("/groups/open")
+    suspend fun postOpenGroups(@Body body: PostOpenGroupRequest): GetGroupResponse
+
+    // 친구 그룹 만들기
+    @POST("/groups/friend")
+    suspend fun postFriendGroups(@Body body: PostFriendGroupRequest): GetGroupResponse
+
 }
