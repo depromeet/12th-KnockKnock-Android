@@ -5,10 +5,7 @@ import com.depromeet.data.api.handleApi
 import com.depromeet.data.mapper.toDomain
 import com.depromeet.data.model.request.*
 import com.depromeet.domain.NetworkResult
-import com.depromeet.domain.model.GoogleLoginResponse
-import com.depromeet.domain.model.KakaoLoginResponse
-import com.depromeet.domain.model.RefreshTokenResponse
-import com.depromeet.domain.model.SearchUserNicknameResponse
+import com.depromeet.domain.model.*
 import com.depromeet.domain.repository.MainRepository
 import javax.inject.Inject
 import javax.inject.Named
@@ -40,5 +37,9 @@ class MainRepositoryImpl @Inject constructor(
     override suspend fun getUserNickname(nickName: String): NetworkResult<SearchUserNicknameResponse> {
         val body = GetUserNicknameRequest(nickName = nickName)
         return handleApi { mainAPIService.getUserNickname(body = body).toDomain() }
+    }
+
+    override suspend fun getGroup(id: Int): NetworkResult<GroupResponse> {
+        return handleApi { mainAPIService.getGroup(path = id).toDomain() }
     }
 }

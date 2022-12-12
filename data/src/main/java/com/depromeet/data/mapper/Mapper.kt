@@ -1,13 +1,7 @@
 package com.depromeet.data.mapper
 
-import com.depromeet.data.model.response.GetGoogleLoginResponse
-import com.depromeet.data.model.response.GetKakaoLoginResponse
-import com.depromeet.data.model.response.GetUserNicknameResponse
-import com.depromeet.data.model.response.PostRefreshTokenResponse
-import com.depromeet.domain.model.GoogleLoginResponse
-import com.depromeet.domain.model.KakaoLoginResponse
-import com.depromeet.domain.model.RefreshTokenResponse
-import com.depromeet.domain.model.SearchUserNicknameResponse
+import com.depromeet.data.model.response.*
+import com.depromeet.domain.model.*
 
 
 fun PostRefreshTokenResponse.toDomain() : RefreshTokenResponse {
@@ -36,6 +30,21 @@ fun GetGoogleLoginResponse.toDomain() : GoogleLoginResponse {
 fun GetUserNicknameResponse.toDomain() : SearchUserNicknameResponse {
     return SearchUserNicknameResponse(
         userList = this.userList
+    )
+}
+
+fun GetGroupResponse.toDomain() : GroupResponse {
+    return GroupResponse(
+        groupId = this.groupId,
+        title = this.title,
+        description = this.description,
+        thumbnailPath = this.thumbnailPath,
+        backgroundImagePath = this.backgroundImagePath,
+        publicAccess = this.publicAccess,
+        category = this.category,
+        members = this.members,
+        groupType = this.groupType,
+        host = host
     )
 }
 

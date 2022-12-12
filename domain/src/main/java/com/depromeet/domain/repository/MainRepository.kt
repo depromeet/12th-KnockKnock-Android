@@ -1,10 +1,7 @@
 package com.depromeet.domain.repository
 
 import com.depromeet.domain.NetworkResult
-import com.depromeet.domain.model.GoogleLoginResponse
-import com.depromeet.domain.model.KakaoLoginResponse
-import com.depromeet.domain.model.RefreshTokenResponse
-import com.depromeet.domain.model.SearchUserNicknameResponse
+import com.depromeet.domain.model.*
 
 
 interface  MainRepository {
@@ -18,4 +15,6 @@ interface  MainRepository {
     suspend fun putUserNickname(nickName: String): NetworkResult<Unit>
 
     suspend fun getUserNickname(nickName: String): NetworkResult<SearchUserNicknameResponse>
+
+    suspend fun getGroup(id: Int): NetworkResult<GroupResponse>
 }
