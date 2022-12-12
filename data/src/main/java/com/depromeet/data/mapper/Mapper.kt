@@ -54,4 +54,10 @@ fun GetGroupAdmissionsResponse.toDomain() : GroupAdmissionsResponse {
     )
 }
 
+fun GetOpenGroupsResponse.toDomain() : OpenGroupsResponse {
+    return OpenGroupsResponse(
+        groupInfos = this.groupInfos
+    )
+}
+
 

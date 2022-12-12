@@ -94,4 +94,8 @@ class MainRepositoryImpl @Inject constructor(
     ): NetworkResult<Admissions> {
         return handleApi { mainAPIService.postAllowGroupAdmissions(id = id, admissionId = admissionsId) }
     }
+
+    override suspend fun getOpenGroups(category: Int): NetworkResult<OpenGroupsResponse> {
+        return handleApi { mainAPIService.getOpenGroups(category = category).toDomain() }
+    }
 }

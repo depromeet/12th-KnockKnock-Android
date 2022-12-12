@@ -9,6 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface MainAPIService {
@@ -64,5 +65,9 @@ interface MainAPIService {
     // 그룹 가입 허용(방장 권한)
     @POST("/groups/{id}/admissions/{admission_id}/allow")
     suspend fun postAllowGroupAdmissions(@Path("id") id: Int, @Path("admission_id") admissionId: Int): Admissions
+
+    // 방 찾기
+    @GET("/groups/open")
+    suspend fun getOpenGroups(@Query("category") category: Int): GetOpenGroupsResponse
 
 }

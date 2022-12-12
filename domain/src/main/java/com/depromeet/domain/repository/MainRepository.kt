@@ -39,4 +39,6 @@ interface  MainRepository {
     suspend fun postRefuseGroupAdmissions(id: Int, admissionsId: Int): NetworkResult<Admissions>
 
     suspend fun postAllowGroupAdmissions(id: Int, admissionsId: Int): NetworkResult<Admissions>
+
+    suspend fun getOpenGroups(category: Int): NetworkResult<OpenGroupsResponse>
 }
