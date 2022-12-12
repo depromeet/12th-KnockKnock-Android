@@ -1,6 +1,5 @@
 package com.depromeet.knockknock.ui.bookmark
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -12,6 +11,7 @@ import com.depromeet.knockknock.ui.bookmark.adapter.BookmarkAdapter
 import com.depromeet.knockknock.ui.bookmark.bottom.BottomPeriodFilter
 import com.depromeet.knockknock.ui.bookmark.bottom.BottomRoomFilter
 import com.depromeet.knockknock.ui.bookmark.model.Bookmark
+import com.depromeet.knockknock.ui.bookmark.model.Room
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -103,11 +103,37 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
     }
 
     private fun roomFilter() {
+        val test1 = Room(
+            roomId = 1,
+            roomName = "테스트 1호방",
+            roomImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            isChecked = false
+        )
+        val test2 = Room(
+            roomId = 2,
+            roomName = "테스트 2호방",
+            roomImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            isChecked = false
+        )
+        val test3 = Room(
+            roomId = 3,
+            roomName = "테스트 3호방",
+            roomImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            isChecked = false
+        )
+        val test4 = Room(
+            roomId = 4,
+            roomName = "테스트 4호방",
+            roomImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            isChecked = false
+        )
+        val testList = listOf(test1, test2, test3, test4)
+
         val bottomSheet = BottomRoomFilter(
-            roomList = emptyList(),
-            beforeClickedRoom = emptyList()
+            roomList = testList,
+            beforeClickedRoom = viewModel.roomClicked.value
         ) { clickedRoom ->
-            viewModel.setRoomFilter(clickedRoom.size)
+            viewModel.setRoomFilter(clickedRoom)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

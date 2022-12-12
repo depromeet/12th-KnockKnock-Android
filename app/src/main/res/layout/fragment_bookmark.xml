@@ -81,7 +81,7 @@
                 app:layout_constraintStart_toEndOf="@id/reset_btn"
                 android:layout_marginStart="8dp"
                 android:onClick="@{() -> viewmodel.onFilterRoomClicked()}"
-                app:roomFilterBackground="@{viewmodel.roomClicked}">
+                app:roomFilterBackground="@{viewmodel.roomClicked.size()}">
 
                 <TextView
                     android:id="@+id/filter_room_contents"
@@ -91,7 +91,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:roomCountChecked="@{viewmodel.roomClicked}">
+                    app:roomCountChecked="@{viewmodel.roomClicked.size()}">
                 </TextView>
 
                 <ImageView

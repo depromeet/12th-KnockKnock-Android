@@ -2,6 +2,7 @@ package com.depromeet.knockknock.ui.bookmark
 
 import android.util.Log
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.bookmark.model.Room
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -11,13 +12,13 @@ import javax.inject.Inject
 class BookmarkViewModel @Inject constructor(
 ) : BaseViewModel(), BookmarkActionHandler {
 
-    private val TAG = "AlarmRoomViewModel"
+    private val TAG = "BookmarkViewModel"
 
     private val _navigationHandler: MutableSharedFlow<BookmarkNavigationAction> = MutableSharedFlow<BookmarkNavigationAction>()
     val navigationHandler: SharedFlow<BookmarkNavigationAction> = _navigationHandler.asSharedFlow()
 
-    private val _roomClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
-    val roomClicked: StateFlow<Int> = _roomClicked
+    private val _roomClicked: MutableStateFlow<List<Int>> = MutableStateFlow<List<Int>>(emptyList())
+    val roomClicked: StateFlow<List<Int>> = _roomClicked
 
     private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val periodClicked: StateFlow<Int> = _periodClicked
@@ -34,7 +35,7 @@ class BookmarkViewModel @Inject constructor(
 
     override fun onFilterResetClicked() {
         baseViewModelScope.launch {
-            _roomClicked.value = 0
+            _roomClicked.value = emptyList()
             _periodClicked.value = 0
             _filterChecked.value = false
             _navigationHandler.emit(BookmarkNavigationAction.NavigateToBookmarkFilterReset)
@@ -47,10 +48,10 @@ class BookmarkViewModel @Inject constructor(
         }
     }
 
-    fun setRoomFilter(roomCheckCount: Int) = baseViewModelScope.launch {
-        _roomClicked.emit(roomCheckCount)
+    fun setRoomFilter(roomFilter: List<Int>) = baseViewModelScope.launch {
+        _roomClicked.emit(roomFilter)
 
-        if(roomClicked.value == 0 && periodClicked.value == 0) _filterChecked.value = false
+        if(roomClicked.value.size == 0 && periodClicked.value == 0) _filterChecked.value = false
         else _filterChecked.value = true
     }
 
@@ -63,7 +64,7 @@ class BookmarkViewModel @Inject constructor(
     fun setPeriodFilter(periodCheckCount: Int) = baseViewModelScope.launch {
         _periodClicked.value = periodCheckCount
 
-        if(roomClicked.value == 0 && periodClicked.value == 0) _filterChecked.value = false
+        if(roomClicked.value.size == 0 && periodClicked.value == 0) _filterChecked.value = false
         else _filterChecked.value = true
     }
 

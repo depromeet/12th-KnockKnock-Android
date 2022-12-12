@@ -2,6 +2,7 @@ package com.depromeet.knockknock.ui.bookmark.bottom
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.ui.bookmark.BookmarkActionHandler
 import com.depromeet.knockknock.ui.bookmark.adapter.FilterRoomAdapter
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -20,11 +20,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class BottomRoomFilter(
     val roomList: List<Room>,
     val beforeClickedRoom: List<Int>,
-    val callback: (roomList: List<Room>) -> Unit
+    val callback: (roomList: List<Int>) -> Unit
 ) : BottomSheetDialogFragment(){
     private lateinit var dlg : BottomSheetDialog
-
-    private val clickedRoom: ArrayList<Int> = ArrayList()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // 이 코드를 실행하지 않으면 XML에서 round 처리를 했어도 적용되지 않는다.
@@ -53,7 +51,17 @@ class BottomRoomFilter(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val clickedRoom: ArrayList<Int> = ArrayList()
         clickedRoom.addAll(beforeClickedRoom)
+
+        for(before in beforeClickedRoom.indices) {
+            for (now in roomList.indices) {
+                if(beforeClickedRoom[before] == roomList[now].roomId) {
+                    roomList[now].isChecked = true
+                }
+            }
+        }
 
         val roomRecycler = requireView().findViewById<RecyclerView>(R.id.room_recycler)
         val filterAdapter = FilterRoomAdapter { roomId, isChecked ->
@@ -65,7 +73,7 @@ class BottomRoomFilter(
 
         val saveBtn = requireView().findViewById<TextView>(R.id.save_btn)
         saveBtn.setOnClickListener {
-            callback.invoke(roomList)
+            callback.invoke(clickedRoom)
             dismiss()
         }
 

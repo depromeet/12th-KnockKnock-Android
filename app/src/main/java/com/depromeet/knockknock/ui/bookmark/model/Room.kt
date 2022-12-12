@@ -4,5 +4,5 @@ data class Room (
     val roomId: Int,
     val roomName: String,
     val roomImg: String,
-    var isCheckd: Boolean
+    var isChecked: Boolean = false
 )
