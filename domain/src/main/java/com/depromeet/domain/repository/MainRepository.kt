@@ -6,7 +6,9 @@ import com.depromeet.domain.model.*
 
 interface  MainRepository {
 
-    suspend fun refreshTokenAPI(refreshToken: String): NetworkResult<RefreshTokenResponse>
+    suspend fun postNotificationToken(deviceId: String, token: String): NetworkResult<Unit>
+
+    suspend fun postRefreshToken(refreshToken: String): NetworkResult<RefreshTokenResponse>
 
     suspend fun getKakaoLogin(code: String): NetworkResult<KakaoLoginResponse>
 

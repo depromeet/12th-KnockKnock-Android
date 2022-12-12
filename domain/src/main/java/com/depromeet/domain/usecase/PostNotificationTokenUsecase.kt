@@ -6,10 +6,10 @@ import com.depromeet.domain.repository.MainRepository
 import javax.inject.Inject
 
 
-class PostRefreshTokenUsecase @Inject constructor(
+class PostNotificationTokenUsecase @Inject constructor(
     private val repository: MainRepository
 ){
-    suspend operator fun invoke(refreshToken: String): NetworkResult<RefreshTokenResponse> {
-        return repository.postRefreshToken(refreshToken = refreshToken)
+    suspend operator fun invoke(deviceId: String, token: String): NetworkResult<Unit> {
+        return repository.postNotificationToken(deviceId = deviceId, token = token)
     }
 }

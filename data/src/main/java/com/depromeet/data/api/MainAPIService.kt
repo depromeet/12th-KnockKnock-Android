@@ -16,6 +16,10 @@ import retrofit2.http.Query
 
 interface MainAPIService {
 
+    // FCM 디바이스 토큰 관련
+    @POST("/notifications/token")
+    suspend fun postNotificationToken(@Body body: PostNotifcationTokenRequest): Unit
+
     // Refresh Token 재발급
     @POST("/credentials/refresh")
     suspend fun postRefreshToken(@Body body: PostRefreshTokenRequest): PostRefreshTokenResponse

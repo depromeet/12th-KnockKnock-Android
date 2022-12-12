@@ -14,7 +14,15 @@ class MainRepositoryImpl @Inject constructor(
     @Named("Main") private val mainAPIService: MainAPIService
 ): MainRepository {
 
-    override suspend fun refreshTokenAPI(refreshToken: String): NetworkResult<RefreshTokenResponse> {
+    override suspend fun postNotificationToken(deviceId: String, token: String): NetworkResult<Unit> {
+        val body = PostNotifcationTokenRequest(
+            deviceId = deviceId,
+            token = token
+        )
+        return handleApi { mainAPIService.postNotificationToken(body) }
+    }
+
+    override suspend fun postRefreshToken(refreshToken: String): NetworkResult<RefreshTokenResponse> {
         val body = PostRefreshTokenRequest(refreshToken = refreshToken)
         return handleApi { mainAPIService.postRefreshToken(body = body).toDomain() }
     }
