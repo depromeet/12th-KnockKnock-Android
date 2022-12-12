@@ -40,6 +40,36 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getGroup(id: Int): NetworkResult<GroupResponse> {
-        return handleApi { mainAPIService.getGroup(path = id).toDomain() }
+        return handleApi { mainAPIService.getGroup(id = id).toDomain() }
+    }
+
+    override suspend fun putGroup(
+        id: Int,
+        title: String,
+        description: String,
+        publicAccess: Boolean,
+        thumbnailPath: String,
+        backgroundImagePath: String,
+        categoryId: Int
+    ): NetworkResult<GroupResponse> {
+        val body = PutGroupRequest(
+            title = title,
+            description = description,
+            publicAccess = publicAccess,
+            thumbnailPath = thumbnailPath,
+            backgroundImagePath = backgroundImagePath,
+            categoryId = categoryId
+        )
+
+        return handleApi { mainAPIService.putGroup(id = id, body = body).toDomain() }
+    }
+
+    override suspend fun deleteGroup(id: Int): NetworkResult<Unit> {
+        return handleApi { mainAPIService.deleteGroup(id = id) }
+    }
+
+    override suspend fun addGroupMember(id: Int, members: List<Int>): NetworkResult<GroupResponse> {
+        val body = PostAddGroupMemberRequest(memberIds = members)
+        return handleApi { mainAPIService.addGroupMember(id = id, body = body).toDomain() }
     }
 }

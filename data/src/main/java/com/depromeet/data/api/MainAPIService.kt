@@ -3,6 +3,7 @@ package com.depromeet.data.api
 import com.depromeet.data.model.request.*
 import com.depromeet.data.model.response.*
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -34,5 +35,17 @@ interface MainAPIService {
     // 그룹 정보
     @GET("/groups/{id}")
     suspend fun getGroup(@Path("id") id: Int): GetGroupResponse
-    
+
+    // 그룹 설정 변경(방장 권한)
+    @PUT("/groups/{id}")
+    suspend fun putGroup(@Path("id") id: Int, @Body body: PutGroupRequest): GetGroupResponse
+
+    // 그룹 설정 제거(방장 권한)
+    @DELETE("/groups/{id}")
+    suspend fun deleteGroup(@Path("id") id: Int): Unit
+
+    // 그룹 멤버 추가(방장 권한)
+    @POST("/groups/{id}/members")
+    suspend fun addGroupMember(@Path("id") id: Int, @Body body: PostAddGroupMemberRequest): GetGroupResponse
+
 }
