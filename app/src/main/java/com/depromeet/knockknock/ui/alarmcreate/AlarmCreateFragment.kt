@@ -64,6 +64,7 @@ class AlarmCreateFragment :
         initAdapter()
         setupEvent()
         setOnTouchListenerEditText()
+
     }
 
     private fun setupEvent() {
@@ -80,21 +81,11 @@ class AlarmCreateFragment :
         }
     }
 
-//    private fun addRecommendationMessage(message: String) = binding.editTextMessage.let {
-//        Log.d("tttt1",it.text.length.toString())
-//        it.text.append(message)
-//        Log.d("tttt2",it.text.length.toString())
-//        it.setSelection(it.text.length)
-//        Log.d("tttt3",it.text.length.toString())
-//
-//    }
-
-    private fun addRecommendationMessage(message: String) {
-        binding.editTextMessage.text.append(message)
-        binding.editTextMessage.setSelection(binding.editTextMessage.text.length)
-        requireActivity().showKeyboard(binding.editTextMessage)
-
-
+    private fun addRecommendationMessage(message: String) = binding.editTextMessage.let {
+        val editTextMessageStart = it.text.substring(0 until it.selectionStart)
+        val editTextMessageEnd = it.text.substring(it.selectionStart until it.length())
+        it.setText(editTextMessageStart + message + editTextMessageEnd)
+        it.setSelection(editTextMessageStart.length + message.length)
     }
 
     private fun initAdapter() {
