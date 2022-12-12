@@ -98,7 +98,9 @@
             android:gravity="center"
             android:background="@drawable/custom_yellow_radius10"
             android:text="@string/delete_short"
-            app:deleteBtnEnable="@{viewmodel.enableEditBtn}">
+            app:deleteBtnEnable="@{viewmodel.enableEditBtn}"
+            android:clickable="@{viewmodel.enableEditBtn}"
+            android:onClick="@{() -> viewmodel.onCompleteClicked()}">
         </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
