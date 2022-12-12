@@ -31,4 +31,6 @@ interface  MainRepository {
     suspend fun deleteGroup(id: Int): NetworkResult<Unit>
 
     suspend fun addGroupMember(id: Int, members: List<Int>): NetworkResult<GroupResponse>
+
+    suspend fun getGroupAdmissions(id: Int): NetworkResult<GroupAdmissionsResponse>
 }

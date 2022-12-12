@@ -70,6 +70,10 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun addGroupMember(id: Int, members: List<Int>): NetworkResult<GroupResponse> {
         val body = PostAddGroupMemberRequest(memberIds = members)
-        return handleApi { mainAPIService.addGroupMember(id = id, body = body).toDomain() }
+        return handleApi { mainAPIService.postAddGroupMember(id = id, body = body).toDomain() }
+    }
+
+    override suspend fun getGroupAdmissions(id: Int): NetworkResult<GroupAdmissionsResponse> {
+        return handleApi { mainAPIService.getGroupAdmissions(id = id).toDomain() }
     }
 }

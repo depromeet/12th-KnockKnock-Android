@@ -46,6 +46,10 @@ interface MainAPIService {
 
     // 그룹 멤버 추가(방장 권한)
     @POST("/groups/{id}/members")
-    suspend fun addGroupMember(@Path("id") id: Int, @Body body: PostAddGroupMemberRequest): GetGroupResponse
+    suspend fun postAddGroupMember(@Path("id") id: Int, @Body body: PostAddGroupMemberRequest): GetGroupResponse
+
+    // 그룹 가입 요청 살펴보기(방장 권한)
+    @POST("/groups/{id}/admissions")
+    suspend fun getGroupAdmissions(@Path("id") id: Int): GetGroupAdmissionsResponse
 
 }

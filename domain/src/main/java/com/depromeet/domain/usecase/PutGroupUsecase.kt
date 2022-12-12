@@ -18,7 +18,6 @@ class PutGroupUsecase @Inject constructor(
         backgroundImagePath: String,
         categoryId: Int
     ): NetworkResult<GroupResponse> {
-
         return repository.putGroup(
             id = id,
             title = title,

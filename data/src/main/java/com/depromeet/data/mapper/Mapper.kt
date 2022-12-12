@@ -48,4 +48,10 @@ fun GetGroupResponse.toDomain() : GroupResponse {
     )
 }
 
+fun GetGroupAdmissionsResponse.toDomain() : GroupAdmissionsResponse {
+    return GroupAdmissionsResponse(
+        admissions = this.admissions
+    )
+}
+
 
