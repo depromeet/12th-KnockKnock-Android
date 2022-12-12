@@ -5,4 +5,6 @@ sealed class AlarmCreateNavigationAction {
     object NavigateToAddImage: AlarmCreateNavigationAction()
     object NavigateToFocusTitleText: AlarmCreateNavigationAction()
     object NavigateToDeleteMessageText: AlarmCreateNavigationAction()
+    class NavigateToRecommendationMessageText(val message: String) : AlarmCreateNavigationAction()
+
 }

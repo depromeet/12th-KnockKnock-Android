@@ -28,27 +28,26 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
             android:padding="16dp"
+            android:text="미리보기"
             android:textColor="@color/gray07"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toStartOf="@+id/edit_btn"
-            app:layout_constraintTop_toTopOf="@+id/toolbar"
-            android:text="미리보기"/>
+            app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
         <TextView
             android:id="@+id/edit_btn"
-            android:textSize="16dp"
-            android:fontFamily="@font/pretendard_regular"
-            android:textColor="@color/black"
-            android:padding="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/toolbar"
+            android:fontFamily="@font/pretendard_regular"
+            android:padding="16dp"
+            android:text="완료"
+            android:textColor="@color/black"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@id/toolbar"
             app:layout_constraintEnd_toEndOf="@id/toolbar"
-            app:onSingleClick="@{() -> vm.onAlarmPushClicked()}"
-            android:text="완료">
-        </TextView>
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            app:onSingleClick="@{() -> vm.onAlarmPushClicked()}"></TextView>
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -64,14 +63,13 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="42dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginTop="42dp">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:id="@+id/linear_layout_title_edit_text"
-                        app:onSingleClick="@{() -> vm.onFocusEditTextTitleClicked()}"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="5dp"
@@ -79,7 +77,8 @@
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        app:onSingleClick="@{() -> vm.onFocusEditTextTitleClicked()}">
 
                         <EditText
                             android:id="@+id/edit_text_title"
@@ -93,7 +92,7 @@
                             android:maxLength="15"
                             android:text="@={vm.editTextTitleEvent}"
                             android:textColor="#212121"
-                            android:textSize="22dp" />
+                            android:textSize="20dp" />
 
                         <ImageView
                             android:id="@+id/edit_text_title_img"
@@ -112,18 +111,15 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
+                        android:layout_gravity="right"
                         android:fontFamily="@font/pretendard_regular"
                         android:lineSpacingExtra="3sp"
                         android:text="새로쓰기"
-                        app:onSingleClick="@{() -> vm.onDeleteEditTextMessageClicked()}"
-                        app:deleteTextVisible="@{vm.editTextMessageCountEvent}"
                         android:textColor="#BDBDBD"
                         android:translationY="-1.45sp"
-                        android:layout_gravity="right"
-                        />
+                        app:deleteTextVisible="@{vm.editTextMessageCountEvent}"
+                        app:onSingleClick="@{() -> vm.onDeleteEditTextMessageClicked()}" />
                 </RelativeLayout>
-
-
 
 
                 <androidx.cardview.widget.CardView
@@ -140,34 +136,33 @@
 
                     <LinearLayout
                         android:id="@+id/linear_layout_edit_text"
-                        android:background="@drawable/custom_backgroundgray03_radius10"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/custom_backgroundgray03_radius10"
                         android:elevation="1dp"
                         android:orientation="vertical">
 
                         <EditText
                             android:id="@+id/edit_text_message"
-                            android:text="@={vm.editTextMessageEvent}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="26dp"
                             android:layout_marginEnd="16dp"
+                            android:background="@null"
                             android:drawablePadding="8dp"
                             android:fontFamily="@font/pretendard_regular"
-                            android:background="@null"
                             android:hint="메시지를 작성해주세요!"
                             android:maxHeight="110dp"
+                            android:maxLength="200"
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"
+                            android:text="@={vm.editTextMessageEvent}"
                             android:textAlignment="center"
                             android:textColor="#000000"
                             android:textColorHint="#757575"
-                            android:textSize="22dp"
-                            android:maxLength="200"
-                            />
+                            android:textSize="22dp" />
 
 
                         <TextView
@@ -178,13 +173,13 @@
                             android:layout_marginTop="14dp"
                             android:layout_marginBottom="16dp"
                             android:fontFamily="@font/pretendard_regular"
-                            app:editTextCountColorChange="@{vm.editTextMessageCountEvent}"
                             android:gravity="right|top"
                             android:lineSpacingExtra="3sp"
                             android:text="0/200"
                             android:textColor="#BDBDBD"
                             android:textSize="16dp"
-                            android:translationY="-1.6sp" />
+                            android:translationY="-1.6sp"
+                            app:editTextCountColorChange="@{vm.editTextMessageCountEvent}" />
 
 
                     </LinearLayout>
@@ -198,17 +193,17 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="20dp"
+                    app:addImageCardViewVisible="@{vm.messageImgState}"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintTop_toBottomOf="@+id/cardView"
-                    tools:layout_editor_absoluteX="-30dp"
                     app:onSingleClick="@{() -> vm.onAddImageClicked()}"
-                    app:addImageCardViewVisible="@{vm.messageImgState}">
+                    tools:layout_editor_absoluteX="-30dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:background="@drawable/custom_backgroundwhite_radius10_line_gray05"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -237,28 +232,28 @@
 
                 <ImageView
                     android:id="@+id/img_load"
-                    app:imgLoadVisible="@{vm.messageImgState}"
-                    app:onSingleClick="@{() -> vm.onAddImageClicked()}"
-                    android:layout_gravity="center"
                     android:layout_width="122dp"
                     android:layout_height="106dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="12dp"
-                    android:visibility="visible"/>
+                    android:visibility="visible"
+                    app:imgLoadVisible="@{vm.messageImgState}"
+                    app:onSingleClick="@{() -> vm.onAddImageClicked()}" />
             </LinearLayout>
 
         </ScrollView>
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="22.5dp"
+            android:layout_width="60dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="16dp"
             android:background="@color/white"
             android:fontFamily="@font/pretendard_regular"
-            android:gravity="center_horizontal|top"
+            android:gravity="center"
             android:lineSpacingExtra="3sp"
             android:text="추천"
+            android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -266,19 +261,18 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list"
+            recommendationAdapter="@{vm.recommendationMessageEvent}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="22.5dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@color/white"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            recommendationAdapter="@{vm.recommendationMessageEvent}"
-            tools:listitem="@layout/item_recycler_recommendation_message"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView2" />
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            tools:listitem="@layout/item_recycler_recommendation_message" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

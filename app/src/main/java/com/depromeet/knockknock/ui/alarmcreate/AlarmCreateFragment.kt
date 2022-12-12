@@ -74,9 +74,27 @@ class AlarmCreateFragment :
                     is AlarmCreateNavigationAction.NavigateToAlarmSend -> alarmSend()
                     is AlarmCreateNavigationAction.NavigateToFocusTitleText -> focusTitleText()
                     is AlarmCreateNavigationAction.NavigateToDeleteMessageText -> deleteMessageText()
+                    is AlarmCreateNavigationAction.NavigateToRecommendationMessageText ->  addRecommendationMessage(it.message)
                 }
             }
         }
+    }
+
+//    private fun addRecommendationMessage(message: String) = binding.editTextMessage.let {
+//        Log.d("tttt1",it.text.length.toString())
+//        it.text.append(message)
+//        Log.d("tttt2",it.text.length.toString())
+//        it.setSelection(it.text.length)
+//        Log.d("tttt3",it.text.length.toString())
+//
+//    }
+
+    private fun addRecommendationMessage(message: String) {
+        binding.editTextMessage.text.append(message)
+        binding.editTextMessage.setSelection(binding.editTextMessage.text.length)
+        requireActivity().showKeyboard(binding.editTextMessage)
+
+
     }
 
     private fun initAdapter() {
@@ -135,7 +153,7 @@ class AlarmCreateFragment :
     }
 
     private fun addImageBottomSheet() {
-        binding.editTextMessage.customOnFocusChangeListener(
+        binding.editTextMessage.messageTextOnFocusChangeListener(
             requireContext(),
             binding.linearLayoutEditText
         )
@@ -196,7 +214,7 @@ class AlarmCreateFragment :
     @SuppressLint("ClickableViewAccessibility")
     private fun initEditText() {
 
-        binding.editTextMessage.customOnFocusChangeListener(requireContext(), binding.linearLayoutEditText)
+        binding.editTextMessage.messageTextOnFocusChangeListener(requireContext(), binding.linearLayoutEditText)
         binding.alarmCreateMain.setOnTouchListener { _, _ ->
             requireActivity().hideKeyboard()
             binding.editTextMessage.clearFocus()
@@ -204,7 +222,7 @@ class AlarmCreateFragment :
             false
         }
 
-        binding.editTextTitle.imageOnFocusChangeListener(binding.editTextTitleImg)
+        binding.editTextTitle.titleTextOnFocusChangeListener(binding.editTextTitleImg)
         binding.editTextTitle.setOnKeyListener { view, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KEYCODE_ENTER) {
                 // 엔터 눌렀을때 행동

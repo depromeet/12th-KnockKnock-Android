@@ -3,6 +3,7 @@ package com.depromeet.knockknock.ui.alarmcreate
 import android.util.Log
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
+import com.depromeet.knockknock.ui.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -43,13 +44,16 @@ class AlarmCreateViewModel @Inject constructor(
 
     private fun getTempList() {
 
-        val test1 = RecommendationMessage("dd")
 
-        val test2 = RecommendationMessage(
+        val test1 = RecommendationMessage(
             "${String(Character.toChars(0x1F4AA))}${String(Character.toChars(0x1F4AA))}${String(Character.toChars(0x1F4AA))}"
         )
+        val test2 = RecommendationMessage("탈락?오히려좋아")
+        val test3 = RecommendationMessage("꿈은 없고요 그냥 놀고 싶습니다.")
+        val test4 = RecommendationMessage("서류 접수 하셨나요")
+        val test5= RecommendationMessage(String(Character.toChars(0x1F971)))
 
-        val testList = listOf(test1, test2, test2, test2, test2, test2, test2, test2, test2)
+        val testList = listOf(test1, test2, test3, test4, test5)
 
         baseViewModelScope.launch {
 
@@ -76,6 +80,13 @@ class AlarmCreateViewModel @Inject constructor(
         baseViewModelScope.launch {
             _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToFocusTitleText)
         }
+    }
+
+    override fun onRecommendationMessageClicked(message: String) {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToRecommendationMessageText(message))
+        }
+
     }
 
     override fun onAddImageClicked() {
