@@ -76,4 +76,22 @@ class MainRepositoryImpl @Inject constructor(
     override suspend fun getGroupAdmissions(id: Int): NetworkResult<GroupAdmissionsResponse> {
         return handleApi { mainAPIService.getGroupAdmissions(id = id).toDomain() }
     }
+
+    override suspend fun postGroupAdmissions(id: Int): NetworkResult<Admissions> {
+        return handleApi { mainAPIService.postGroupAdmissions(id = id) }
+    }
+
+    override suspend fun postRefuseGroupAdmissions(
+        id: Int,
+        admissionsId: Int
+    ): NetworkResult<Admissions> {
+        return handleApi { mainAPIService.postRefuseGroupAdmissions(id = id, admissionId = admissionsId) }
+    }
+
+    override suspend fun postAllowGroupAdmissions(
+        id: Int,
+        admissionsId: Int
+    ): NetworkResult<Admissions> {
+        return handleApi { mainAPIService.postAllowGroupAdmissions(id = id, admissionId = admissionsId) }
+    }
 }

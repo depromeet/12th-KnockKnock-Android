@@ -33,4 +33,10 @@ interface  MainRepository {
     suspend fun addGroupMember(id: Int, members: List<Int>): NetworkResult<GroupResponse>
 
     suspend fun getGroupAdmissions(id: Int): NetworkResult<GroupAdmissionsResponse>
+
+    suspend fun postGroupAdmissions(id: Int): NetworkResult<Admissions>
+
+    suspend fun postRefuseGroupAdmissions(id: Int, admissionsId: Int): NetworkResult<Admissions>
+
+    suspend fun postAllowGroupAdmissions(id: Int, admissionsId: Int): NetworkResult<Admissions>
 }
