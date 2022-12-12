@@ -1,7 +1,10 @@
 package com.depromeet.data.api
 
+import com.depromeet.data.model.PostRefreshTokenResponse
+import retrofit2.http.GET
+
 
 interface MainAPIService {
-//    @GET("/app/version")
-//    suspend fun checkVersion(): AppVersionResponse
+    @GET("/credentials/refresh")
+    suspend fun postRefreshToken(): PostRefreshTokenResponse
 }
