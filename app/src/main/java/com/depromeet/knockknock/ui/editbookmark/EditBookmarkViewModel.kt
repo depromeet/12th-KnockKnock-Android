@@ -46,9 +46,13 @@ class EditBookmarkViewModel @Inject constructor(
             _allDeleteClicked.value = !_allDeleteClicked.value
             if(_allDeleteClicked.value) {
                 for(index in bookmarkList.value.indices) {
+                    bookmarkList.value[index].isChecked = _allDeleteClicked.value
                     deleteBookmarkList.add(bookmarkList.value[index].bookmarkId)
                 }
             } else {
+                for(index in bookmarkList.value.indices) {
+                    bookmarkList.value[index].isChecked = _allDeleteClicked.value
+                }
                 deleteBookmarkList.clear()
             }
             _enableEditBtn.value = deleteBookmarkList.size > 0

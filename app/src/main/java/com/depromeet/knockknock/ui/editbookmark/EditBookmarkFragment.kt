@@ -33,6 +33,7 @@ class EditBookmarkFragment : BaseFragment<FragmentEditBookmarkBinding, EditBookm
 
     override val viewModel : EditBookmarkViewModel by viewModels()
     private val navController: NavController by lazy { findNavController() }
+    private val adapter by lazy { EditBookmarkAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -52,6 +53,12 @@ class EditBookmarkFragment : BaseFragment<FragmentEditBookmarkBinding, EditBookm
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.bookmarkList.collectLatest {
+                adapter.submitList(it)
+            }
+        }
     }
 
     override fun initAfterBinding() {
@@ -67,10 +74,6 @@ class EditBookmarkFragment : BaseFragment<FragmentEditBookmarkBinding, EditBookm
     }
 
     private fun initAdapter() {
-        val testList = listOf<EditBookmark>()
-
-        val adapter = EditBookmarkAdapter(viewModel)
-        adapter.submitList(testList)
         binding.bookmarkRecycler.adapter = adapter
     }
 

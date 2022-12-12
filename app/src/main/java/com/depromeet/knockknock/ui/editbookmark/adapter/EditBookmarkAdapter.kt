@@ -56,7 +56,7 @@ class EditBookmarkAdapter(
 
     internal object EditBookmarkItemDiffCallback : DiffUtil.ItemCallback<EditBookmark>() {
         override fun areItemsTheSame(oldItem: EditBookmark, newItem: EditBookmark) =
-            oldItem.bookmarkId == newItem.bookmarkId
+            oldItem.bookmarkId == newItem.bookmarkId && oldItem.isChecked == newItem.isChecked
 
         override fun areContentsTheSame(oldItem: EditBookmark, newItem: EditBookmark) =
             oldItem == newItem
