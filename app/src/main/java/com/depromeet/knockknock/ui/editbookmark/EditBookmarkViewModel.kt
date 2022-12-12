@@ -22,6 +22,9 @@ class EditBookmarkViewModel @Inject constructor(
     private val _enableEditBtn: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val enableEditBtn: StateFlow<Boolean> = _enableEditBtn
 
+    private val _allDeleteClicked: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+    val allDeleteClicked: StateFlow<Boolean> = _allDeleteClicked.asStateFlow()
+
     val deleteBookmarkList = mutableListOf<Int>()
 
     override fun onCheckClicked(bookmarkIdx: Int, isChecked: Boolean) {
@@ -40,10 +43,15 @@ class EditBookmarkViewModel @Inject constructor(
 
     override fun onAllDeleteClicked() {
         baseViewModelScope.launch {
-            for(index in bookmarkList.value.indices) {
-                deleteBookmarkList.add(bookmarkList.value[index].bookmarkId)
+            _allDeleteClicked.value = !_allDeleteClicked.value
+            if(_allDeleteClicked.value) {
+                for(index in bookmarkList.value.indices) {
+                    deleteBookmarkList.add(bookmarkList.value[index].bookmarkId)
+                }
+            } else {
+                deleteBookmarkList.clear()
             }
-            _navigationHandler.emit(EditBookmarkNavigationAction.NavigateToEditComplete)
+            _enableEditBtn.value = deleteBookmarkList.size > 0
         }
     }
 }

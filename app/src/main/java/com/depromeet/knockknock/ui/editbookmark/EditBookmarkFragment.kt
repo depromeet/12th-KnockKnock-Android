@@ -76,10 +76,10 @@ class EditBookmarkFragment : BaseFragment<FragmentEditBookmarkBinding, EditBookm
 
     private fun deleteDialog() {
         val res = AlertDialogModel(
-            title = "",
-            description = "",
-            positiveContents = "",
-            negativeContents = ""
+            title = requireContext().getString(R.string.delete_dialog_title),
+            description = requireContext().getString(R.string.delete_dialog_description),
+            positiveContents = requireContext().getString(R.string.delete_short),
+            negativeContents = requireContext().getString(R.string.no)
         )
         val dialog = DefaultYellowAlertDialog(
             alertDialogModel = res,

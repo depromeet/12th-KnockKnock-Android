@@ -51,6 +51,8 @@
     <string name="ok">완료</string>
     <string name="all_click">전체선택</string>
     <string name="delete_short">삭제</string>
+    <string name="delete_dialog_title">선택항목을 삭제할까요?</string>
+    <string name="delete_dialog_description">내 보관함에서만 삭제돼요</string>
 
     <!--마이페이지-->
     <string name="mypage_profile_btn">프로필</string>
