@@ -124,4 +124,13 @@ class MainRepositoryImpl @Inject constructor(
         val body = PostFriendGroupRequest(memberIds = members)
         return handleApi { mainAPIService.postFriendGroups(body).toDomain() }
     }
+
+    override suspend fun getCategories(): NetworkResult<CategoryResponse> {
+        return handleApi { mainAPIService.getCategories().toDomain() }
+    }
+
+    override suspend fun postCategories(emoji: String, content: String): NetworkResult<Category> {
+        val body = PostCategoryRequest(emoji = emoji, content = content)
+        return handleApi { mainAPIService.postCategories(body) }
+    }
 }

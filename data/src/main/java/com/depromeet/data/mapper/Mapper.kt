@@ -60,4 +60,10 @@ fun GetOpenGroupsResponse.toDomain() : OpenGroupsResponse {
     )
 }
 
+fun GetCategoriesResponse.toDomain() : CategoryResponse {
+    return CategoryResponse(
+        categories = this.categories
+    )
+}
+
 

@@ -53,4 +53,8 @@ interface  MainRepository {
     ): NetworkResult<GroupResponse>
 
     suspend fun postFriendGroups(members: List<Int>): NetworkResult<GroupResponse>
+
+    suspend fun getCategories(): NetworkResult<CategoryResponse>
+
+    suspend fun postCategories(emoji: String, content: String): NetworkResult<Category>
 }

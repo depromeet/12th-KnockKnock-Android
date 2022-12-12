@@ -3,6 +3,8 @@ package com.depromeet.data.api
 import com.depromeet.data.model.request.*
 import com.depromeet.data.model.response.*
 import com.depromeet.domain.model.Admissions
+import com.depromeet.domain.model.Category
+import com.depromeet.domain.model.CategoryResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -77,5 +79,13 @@ interface MainAPIService {
     // 친구 그룹 만들기
     @POST("/groups/friend")
     suspend fun postFriendGroups(@Body body: PostFriendGroupRequest): GetGroupResponse
+
+    // 카테고리 목록
+    @GET("/groups/categories")
+    suspend fun getCategories(): GetCategoriesResponse
+
+    // 카테고리 생성
+    @POST("/groups/categories")
+    suspend fun postCategories(@Body body: PostCategoryRequest): Category
 
 }
