@@ -6,10 +6,10 @@ import com.depromeet.domain.repository.MainRepository
 import javax.inject.Inject
 
 
-class PostRefuseGroupAdmissionsUsecase @Inject constructor(
+class PostAllowGroupAdmissionsUsecase @Inject constructor(
     private val repository: MainRepository
 ){
     suspend operator fun invoke(id: Int, admissionsId: Int): NetworkResult<Admissions> {
-        return repository.postRefuseGroupAdmissions(id = id, admissionsId = admissionsId)
+        return repository.postAllowGroupAdmissions(id = id, admissionsId = admissionsId)
     }
 }

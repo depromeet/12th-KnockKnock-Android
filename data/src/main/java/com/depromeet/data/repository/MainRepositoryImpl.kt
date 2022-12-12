@@ -68,7 +68,7 @@ class MainRepositoryImpl @Inject constructor(
         return handleApi { mainAPIService.deleteGroup(id = id) }
     }
 
-    override suspend fun addGroupMember(id: Int, members: List<Int>): NetworkResult<GroupResponse> {
+    override suspend fun postAddGroupMember(id: Int, members: List<Int>): NetworkResult<GroupResponse> {
         val body = PostAddGroupMemberRequest(memberIds = members)
         return handleApi { mainAPIService.postAddGroupMember(id = id, body = body).toDomain() }
     }

@@ -6,10 +6,10 @@ import com.depromeet.domain.repository.MainRepository
 import javax.inject.Inject
 
 
-class PostOpenGroupUsecase @Inject constructor(
+class PostFriendGroupUsecase @Inject constructor(
     private val repository: MainRepository
 ){
-    suspend operator fun invoke(category: Int): NetworkResult<OpenGroupsResponse> {
-        return repository.getOpenGroups(category = category)
+    suspend operator fun invoke(members: List<Int>): NetworkResult<GroupResponse> {
+        return repository.postFriendGroups(members = members)
     }
 }
