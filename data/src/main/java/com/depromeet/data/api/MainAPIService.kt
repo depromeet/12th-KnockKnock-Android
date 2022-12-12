@@ -88,4 +88,16 @@ interface MainAPIService {
     @POST("/groups/categories")
     suspend fun postCategories(@Body body: PostCategoryRequest): Category
 
+    // 방 검색하기
+    @GET("/groups/search/{searchString}")
+    suspend fun getSearchGroups(@Path("searchString") searchString: String): GetOpenGroupsResponse
+
+    // 참여중인 그룹 필터링 (전체, 홀로, 친구들)
+    @GET("/groups/joined")
+    suspend fun getJoinedGroups(@Query("type") type: String): GetOpenGroupsResponse
+
+    // 멤버 제거 (방장 : 본인제외 모든 인원, 멤버 : 본인만) <- 방 나가기 처럼 사용
+    @DELETE("/groups/{id}/members/{user_id}")
+    suspend fun deleteGroupMember(@Path("id") id: Int, @Path("user_id") userId: Int): GetGroupResponse
+
 }

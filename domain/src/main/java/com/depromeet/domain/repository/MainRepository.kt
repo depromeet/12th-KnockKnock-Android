@@ -57,4 +57,10 @@ interface  MainRepository {
     suspend fun getCategories(): NetworkResult<CategoryResponse>
 
     suspend fun postCategories(emoji: String, content: String): NetworkResult<Category>
+
+    suspend fun getSearchGroups(searchString: String): NetworkResult<OpenGroupsResponse>
+
+    suspend fun getJoinedGroups(type: String): NetworkResult<OpenGroupsResponse>
+
+    suspend fun deleteGroupMember(id: Int, userId: Int): NetworkResult<GroupResponse>
 }

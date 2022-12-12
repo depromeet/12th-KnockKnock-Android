@@ -133,4 +133,21 @@ class MainRepositoryImpl @Inject constructor(
         val body = PostCategoryRequest(emoji = emoji, content = content)
         return handleApi { mainAPIService.postCategories(body) }
     }
+
+    override suspend fun getSearchGroups(searchString: String): NetworkResult<OpenGroupsResponse> {
+        return handleApi { mainAPIService.getSearchGroups(searchString = searchString).toDomain() }
+    }
+
+    override suspend fun getJoinedGroups(type: String): NetworkResult<OpenGroupsResponse> {
+        val filterType = when(type) {
+            "FRIEND" -> "FRIEND"
+            "OPEN" -> "OPEN"
+            else -> "ALL"
+        }
+        return handleApi { mainAPIService.getJoinedGroups(filterType).toDomain() }
+    }
+
+    override suspend fun deleteGroupMember(id: Int, userId: Int): NetworkResult<GroupResponse> {
+        return handleApi { mainAPIService.deleteGroupMember(id = id, userId = userId).toDomain() }
+    }
 }
