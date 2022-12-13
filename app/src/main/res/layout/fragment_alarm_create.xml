@@ -47,7 +47,10 @@
             app:layout_constraintBottom_toBottomOf="@id/toolbar"
             app:layout_constraintEnd_toEndOf="@id/toolbar"
             app:layout_constraintTop_toTopOf="@id/toolbar"
-            app:onSingleClick="@{() -> vm.onAlarmPushClicked()}"></TextView>
+            app:editTextVisible="@{vm.editTextMessageCountEvent}"
+            app:onSingleClick="@{() -> vm.onAlarmPushClicked()}">
+
+        </TextView>
 
         <ScrollView
             android:id="@+id/scrollView"
