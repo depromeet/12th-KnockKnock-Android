@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
+import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
+import com.depromeet.knockknock.base.DefaultRedAlertDialog
 import com.depromeet.knockknock.databinding.FragmentSetProfileBinding
 import com.depromeet.knockknock.ui.editprofile.EditProfileNavigationAction
 import com.depromeet.knockknock.ui.editprofile.bottom.EditProfileImageBottomSheet
@@ -115,4 +117,7 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
             false
         }
     }
+
+
+
 }
