@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.register
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.NotificationManager
 import android.content.Context
@@ -16,6 +17,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.FragmentRegisterBinding
+import com.depromeet.knockknock.util.customOnFocusChangeListener
+import com.depromeet.knockknock.util.hideKeyboard
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
@@ -80,6 +83,7 @@ class RegisterFragment : Fragment() {
 
         }
         countEditTextMessage()
+        initEditText()
         return binding.root
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -116,6 +120,24 @@ class RegisterFragment : Fragment() {
                     binding.onboardBeforeWrite.setImageDrawable(resources.getDrawable(R.drawable.onboard_after_write))
                 }
             }
+        }
+    }
+
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditText() {
+
+        binding.editTextMessage.onFocusChangeListener = View.OnFocusChangeListener { view, gainFocus ->
+            //포커스가 주어졌을 때
+            if (gainFocus) {binding.editTextMessageLayout.background = context!!.getDrawable(R.drawable.custom_backgroundgray03_radius10_line_gray08)
+            }
+            
+            else binding.editTextMessageLayout.background = context!!.getDrawable(R.drawable.custom_backgroundgray03_radius10)
+        }
+        binding.registerMain.setOnTouchListener { _, _ ->
+            requireActivity().hideKeyboard()
+            binding.editTextMessage.clearFocus()
+            false
         }
     }
 
