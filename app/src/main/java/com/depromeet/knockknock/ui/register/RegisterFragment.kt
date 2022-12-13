@@ -3,6 +3,7 @@ package com.depromeet.knockknock.ui.register
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.NotificationManager
+import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,12 +12,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.depromeet.knockknock.R
+import com.depromeet.knockknock.base.AlertDialogModel
+import com.depromeet.knockknock.base.DefaultRedAlertDialog
+import com.depromeet.knockknock.base.DefaultYellowAlertDialog
 import com.depromeet.knockknock.databinding.FragmentRegisterBinding
+import com.depromeet.knockknock.ui.setprofile.SetProfileFragmentDirections
+import com.depromeet.knockknock.ui.setprofile.SetProfileNavigationAction
 import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.hideKeyboard
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -28,6 +35,9 @@ import kotlinx.coroutines.flow.collectLatest
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
+    private val TAG = "RegisterFragment"
+    private var toast : Toast? = null
+
     companion object {
         private const val RC_SIGN_IN = 9001
     }
@@ -36,6 +46,46 @@ class RegisterFragment : Fragment() {
     private lateinit var kakaoAuthViewModel: KakaoAuthViewModel
     private lateinit var googleAuthViewModel: GoogleAuthViewModel
     private lateinit var testAlarmViewModel : TestAlarmViewModel
+
+
+    fun initDataBinding() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            testAlarmViewModel.navigationHandler.collectLatest {
+                when(it) {
+                    is RegisterNavigationAction.NavigateToPushSetting -> pushSettingDialog()
+                    is RegisterNavigationAction.NavigateToNotificationAlarm -> testAlarm()
+                }
+            }
+        }
+    }
+
+    private fun pushSettingDialog() {
+        val res = AlertDialogModel(
+            title = getString(R.string.alarm_permission_title),
+            description = getString(R.string.alarm_permission_description),
+            positiveContents = getString(R.string.alarm_permission_yes),
+            negativeContents = getString(R.string.alarm_permission_no)
+        )
+        val dialog: DefaultYellowAlertDialog = DefaultYellowAlertDialog(
+            alertDialogModel = res,
+            clickToPositive = {
+                testAlarmViewModel.pushAlarmAgreed.value = true
+                toast?.cancel()
+                toast = Toast.makeText(activity, "푸쉬 알림 적용 완료", Toast.LENGTH_SHORT)?.apply { show() }
+            },
+            clickToNegative = {
+                toast?.cancel()
+                toast = Toast.makeText(activity, "푸쉬 알림 적용 해제", Toast.LENGTH_SHORT)?.apply { show() }
+            }
+        )
+        dialog.show(childFragmentManager, TAG)
+    }
+
+    private fun testAlarm(){
+        testAlarmViewModel.createNotificationChannel(testAlarmViewModel.CHANNEL_ID, "DemoChannel", "this is a demo")
+        testAlarmViewModel.displayNotification(context!!)
+    }
+
 
 
     override fun onCreateView(
@@ -71,17 +121,13 @@ class RegisterFragment : Fragment() {
             googleAuthViewModel.signIn()
         }
 
-        binding.testAlarmButton.setOnClickListener{
-            testAlarmViewModel.createNotificationChannel(testAlarmViewModel.CHANNEL_ID, "DemoChannel", "this is a demo")
-            testAlarmViewModel.displayNotification(context!!)
-        }
-
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             kakaoAuthViewModel.message.collect{
                 view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
             }
 
         }
+        initDataBinding()
         countEditTextMessage()
         initEditText()
         return binding.root
