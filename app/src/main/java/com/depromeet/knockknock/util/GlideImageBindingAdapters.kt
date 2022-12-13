@@ -18,7 +18,7 @@ fun ImageView.bindUserProfile(profileUri: String) {
 fun ImageView.bindBookmarkContentsImage(contentsImageUri: String) {
     Glide.with(context)
         .load(contentsImageUri)
-        .transform(CenterCrop(), RoundedCorners(100))
+        .transform(CenterCrop(), RoundedCorners(50))
         .into(this)
 }
 

@@ -27,11 +27,10 @@
                 android:id="@+id/lauout_main"
                 android:focusable="true"
                 android:clickable="true"
-                android:minHeight="?attr/actionBarSize"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
@@ -65,47 +64,42 @@
                     app:layout_constraintStart_toEndOf="@id/user_name_text"
                     android:text="@{holder.userName}"/>
 
-                <ImageView
-                    android:id="@+id/expand_btn"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="16dp"
-                    app:layout_constraintTop_toTopOf="@id/user_img"
-                    app:layout_constraintBottom_toBottomOf="@id/user_img"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:src="@drawable/ic_bookmark_expand_btn">
-                </ImageView>
-
                 <TextView
                     android:id="@+id/contents_text"
                     style="@style/Theme.AppCompat.TextView.Item.Contents"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/user_img"
+                    app:layout_constraintEnd_toStartOf="@id/contents_img"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
+                    android:gravity="start"
                     android:text="@{holder.contents}"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_expand"
-                android:visibility="gone"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/lauout_main"
-                android:layout_marginTop="8dp">
-
+                
                 <ImageView
                     android:id="@+id/contents_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="92dp"
+                    android:layout_height="64dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/contents_text"
+                    app:layout_constraintBottom_toBottomOf="@id/contents_text"
                     app:bookmarkContentsImage="@{holder.contentsImg}">
                 </ImageView>
+
+                <TextView
+                    android:id="@+id/expand_btn"
+                    style="@style/Theme.AppCompat.TextView.EditBookmark.Expanded.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/contents_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/more_contents"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp">
+                </TextView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

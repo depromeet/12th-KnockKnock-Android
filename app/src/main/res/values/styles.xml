@@ -67,6 +67,11 @@
         <item name="fontFamily">@font/pretendard_medium</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.Medium.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
     <style name="Theme.AppCompat.TextView.Medium.SystemRedCaution.Size18" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/system_red_caution</item>
         <item name="android:textSize">18dp</item>
@@ -91,6 +96,12 @@
         <item name="fontFamily">@font/pretendard_medium</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.Medium.Black.Size16" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
     <style name="Theme.AppCompat.TextView.Medium.Gray10.Size18" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/gray10</item>
         <item name="android:textSize">18dp</item>
@@ -109,6 +120,17 @@
     <style name="Theme.AppCompat.TextView.Regular.Gray07.Size16" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/gray07</item>
         <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Size16" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Gray05.Size14" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray05</item>
+        <item name="android:textSize">14dp</item>
         <item name="fontFamily">@font/pretendard_regular</item>
     </style>
 
@@ -283,6 +305,17 @@
         <item name="android:padding">16dp</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.EditBookmark.Edit.Button" parent="Theme.AppCompat.TextView.Regular.Size16">
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.EditBookmark.Expanded.Button" parent="Theme.AppCompat.TextView.Regular.Gray05.Size14"/>
+
+    <style name="Theme.AppCompat.TextView.EditBookmark.AllDelete.Button" parent="Theme.AppCompat.TextView.Regular.Black.Size16"/>
+    <style name="Theme.AppCompat.TextView.EditBookmark.Delete.Button" parent="Theme.AppCompat.TextView.Medium.Size18"/>
+
+
+
     <style name="Theme.AppCompat.Bookmark.Filter.Reset" parent="Theme.AppCompat">
         <item name="android:paddingTop">6dp</item>
         <item name="android:paddingBottom">6dp</item>
@@ -328,6 +361,11 @@
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>
     </style>
+
+    <!-- 보관함 편집 -->
+    <style name="Theme.AppCompat.TextView.EditBookmark.UserName" parent="Theme.AppCompat.TextView.Medium.Black.Size16"/>
+    <style name="Theme.AppCompat.TextView.EditBookmark.DateTime" parent="Theme.AppCompat.TextView.Regular.Gray07.Size14"/>
+    <style name="Theme.AppCompat.TextView.EditBookmark.Contents" parent="Theme.AppCompat.TextView.Regular.Black.Size14"/>
 
     <!-- 친구목록 -->
     <style name="Theme.AppCompat.EditText.Friend.List.Search" parent="@style/Widget.AppCompat.EditText">

@@ -101,7 +101,18 @@
     <fragment
         android:id="@+id/bookmarkFragment"
         android:name="com.depromeet.knockknock.ui.bookmark.BookmarkFragment"
-        android:label="BookmarkFragment" />
+        android:label="BookmarkFragment" >
+        <action
+            android:id="@+id/action_bookmarkFragment_to_editBookmarkFragment"
+            app:destination="@id/editBookmarkFragment"
+            app:popExitAnim="@anim/exit_to_right"
+            app:enterAnim="@anim/enter_from_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editBookmarkFragment"
+        android:name="com.depromeet.knockknock.ui.editbookmark.EditBookmarkFragment"
+        android:label="EditBookmarkFragment" />
 
     <fragment
         android:id="@+id/friendListFragment"

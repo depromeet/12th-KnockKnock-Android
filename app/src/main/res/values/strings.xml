@@ -37,6 +37,8 @@
     <string name="room">모든방</string>
     <string name="reaction">리액션</string>
     <string name="reset">초기화</string>
+    <string name="more_contents">더보기</string>
+    <string name="shorts_contents">간단히보기</string>
 
     <string name="room_select">알림방 선택</string>
     <string name="period_select">기간 선택</string>
@@ -46,6 +48,13 @@
     <string name="three_month">3개월</string>
     <string name="six_month">6개월</string>
     <string name="one_year">1년</string>
+
+    <!--보관함 편집-->
+    <string name="ok">완료</string>
+    <string name="all_click">전체선택</string>
+    <string name="delete_short">삭제</string>
+    <string name="delete_dialog_title">선택항목을 삭제할까요?</string>
+    <string name="delete_dialog_description">내 보관함에서만 삭제돼요</string>
 
     <!--마이페이지-->
     <string name="mypage_profile_btn">프로필</string>
