@@ -23,6 +23,11 @@
     <string name="alarm_permission_yes">허용</string>
     <string name="alarm_permission_no">허용 안함</string>
 
+    <string name="alarm_permission_no_title">기기 알림이 꺼졌어요</string>
+    <string name="alarm_permission_no_description">마이페이지 >알림 설정에서\n다시 푸시알림을 켤 수 있어요</string>
+    <string name="alarm_permission_no_confirm">확인</string>
+
+
     <!--알림설정-->
     <string name="alarm_settings_title">알림 설정</string>
 
