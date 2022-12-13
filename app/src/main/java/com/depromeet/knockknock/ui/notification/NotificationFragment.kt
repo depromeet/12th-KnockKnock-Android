@@ -31,6 +31,7 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
         }
         exception = viewModel.errorEvent
         initToolbar()
+        initAdapter()
     }
 
     override fun initDataBinding() {

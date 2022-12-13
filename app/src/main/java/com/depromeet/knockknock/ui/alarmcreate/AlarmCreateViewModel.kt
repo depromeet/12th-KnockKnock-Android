@@ -1,6 +1,8 @@
 package com.depromeet.knockknock.ui.alarmcreate
 
+import androidx.lifecycle.lifecycleScope
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.editprofile.EditProfileNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -15,15 +17,20 @@ class AlarmCreateViewModel @Inject constructor(
     private val _navigationEvent: MutableSharedFlow<AlarmCreateNavigationAction> =
         MutableSharedFlow<AlarmCreateNavigationAction>()
     val navigationEvent: SharedFlow<AlarmCreateNavigationAction> = _navigationEvent.asSharedFlow()
+    var editTextTitleEvent = MutableStateFlow<String>("")
     var editTextMessageEvent = MutableStateFlow<String>("")
     var editTextMessageCountEvent = MutableStateFlow<Int>(0)
-    val imgState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+    val messageImgState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
 
     init {
         baseViewModelScope.launch {
             editTextMessageEvent.debounce(0).collectLatest {
                 onEditTextCount(it.length)
             }
+        }
+
+        baseViewModelScope.launch {
+            editTextTitleEvent.emit("주호민")
         }
     }
 
@@ -39,13 +46,19 @@ class AlarmCreateViewModel @Inject constructor(
 
     override fun onAddImageClicked() {
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToGallery)
+            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToAddImage)
         }
     }
 
     override fun onAlarmPushClicked() {
         baseViewModelScope.launch {
             _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToAlarmSend)
+        }
+    }
+
+    fun onImageStateChecked() {
+        baseViewModelScope.launch {
+            messageImgState.emit(true)
         }
     }
 }

@@ -1,24 +1,18 @@
 package com.depromeet.knockknock.ui.bookmark.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.databinding.HolderBookmarkBinding
 import com.depromeet.knockknock.databinding.HolderRoomFilterBinding
-import com.depromeet.knockknock.ui.bookmark.BookmarkActionHandler
-import com.depromeet.knockknock.ui.bookmark.model.Bookmark
 import com.depromeet.knockknock.ui.bookmark.model.Room
-import com.depromeet.knockknock.util.ToggleAnimation
-import com.depromeet.knockknock.util.toggleLayout
 
 class FilterRoomAdapter(
-    val callback: (roomId: Int) -> Unit
+    val callback: (roomId: Int, isChecked: Boolean) -> Unit
 ) : ListAdapter<Room, FilterRoomAdapter.ViewHolder>(FilterRoomItemDiffCallback){
 
     init { setHasStableIds(true) }
@@ -26,12 +20,15 @@ class FilterRoomAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewDataBinding: HolderRoomFilterBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.holder_bookmark,
+            R.layout.holder_room_filter,
             parent,
             false
         )
-        viewDataBinding.root.setOnClickListener {
-            callback.invoke(viewDataBinding.holder!!.roomId)
+        viewDataBinding.layoutMain.setOnClickListener {
+            callback.invoke(
+                viewDataBinding.holder!!.roomId,
+                viewDataBinding.roomCheck.isChecked
+            )
         }
         return ViewHolder(viewDataBinding)
     }

@@ -1,5 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Common -->
+
+    <!-- Bold -->
+    <style name="Theme.AppCompat.TextView.Bold.Gray10.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray08_1</item>
+        <item name="android:textSize">20dp</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
+    </style>
+
+    <!-- Semi Bold -->
+    <style name="Theme.AppCompat.TextView.SemiBold.Black.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.SemiBold.Gray08_1.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textColor">@color/gray08_1</item>
+        <item name="android:layout_marginStart">16dp</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.SemiBold.Gray08.Size18" parent="Theme.AppCompat.TextView.Medium.Black.Size18">
+        <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textColor">@color/gray08</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.SemiBold.Gray09.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray09</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.SemiBold.Black.Size24" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">24dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.SemiBold.Gray05.Size16" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray05</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.SemiBold.Black.Size16" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.SemiBold.Gray07.Size14" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textColor">@color/gray07</item>
+    </style>
+
+    <!-- Medium -->
+    <style name="Theme.AppCompat.TextView.Medium.Black.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Medium.SystemRedCaution.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/system_red_caution</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.SemiBold.Gray10.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray10</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Medium.Gray08.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray08</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Medium.Gray07.Size14" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray07</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Medium.Gray10.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray10</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
+
+    <!-- Regular -->
+
+    <style name="Theme.AppCompat.TextView.Regular.Black.Size14" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Gray07.Size16" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray07</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Gray07.Size14" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray07</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.BackgroundWhite.Size14" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/background_white_mode</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Gray08.Size16" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/gray08</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Black.Size16" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Gray07.Size12" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray07</item>
+        <item name="android:textSize">12dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Black.Size12" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Gray10.Size14" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray10</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Black.Size18" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+
+
+
     <!-- ToolBar -->
     <style name="ToolBarStyle" parent="Theme.AppCompat">
         <item name="android:textColorPrimary">@color/gray09</item>
@@ -72,42 +235,19 @@
         <item name="android:layout_marginEnd">16dp</item>
     </style>
 
-    <style name="Theme.AppCompat.Alarm.Settings.Title" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
+    <style name="Theme.AppCompat.Alarm.Settings.Title" parent="Theme.AppCompat.TextView.Regular.Black.Size16"/>
 
-    <style name="Theme.AppCompat.Alarm.Settings.Description" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">14dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textColor">@color/gray07</item>
-    </style>
+    <style name="Theme.AppCompat.Alarm.Settings.Description" parent="Theme.AppCompat.TextView.Regular.Gray07.Size14"/>
 
     <!-- 마이페이지 -->
-    <style name="Theme.AppCompat.TextView.Mypage.Name.Title" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Mypage.Name.Title" parent="Theme.AppCompat.TextView.Medium.Black.Size18"/>
 
-    <style name="Theme.AppCompat.TextView.Mypage.Email.Title" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">14dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textColor">@color/gray07</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Mypage.Email.Title" parent="Theme.AppCompat.TextView.Regular.Gray07.Size14"/>
 
-    <style name="Theme.AppCompat.TextView.Mypage.Button.Title" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Mypage.Button.Title" parent="Theme.AppCompat.TextView.Regular.Black.Size16"/>
 
     <!-- 프로필 -->
-    <style name="Theme.AppCompat.TextView.Profile.Username.Title" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
-        <item name="android:textColor">@color/gray09</item>
+    <style name="Theme.AppCompat.TextView.Profile.Username.Title" parent="Theme.AppCompat.TextView.SemiBold.Gray09.Size18">
         <item name="android:layout_marginStart">16dp</item>
     </style>
 
@@ -125,33 +265,29 @@
         <item name="maxLines">1</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Profile.Email.Title" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
-        <item name="android:textColor">@color/gray08_1</item>
+    <style name="Theme.AppCompat.TextView.Profile.Email.Title" parent="Theme.AppCompat.TextView.SemiBold.Gray08_1.Size18">
         <item name="android:layout_marginStart">16dp</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Profile.Email.Contents" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textColor">@color/gray07</item>
+    <style name="Theme.AppCompat.TextView.Profile.Email.Contents" parent="Theme.AppCompat.TextView.Regular.Gray07.Size16">
         <item name="android:layout_marginStart">16dp</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Profile.Menu" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">14dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
-        <item name="android:textColor">@color/gray07</item>
+    <style name="Theme.AppCompat.TextView.Profile.Menu" parent="Theme.AppCompat.TextView.SemiBold.Gray07.Size14">
         <item name="android:layout_marginStart">4dp</item>
     </style>
 
+
     <!-- 보관함 -->
-    <style name="Theme.AppCompat.TextView.Bookmark.Edit.Button" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textColor">@color/gray07</item>
+    <style name="Theme.AppCompat.TextView.Bookmark.Edit.Button" parent="Theme.AppCompat.TextView.Regular.Gray07.Size16">
         <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="Theme.AppCompat.Bookmark.Filter.Reset" parent="Theme.AppCompat">
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
     </style>
 
     <style name="Theme.AppCompat.Bookmark.Filter.View" parent="Theme.AppCompat">
@@ -166,58 +302,31 @@
         <item name="fontFamily">@font/pretendard_regular</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Item.UserName" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray09</item>
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Item.UserName" parent="Theme.AppCompat.TextView.SemiBold.Gray09.Size18"/>
 
-    <style name="Theme.AppCompat.TextView.Item.Date" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray07</item>
-        <item name="android:textSize">14dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Item.Date" parent="Theme.AppCompat.TextView.Regular.Gray07.Size14"/>
 
-    <style name="Theme.AppCompat.TextView.Item.Contents" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">14dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-    </style>
-
-    <style name="Theme.AppCompat.TextView.Item.RoomName" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray07</item>
-        <item name="android:textSize">12dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-    </style>
-
-    <style name="Theme.AppCompat.TextView.Item.Reaction" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">12dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-    </style>
-
-    <style name="Theme.AppCompat.TextView.Item.Reaction.Count" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray10</item>
-        <item name="android:textSize">14dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Item.Contents" parent="Theme.AppCompat.TextView.Regular.Black.Size14"/>
 
 
-    <style name="Theme.AppCompat.TextView.Room.Filter.Title" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Item.RoomName" parent="Theme.AppCompat.TextView.Regular.Gray07.Size12"/>
 
-    <style name="Theme.AppCompat.TextView.Filter.Room.Name" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray10</item>
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_medium</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Item.Reaction" parent="Theme.AppCompat.TextView.Regular.Black.Size12"/>
 
-    <style name="Theme.AppCompat.TextView.Period.Filter" parent="@style/Widget.AppCompat.TextView">\
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    <style name="Theme.AppCompat.TextView.Item.Reaction.Count" parent="Theme.AppCompat.TextView.Regular.Gray10.Size14"/>
+
+
+    <style name="Theme.AppCompat.TextView.Room.Filter.Title" parent="Theme.AppCompat.TextView.SemiBold.Black.Size18"/>
+
+    <style name="Theme.AppCompat.TextView.Filter.Room.Name" parent="Theme.AppCompat.TextView.Medium.Gray10.Size18"/>
+
+    <style name="Theme.AppCompat.TextView.Period.Filter" parent="Theme.AppCompat.TextView.Regular.Black.Size18"/>
+
+    <style name="Theme.AppCompat.TextView.Period.Save.Btn" parent="Theme.AppCompat.TextView.Medium.Black.Size18">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
     </style>
 
     <!-- 친구목록 -->
@@ -229,95 +338,85 @@
         <item name="maxLines">1</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Friend.List.Link.Description1" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    <style name="Theme.AppCompat.TextView.Friend.List.Link.Description1" parent="Theme.AppCompat.TextView.SemiBold.Black.Size16"/>
+
+    <style name="Theme.AppCompat.TextView.Friend.List.Link.Description2" parent="Theme.AppCompat.TextView.SemiBold.Gray05.Size16"/>
+
+
+    <style name="Theme.AppCompat.TextView.Friend.List.My.Title" parent="Theme.AppCompat.TextView.Bold.Gray10.Size18"/>
+
+    <style name="Theme.AppCompat.TextView.Friend.More" parent="Theme.AppCompat.TextView.SemiBold.Gray10.Size18"/>
+
+
+    <style name="Theme.AppCompat.TextView.Report" parent="Theme.AppCompat.TextView.Medium.SystemRedCaution.Size18"/>
+
+    <!-- 선택한 날짜를 표시할 색상 -->
+    <style name="CalenderViewDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorControlActivated">@color/main_yellow_light_mode</item>
+        <item name="colorControlHighlight">@color/main_yellow_light_mode</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Friend.List.Link.Description2" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray05</item>
-        <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
-    </style>
-
-    <style name="Theme.AppCompat.TextView.Friend.List.My.Title" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray08_1</item>
-        <item name="android:textSize">20dp</item>
-        <item name="fontFamily">@font/pretendard_bold</item>
-    </style>
-
-    <style name="Theme.AppCompat.TextView.Friend.More" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray10</item>
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
-    </style>
+    <!-- 달력 안의 숫자들에 적용되는 스타일 -->
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small"/>
 
     <!-- Notification -->
-    <style name="Theme.AppCompat.TextView.Notification.UserName" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray09</item>
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Notification.UserName" parent="Theme.AppCompat.TextView.SemiBold.Gray09.Size18"/>
 
-    <style name="Theme.AppCompat.TextView.Notification.Date" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/gray07</item>
-        <item name="android:textSize">14dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Notification.Date" parent="Theme.AppCompat.TextView.Regular.Gray07.Size14"/>
 
-    <style name="Theme.AppCompat.TextView.Notification.Contents" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">14dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Notification.Contents" parent="Theme.AppCompat.TextView.Regular.Black.Size14"/>
 
-    <style name="Theme.AppCompat.TextView.Notification.Title" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-    </style>
+    <style name="Theme.AppCompat.TextView.Notification.Title" parent="Theme.AppCompat.TextView.Regular.Black.Size16"/>
 
-    <style name="Theme.AppCompat.TextView.Notification.Button.Negative" parent="Theme.AppCompat.Alert.Padding.Radius16">
+    <style name="Theme.AppCompat.TextView.Notification.Button.Negative" parent="Theme.AppCompat.TextView.Regular.Gray08.Size16">
         <item name="android:background">@drawable/custom_backgroundwhite_radius12</item>
-        <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textColor">@color/gray08</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Notification.Button.Positive" parent="@style/Widget.AppCompat.TextView">
+    <style name="Theme.AppCompat.TextView.Notification.Button.Positive" parent="Theme.AppCompat.TextView.Regular.Black.Size16">
         <item name="android:background">@drawable/custom_yellow_radius12</item>
-        <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textColor">@color/black</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Notification.Empty.Text" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">24dp</item>
-        <item name="fontFamily">@font/pretendard_semi_bold</item>
-        <item name="android:textColor">@color/black</item>
+    <style name="Theme.AppCompat.TextView.Notification.Empty.Text" parent="Theme.AppCompat.TextView.SemiBold.Black.Size24">
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Notification.Empty.Description" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">16dp</item>
-        <item name="fontFamily">@font/pretendard_regular</item>
-        <item name="android:textColor">@color/gray07</item>
+    <style name="Theme.AppCompat.TextView.Notification.Empty.Description" parent="Theme.AppCompat.TextView.Regular.Gray07.Size16">
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Notification.Empty.Button" parent="@style/Widget.AppCompat.TextView">
-        <item name="android:textSize">18dp</item>
-        <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textColor">@color/black</item>
+    <style name="Theme.AppCompat.TextView.Notification.Empty.Button" parent="Theme.AppCompat.TextView.Medium.Black.Size18">
         <item name="android:gravity">center</item>
         <item name="android:padding">16dp</item>
+    </style>
+
+    <!-- 홈 -->
+    <style name="Theme.AppCompat.TextView.Home.Create.Push" parent="Theme.AppCompat.TextView.Medium.Black.Size18">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/custom_yellow_radius40</item>
+    </style>
+
+
+
+    <style name="Theme.AppCompat.TextView.Home.Recent.Title" parent="Theme.AppCompat.TextView.SemiBold.Black.Size18"/>
+    <style name="Theme.AppCompat.TextView.Home.Recent.UserName" parent="Theme.AppCompat.TextView.SemiBold.Gray09.Size18"/>
+    <style name="Theme.AppCompat.TextView.Home.Recent.Contents" parent="Theme.AppCompat.TextView.Regular.Black.Size14"/>
+    <style name="Theme.AppCompat.TextView.Home.Recent.DateTime" parent="Theme.AppCompat.TextView.Regular.Gray07.Size14"/>
+    <style name="Theme.AppCompat.TextView.Home.Recent.Reaction" parent="Theme.AppCompat.TextView.Regular.BackgroundWhite.Size14"/>
+
+    <style name="Theme.AppCompat.TextView.Home.Room.Empty.Text" parent="Theme.AppCompat.TextView.SemiBold.Gray08.Size18"/>
+    <style name="Theme.AppCompat.TextView.Home.Room.Search.Btn" parent="Theme.AppCompat.TextView.Medium.Black.Size18">
+        <item name="background">@drawable/custom_yellow_radius10</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="Theme.AppCompat.TextView.Home.Room.Create.Btn" parent="Theme.AppCompat.TextView.Medium.Gray08.Size18">
+        <item name="background">@drawable/custom_backgroundwhite_radius10</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

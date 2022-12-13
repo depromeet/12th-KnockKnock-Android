@@ -36,10 +36,12 @@
     <string name="all">전체</string>
     <string name="room">모든방</string>
     <string name="reaction">리액션</string>
+    <string name="reset">초기화</string>
 
     <string name="room_select">알림방 선택</string>
     <string name="period_select">기간 선택</string>
 
+    <string name="all_period">전체 기간</string>
     <string name="one_month">1개월</string>
     <string name="three_month">3개월</string>
     <string name="six_month">6개월</string>
@@ -58,6 +60,7 @@
     <string name="profile_email_title">이메일</string>
     <string name="update">수정</string>
     <string name="save">저장</string>
+    <string name="accept">적용하기</string>
 
     <string name="logout">로그아웃</string>
     <string name="user_delete">탈퇴하기</string>
@@ -114,5 +117,17 @@
     <string name="notification_empty_text">아직 받은 알림이 없어요</string>
     <string name="notification_empty_description">내 친구들에게 먼저 알림을 보내보세요</string>
     <string name="notification_empty_btn">푸시알림 작성하기</string>
+
+    <!--홈-->
+    <string name="home_create_push_text">푸시알림 작성하기</string>
+    <string name="home_recent_push_title">최신 푸시알림</string>
+    <string name="home_empty_tile">참여중인 알림방이 없어요</string>
+    <string name="home_search_room">알림방 탐색하기</string>
+    <string name="home_create_room">알림방 생성하기</string>
+
+    <string name="home_more_copy">이 알림 복사 붙이기</string>
+    <string name="bookmark_save">보관함 저장</string>
+    <string name="user_declare">유저 차단하기</string>
+    <string name="report">신고하기</string>
 
 </resources>

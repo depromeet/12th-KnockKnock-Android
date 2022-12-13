@@ -2,10 +2,13 @@ package com.depromeet.knockknock.ui.bookmark.bottom
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.ui.bookmark.adapter.FilterRoomAdapter
@@ -16,7 +19,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomRoomFilter(
     val roomList: List<Room>,
-    val itemClick: (roomId: Int) -> Unit
+    val beforeClickedRoom: List<Int>,
+    val callback: (roomList: List<Int>) -> Unit
 ) : BottomSheetDialogFragment(){
     private lateinit var dlg : BottomSheetDialog
 
@@ -48,12 +52,34 @@ class BottomRoomFilter(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val clickedRoom: ArrayList<Int> = ArrayList()
+        clickedRoom.addAll(beforeClickedRoom)
+
+        for(before in beforeClickedRoom.indices) {
+            for (now in roomList.indices) {
+                if(beforeClickedRoom[before] == roomList[now].roomId) {
+                    roomList[now].isChecked = true
+                }
+            }
+        }
+
         val roomRecycler = requireView().findViewById<RecyclerView>(R.id.room_recycler)
-        val filterAdapter = FilterRoomAdapter { roomId ->
-            itemClick.invoke(roomId)
-            dismiss()
+        val filterAdapter = FilterRoomAdapter { roomId, isChecked ->
+            if(isChecked) clickedRoom.add(roomId)
+            else clickedRoom.remove(roomId)
         }
         filterAdapter.submitList(roomList)
         roomRecycler.adapter = filterAdapter
+
+        val saveBtn = requireView().findViewById<TextView>(R.id.save_btn)
+        saveBtn.setOnClickListener {
+            callback.invoke(clickedRoom)
+            dismiss()
+        }
+
+        val closeBtn = requireView().findViewById<ImageView>(R.id.close_btn)
+        closeBtn.setOnClickListener {
+            dismiss()
+        }
     }
 }
