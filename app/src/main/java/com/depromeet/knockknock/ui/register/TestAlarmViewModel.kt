@@ -8,19 +8,29 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.*
 import com.depromeet.knockknock.R
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.debounce
+import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.setprofile.SetProfileNavigationAction
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TestAlarmViewModel(application: Application, private val notificationManager: NotificationManager?) : AndroidViewModel(application) {
+class TestAlarmViewModel(
+    application: Application,
+    private val notificationManager: NotificationManager?
+) : BaseViewModel(), RegisterActionHandler {
 
     var inputContent = MutableStateFlow<String>("")
     var editTextMessageCountEvent = MutableStateFlow<Int>(0)
     var notificationId = 45
+    var pushAlarmAgreed = MutableStateFlow<Boolean>(false)
     var CHANNEL_ID = "com.example.depromeet.knockknock.ui.register.channel1"
 
-    init{
+    private val _navigationHandler: MutableSharedFlow<RegisterNavigationAction> =
+        MutableSharedFlow<RegisterNavigationAction>()
+    val navigationHandler: SharedFlow<RegisterNavigationAction> = _navigationHandler.asSharedFlow()
+
+    init {
         viewModelScope.launch {
             inputContent.debounce(0).collectLatest {
                 onEditTextCount(it.length)
@@ -35,22 +45,24 @@ class TestAlarmViewModel(application: Application, private val notificationManag
     }
 
 
-    fun displayNotification(packageContext: Context){
-        var builder = NotificationCompat.Builder(packageContext,CHANNEL_ID)
+    fun displayNotification(packageContext: Context) {
+        var builder = NotificationCompat.Builder(packageContext, CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle("똑똑 미리 체험하기")
             .setContentText(inputContent.value)
             .setAutoCancel(true)
-            .setStyle(NotificationCompat.BigTextStyle()
-                .bigText(inputContent.value))
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(inputContent.value)
+            )
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
 
-        notificationManager?.notify(notificationId,builder)
+        notificationManager?.notify(notificationId, builder)
     }
 
 
-     fun createNotificationChannel(id: String, name: String, channelDescription: String) {
+    fun createNotificationChannel(id: String, name: String, channelDescription: String) {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -68,6 +80,16 @@ class TestAlarmViewModel(application: Application, private val notificationManag
 
     fun onDeleteEditTextMessageClicked() {
         inputContent.value = ""
+    }
+
+    override fun onSendTestPushAlarmClicked() {
+        baseViewModelScope.launch {
+            if (!pushAlarmAgreed.value){
+                _navigationHandler.emit(RegisterNavigationAction.NavigateToPushSetting)
+            }
+            else
+                _navigationHandler.emit(RegisterNavigationAction.NavigateToNotificationAlarm)
+        }
     }
 }
 
