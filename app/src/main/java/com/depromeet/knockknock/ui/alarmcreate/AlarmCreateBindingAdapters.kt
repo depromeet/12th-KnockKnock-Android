@@ -42,6 +42,17 @@ fun TextView.bindDeleteTextVisible(textLength: Int) {
     }
 }
 
+@BindingAdapter("editTextVisible")
+fun TextView.bindEditTextVisible(textLength: Int) {
+    if (textLength == 0) {
+        this.setTextColor(Color.parseColor("#BDBDBD"))
+        this.isClickable = false
+    } else {
+        this.setTextColor(Color.parseColor("#FFD260"))
+        this.isClickable = true
+    }
+}
+
 @BindingAdapter("recommendationAdapter")
 fun RecyclerView.bindTodo(itemList: List<RecommendationMessage>) {
     val boundAdapter = this.adapter
