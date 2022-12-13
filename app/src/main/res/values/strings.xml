@@ -37,6 +37,8 @@
     <string name="room">모든방</string>
     <string name="reaction">리액션</string>
     <string name="reset">초기화</string>
+    <string name="more_contents">더보기</string>
+    <string name="shorts_contents">간단히보기</string>
 
     <string name="room_select">알림방 선택</string>
     <string name="period_select">기간 선택</string>

@@ -45,10 +45,22 @@ class BookmarkAdapter(
             binding.holder = item
             binding.executePendingBindings()
             binding.expandBtn.setOnClickListener {
-                val show = toggleLayout(!item.isExpanded, it, binding.layoutExpand)
-                item.isExpanded = show
+                binding.holder!!.isExpanded = !(binding.holder!!.isExpanded)
+
+                if(binding.holder!!.isExpanded) {
+                    binding.contentsText.apply {
+                        this.maxLines = 9999
+                        this.text = context.getString(R.string.shorts_contents)
+                    }
+                }
+                else {
+                    binding.contentsText.apply {
+                        this.maxLines = 2
+                        this.text = context.getString(R.string.more_contents)
+                    }
+                }
             }
-        }
+        } }
     }
 
     internal object BookmarkItemDiffCallback : DiffUtil.ItemCallback<Bookmark>() {

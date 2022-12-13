@@ -128,6 +128,12 @@
         <item name="fontFamily">@font/pretendard_regular</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.Regular.Gray05.Size14" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray05</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
     <style name="Theme.AppCompat.TextView.Regular.Gray07.Size14" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/gray07</item>
         <item name="android:textSize">14dp</item>
@@ -302,6 +308,8 @@
     <style name="Theme.AppCompat.TextView.EditBookmark.Edit.Button" parent="Theme.AppCompat.TextView.Regular.Size16">
         <item name="android:padding">16dp</item>
     </style>
+
+    <style name="Theme.AppCompat.TextView.EditBookmark.Expanded.Button" parent="Theme.AppCompat.TextView.Regular.Gray05.Size14"/>
 
     <style name="Theme.AppCompat.TextView.EditBookmark.AllDelete.Button" parent="Theme.AppCompat.TextView.Regular.Black.Size16"/>
     <style name="Theme.AppCompat.TextView.EditBookmark.Delete.Button" parent="Theme.AppCompat.TextView.Medium.Size18"/>
