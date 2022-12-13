@@ -1,93 +1,69 @@
 package com.depromeet.data.mapper
 
+import com.depromeet.data.model.response.*
+import com.depromeet.domain.model.*
 
-//fun GetMainResponse.toDomain() : Home {
-//    return Home(
-//        getHotItems = getHotItems.toDomain(),
-//        getHotSellers = getHotSellers.toDomain(),
-//        getRecentCards = getRecentCards.toDomain(),
-//        getHotUsers = getHotUsers.toDomain()
-//    )
-//}
-//
-//fun List<GetSoldOutResponse>.toDomain(): List<SoldOut> {
-//    return map { SoldOut(
-//        nftId = it.nftId,
-//        nftImg = it.imgUrl,
-//        nftName = it.name,
-//        userImg = it.profileUrl,
-//        userName = it.userName,
-//        price = it.price
-//    ) }
-//}
-//
-//fun AssetResponse.toDomain() : Asset {
-//    return Asset(
-//        contentType = contentType,
-//        filename = filename,
-//        uri = uri
-//    )
-//}
-//
-//fun SendEmailResponse.toDomain(): RandomNumber { return RandomNumber( random = random ) }
-//
-//fun PostCheckPasswordResponse.toDomain(): Boolean { return flag }
-//
-//@JvmName("toDomainHotItemResponse")
-//fun List<HotItemResponse>.toDomain(): List<Hots> {
-//    return map { Hots(
-//        cardId = it.cardId,
-//        nftImg = it.imgUrl,
-//        nftName = it.name,
-//        heartCount = it.count,
-//        price = it.price
-//    ) }
-//}
-//
-//@JvmName("toDomainHotSellerResponse")
-//fun List<HotSellerResponse>.toDomain(): List<HotSeller> {
-//    return map { HotSeller(
-//        userId = it.userId,
-//        sellerBackground = it.imgUrl,
-//        sellerProfile = it.profileUrl,
-//        sellerName = it.name
-//    ) }
-//}
-//
-//@JvmName("toDomainRecentCardResponse")
-//fun List<RecentCardResponse>.toDomain(): List<UserNft> {
-//    return map { UserNft(
-//        cardId = it.cardId,
-//        userName = it.userName,
-//        imgUrl = it.imgUrl,
-//        cardName = it.cardName,
-//        price = it.price,
-//        liked = it.liked
-//    ) }
-//}
-//
-//@JvmName("toDomainHotUserResponse")
-//fun List<HotUserResponse>.toDomain(): List<Collection> {
-//    return map { Collection(
-//        userId = it.userId,
-//        userImg = it.profileUrl,
-//        userName = it.name,
-//        userDetail = it.count+" 작품",
-//        follow = it.followed
-//    ) }
-//}
-//
-//fun UserProfileResponse.toDomain(): UserProfile {
-//    return UserProfile(
-//        cardCnt = cardCnt,
-//        description = description,
-//        followerCnt = followerCnt,
-//        followingCnt = followingCnt,
-//        getWallet = getWallet,
-//        nickname = nickname,
-//        profileUrl = profileUrl,
-//        userId = userId
-//    )
-//}
+
+fun PostRefreshTokenResponse.toDomain() : RefreshTokenResponse {
+    return RefreshTokenResponse(
+        accessToken = this.accessToken,
+        refreshToken = this.refreshToken
+    )
+}
+
+fun GetKakaoLoginResponse.toDomain() : KakaoLoginResponse {
+    return KakaoLoginResponse(
+        accessToken = this.accessToken,
+        refreshToken = this.refreshToken,
+        isRegisted = this.isRegistered
+    )
+}
+
+fun GetGoogleLoginResponse.toDomain() : GoogleLoginResponse {
+    return GoogleLoginResponse(
+        accessToken = this.accessToken,
+        refreshToken = this.refreshToken,
+        isRegisted = this.isRegistered
+    )
+}
+
+fun GetUserNicknameResponse.toDomain() : SearchUserNicknameResponse {
+    return SearchUserNicknameResponse(
+        userList = this.userList
+    )
+}
+
+fun GetGroupResponse.toDomain() : GroupResponse {
+    return GroupResponse(
+        groupId = this.groupId,
+        title = this.title,
+        description = this.description,
+        thumbnailPath = this.thumbnailPath,
+        backgroundImagePath = this.backgroundImagePath,
+        publicAccess = this.publicAccess,
+        category = this.category,
+        members = this.members,
+        groupType = this.groupType,
+        host = host
+    )
+}
+
+fun GetGroupAdmissionsResponse.toDomain() : GroupAdmissionsResponse {
+    return GroupAdmissionsResponse(
+        admissions = this.admissions
+    )
+}
+
+fun GetOpenGroupsResponse.toDomain() : OpenGroupsResponse {
+    return OpenGroupsResponse(
+        groupInfos = this.groupInfos
+    )
+}
+
+fun GetCategoriesResponse.toDomain() : CategoryResponse {
+    return CategoryResponse(
+        categories = this.categories
+    )
+}
 
 
