@@ -14,7 +14,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.knockknock.R
+import com.depromeet.knockknock.ui.alarmcreate.adapter.RecommendationAdapter
+import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
 
 @BindingAdapter("addImageCardViewVisible")
 fun CardView.bindAddImageCardViewVisible(enable: Boolean) {
@@ -36,6 +39,14 @@ fun TextView.bindDeleteTextVisible(textLength: Int) {
     } else {
         this.setTextColor(Color.parseColor("#212121"))
         this.isClickable = true
+    }
+}
+
+@BindingAdapter("recommendationAdapter")
+fun RecyclerView.bindTodo(itemList: List<RecommendationMessage>) {
+    val boundAdapter = this.adapter
+    if (boundAdapter is RecommendationAdapter) {
+        boundAdapter.submitList(itemList)
     }
 }
 
@@ -64,7 +75,7 @@ fun TextView.textChangeColor(
 }
 
 @SuppressLint("UseCompatLoadingForDrawables")
-fun EditText.customOnFocusChangeListener(context: Context, linearLayout: LinearLayout) {
+fun EditText.messageTextOnFocusChangeListener(context: Context, linearLayout: LinearLayout) {
     this.onFocusChangeListener = View.OnFocusChangeListener { view, gainFocus ->
         //포커스가 주어졌을 때
         if (gainFocus) linearLayout.background = context.getDrawable(R.drawable.custom_backgroundgray03_radius10_line_gray08)
@@ -73,10 +84,16 @@ fun EditText.customOnFocusChangeListener(context: Context, linearLayout: LinearL
 }
 
 @SuppressLint("UseCompatLoadingForDrawables")
-fun EditText.imageOnFocusChangeListener(imageView: ImageView) {
+fun EditText.titleTextOnFocusChangeListener(imageView: ImageView) {
     this.onFocusChangeListener = View.OnFocusChangeListener { view, gainFocus ->
         //포커스가 주어졌을 때
-        if (gainFocus) imageView.visibility = View.GONE
-        else imageView.visibility = View.VISIBLE
+        if (gainFocus) {
+            this.setTextColor(Color.parseColor("#757575"))
+            imageView.visibility = View.GONE
+        }
+        else {
+            this.setTextColor(Color.parseColor("#212121"))
+            imageView.visibility = View.VISIBLE
+        }
     }
 }

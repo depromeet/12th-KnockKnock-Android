@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.alarmcreate
+package com.depromeet.knockknock.ui.alarmcreate.bottom
 
 import android.app.Dialog
 import android.os.Bundle
@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.depromeet.knockknock.R
+import com.depromeet.knockknock.ui.alarmcreate.model.ReservationAlarm
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -117,7 +118,3 @@ class BottomAlarmReservationPicker(
     }
 }
 
-data class ReservationAlarm(
-    val reservationDate: String,
-    val reservationTime: String
-)

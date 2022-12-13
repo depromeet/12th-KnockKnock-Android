@@ -1,8 +1,9 @@
 package com.depromeet.knockknock.ui.alarmcreate
 
-import androidx.lifecycle.lifecycleScope
+import android.util.Log
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.editprofile.EditProfileNavigationAction
+import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
+import com.depromeet.knockknock.ui.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -22,6 +23,10 @@ class AlarmCreateViewModel @Inject constructor(
     var editTextMessageCountEvent = MutableStateFlow<Int>(0)
     val messageImgState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
 
+    private val _recommendationMessageEvent: MutableStateFlow<List<RecommendationMessage>> = MutableStateFlow(emptyList())
+    val recommendationMessageEvent: StateFlow<List<RecommendationMessage>> = _recommendationMessageEvent
+
+
     init {
         baseViewModelScope.launch {
             editTextMessageEvent.debounce(0).collectLatest {
@@ -32,6 +37,31 @@ class AlarmCreateViewModel @Inject constructor(
         baseViewModelScope.launch {
             editTextTitleEvent.emit("주호민")
         }
+
+        getTempList()
+
+    }
+
+    private fun getTempList() {
+
+
+        val test1 = RecommendationMessage(
+            "${String(Character.toChars(0x1F4AA))}${String(Character.toChars(0x1F4AA))}${String(Character.toChars(0x1F4AA))}"
+        )
+        val test2 = RecommendationMessage("탈락?오히려좋아")
+        val test3 = RecommendationMessage("꿈은 없고요 그냥 놀고 싶습니다.")
+        val test4 = RecommendationMessage("서류 접수 하셨나요")
+        val test5= RecommendationMessage(String(Character.toChars(0x1F971)))
+
+        val testList = listOf(test1, test2, test3, test4, test5)
+
+        baseViewModelScope.launch {
+
+            _recommendationMessageEvent.value = testList
+
+        }
+
+
     }
 
     private fun onEditTextCount(count: Int) {
@@ -40,8 +70,23 @@ class AlarmCreateViewModel @Inject constructor(
         }
     }
 
-    fun onDeleteEditTextMessageClicked() {
-        editTextMessageEvent.value = ""
+    override fun onDeleteEditTextMessageClicked() {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToDeleteMessageText)
+        }
+    }
+
+    override fun onFocusEditTextTitleClicked() {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToFocusTitleText)
+        }
+    }
+
+    override fun onRecommendationMessageClicked(message: String) {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToRecommendationMessageText(message))
+        }
+
     }
 
     override fun onAddImageClicked() {
