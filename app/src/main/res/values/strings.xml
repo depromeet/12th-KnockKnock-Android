@@ -18,6 +18,11 @@
     <string name="user_delete_description">탈퇴시 모든 알림방과\n푸시메세지가 사라져요.</string>
     <string name="user_delete_yes">회원 탈퇴</string>
 
+    <string name="alarm_permission_title">똑똑! 푸쉬 알림을 켜주세요</string>
+    <string name="alarm_permission_description">문을 열고 알림을 받아보세요</string>
+    <string name="alarm_permission_yes">허용</string>
+    <string name="alarm_permission_no">허용 안함</string>
+
     <!--알림설정-->
     <string name="alarm_settings_title">알림 설정</string>
 
