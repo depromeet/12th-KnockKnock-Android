@@ -19,17 +19,18 @@ import kotlinx.coroutines.launch
 class KakaoAuthViewModel(application: Application) : AndroidViewModel(application) {
 
     private val context = application.applicationContext
-//    val accessToken = MutableLiveData<String?>()
+
+    //    val accessToken = MutableLiveData<String?>()
 //    val userEmail = MutableLiveData<String>()
     private val _flowAccessToken = MutableStateFlow<String>("")
-    val flowAccessToken : StateFlow<String> = _flowAccessToken
+    val flowAccessToken: StateFlow<String> = _flowAccessToken
     private val _flowUserEmail = MutableStateFlow<String?>("")
-    val flowUserEmail : StateFlow<String?> = _flowUserEmail
+    val flowUserEmail: StateFlow<String?> = _flowUserEmail
 
     private val _message = MutableSharedFlow<String>()
-    val message : SharedFlow<String> = _message
+    val message: SharedFlow<String> = _message
 
-    fun handleKakaoLogin(){
+    fun handleKakaoLogin() {
         // 로그인 조합 예제
 
 // 카카오계정으로 로그인 공통 callback 구성
@@ -50,19 +51,34 @@ class KakaoAuthViewModel(application: Application) : AndroidViewModel(applicatio
                 UserApiClient.instance.me { user, error ->
                     if (error != null) {
                         Log.e(TAG, "사용자 정보 요청 실패", error)
-                    }
-                    else if (user != null) {
+                    } else if (user != null) {
                         var scopes = mutableListOf<String>()
 
-                        if (user.kakaoAccount?.emailNeedsAgreement == true) { scopes.add("account_email") }
-                        if (user.kakaoAccount?.birthdayNeedsAgreement == true) { scopes.add("birthday") }
-                        if (user.kakaoAccount?.birthyearNeedsAgreement == true) { scopes.add("birthyear") }
-                        if (user.kakaoAccount?.genderNeedsAgreement == true) { scopes.add("gender") }
-                        if (user.kakaoAccount?.phoneNumberNeedsAgreement == true) { scopes.add("phone_number") }
-                        if (user.kakaoAccount?.profileNeedsAgreement == true) { scopes.add("profile") }
-                        if (user.kakaoAccount?.ageRangeNeedsAgreement == true) { scopes.add("age_range") }
-                        if (user.kakaoAccount?.ciNeedsAgreement == true) { scopes.add("account_ci") }
-                        Log.d("MYTAG" , "${scopes}")
+                        if (user.kakaoAccount?.emailNeedsAgreement == true) {
+                            scopes.add("account_email")
+                        }
+                        if (user.kakaoAccount?.birthdayNeedsAgreement == true) {
+                            scopes.add("birthday")
+                        }
+                        if (user.kakaoAccount?.birthyearNeedsAgreement == true) {
+                            scopes.add("birthyear")
+                        }
+                        if (user.kakaoAccount?.genderNeedsAgreement == true) {
+                            scopes.add("gender")
+                        }
+                        if (user.kakaoAccount?.phoneNumberNeedsAgreement == true) {
+                            scopes.add("phone_number")
+                        }
+                        if (user.kakaoAccount?.profileNeedsAgreement == true) {
+                            scopes.add("profile")
+                        }
+                        if (user.kakaoAccount?.ageRangeNeedsAgreement == true) {
+                            scopes.add("age_range")
+                        }
+                        if (user.kakaoAccount?.ciNeedsAgreement == true) {
+                            scopes.add("account_ci")
+                        }
+                        Log.d("MYTAG", "${scopes}")
 
                         if (scopes.count() > 0) {
                             Log.d(TAG, "사용자에게 추가 동의를 받아야 합니다.")
@@ -73,7 +89,10 @@ class KakaoAuthViewModel(application: Application) : AndroidViewModel(applicatio
                             // scopes.add("openid")
 
                             //scope 목록을 전달하여 카카오 로그인 요청
-                            UserApiClient.instance.loginWithNewScopes(context, scopes) { token, error ->
+                            UserApiClient.instance.loginWithNewScopes(
+                                context,
+                                scopes
+                            ) { token, error ->
                                 if (error != null) {
                                     Log.e(TAG, "사용자 추가 동의 실패", error)
                                 } else {
@@ -83,8 +102,7 @@ class KakaoAuthViewModel(application: Application) : AndroidViewModel(applicatio
                                     UserApiClient.instance.me { user, error ->
                                         if (error != null) {
                                             Log.e(TAG, "사용자 정보 요청 실패", error)
-                                        }
-                                        else if (user != null) {
+                                        } else if (user != null) {
                                             Log.i(TAG, "사용자 정보 요청 성공")
                                         }
                                     }
@@ -98,13 +116,14 @@ class KakaoAuthViewModel(application: Application) : AndroidViewModel(applicatio
                 UserApiClient.instance.me { user, error ->
                     if (error != null) {
                         Log.e(TAG, "사용자 정보 요청 실패", error)
-                    }
-                    else if (user != null) {
-                        Log.i(TAG, "사용자 정보 요청 성공" +
-                                "\n회원번호: ${user.id}" +
-                                "\n이메일: ${user.kakaoAccount?.email}" +
-                                "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                                "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                    } else if (user != null) {
+                        Log.i(
+                            TAG, "사용자 정보 요청 성공" +
+                                    "\n회원번호: ${user.id}" +
+                                    "\n이메일: ${user.kakaoAccount?.email}" +
+                                    "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                                    "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                        )
                         _flowUserEmail.value = user.kakaoAccount?.email
                     }
                 }

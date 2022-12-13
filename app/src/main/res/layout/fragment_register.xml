@@ -19,6 +19,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/register_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -30,7 +31,7 @@
             android:id="@+id/intro_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="55dp"
             android:fontFamily="@font/pretendard_bold"
             android:text="똑똑 미리 체험하기"
             android:textColor="@color/black"
@@ -42,12 +43,41 @@
 
         <ImageView
             android:id="@+id/onboard_before_write"
-            android:layout_width="161dp"
-            android:layout_height="161dp"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
             android:src="@drawable/onboard_before_write"
+            app:layout_constraintBottom_toTopOf="@+id/write_again_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/intro_text" />
+
+
+        <RelativeLayout
+            android:id="@+id/write_again_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="283dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/pretendard_regular"
+                android:lineSpacingExtra="3sp"
+                android:text="새로쓰기"
+                android:onClick="@{_ -> testAlarmViewModel.onDeleteEditTextMessageClicked()}"
+                app:deleteTextVisible="@{testAlarmViewModel.editTextMessageCountEvent}"
+                android:textColor="#BDBDBD"
+                android:translationY="-1.45sp"
+                android:layout_gravity="right"
+                />
+        </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -55,28 +85,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:backgroundTint="#EEEEEE"
+            android:backgroundTint="@color/gray03"
+            android:background="@android:color/background_dark"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/onboard_before_write">
+            app:layout_constraintTop_toBottomOf="@id/write_again_btn">
+
+
 
             <LinearLayout
+                android:id="@+id/edit_text_message_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:elevation="1dp"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="19dp"
-                    android:background="@null"
-                    android:onClick="@{_ -> testAlarmViewModel.onDeleteEditTextMessageClicked()}"
-                    android:src="@drawable/ic_baseline_cancel_24"
-                    android:visibility="visible" />
 
                 <EditText
                     android:id="@+id/edit_text_message"
@@ -84,7 +107,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="26dp"
                     android:layout_marginEnd="16dp"
                     android:background="@android:color/transparent"
                     android:drawablePadding="8dp"
@@ -126,49 +149,52 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="127dp"
             android:layout_height="45dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/custom_white_radius20"
             android:backgroundTint="#F6F6F6"
             android:fontFamily="@font/pretendard_medium"
+            android:onClick="@{() -> testAlarmViewModel.onSendTestPushAlarmClicked()}"
             android:text="@string/register_send"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardView"
-            android:layout_marginTop="16dp"/>
+            app:layout_constraintTop_toBottomOf="@id/cardView" />
 
         <TextView
+            android:id="@+id/register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="바로 회원가입할래요"
-            android:textSize="16dp"
-            android:textColor="@color/gray07"
-            android:fontFamily="@font/pretendard_regular"
             android:layout_marginBottom="16dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="바로 회원가입할래요"
+            android:textColor="@color/gray07"
+            android:textSize="16dp"
+            android:layout_marginTop="524dp"
             app:layout_constraintBottom_toTopOf="@+id/kakao_register_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/kakao_register_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
             android:padding="0dp"
             android:scaleType="fitCenter"
             android:src="@drawable/onboard_kakao_register"
-            app:layout_constraintBottom_toTopOf="@+id/google_register_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/register_text" />
 
         <ImageButton
             android:id="@+id/google_register_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="50dp"
@@ -176,7 +202,8 @@
             android:padding="0dp"
             android:scaleType="fitCenter"
             android:src="@drawable/onboard_google_register"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/kakao_register_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

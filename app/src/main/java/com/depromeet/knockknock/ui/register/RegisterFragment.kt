@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.register
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.NotificationManager
 import android.content.Context
@@ -10,12 +11,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.FragmentRegisterBinding
+import com.depromeet.knockknock.util.hideKeyboard
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
@@ -25,6 +28,9 @@ import kotlinx.coroutines.flow.collectLatest
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
+    private val TAG = "RegisterFragment"
+    private var toast : Toast? = null
+
     companion object {
         private const val RC_SIGN_IN = 9001
     }
@@ -33,6 +39,62 @@ class RegisterFragment : Fragment() {
     private lateinit var kakaoAuthViewModel: KakaoAuthViewModel
     private lateinit var googleAuthViewModel: GoogleAuthViewModel
     private lateinit var testAlarmViewModel : TestAlarmViewModel
+
+
+    fun initDataBinding() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            testAlarmViewModel.navigationHandler.collectLatest {
+                when(it) {
+                    is RegisterNavigationAction.NavigateToPushSetting -> pushSettingDialog()
+                    is RegisterNavigationAction.NavigateToNotificationAlarm -> testAlarm()
+                }
+            }
+        }
+    }
+
+    private fun pushSettingDialog() {
+        val res = RegisterAlertDialogModel(
+            title = getString(R.string.alarm_permission_title),
+            description = getString(R.string.alarm_permission_description),
+            image = R.drawable.onboard_after_write,
+            positiveContents = getString(R.string.alarm_permission_yes),
+            negativeContents = getString(R.string.alarm_permission_no)
+        )
+        val dialog: RegisterDefaultYellowAlertDialog = RegisterDefaultYellowAlertDialog(
+            alertDialogModel = res,
+            clickToPositive = {
+                testAlarmViewModel.pushAlarmAgreed.value = true
+                toast?.cancel()
+                toast = Toast.makeText(activity, "푸쉬 알림 적용 완료", Toast.LENGTH_SHORT)?.apply { show() }
+            },
+            clickToNegative = {
+                toast?.cancel()
+                toast = Toast.makeText(activity, "푸쉬 알림 적용 해제", Toast.LENGTH_SHORT)?.apply { show() }
+                pushSettingNoDialog()
+            }
+        )
+        dialog.show(childFragmentManager, TAG)
+    }
+
+    private fun pushSettingNoDialog() {
+        val res = RegisterAlertDialogModel(
+            title = getString(R.string.alarm_permission_no_title),
+            description = getString(R.string.alarm_permission_no_description),
+            image = R.drawable.onboard_after_write,
+            positiveContents = getString(R.string.alarm_permission_no_confirm),
+            negativeContents = null
+        )
+        val dialog: RegisterDefaultYellowAlertSingleButtonDialog = RegisterDefaultYellowAlertSingleButtonDialog(
+            alertDialogModel = res,
+        ) {}
+        dialog.show(childFragmentManager, TAG)
+    }
+
+    private fun testAlarm(){
+        testAlarmViewModel.createNotificationChannel(testAlarmViewModel.CHANNEL_ID, "DemoChannel", "this is a demo")
+        testAlarmViewModel.displayNotification(context!!)
+    }
+
 
 
     override fun onCreateView(
@@ -68,18 +130,15 @@ class RegisterFragment : Fragment() {
             googleAuthViewModel.signIn()
         }
 
-        binding.testAlarmButton.setOnClickListener{
-            testAlarmViewModel.createNotificationChannel(testAlarmViewModel.CHANNEL_ID, "DemoChannel", "this is a demo")
-            testAlarmViewModel.displayNotification(context!!)
-        }
-
-        lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             kakaoAuthViewModel.message.collect{
-                view?.findNavController()?.navigate(R.id.action_registerFragment_to_homeFragment)
+                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
             }
 
         }
+        initDataBinding()
         countEditTextMessage()
+        initEditText()
         return binding.root
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -94,7 +153,7 @@ class RegisterFragment : Fragment() {
                 Log.d("MYTAG", account.idToken.toString())
                 Log.d("MYTAG", account.account.toString())
                 Log.d("MYTAG", account.email.toString())
-                view?.findNavController()?.navigate(R.id.action_registerFragment_to_homeFragment)
+                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
             } catch (e: ApiException) {
                 e.localizedMessage?.let { Log.d("MYTAG", it) }
             }
@@ -106,11 +165,34 @@ class RegisterFragment : Fragment() {
             testAlarmViewModel.editTextMessageCountEvent.collectLatest {
                 binding.editTextCount.text = "$it/200"
 
-                if (it == 0) {binding.editTextCount.text = textChangeColor(binding.editTextCount, "#ff0000", 0, 1)
+                if (it == 0) {
+                    binding.editTextCount.text =
+                        textChangeColor(binding.editTextCount, "#ff0000", 0, 1)
                     binding.testAlarmButton.setBackgroundTintList(resources.getColorStateList(R.color.background_white_mode))
+                    binding.onboardBeforeWrite.setImageDrawable(resources.getDrawable(R.drawable.onboard_before_write))
+                } else {
+                    binding.testAlarmButton.setBackgroundTintList(resources.getColorStateList(R.color.main_yellow_light_mode))
+                    binding.onboardBeforeWrite.setImageDrawable(resources.getDrawable(R.drawable.onboard_after_write))
                 }
-                else binding.testAlarmButton.setBackgroundTintList(resources.getColorStateList(R.color.main_yellow_light_mode))
             }
+        }
+    }
+
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditText() {
+
+        binding.editTextMessage.onFocusChangeListener = View.OnFocusChangeListener { view, gainFocus ->
+            //포커스가 주어졌을 때
+            if (gainFocus) {binding.editTextMessageLayout.background = context!!.getDrawable(R.drawable.custom_backgroundgray03_radius10_line_gray08)
+            }
+            
+            else binding.editTextMessageLayout.background = context!!.getDrawable(R.drawable.custom_backgroundgray03_radius10)
+        }
+        binding.registerMain.setOnTouchListener { _, _ ->
+            requireActivity().hideKeyboard()
+            binding.editTextMessage.clearFocus()
+            false
         }
     }
 

@@ -11,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_set_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
@@ -48,6 +49,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="right|bottom"
+                android:onClick="@{() -> vm.onProfileImageSetClicked()}"
                 android:src="@drawable/setprofile_add_button" />
 
 
@@ -66,47 +68,55 @@
             app:layout_constraintVertical_bias="0.4">
 
             <TextView
+                style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+                android:id="@+id/user_name_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/pretendard_bold"
-                android:text="@string/setprofile_nickname"
-                android:textColor="@color/gray09"
-                android:textSize="18sp" />
+                android:text="@string/setprofile_nickname" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/example_content"
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/example_content"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textColorHint="@color/gray05"-->
+<!--                app:boxBackgroundColor="@color/gray03"-->
+<!--                app:boxBackgroundMode="filled"-->
+<!--                app:boxCornerRadiusBottomEnd="10dp"-->
+<!--                app:boxCornerRadiusBottomStart="10dp"-->
+<!--                app:boxCornerRadiusTopEnd="10dp"-->
+<!--                app:boxCornerRadiusTopStart="10dp"-->
+<!--                app:boxStrokeWidth="0dp"-->
+<!--                app:boxStrokeWidthFocused="0dp"-->
+<!--                app:counterEnabled="true"-->
+<!--                app:counterMaxLength="15"-->
+<!--                app:endIconMode="clear_text"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/test_alarm_button"-->
+<!--                app:hintEnabled="false">-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:fontFamily="@font/pretendard_medium"-->
+<!--                    android:hint="@string/setprofile_nickname_hint"-->
+<!--                    android:paddingTop="10dp"-->
+<!--                    android:privateImeOptions="defaultInputMode=korean"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16sp" />-->
+<!--                -->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+            <EditText
+                android:id="@+id/user_name_contents"
+                style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
+                android:background="@drawable/custom_backgroundwhite_radius16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/gray05"
-                app:boxBackgroundColor="@color/gray03"
-                app:boxBackgroundMode="filled"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:counterEnabled="true"
-                app:counterMaxLength="15"
-                app:endIconMode="clear_text"
-                app:layout_constraintBottom_toTopOf="@+id/test_alarm_button"
-                app:hintEnabled="false">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:hint="@string/setprofile_nickname_hint"
-                    android:paddingTop="10dp"
-                    android:privateImeOptions="defaultInputMode=korean"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintTop_toBottomOf="@id/user_name_title"
+                app:layout_constraintStart_toStartOf="parent">
+            </EditText>
 
         </LinearLayout>
 
@@ -252,20 +262,33 @@
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/setprofile_start_button"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/send_card_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="59dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:adjustViewBounds="true"
-            android:padding="0dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/setprofile_startbutton"
-
+            android:backgroundTint="@color/main_yellow_light_mode"
+            app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> vm.onSelectionDoneClicked()}">
+            <TextView
+                android:id="@+id/some_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:fontFamily="@font/pretendard_medium"
+                android:textSize="18dp"
+                android:text="선택 완료!"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4sp"
+                android:translationY="-1.86sp"
+                />
+
+
+        </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/description_text"
         android:layout_width="match_parent"
-        android:layout_height="155dp"
+        android:layout_height="150dp"
         android:fontFamily="@font/pretendard_bold"
         android:gravity="center|top"
         android:lineSpacingMultiplier="1.4"
@@ -21,9 +21,7 @@
     <ImageView
         android:id="@+id/onboard_img"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_height="388dp"
         android:layout_marginBottom="30dp" />
 </LinearLayout>
 </layout>
