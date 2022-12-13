@@ -149,16 +149,17 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="127dp"
             android:layout_height="45dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/custom_white_radius20"
             android:backgroundTint="#F6F6F6"
             android:fontFamily="@font/pretendard_medium"
+            android:onClick="@{() -> testAlarmViewModel.onSendTestPushAlarmClicked()}"
             android:text="@string/register_send"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardView"
-            android:layout_marginTop="16dp"/>
+            app:layout_constraintTop_toBottomOf="@id/cardView" />
 
         <TextView
             android:id="@+id/register_text"
