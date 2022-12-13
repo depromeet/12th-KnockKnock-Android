@@ -7,6 +7,7 @@ import com.depromeet.knockknock.ui.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import okio.utf8Size
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +31,7 @@ class AlarmCreateViewModel @Inject constructor(
     init {
         baseViewModelScope.launch {
             editTextMessageEvent.debounce(0).collectLatest {
-                onEditTextCount(it.length)
+                onEditTextCount(it.codePointCount(0, it.length))
             }
         }
 
@@ -46,7 +47,7 @@ class AlarmCreateViewModel @Inject constructor(
 
 
         val test1 = RecommendationMessage(
-            "${String(Character.toChars(0x1F4AA))}${String(Character.toChars(0x1F4AA))}${String(Character.toChars(0x1F4AA))}"
+            "\uD83D\uDCAA\uD83D\uDCAA\uD83D\uDCAA"
         )
         val test2 = RecommendationMessage("탈락?오히려좋아")
         val test3 = RecommendationMessage("꿈은 없고요 그냥 놀고 싶습니다.")
