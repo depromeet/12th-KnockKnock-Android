@@ -56,7 +56,7 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
             viewModel.navigationHandler.collectLatest {
                 when(it) {
                     is SetProfileNavigationAction.NavigateToSetProfileImage -> setProfileImageBottomSheet()
-                    is SetProfileNavigationAction.NavigateToHome ->navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
+//                    is SetProfileNavigationAction.NavigateToHome ->navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
                 }
             }
         }

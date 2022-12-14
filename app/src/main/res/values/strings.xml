@@ -160,4 +160,9 @@
     <string name="exit_member">내보내기</string>
     <string name="edit">편집</string>
 
+    <!--카테고리 설정-->
+    <string name="category_title">카테고리 설정</string>
+    <string name="category_description">어떤 그룹인가요?</string>
+    <string name="okay">완료</string>
+
 </resources>

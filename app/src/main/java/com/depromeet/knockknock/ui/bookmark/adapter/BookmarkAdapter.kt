@@ -61,13 +61,12 @@ class BookmarkAdapter(
                 }
             }
         } }
-    }
+}
 
-    internal object BookmarkItemDiffCallback : DiffUtil.ItemCallback<Bookmark>() {
-        override fun areItemsTheSame(oldItem: Bookmark, newItem: Bookmark) =
-            oldItem.bookmarkId == newItem.bookmarkId
+internal object BookmarkItemDiffCallback : DiffUtil.ItemCallback<Bookmark>() {
+    override fun areItemsTheSame(oldItem: Bookmark, newItem: Bookmark) =
+        oldItem.bookmarkId == newItem.bookmarkId
 
-        override fun areContentsTheSame(oldItem: Bookmark, newItem: Bookmark) =
-            oldItem == newItem
-    }
+    override fun areContentsTheSame(oldItem: Bookmark, newItem: Bookmark) =
+        oldItem == newItem
 }

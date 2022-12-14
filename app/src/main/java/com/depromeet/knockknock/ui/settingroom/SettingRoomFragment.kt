@@ -1,33 +1,14 @@
-package com.depromeet.knockknock.ui.setting_room
+package com.depromeet.knockknock.ui.settingroom
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.os.Build
-import android.provider.MediaStore
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
-import com.depromeet.knockknock.base.DefaultRedAlertDialog
-import com.depromeet.knockknock.databinding.FragmentSetProfileBinding
 import com.depromeet.knockknock.databinding.FragmentSettingRoomBinding
-import com.depromeet.knockknock.ui.editprofile.EditProfileNavigationAction
-import com.depromeet.knockknock.ui.editprofile.bottom.EditProfileImageBottomSheet
-import com.depromeet.knockknock.ui.mypage.MypageFragmentDirections
-import com.depromeet.knockknock.ui.setting_room.adapter.ExportMemberAdapter
-import com.depromeet.knockknock.util.KnockKnockIntent
-import com.depromeet.knockknock.util.customOnFocusChangeListener
-import com.depromeet.knockknock.util.hideKeyboard
-import com.depromeet.knockknock.util.uriToFile
+import com.depromeet.knockknock.ui.settingroom.adapter.ExportMemberAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 
 
 @AndroidEntryPoint
@@ -56,7 +37,7 @@ class SettingRoomFragment : BaseFragment<FragmentSettingRoomBinding, SettingRoom
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is SettingRoomNavigationAction.NavigateToCategory -> {}
+                    is SettingRoomNavigationAction.NavigateToCategory -> navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToCategoryFragment())
                     is SettingRoomNavigationAction.NavigateToLink -> {}
                     is SettingRoomNavigationAction.NavigateToAddMember -> {}
                     is SettingRoomNavigationAction.NavigateToExportMember -> {}

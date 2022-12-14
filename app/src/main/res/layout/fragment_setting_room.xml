@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.depromeet.knockknock.ui.setting_room.SettingRoomViewModel" />
+            type="com.depromeet.knockknock.ui.settingroom.SettingRoomViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +42,8 @@
             app:layout_constraintBottom_toBottomOf="@id/category_title"
             app:layout_constraintEnd_toEndOf="parent"
             android:padding="8dp"
-            android:layout_marginEnd="8dp">
+            android:layout_marginEnd="8dp"
+            android:onClick="@{() -> viewmodel.onCategoryClicked()}">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +71,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
             android:text="@string/detail_information"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="24dp">
         </TextView>
 
         <TextView
@@ -228,12 +229,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/custom_red_corner_radius10"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="@string/remove_room"
             android:gravity="center">
         </TextView>

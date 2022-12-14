@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.setting_room
+package com.depromeet.knockknock.ui.settingroom
 
 interface SettingRoomActionHandler {
     fun onCategoryClicked()
