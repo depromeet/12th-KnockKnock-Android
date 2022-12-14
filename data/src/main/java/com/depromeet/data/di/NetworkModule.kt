@@ -4,6 +4,9 @@ import android.content.Context
 import com.depromeet.data.BuildConfig
 import com.depromeet.data.api.ApiClient.BASE_URL
 import com.depromeet.data.api.MainAPIService
+import com.depromeet.data.interceptor.BearerInterceptor
+import com.depromeet.data.interceptor.ErrorResponseInterceptor
+import com.depromeet.data.interceptor.XAccessTokenInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,17 +33,17 @@ object NetworkModule {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-//            .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
-//            .addInterceptor(ErrorResponseInterceptor()) // Error Response
-//            .addInterceptor(BearerInterceptor()) // Refresh Token
+            .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
+            .addInterceptor(ErrorResponseInterceptor()) // Error Response
+            .addInterceptor(BearerInterceptor()) // Refresh Token
             .build()
     } else {
         OkHttpClient.Builder()
             .readTimeout(5000, TimeUnit.MILLISECONDS)
             .connectTimeout(5000, TimeUnit.MILLISECONDS)
-//            .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
-//            .addInterceptor(ErrorResponseInterceptor()) // Error Response
-//            .addInterceptor(BearerInterceptor()) // Refresh Token
+            .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
+            .addInterceptor(ErrorResponseInterceptor()) // Error Response
+            .addInterceptor(BearerInterceptor()) // Refresh Token
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }
