@@ -136,7 +136,15 @@
         android:name="com.depromeet.knockknock.ui.register.RegisterFragment"
         android:label="RegisterFragment" >
         <action
-            android:id="@+id/action_registerFragment_to_homeFragment"
+            android:id="@+id/action_registerFragment_to_setProfileFragment"
+            app:destination="@id/setProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setProfileFragment"
+        android:name="com.depromeet.knockknock.ui.setprofile.SetProfileFragment"
+        android:label="SetProfileFragment" >
+        <action
+            android:id="@+id/action_setProfileFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>
