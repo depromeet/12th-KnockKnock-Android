@@ -1,18 +1,21 @@
 package com.depromeet.knockknock.ui.editprofile
 
+import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
+import android.content.ContentValues
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
-import android.view.View.OnTouchListener
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
@@ -20,15 +23,14 @@ import com.depromeet.knockknock.base.DefaultRedAlertDialog
 import com.depromeet.knockknock.base.DefaultYellowAlertDialog
 import com.depromeet.knockknock.databinding.FragmentEditProfileBinding
 import com.depromeet.knockknock.ui.editprofile.bottom.EditProfileImageBottomSheet
-import com.depromeet.knockknock.util.KnockKnockIntent
-import com.depromeet.knockknock.util.customOnFocusChangeListener
-import com.depromeet.knockknock.util.hideKeyboard
-import com.depromeet.knockknock.util.uriToFile
+import com.depromeet.knockknock.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -42,7 +44,22 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
     override val viewModel : EditProfileViewModel by viewModels()
     private val navController by lazy { findNavController() }
 
-    private lateinit var requestUpdateProfile: ActivityResultLauncher<Intent>
+    private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
+    private lateinit var cameraLauncher: ActivityResultLauncher<Uri>
+    private var cameraUri: Uri? = null
+
+    // 요청하고자 하는 권한들
+    private val permissionList = arrayOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE)
+
+    // 권한을 허용하도록 요청
+    private val requestMultiplePermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
+        results.forEach {
+            if(!it.value) toastMessage("권한 허용 필요")
+        }
+    }
 
     override fun initStartView() {
         binding.apply {
@@ -121,6 +138,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
     }
 
     private fun editProfileImageBottomSheet() {
+        requestMultiplePermission.launch(permissionList)
         val dialog = EditProfileImageBottomSheet {
             if(it) getGalleryImage()
             else getCaptureImage()
@@ -129,20 +147,29 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
     }
 
     private fun initRegisterForActivityResult() {
-        requestUpdateProfile = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-            val isUpdateProfile = activityResult.data?.getBooleanExtra(KnockKnockIntent.RESULT_KEY_UPDATE_PROFILE, false) ?: false
-            if (isUpdateProfile) {
-                val intent = activityResult.data
-                if (intent != null) {
-                    val uri = intent.data
-                    val file = uriToFile(uri!!,requireContext())
-                    val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-                    val requestBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
+        galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            val intent = activityResult.data
+            if (intent != null) {
+                val data = intent.data
+                val file = uriToFile(data!!, requireContext())
+                val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+                val requestBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
+                // Update Profile API
 
-                    //TODO : 이후에 설명도 입력한걸로 넣기
-                    val nicknamePart: MultipartBody.Part = MultipartBody.Part.createFormData("description", "테스트 설명")
+                Glide.with(requireContext())
+                    .load(file)
+                    .transform(CenterCrop(), RoundedCorners(300))
+                    .into(binding.userProfileEdit)
+            }
+        }
 
-                    // Update Profile API
+        cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) {
+            if(it) {
+                cameraUri?.let { uri ->
+                    Glide.with(requireContext())
+                        .load(uri)
+                        .transform(CenterCrop(), RoundedCorners(300))
+                        .into(binding.userProfileEdit)
                 }
             }
         }
@@ -151,16 +178,20 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
     private fun getGalleryImage() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-        requestUpdateProfile.launch(intent)
+        viewModel.isGalleryImage.value = true
+        galleryLauncher.launch(intent)
+
     }
 
     private fun getCaptureImage() {
-        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE)
-        } else {
-            Intent(ACTION_IMAGE_CAPTURE)
-        }
-        requestUpdateProfile.launch(intent)
+//        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE)
+//        } else {
+//            Intent(ACTION_IMAGE_CAPTURE)
+//        }
+        viewModel.isGalleryImage.value = false
+        cameraUri = createImageFile()
+        cameraLauncher.launch(cameraUri)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -171,5 +202,14 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
             binding.userNameContents.clearFocus()
             false
         }
+    }
+
+    private fun createImageFile(): Uri? {
+        val now = SimpleDateFormat("yyMMdd_HHmmss").format(Date())
+        val content = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, "img_$now.jpg")
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
+        }
+        return requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, content)
     }
 }
