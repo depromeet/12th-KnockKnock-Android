@@ -148,30 +148,15 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
 
     private fun initRegisterForActivityResult() {
         galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-            val intent = activityResult.data
-            if (intent != null) {
-                val data = intent.data
-                val file = uriToFile(data!!, requireContext())
-                val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-                val requestBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
-                // Update Profile API
-
-                Glide.with(requireContext())
-                    .load(file)
-                    .transform(CenterCrop(), RoundedCorners(300))
-                    .into(binding.userProfileEdit)
+            activityResult.data?.let {
+                createFile(it.data!!)
             }
         }
 
         cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) {
-            if(it) {
-                cameraUri?.let { uri ->
-                    Glide.with(requireContext())
-                        .load(uri)
-                        .transform(CenterCrop(), RoundedCorners(300))
-                        .into(binding.userProfileEdit)
-                }
-            }
+            if(it) { cameraUri?.let { uri ->
+                createFile(uri)
+            } }
         }
     }
 
@@ -211,5 +196,17 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
             put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
         }
         return requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, content)
+    }
+
+    private fun createFile(uri: Uri) {
+        val file = uriToFile(uri, requireContext())
+        val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val requestBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
+        // Update Profile API
+
+        Glide.with(requireContext())
+            .load(uri)
+            .transform(CenterCrop(), RoundedCorners(300))
+            .into(binding.userProfileEdit)
     }
 }
