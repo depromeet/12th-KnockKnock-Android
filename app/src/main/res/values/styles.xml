@@ -36,6 +36,12 @@
         <item name="fontFamily">@font/pretendard_semi_bold</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.SemiBold.Gray09.Size24" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray09</item>
+        <item name="android:textSize">24dp</item>
+        <item name="fontFamily">@font/pretendard_semi_bold</item>
+    </style>
+
     <style name="Theme.AppCompat.TextView.SemiBold.Black.Size24" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textSize">24dp</item>
         <item name="fontFamily">@font/pretendard_semi_bold</item>
@@ -471,5 +477,10 @@
     <style name="Theme.AppCompat.TextView.Setting.Room.Exit.Member.Title" parent="Theme.AppCompat.TextView.Regular.Black.Size14"/>
     <style name="Theme.AppCompat.TextView.Setting.Room.Member.Name" parent="Theme.AppCompat.TextView.Regular.Black.Size18"/>
     <style name="Theme.AppCompat.TextView.Setting.Room.Remove.Btn" parent="Theme.AppCompat.TextView.Regular.Red.Size14"/>
+
+    <!-- 카테고리 설정 -->
+    <style name="Theme.AppCompat.TextView.Category.Description" parent="Theme.AppCompat.TextView.SemiBold.Gray09.Size24"/>
+    <style name="Theme.AppCompat.TextView.Category.Contents" parent="Theme.AppCompat.TextView.Regular.Black.Size16"/>
+    <style name="Theme.AppCompat.TextView.Category.Save.Btn" parent="Theme.AppCompat.TextView.Medium.Size18"/>
 
 </resources>

@@ -1,12 +1,10 @@
-package com.depromeet.knockknock.ui.setting_room
+package com.depromeet.knockknock.ui.settingroom
 
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.bookmark.model.Room
-import com.depromeet.knockknock.ui.editprofile.EditProfileNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.depromeet.knockknock.ui.setprofile.SetProfileNavigationAction
 import kotlinx.coroutines.flow.*
 
 @HiltViewModel

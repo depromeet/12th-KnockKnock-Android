@@ -132,7 +132,7 @@ class RegisterFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             kakaoAuthViewModel.message.collect{
-                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
+//                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
             }
 
         }
@@ -153,7 +153,7 @@ class RegisterFragment : Fragment() {
                 Log.d("MYTAG", account.idToken.toString())
                 Log.d("MYTAG", account.account.toString())
                 Log.d("MYTAG", account.email.toString())
-                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
+//                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
             } catch (e: ApiException) {
                 e.localizedMessage?.let { Log.d("MYTAG", it) }
             }
