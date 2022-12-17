@@ -54,33 +54,47 @@ class KakaoAuthViewModel(application: Application) : AndroidViewModel(applicatio
                     } else if (user != null) {
                         var scopes = mutableListOf<String>()
 
-                        if (user.kakaoAccount?.emailNeedsAgreement == true) {
-                            scopes.add("account_email")
-                        }
-                        if (user.kakaoAccount?.birthdayNeedsAgreement == true) {
-                            scopes.add("birthday")
-                        }
-                        if (user.kakaoAccount?.birthyearNeedsAgreement == true) {
-                            scopes.add("birthyear")
-                        }
-                        if (user.kakaoAccount?.genderNeedsAgreement == true) {
-                            scopes.add("gender")
-                        }
-                        if (user.kakaoAccount?.phoneNumberNeedsAgreement == true) {
-                            scopes.add("phone_number")
-                        }
-                        if (user.kakaoAccount?.profileNeedsAgreement == true) {
-                            scopes.add("profile")
-                        }
-                        if (user.kakaoAccount?.ageRangeNeedsAgreement == true) {
-                            scopes.add("age_range")
-                        }
-                        if (user.kakaoAccount?.ciNeedsAgreement == true) {
-                            scopes.add("account_ci")
-                        }
-                        Log.d("MYTAG", "${scopes}")
+//                        if (user.kakaoAccount?.emailNeedsAgreement == true) {
+//                            scopes.add("account_email")
+//                        }
+//                        if (user.kakaoAccount?.birthdayNeedsAgreement == true) {
+//                            scopes.add("birthday")
+//                        }
+//                        if (user.kakaoAccount?.birthyearNeedsAgreement == true) {
+//                            scopes.add("birthyear")
+//                        }
+//                        if (user.kakaoAccount?.genderNeedsAgreement == true) {
+//                            scopes.add("gender")
+//                        }
+//                        if (user.kakaoAccount?.phoneNumberNeedsAgreement == true) {
+//                            scopes.add("phone_number")
+//                        }
+//                        if (user.kakaoAccount?.profileNeedsAgreement == true) {
+//                            scopes.add("profile")
+//                        }
+//                        if (user.kakaoAccount?.ageRangeNeedsAgreement == true) {
+//                            scopes.add("age_range")
+//                        }
+//                        if (user.kakaoAccount?.ciNeedsAgreement == true) {
+//                            scopes.add("account_ci")
+//                        }
+//                        Log.d("MYTAG", "${scopes}")
 
-                        if (scopes.count() > 0) {
+                        user.kakaoAccount?.let {
+                            when(true) {
+                                (it.emailNeedsAgreement == true) -> scopes.add("account_email")
+                                (it.birthdayNeedsAgreement == true) -> scopes.add("birthday")
+                                (it.birthyearNeedsAgreement == true) -> scopes.add("birthyear")
+                                (it.genderNeedsAgreement == true) -> scopes.add("gender")
+                                (it.phoneNumberNeedsAgreement == true) -> scopes.add("profile")
+                                (it.profileNeedsAgreement == true) -> scopes.add("age_range")
+                                (it.ageRangeNeedsAgreement == true) -> scopes.add("age_range")
+                                (it.ciNeedsAgreement == true) -> scopes.add("account_ci")
+                                else -> Unit
+                            }
+                        }
+
+                        if (scopes.isNotEmpty()) {
                             Log.d(TAG, "사용자에게 추가 동의를 받아야 합니다.")
 
                             // OpenID Connect 사용 시
