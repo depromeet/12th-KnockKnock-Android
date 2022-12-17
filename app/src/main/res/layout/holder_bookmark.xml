@@ -75,6 +75,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
                     android:gravity="start"
+                    android:maxLines="2"
                     android:text="@{holder.contents}"/>
                 
                 <ImageView

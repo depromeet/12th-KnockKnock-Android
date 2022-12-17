@@ -48,16 +48,16 @@ class BookmarkAdapter(
                 binding.holder!!.isExpanded = !(binding.holder!!.isExpanded)
 
                 if(binding.holder!!.isExpanded) {
-                    binding.contentsText.apply {
-                        this.maxLines = 9999
+                    binding.expandBtn.apply {
                         this.text = context.getString(R.string.shorts_contents)
                     }
+                    binding.contentsText.maxLines = 9999
                 }
                 else {
-                    binding.contentsText.apply {
-                        this.maxLines = 2
+                    binding.expandBtn.apply {
                         this.text = context.getString(R.string.more_contents)
                     }
+                    binding.contentsText.maxLines = 2
                 }
             }
         } }
