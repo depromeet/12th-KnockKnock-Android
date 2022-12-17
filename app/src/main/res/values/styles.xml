@@ -117,6 +117,12 @@
         <item name="fontFamily">@font/pretendard_regular</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.Regular.Red.Size14" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/system_red_caution</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
     <style name="Theme.AppCompat.TextView.Regular.Gray07.Size16" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/gray07</item>
         <item name="android:textSize">16dp</item>
@@ -376,7 +382,7 @@
         <item name="maxLines">1</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Friend.List.Link.Description1" parent="Theme.AppCompat.TextView.SemiBold.Black.Size16"/>
+    <style name="Theme.AppCompat.TextView.Friend.List.Link.Description1" parent="Theme.AppCompat.TextView.Medium.Black.Size16"/>
 
     <style name="Theme.AppCompat.TextView.Friend.List.Link.Description2" parent="Theme.AppCompat.TextView.SemiBold.Gray05.Size16"/>
 
@@ -456,5 +462,14 @@
         <item name="background">@drawable/custom_backgroundwhite_radius10</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <!-- 알림방 설정 -->
+    <style name="Theme.AppCompat.TextView.Setting.Room.Content.Title" parent="Theme.AppCompat.TextView.Medium.Black.Size18"/>
+    <style name="Theme.AppCompat.TextView.Setting.Room.Edit.Btn" parent="Theme.AppCompat.TextView.Regular.Black.Size18"/>
+    <style name="Theme.AppCompat.TextView.Setting.Room.Member" parent="Theme.AppCompat.TextView.Medium.Black.Size16"/>
+    <style name="Theme.AppCompat.TextView.Setting.Room.Add.Member" parent="Theme.AppCompat.TextView.Regular.Black.Size18"/>
+    <style name="Theme.AppCompat.TextView.Setting.Room.Exit.Member.Title" parent="Theme.AppCompat.TextView.Regular.Black.Size14"/>
+    <style name="Theme.AppCompat.TextView.Setting.Room.Member.Name" parent="Theme.AppCompat.TextView.Regular.Black.Size18"/>
+    <style name="Theme.AppCompat.TextView.Setting.Room.Remove.Btn" parent="Theme.AppCompat.TextView.Regular.Red.Size14"/>
 
 </resources>
