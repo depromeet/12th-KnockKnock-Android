@@ -21,6 +21,8 @@ class EditProfileViewModel @Inject constructor(
     val editBtnState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val editPossibleState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
 
+    val isGalleryImage: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+
     override fun onLogoutClicked() {
         baseViewModelScope.launch {
             _navigationHandler.emit(EditProfileNavigationAction.NavigateToLogout)
