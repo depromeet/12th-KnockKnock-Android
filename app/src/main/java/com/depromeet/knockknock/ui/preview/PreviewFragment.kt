@@ -1,38 +1,56 @@
 package com.depromeet.knockknock.ui.preview
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentPreviewBinding
+import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateFragmentDirections
+import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateNavigationAction
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class PreviewFragment(
-    override val layoutResourceId: Int,
-    override val viewModel: PreviewViewModel
-) : BaseFragment<FragmentPreviewBinding, PreviewViewModel>(R.layout.fragment_preview) {
+class PreviewFragment :
+    BaseFragment<FragmentPreviewBinding, PreviewViewModel>(R.layout.fragment_preview) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_preview, container, false)
-    }
+    private val TAG = "PreviewFragment"
+
+    override val layoutResourceId: Int
+        get() = R.layout.fragment_preview
+    private val navController by lazy { findNavController() }
+
+    override val viewModel: PreviewViewModel by viewModels()
 
     override fun initStartView() {
-        TODO("Not yet implemented")
+        binding.apply {
+            this.vm = viewModel
+            this.lifecycleOwner = viewLifecycleOwner
+        }
+        exception = viewModel.errorEvent
+        val args: PreviewFragmentArgs by navArgs()
+        viewModel.previewTitleEvent.value = args.title
+        viewModel.previewMessageEvent.value = args.message
+        setupEvent()
+    }
+
+    private fun setupEvent() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.navigationEvent.collectLatest {
+                when (it) {
+                    is PreviewNavigationAction.NavigateToBackStack -> navController.popBackStack()
+                }
+            }
+        }
     }
 
     override fun initDataBinding() {
-        TODO("Not yet implemented")
     }
 
     override fun initAfterBinding() {
-        TODO("Not yet implemented")
     }
 
 }
