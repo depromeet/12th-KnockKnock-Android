@@ -15,7 +15,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
@@ -24,16 +23,13 @@ import com.depromeet.knockknock.ui.alarmcreate.adapter.RecommendationAdapter
 import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomAlarmReservationPicker
 import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomAlarmSend
 import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomImageAdd
-import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
-import com.depromeet.knockknock.ui.alarmcreate.model.ReservationAlarm
-import com.depromeet.knockknock.ui.bookmark.adapter.BookmarkAdapter
-import com.depromeet.knockknock.ui.bookmark.model.Bookmark
 import com.depromeet.knockknock.util.KnockKnockIntent
 import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @AndroidEntryPoint
@@ -64,7 +60,6 @@ class AlarmCreateFragment :
         initAdapter()
         setupEvent()
         setOnTouchListenerEditText()
-
     }
 
     private fun setupEvent() {
@@ -75,7 +70,14 @@ class AlarmCreateFragment :
                     is AlarmCreateNavigationAction.NavigateToAlarmSend -> alarmSend()
                     is AlarmCreateNavigationAction.NavigateToFocusTitleText -> focusTitleText()
                     is AlarmCreateNavigationAction.NavigateToDeleteMessageText -> deleteMessageText()
-                    is AlarmCreateNavigationAction.NavigateToRecommendationMessageText ->  addRecommendationMessage(it.message)
+                    is AlarmCreateNavigationAction.NavigateToRecommendationMessageText -> addRecommendationMessage(
+                        it.message
+                    )
+                    is AlarmCreateNavigationAction.NavigateToPreview ->
+                        navigate(
+                            AlarmCreateFragmentDirections.actionAlarmCreateFragmentToPreviewFragment(it.title, it.message)
+                        )
+                    is AlarmCreateNavigationAction.NavigateToPushAlarm -> navController.popBackStack()
                 }
             }
         }
@@ -93,12 +95,12 @@ class AlarmCreateFragment :
     }
 
     private fun focusTitleText() = binding.editTextTitle.let {
-            it.requestFocus()
-            it.setSelection(it.text.length)
-            requireActivity().showKeyboard(it)
+        it.requestFocus()
+        it.setSelection(it.text.length)
+        requireActivity().showKeyboard(it)
     }
 
-    private fun deleteMessageText(){
+    private fun deleteMessageText() {
         viewModel.editTextMessageEvent.value = ""
         binding.editTextMessage.requestFocus()
         requireActivity().showKeyboard(binding.editTextMessage)
@@ -117,11 +119,7 @@ class AlarmCreateFragment :
                      * 푸쉬알림을 발송했습니다!
                      * fcm API!!
                      * */
-                    /**
-                     * 푸쉬알림을 발송했습니다!
-                     * fcm API!!
-                     * */
-
+//                    viewModel.onAlarmPush()
                 }
             }
         })
@@ -134,11 +132,8 @@ class AlarmCreateFragment :
              * 예약 푸쉬알림을 발송했습니다!
              * fcm API!!
              * */
-            /**
-             * 예약 푸쉬알림을 발송했습니다!
-             * fcm API!!
-             * */
             Log.d("ttt", it.toString())
+//            viewModel.onAlarmPush()
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
@@ -205,7 +200,10 @@ class AlarmCreateFragment :
     @SuppressLint("ClickableViewAccessibility")
     private fun initEditText() {
 
-        binding.editTextMessage.messageTextOnFocusChangeListener(requireContext(), binding.linearLayoutEditText)
+        binding.editTextMessage.messageTextOnFocusChangeListener(
+            requireContext(),
+            binding.linearLayoutEditText
+        )
         binding.alarmCreateMain.setOnTouchListener { _, _ ->
             requireActivity().hideKeyboard()
             binding.editTextMessage.clearFocus()
