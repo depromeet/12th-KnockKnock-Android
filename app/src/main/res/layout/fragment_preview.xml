@@ -27,23 +27,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/some_id"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="41dp"
+            android:gravity="center_horizontal|top"
+            android:lineSpacingExtra="3sp"
+            android:text="미리보기 예시 화면입니다"
+            android:textColor="@color/main_yellow_dark_mode"
+            android:translationY="-1.45sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/iv_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="bottom"
-            android:layout_marginTop="116dp"
+            android:layout_marginLeft="31dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="31dp"
+            android:layout_marginBottom="31.53dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/preview_mockup"
+            android:src="@drawable/preview_mockup3"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_close" />
+            app:layout_constraintTop_toBottomOf="@+id/some_id" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="130dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="88dp"
+            android:layout_height="92.68dp"
+            android:layout_marginHorizontal="30.17dp"
+            android:layout_marginTop="61.79dp"
             android:background="@drawable/bg_gray_radius10"
             app:layout_constraintEnd_toEndOf="@id/iv_phone"
             app:layout_constraintHorizontal_bias="0.0"
@@ -52,10 +73,10 @@
 
             <ImageView
                 android:id="@+id/iv_profile"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="17.24dp"
+                android:layout_height="17.24dp"
+                android:layout_marginStart="11.5dp"
+                android:layout_marginTop="11.5dp"
                 android:src="@drawable/preview_profile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +88,7 @@
                 android:layout_marginStart="6dp"
                 android:text="@={vm.previewTitleEvent}"
                 android:textColor="#424242"
-                android:textSize="18sp"
+                android:textSize="12.93sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
                 app:layout_constraintStart_toEndOf="@+id/iv_profile"
@@ -79,7 +100,7 @@
                 android:layout_marginStart="6dp"
                 android:text="@{vm.previewTimeEvent()}"
                 android:textColor="#757575"
-                android:textSize="14sp"
+                android:textSize="10.06sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
                 app:layout_constraintStart_toEndOf="@+id/tv_name"
@@ -87,9 +108,9 @@
 
             <ImageView
                 android:id="@+id/iv_fold"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
+                android:layout_width="17.24dp"
+                android:layout_height="17.24dp"
+                android:layout_marginEnd="11.49dp"
                 android:src="@drawable/ic_arrow_down"
                 app:layout_constraintBottom_toBottomOf="@id/iv_profile"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -97,21 +118,24 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:maxLines="2"
+                android:layout_marginTop="5.75dp"
+                android:layout_marginRight="5.75dp"
                 android:ellipsize="end"
+                android:maxLines="2"
                 android:text="@={vm.previewMessageEvent}"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="10.06sp"
+                app:layout_constraintEnd_toStartOf="@+id/cardView2"
                 app:layout_constraintStart_toStartOf="@id/iv_profile"
                 app:layout_constraintTop_toBottomOf="@id/iv_profile" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="88dp"
-                android:layout_height="64dp"
-                app:cardCornerRadius="8dp"
+                android:id="@+id/cardView2"
+                android:layout_width="63.22dp"
+                android:layout_height="45.98dp"
+                app:cardCornerRadius="5.75dp"
                 app:elevation="0dp"
                 app:layout_constraintEnd_toEndOf="@+id/iv_fold"
                 app:layout_constraintTop_toTopOf="@+id/textView">
