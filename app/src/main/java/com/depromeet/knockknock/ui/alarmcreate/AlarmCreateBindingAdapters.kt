@@ -26,7 +26,7 @@ fun CardView.bindAddImageCardViewVisible(enable: Boolean) {
 }
 
 @BindingAdapter("imgLoadVisible")
-fun ImageView.bindImgLoadVisible(enable: Boolean) {
+fun CardView.bindImgLoadVisible(enable: Boolean) {
     if (enable) this.visibility = View.VISIBLE
     else this.visibility = View.GONE
 }

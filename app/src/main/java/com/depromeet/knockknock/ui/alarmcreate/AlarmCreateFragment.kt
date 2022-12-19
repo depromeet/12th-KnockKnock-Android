@@ -175,7 +175,7 @@ class AlarmCreateFragment :
 
                         Log.d("ttt uri ", intent.toString())
                         // Update Profile API
-                        Glide.with(this).load(uri).into(binding.imgLoad)
+                        Glide.with(this).load(uri).into(binding.alarmCreateImg)
                         viewModel.onImageStateChecked()
                     }
                 }

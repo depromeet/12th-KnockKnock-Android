@@ -234,15 +234,25 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <ImageView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/img_load"
                     android:layout_width="122dp"
                     android:layout_height="106dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
-                    android:visibility="visible"
+                    app:cardCornerRadius="8dp"
+                    app:elevation="0dp"
                     app:imgLoadVisible="@{vm.messageImgState}"
-                    app:onSingleClick="@{() -> vm.onAddImageClicked()}" />
+                    app:onSingleClick="@{() -> vm.onAddImageClicked()}">
+
+                    <ImageView
+                        android:id="@+id/alarm_create_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"/>
+
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
 
         </ScrollView>
