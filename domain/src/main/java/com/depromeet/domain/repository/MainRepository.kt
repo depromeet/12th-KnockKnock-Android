@@ -19,9 +19,19 @@ interface  MainRepository {
 
     suspend fun getGoogleLogin(code: String): NetworkResult<GoogleLoginResponse>
 
+    suspend fun getUserProfile(): NetworkResult<UserProfileResponse>
+
+    suspend fun putUserProfile(nickName: String, profilePath: String): NetworkResult<UserProfileResponse>
+
     suspend fun putUserNickname(nickName: String): NetworkResult<Unit>
 
     suspend fun getUserNickname(nickName: String): NetworkResult<SearchUserNicknameResponse>
+
+    suspend fun getFriendList(): NetworkResult<FriendListResponse>
+
+    suspend fun postFriend(userId: Int): NetworkResult<Unit>
+
+    suspend fun getSearchUser(nickName: String): NetworkResult<UserListResponse>
 
     suspend fun getGroup(id: Int): NetworkResult<GroupResponse>
 

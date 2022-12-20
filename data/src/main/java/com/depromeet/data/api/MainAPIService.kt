@@ -21,36 +21,77 @@ interface MainAPIService {
     suspend fun postNotificationToken(@Body body: PostNotifcationTokenRequest): Unit
 
     // Refresh Token 재발급
-    @POST("/credentials/refresh")
+    @POST("/api/v1/credentials/refresh")
     suspend fun postRefreshToken(@Body body: PostRefreshTokenRequest): PostRefreshTokenResponse
 
     // Oauth Kakao 로그인
-    @GET("/credentials/oauth/kakao")
+    @GET("/api/v1/credentials/oauth/link/kakao")
     suspend fun getKakaoLogin(@Body body: GetKakaoLoginRequest): GetKakaoLoginResponse
 
-    // Oauth Kakao 로그인 링크 발금
-    @GET("/credentials/oauth/link/kakao")
-    suspend fun getKakaoLoginLink(): GetKakaoLoginLinkResponse
-
     // Oauth Google 로그인
-    @GET("/credentials/oauth/google")
+    @GET("/api/v1/credentials/oauth/link/google")
     suspend fun getGoogleLogin(@Body body: GetGoogleLoginRequest): GetGoogleLoginResponse
 
-    // Oauth Google 로그인 링크 발금
-    @GET("/credentials/oauth/link/google")
-    suspend fun getGoogleLoginLink(): GetGoogleLoginLinkResponse
+    // 유저 프로필 가져오기
+    @GET("/api/v1/users/profile")
+    suspend fun getUserProfile(): GetUserProfileResponse
+
+    // 유저 프로필 변경하기
+    @PUT("/api/v1/users/profile")
+    suspend fun putUserProfile(@Body body: PutUserProfileRequest): GetUserProfileResponse
 
     // 유저 닉네임 변경
-    @PUT("/users/nickname")
+    @PUT("/api/v1/users/nickname")
     suspend fun putUserNickname(@Body body: PutUserNicknameRequest): Unit
 
     // 유저 닉네임 검색
     @GET("/users/nickname")
     suspend fun getUserNickname(@Body body: GetUserNicknameRequest): GetUserNicknameResponse
 
+    // 내 친구 리스트 가져오기
+    @GET("/api/v1/relations")
+    suspend fun getFriendList(): GetFriendListResponse
+
+    // 친구 요청 보내기
+    @POST("/api/v1/relations")
+    suspend fun postFriend(@Body body: PostFriendRequest): Unit
+
+    // 유저 닉네임 검색
+    @GET("/api/v1/users/nickname/{nickname}")
+    suspend fun getSearchUser(@Path("nickname") nickname: String): GetSearchUserResponse
+
     // 그룹 정보
-    @GET("/groups/{id}")
+    @GET("/api/v1/groups/{id}")
     suspend fun getGroup(@Path("id") id: Int): GetGroupResponse
+
+    // 그룹 찾기 <- 미적용
+    @GET("/api/v1/groups/open")
+    suspend fun getSearchGroup(
+        @Query("category") category: Int,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    )
+
+    // 그룹 검색 <- 미적용
+    @GET("/api/v1/groups/search/{searchString}")
+    suspend fun getSearchGroupKeyword(
+        @Path("searchString") searchString: String,
+        @Query("category") category: Int,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    )
+
+    // 참여중인 그룹 필터링 <- 미적용
+    @GET("/api/v1/groups/joined")
+    suspend fun getJoinedGroupFilter(
+        @Query("type") type: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    )
+
+    // 요즘 뜨는 그룹 <- 미적용
+    @GET("/api/v1/groups/famous")
+    suspend fun getHotGroups()
 
     // 그룹 설정 변경(방장 권한)
     @PUT("/groups/{id}")
@@ -59,6 +100,10 @@ interface MainAPIService {
     // 그룹 설정 제거(방장 권한)
     @DELETE("/groups/{id}")
     suspend fun deleteGroup(@Path("id") id: Int): Unit
+
+    // 그룹 설정 멤버 제거(방장 권한) <- 미적용
+    @DELETE("/groups/{id}")
+    suspend fun deleteUserInGroup(@Path("id") id: Int, @Path("user_id") userId: Int)
 
     // 그룹 멤버 추가(방장 권한)
     @POST("/groups/{id}/members")
