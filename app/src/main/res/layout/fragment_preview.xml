@@ -62,7 +62,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="92.68dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="30.17dp"
             android:layout_marginTop="61.79dp"
             android:background="@drawable/bg_gray_radius10"
@@ -75,8 +75,8 @@
                 android:id="@+id/iv_profile"
                 android:layout_width="17.24dp"
                 android:layout_height="17.24dp"
-                android:layout_marginStart="11.5dp"
-                android:layout_marginTop="11.5dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:src="@drawable/preview_profile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -110,41 +110,55 @@
                 android:id="@+id/iv_fold"
                 android:layout_width="17.24dp"
                 android:layout_height="17.24dp"
-                android:layout_marginEnd="11.49dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="gone"
                 android:src="@drawable/ic_arrow_down"
                 app:layout_constraintBottom_toBottomOf="@id/iv_profile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/iv_profile" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/preview_message_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5.75dp"
-                android:layout_marginRight="5.75dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="16dp"
                 android:ellipsize="end"
+                android:visibility="visible"
                 android:maxLines="2"
-                android:text="@={vm.previewMessageEvent}"
                 android:textColor="@color/black"
                 android:textSize="10.06sp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/message_img_card_view"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@id/iv_profile"
-                app:layout_constraintTop_toBottomOf="@id/iv_profile" />
+                app:layout_constraintTop_toBottomOf="@id/iv_profile"
+                app:layout_constraintVertical_bias="0.0" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+                android:id="@+id/message_img_card_view"
                 android:layout_width="63.22dp"
                 android:layout_height="45.98dp"
-                app:cardCornerRadius="5.75dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="visible"
+                app:cardCornerRadius="8dp"
                 app:elevation="0dp"
-                app:layout_constraintEnd_toEndOf="@+id/iv_fold"
-                app:layout_constraintTop_toTopOf="@+id/textView">
+                app:imgLoadVisible="@{vm.messageImgUri}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_profile">
 
                 <ImageView
+                    android:id="@+id/message_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/felix" />
+                    android:src="@drawable/felix"
+                    app:imgLoad="@{vm.messageImgUri}" />
 
             </androidx.cardview.widget.CardView>
 

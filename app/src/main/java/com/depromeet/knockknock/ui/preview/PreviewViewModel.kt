@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.preview
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateNavigationAction
@@ -14,17 +15,24 @@ import javax.inject.Inject
 @HiltViewModel
 class PreviewViewModel @Inject constructor() : BaseViewModel(), PreviewActionHandler {
 
-    private val TAG = "AlarmCreateViewModel"
+    private val TAG = "PreviewViewModel"
 
     private val _navigationEvent: MutableSharedFlow<PreviewNavigationAction> =
         MutableSharedFlow<PreviewNavigationAction>()
     val navigationEvent: SharedFlow<PreviewNavigationAction> = _navigationEvent.asSharedFlow()
     var previewTitleEvent = MutableStateFlow<String>("")
     var previewMessageEvent = MutableStateFlow<String>("")
+    var messageImgUri: MutableStateFlow<String> = MutableStateFlow<String>("")
 
     override fun onCloseClicked() {
         baseViewModelScope.launch {
             _navigationEvent.emit(PreviewNavigationAction.NavigateToBackStack)
+        }
+    }
+
+    fun onImageUriChecked(uri: String) {
+        baseViewModelScope.launch {
+            messageImgUri.emit(uri)
         }
     }
 
