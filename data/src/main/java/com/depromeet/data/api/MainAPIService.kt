@@ -28,6 +28,10 @@ interface MainAPIService {
     @GET("/credentials/oauth/kakao")
     suspend fun getKakaoLogin(@Body body: GetKakaoLoginRequest): GetKakaoLoginResponse
 
+    // Oauth Kakao 로그인 링크 발금
+    @GET("/credentials/oauth/link/kakao")
+    suspend fun getKakaoLoginLink(): GetKakaoLoginLinkResponse
+
     // Oauth Google 로그인
     @GET("/credentials/oauth/google")
     suspend fun getGoogleLogin(@Body body: GetGoogleLoginRequest): GetGoogleLoginResponse
