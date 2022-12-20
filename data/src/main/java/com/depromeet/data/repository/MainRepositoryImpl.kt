@@ -32,6 +32,10 @@ class MainRepositoryImpl @Inject constructor(
         return handleApi { mainAPIService.getKakaoLogin(body = body).toDomain() }
     }
 
+    override suspend fun getKakaoLoginLink(): NetworkResult<KakaoLoginLinkResponse> {
+        return handleApi { mainAPIService.getKakaoLoginLink().toDomain() }
+    }
+
     override suspend fun getGoogleLogin(code: String): NetworkResult<GoogleLoginResponse> {
         val body = GetGoogleLoginRequest(code = code)
         return handleApi { mainAPIService.getGoogleLogin(body = body).toDomain() }
