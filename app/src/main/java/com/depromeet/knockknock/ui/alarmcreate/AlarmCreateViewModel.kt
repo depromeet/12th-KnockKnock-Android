@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.alarmcreate
 
+import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.depromeet.knockknock.base.BaseViewModel
@@ -23,7 +24,7 @@ class AlarmCreateViewModel @Inject constructor(
     var editTextTitleEvent = MutableStateFlow<String>("")
     var editTextMessageEvent = MutableStateFlow<String>("")
     var editTextMessageCountEvent = MutableStateFlow<Int>(0)
-    val messageImgState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+    val messageImgUri: MutableStateFlow<String> = MutableStateFlow<String>("")
     private val _recommendationMessageEvent: MutableStateFlow<List<RecommendationMessage>> = MutableStateFlow(emptyList())
     val recommendationMessageEvent: StateFlow<List<RecommendationMessage>> = _recommendationMessageEvent
 
@@ -90,16 +91,16 @@ class AlarmCreateViewModel @Inject constructor(
         }
     }
 
-    fun onImageStateChecked() {
+    fun onImageUriChecked(uri: String) {
         baseViewModelScope.launch {
-            messageImgState.emit(true)
+            messageImgUri.emit(uri)
         }
     }
 
-    override fun onPreviewClicked(title: String, message: String) {
+    override fun onPreviewClicked(title: String, message: String, uri : String) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
-                AlarmCreateNavigationAction.NavigateToPreview(title, message)
+                AlarmCreateNavigationAction.NavigateToPreview(title, message, uri)
             )
         }
     }

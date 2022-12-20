@@ -6,6 +6,6 @@ interface AlarmCreateActionHandler {
     fun onDeleteEditTextMessageClicked()
     fun onFocusEditTextTitleClicked()
     fun onRecommendationMessageClicked(message: String)
-    fun onPreviewClicked(title: String, message: String)
+    fun onPreviewClicked(title: String, message: String, uri: String)
     fun onAlarmSendClicked()
 }

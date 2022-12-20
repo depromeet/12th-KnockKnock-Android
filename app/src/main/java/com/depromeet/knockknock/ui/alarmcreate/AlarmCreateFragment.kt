@@ -28,7 +28,6 @@ import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
@@ -75,7 +74,7 @@ class AlarmCreateFragment :
                     )
                     is AlarmCreateNavigationAction.NavigateToPreview ->
                         navigate(
-                            AlarmCreateFragmentDirections.actionAlarmCreateFragmentToPreviewFragment(it.title, it.message)
+                            AlarmCreateFragmentDirections.actionAlarmCreateFragmentToPreviewFragment(it.title, it.message, it.uri)
                         )
                     is AlarmCreateNavigationAction.NavigateToPushAlarm -> navController.popBackStack()
                 }
@@ -86,8 +85,10 @@ class AlarmCreateFragment :
     private fun addRecommendationMessage(message: String) = binding.editTextMessage.let {
         val editTextMessageStart = it.text.substring(0 until it.selectionStart)
         val editTextMessageEnd = it.text.substring(it.selectionStart until it.length())
-        it.setText(editTextMessageStart + message + editTextMessageEnd)
-        it.setSelection(editTextMessageStart.length + message.length)
+        if(it.text.length + message.length <= 200) {
+            it.setText(editTextMessageStart + message + editTextMessageEnd)
+            it.setSelection(editTextMessageStart.length + message.length)
+        }
     }
 
     private fun initAdapter() {
@@ -176,7 +177,7 @@ class AlarmCreateFragment :
                         Log.d("ttt uri ", intent.toString())
                         // Update Profile API
                         Glide.with(this).load(uri).into(binding.alarmCreateImg)
-                        viewModel.onImageStateChecked()
+                        viewModel.onImageUriChecked(uri.toString())
                     }
                 }
             }

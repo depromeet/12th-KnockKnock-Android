@@ -20,14 +20,14 @@ import com.depromeet.knockknock.ui.alarmcreate.adapter.RecommendationAdapter
 import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
 
 @BindingAdapter("addImageCardViewVisible")
-fun CardView.bindAddImageCardViewVisible(enable: Boolean) {
-    if (enable) this.visibility = View.GONE
+fun CardView.bindAddImageCardViewVisible(uri: String) {
+    if (uri != "") this.visibility = View.GONE
     else this.visibility = View.VISIBLE
 }
 
 @BindingAdapter("imgLoadVisible")
-fun CardView.bindImgLoadVisible(enable: Boolean) {
-    if (enable) this.visibility = View.VISIBLE
+fun CardView.bindImgLoadVisible(uri: String) {
+    if (uri != "") this.visibility = View.VISIBLE
     else this.visibility = View.GONE
 }
 
