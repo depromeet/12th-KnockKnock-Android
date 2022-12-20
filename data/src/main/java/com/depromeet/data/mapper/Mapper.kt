@@ -28,6 +28,16 @@ fun GetKakaoLoginLinkResponse.toDomain() : KakaoLoginLinkResponse {
     )
 }
 
+
+fun GetGoogleLoginLinkResponse.toDomain() : GoogleLoginLinkResponse {
+    return GoogleLoginLinkResponse(
+        data = this.data,
+        status = this.status,
+        success = this.success,
+        timeStamp = this.timeStamp
+    )
+}
+
 fun GetGoogleLoginResponse.toDomain() : GoogleLoginResponse {
     return GoogleLoginResponse(
         accessToken = this.accessToken,
