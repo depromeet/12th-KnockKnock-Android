@@ -12,6 +12,8 @@ interface  MainRepository {
 
     suspend fun getKakaoLogin(code: String): NetworkResult<KakaoLoginResponse>
 
+    suspend fun getKakaoLoginLink() : NetworkResult<KakaoLoginLinkResponse>
+
     suspend fun getGoogleLogin(code: String): NetworkResult<GoogleLoginResponse>
 
     suspend fun putUserNickname(nickName: String): NetworkResult<Unit>
