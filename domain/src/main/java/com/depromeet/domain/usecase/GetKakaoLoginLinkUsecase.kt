@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetKakaoLoginLinkUsecase @Inject constructor(
     private val repository: MainRepository
 ){
-    suspend operator fun invoke(code: String): NetworkResult<KakaoLoginLinkResponse> {
+    suspend operator fun invoke(): NetworkResult<KakaoLoginLinkResponse> {
         return repository.getKakaoLoginLink()
     }
 }
