@@ -4,6 +4,7 @@ import com.depromeet.domain.NetworkResult
 import com.depromeet.domain.model.*
 
 
+
 interface  MainRepository {
 
     suspend fun postNotificationToken(deviceId: String, token: String): NetworkResult<Unit>
@@ -11,6 +12,10 @@ interface  MainRepository {
     suspend fun postRefreshToken(refreshToken: String): NetworkResult<RefreshTokenResponse>
 
     suspend fun getKakaoLogin(code: String): NetworkResult<KakaoLoginResponse>
+
+    suspend fun getKakaoLoginLink() : NetworkResult<KakaoLoginLinkResponse>
+
+    suspend fun getGoogleLoginLink() : NetworkResult<GoogleLoginLinkResponse>
 
     suspend fun getGoogleLogin(code: String): NetworkResult<GoogleLoginResponse>
 
