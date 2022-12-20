@@ -27,9 +27,30 @@ fun GetGoogleLoginResponse.toDomain() : GoogleLoginResponse {
     )
 }
 
+fun GetUserProfileResponse.toDomain() : UserProfileResponse {
+    return UserProfileResponse(
+        id = id,
+        nickname = nickname,
+        profilePath = profilePath,
+        email = email
+    )
+}
+
 fun GetUserNicknameResponse.toDomain() : SearchUserNicknameResponse {
     return SearchUserNicknameResponse(
         userList = this.userList
+    )
+}
+
+fun GetFriendListResponse.toDomain() : FriendListResponse {
+    return FriendListResponse(
+        friendList = friendList
+    )
+}
+
+fun GetSearchUserResponse.toDomain() : UserListResponse {
+    return UserListResponse(
+        userList = userList
     )
 }
 
