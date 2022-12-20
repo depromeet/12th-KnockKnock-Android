@@ -49,6 +49,7 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
         exception = viewModel.errorEvent
         initRegisterForActivityResult()
         initEditText()
+        countEditTextMessage()
     }
 
     override fun initDataBinding() {
@@ -56,7 +57,7 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
             viewModel.navigationHandler.collectLatest {
                 when(it) {
                     is SetProfileNavigationAction.NavigateToSetProfileImage -> setProfileImageBottomSheet()
-//                    is SetProfileNavigationAction.NavigateToHome ->navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
+                    is SetProfileNavigationAction.NavigateToHome ->navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
                 }
             }
         }
@@ -110,11 +111,31 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initEditText() {
-        binding.userNameContents.customOnFocusChangeListener(requireContext())
+        //포커싱 시 검정 테두리 필요할 시 주석 해제
+        //binding.userNameContents.customOnFocusChangeListener(requireContext())
         binding.profileSetMain.setOnTouchListener { _, _ ->
             requireActivity().hideKeyboard()
             binding.userNameContents.clearFocus()
             false
+        }
+    }
+
+
+    private fun countEditTextMessage() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.editTextMessageCountEvent.collectLatest {
+                binding.editTextCount.text = "$it/15"
+
+                if (it != 0) {
+                    binding.editTextCount.text =
+                        com.depromeet.knockknock.ui.register.textChangeColor(
+                            binding.editTextCount,
+                            "#000000",
+                            0,
+                            it.toString().length
+                        )
+                }
+            }
         }
     }
 

@@ -132,7 +132,7 @@ class RegisterFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             kakaoAuthViewModel.message.collect{
-//                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
+                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
             }
 
         }
@@ -149,13 +149,13 @@ class RegisterFragment : Fragment() {
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 googleAuthViewModel.firebaseAuthWithGoogle(account.idToken!!)
-                Log.d("MYTAG", account.id.toString())
-                Log.d("MYTAG", account.idToken.toString())
-                Log.d("MYTAG", account.account.toString())
-                Log.d("MYTAG", account.email.toString())
-//                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
+                Log.d(TAG, account.id.toString())
+                Log.d(TAG, account.idToken.toString())
+                Log.d(TAG, account.account.toString())
+                Log.d(TAG, account.email.toString())
+                view?.findNavController()?.navigate(R.id.action_registerFragment_to_setProfileFragment)
             } catch (e: ApiException) {
-                e.localizedMessage?.let { Log.d("MYTAG", it) }
+                e.localizedMessage?.let { Log.d(TAG, it) }
             }
         }
     }
@@ -186,7 +186,7 @@ class RegisterFragment : Fragment() {
             //포커스가 주어졌을 때
             if (gainFocus) {binding.editTextMessageLayout.background = context!!.getDrawable(R.drawable.custom_backgroundgray03_radius10_line_gray08)
             }
-            
+
             else binding.editTextMessageLayout.background = context!!.getDrawable(R.drawable.custom_backgroundgray03_radius10)
         }
         binding.registerMain.setOnTouchListener { _, _ ->
