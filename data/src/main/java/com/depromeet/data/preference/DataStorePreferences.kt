@@ -2,7 +2,6 @@ package com.depromeet.data.preference
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.depromeet.data.R
@@ -12,7 +11,7 @@ class DataStorePreferences(
     private val context: Context
 ) {
 
-    private val Context.dataStore  by preferencesDataStore(name = context.getString(R.string.prefs_key))
+    private val Context.dataStore by preferencesDataStore(name = context.getString(R.string.prefs_key))
 
     // Token Variance
     private val accessTokenPreference = stringPreferencesKey("X-ACCESS-TOKEN")
