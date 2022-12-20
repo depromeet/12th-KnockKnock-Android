@@ -36,6 +36,10 @@ interface MainAPIService {
     @GET("/credentials/oauth/google")
     suspend fun getGoogleLogin(@Body body: GetGoogleLoginRequest): GetGoogleLoginResponse
 
+    // Oauth Google 로그인 링크 발금
+    @GET("/credentials/oauth/link/google")
+    suspend fun getGoogleLoginLink(): GetGoogleLoginLinkResponse
+
     // 유저 닉네임 변경
     @PUT("/users/nickname")
     suspend fun putUserNickname(@Body body: PutUserNicknameRequest): Unit
