@@ -32,9 +32,29 @@ class MainRepositoryImpl @Inject constructor(
         return handleApi { mainAPIService.getKakaoLogin(body = body).toDomain() }
     }
 
+    override suspend fun getKakaoLoginLink(): NetworkResult<KakaoLoginLinkResponse> {
+        return handleApi { mainAPIService.getKakaoLoginLink().toDomain() }
+    }
+
+    override suspend fun getGoogleLoginLink(): NetworkResult<GoogleLoginLinkResponse> {
+        return handleApi { mainAPIService.getGoogleLoginLink().toDomain() }
+    }
+
     override suspend fun getGoogleLogin(code: String): NetworkResult<GoogleLoginResponse> {
         val body = GetGoogleLoginRequest(code = code)
         return handleApi { mainAPIService.getGoogleLogin(body = body).toDomain() }
+    }
+
+    override suspend fun getUserProfile(): NetworkResult<UserProfileResponse> {
+        return handleApi { mainAPIService.getUserProfile().toDomain() }
+    }
+
+    override suspend fun putUserProfile(
+        nickName: String,
+        profilePath: String
+    ): NetworkResult<UserProfileResponse> {
+        val body = PutUserProfileRequest(nickname = nickName, profilePath = profilePath)
+        return handleApi { mainAPIService.putUserProfile(body = body).toDomain() }
     }
 
     override suspend fun putUserNickname(nickName: String): NetworkResult<Unit> {
@@ -45,6 +65,19 @@ class MainRepositoryImpl @Inject constructor(
     override suspend fun getUserNickname(nickName: String): NetworkResult<SearchUserNicknameResponse> {
         val body = GetUserNicknameRequest(nickName = nickName)
         return handleApi { mainAPIService.getUserNickname(body = body).toDomain() }
+    }
+
+    override suspend fun getFriendList(): NetworkResult<FriendListResponse> {
+        return handleApi { mainAPIService.getFriendList().toDomain() }
+    }
+
+    override suspend fun postFriend(userId: Int): NetworkResult<Unit> {
+        val body = PostFriendRequest(userId = userId)
+        return handleApi { mainAPIService.postFriend(body) }
+    }
+
+    override suspend fun getSearchUser(nickName: String): NetworkResult<UserListResponse> {
+        return handleApi { mainAPIService.getSearchUser(nickname = nickName).toDomain() }
     }
 
     override suspend fun getGroup(id: Int): NetworkResult<GroupResponse> {

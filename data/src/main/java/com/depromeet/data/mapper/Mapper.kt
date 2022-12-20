@@ -19,6 +19,25 @@ fun GetKakaoLoginResponse.toDomain() : KakaoLoginResponse {
     )
 }
 
+fun GetKakaoLoginLinkResponse.toDomain() : KakaoLoginLinkResponse {
+    return KakaoLoginLinkResponse(
+        data = this.data,
+        status = this.status,
+        success = this.success,
+        timeStamp = this.timeStamp
+    )
+}
+
+
+fun GetGoogleLoginLinkResponse.toDomain() : GoogleLoginLinkResponse {
+    return GoogleLoginLinkResponse(
+        data = this.data,
+        status = this.status,
+        success = this.success,
+        timeStamp = this.timeStamp
+    )
+}
+
 fun GetGoogleLoginResponse.toDomain() : GoogleLoginResponse {
     return GoogleLoginResponse(
         accessToken = this.accessToken,
@@ -27,9 +46,30 @@ fun GetGoogleLoginResponse.toDomain() : GoogleLoginResponse {
     )
 }
 
+fun GetUserProfileResponse.toDomain() : UserProfileResponse {
+    return UserProfileResponse(
+        id = id,
+        nickname = nickname,
+        profilePath = profilePath,
+        email = email
+    )
+}
+
 fun GetUserNicknameResponse.toDomain() : SearchUserNicknameResponse {
     return SearchUserNicknameResponse(
         userList = this.userList
+    )
+}
+
+fun GetFriendListResponse.toDomain() : FriendListResponse {
+    return FriendListResponse(
+        friendList = friendList
+    )
+}
+
+fun GetSearchUserResponse.toDomain() : UserListResponse {
+    return UserListResponse(
+        userList = userList
     )
 }
 

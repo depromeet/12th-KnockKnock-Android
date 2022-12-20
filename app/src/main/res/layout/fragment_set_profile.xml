@@ -29,38 +29,69 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <FrameLayout
-            android:id="@+id/proflie_frame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/nickname_frame"
-            app:layout_constraintEnd_toEndOf="parent"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/user_profile_edit_btn"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/make_profile_text">
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="119dp"
+            android:onClick="@{() -> vm.onProfileImageSetClicked()}">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/img_user_profile_happy" />
+            <ImageView
+                android:id="@+id/user_profile_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_user_profile_happy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/add_profile_button"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="right|bottom"
-                android:onClick="@{() -> vm.onProfileImageSetClicked()}"
-                android:src="@drawable/setprofile_add_button" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/img_user_profile_set_button"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        <FrameLayout-->
+        <!--            android:id="@+id/proflie_frame"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/nickname_frame"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/make_profile_text">-->
+
+        <!--            <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                android:id="@+id/profile_image"-->
+        <!--                android:layout_width="80dp"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                android:src="@drawable/img_user_profile_happy" />-->
+
+        <!--            <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                android:id="@+id/add_profile_button"-->
+        <!--                android:layout_width="24dp"-->
+        <!--                android:layout_height="24dp"-->
+        <!--                android:layout_gravity="right|bottom"-->
+        <!--                android:onClick="@{() -> vm.onProfileImageSetClicked()}"-->
+        <!--                android:src="@drawable/setprofile_add_button" />-->
 
 
-        </FrameLayout>
+        <!--        </FrameLayout>-->
 
         <LinearLayout
             android:id="@+id/nickname_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="246dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,202 +104,233 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_bold"
-                android:text="@string/setprofile_nickname" />
+                android:text="@string/setprofile_nickname"
+                android:layout_marginBottom="3dp"/>
 
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:id="@+id/example_content"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColorHint="@color/gray05"-->
-<!--                app:boxBackgroundColor="@color/gray03"-->
-<!--                app:boxBackgroundMode="filled"-->
-<!--                app:boxCornerRadiusBottomEnd="10dp"-->
-<!--                app:boxCornerRadiusBottomStart="10dp"-->
-<!--                app:boxCornerRadiusTopEnd="10dp"-->
-<!--                app:boxCornerRadiusTopStart="10dp"-->
-<!--                app:boxStrokeWidth="0dp"-->
-<!--                app:boxStrokeWidthFocused="0dp"-->
-<!--                app:counterEnabled="true"-->
-<!--                app:counterMaxLength="15"-->
-<!--                app:endIconMode="clear_text"-->
-<!--                app:layout_constraintBottom_toTopOf="@+id/test_alarm_button"-->
-<!--                app:hintEnabled="false">-->
+            <!--            <com.google.android.material.textfield.TextInputLayout-->
+            <!--                android:id="@+id/example_content"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColorHint="@color/gray05"-->
+            <!--                app:boxBackgroundColor="@color/gray03"-->
+            <!--                app:boxBackgroundMode="filled"-->
+            <!--                app:boxCornerRadiusBottomEnd="10dp"-->
+            <!--                app:boxCornerRadiusBottomStart="10dp"-->
+            <!--                app:boxCornerRadiusTopEnd="10dp"-->
+            <!--                app:boxCornerRadiusTopStart="10dp"-->
+            <!--                app:boxStrokeWidth="0dp"-->
+            <!--                app:boxStrokeWidthFocused="0dp"-->
+            <!--                app:counterEnabled="true"-->
+            <!--                app:counterMaxLength="15"-->
+            <!--                app:endIconMode="clear_text"-->
+            <!--                app:layout_constraintBottom_toTopOf="@+id/test_alarm_button"-->
+            <!--                app:hintEnabled="false">-->
 
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:fontFamily="@font/pretendard_medium"-->
-<!--                    android:hint="@string/setprofile_nickname_hint"-->
-<!--                    android:paddingTop="10dp"-->
-<!--                    android:privateImeOptions="defaultInputMode=korean"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="16sp" />-->
-<!--                -->
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
+            <!--                <com.google.android.material.textfield.TextInputEditText-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:layout_marginStart="16dp"-->
+            <!--                    android:layout_marginEnd="16dp"-->
+            <!--                    android:fontFamily="@font/pretendard_medium"-->
+            <!--                    android:hint="@string/setprofile_nickname_hint"-->
+            <!--                    android:paddingTop="10dp"-->
+            <!--                    android:privateImeOptions="defaultInputMode=korean"-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    android:textSize="16sp" />-->
+            <!--                -->
+            <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <EditText
-                android:id="@+id/user_name_contents"
-                style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:background="@drawable/custom_backgroundwhite_radius16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/user_name_title"
-                app:layout_constraintStart_toStartOf="parent">
-            </EditText>
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
+
+
+                <EditText
+                    android:id="@+id/user_name_contents"
+                    style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/setprofile_nickname_hint"
+                    android:text="@={vm.inputContent}"
+                    android:maxLength="15"
+                    android:layout_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_name_title" />
+
+
+                <TextView
+                    android:id="@+id/edit_text_count"
+                    style="Theme.AppCompat.TextView.Regular.Black.Size16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/gray05"
+                    android:text="0/15">
+
+                </TextView>
+
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/nickname_frame">
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/linearLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="vertical"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/nickname_frame">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="@string/setprofile_profile_pic"
-                android:textColor="@color/gray09"
-                android:textSize="18sp" />
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="16dp"-->
+        <!--                android:layout_marginBottom="10dp"-->
+        <!--                android:fontFamily="@font/pretendard_bold"-->
+        <!--                android:text="@string/setprofile_profile_pic"-->
+        <!--                android:textColor="@color/gray09"-->
+        <!--                android:textSize="18sp" />-->
 
-            <LinearLayout
-                android:id="@+id/profile_choose_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal">
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/profile_choose_1"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="16dp"-->
+        <!--                android:layout_marginEnd="16dp"-->
+        <!--                android:orientation="horizontal">-->
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_happy_dim"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_happy_dim" />
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_happy_dim"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_happy_dim" />-->
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_disgusting"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_disgusting" />
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_disgusting"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_disgusting" />-->
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_cry"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_sad" />
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_cry"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_sad" />-->
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_angry"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_angry" />
-
-
-
-            </LinearLayout>
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_angry"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_angry" />-->
 
 
-            <LinearLayout
-                android:id="@+id/profile_choose_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_pray"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_pray" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_wink"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_wink" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_greedy"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_greedy" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_sunglass"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_sunglass" />
+        <!--            </LinearLayout>-->
 
 
-            </LinearLayout>
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/profile_choose_2"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="16dp"-->
+        <!--                android:layout_marginTop="12dp"-->
+        <!--                android:layout_marginEnd="16dp"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_pray"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_pray" />-->
+
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_wink"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_wink" />-->
+
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_greedy"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_greedy" />-->
+
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_sunglass"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_sunglass" />-->
 
 
-            <LinearLayout
-                android:id="@+id/profile_choose_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_hear"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_heart" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_fire"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_fire" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_firecrackers"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_firecrackers" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_eyes"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/img_user_profile_eyes" />
+        <!--            </LinearLayout>-->
 
 
-            </LinearLayout>
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/profile_choose_3"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="16dp"-->
+        <!--                android:layout_marginTop="12dp"-->
+        <!--                android:layout_marginEnd="16dp"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_hear"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_heart" />-->
+
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_fire"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_fire" />-->
+
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_firecrackers"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_firecrackers" />-->
+
+        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                    android:id="@+id/profile_eyes"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="80dp"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:src="@drawable/img_user_profile_eyes" />-->
 
 
-        </LinearLayout>
+        <!--            </LinearLayout>-->
+
+
+        <!--        </LinearLayout>-->
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/send_card_view"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
+            android:layout_height="57dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@color/main_yellow_light_mode"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -285,7 +347,6 @@
                 android:text="선택 완료!"
                 android:textColor="@color/black"
                 android:lineSpacingExtra="4sp"
-                android:translationY="-1.86sp"
                 />
 
 

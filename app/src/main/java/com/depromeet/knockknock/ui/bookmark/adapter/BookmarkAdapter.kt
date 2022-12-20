@@ -48,26 +48,25 @@ class BookmarkAdapter(
                 binding.holder!!.isExpanded = !(binding.holder!!.isExpanded)
 
                 if(binding.holder!!.isExpanded) {
-                    binding.contentsText.apply {
-                        this.maxLines = 9999
+                    binding.expandBtn.apply {
                         this.text = context.getString(R.string.shorts_contents)
                     }
+                    binding.contentsText.maxLines = 9999
                 }
                 else {
-                    binding.contentsText.apply {
-                        this.maxLines = 2
+                    binding.expandBtn.apply {
                         this.text = context.getString(R.string.more_contents)
                     }
+                    binding.contentsText.maxLines = 2
                 }
             }
         } }
-    }
+}
 
-    internal object BookmarkItemDiffCallback : DiffUtil.ItemCallback<Bookmark>() {
-        override fun areItemsTheSame(oldItem: Bookmark, newItem: Bookmark) =
-            oldItem.bookmarkId == newItem.bookmarkId
+internal object BookmarkItemDiffCallback : DiffUtil.ItemCallback<Bookmark>() {
+    override fun areItemsTheSame(oldItem: Bookmark, newItem: Bookmark) =
+        oldItem.bookmarkId == newItem.bookmarkId
 
-        override fun areContentsTheSame(oldItem: Bookmark, newItem: Bookmark) =
-            oldItem == newItem
-    }
+    override fun areContentsTheSame(oldItem: Bookmark, newItem: Bookmark) =
+        oldItem == newItem
 }

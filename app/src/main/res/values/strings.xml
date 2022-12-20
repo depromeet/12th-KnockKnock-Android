@@ -149,4 +149,20 @@
     <string name="user_declare">유저 차단하기</string>
     <string name="report">신고하기</string>
 
+    <!--알림방 설정-->
+    <string name="setting_alarm_title">알림방 설정</string>
+    <string name="category">카테고리</string>
+    <string name="detail_information">상세정보</string>
+    <string name="member">멤버</string>
+    <string name="add_friend">친구 추가</string>
+    <string name="remove_room">알림방 없애기</string>
+    <string name="invite_room_link">이 알림방에 초대하기</string>
+    <string name="exit_member">내보내기</string>
+    <string name="edit">편집</string>
+
+    <!--카테고리 설정-->
+    <string name="category_title">카테고리 설정</string>
+    <string name="category_description">어떤 그룹인가요?</string>
+    <string name="okay">완료</string>
+
 </resources>
