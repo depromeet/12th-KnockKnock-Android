@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.depromeet.knockknock.ui.editroomdetails.EditRoomDetailsViewModel" />
@@ -11,15 +12,220 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/edit_room_details_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.editroomdetails.EditRoomDetailsFragment">
+        android:background="@color/white">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/ToolBarStyle" />
+
+        <LinearLayout
+            android:id="@+id/room_name_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="118dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4">
+
+            <TextView
+                android:id="@+id/room_name_title"
+                style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/edit_details_room_name" />
+
+
+            <LinearLayout
+                android:id="@+id/room_name_edit_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_backgroundwhite_radius16"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/room_name_contents"
+                    style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:hint="@string/edit_details_room_name_hint"
+                    android:maxLength="18"
+                    android:text="@={viewmodel.inputRoomName}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_name_title" />
+
+
+                <TextView
+                    android:id="@+id/room_name_count"
+                    style="@style/Theme.AppCompat.TextView.Regular.Black.Size14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="0/18"
+                    android:textColor="@color/gray05">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/room_description_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_name_frame"
+            app:layout_constraintVertical_bias="0.4">
+
+            <TextView
+                android:id="@+id/room_description_title"
+                style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/edit_details_room_description" />
+
+
+            <LinearLayout
+                android:id="@+id/room_description_edit_layout"
+                android:layout_width="match_parent"
+                android:layout_height="106dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_backgroundwhite_radius16"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/room_description_content"
+                    style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:gravity="top"
+                    android:hint="@string/edit_details_room_description_hint"
+                    android:maxLength="80"
+                    android:text="@={viewmodel.inputRoomDescription}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_name_title" />
+
+                <TextView
+                    android:id="@+id/room_description_count"
+                    style="@style/Theme.AppCompat.TextView.Regular.Black.Size14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:layout_marginEnd="16dp"
+                    android:text="0/80"
+                    android:paddingTop="79dp"
+                    android:textColor="@color/gray05">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/room_public_title"
+            style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/edit_details_public_scope"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_description_frame" />
+
+        <TextView
+            android:id="@+id/room_public_description"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:layout_marginTop="3dp"
+            style="@style/Theme.AppCompat.TextView.Medium.Black.Size16"
+            app:layout_constraintTop_toBottomOf="@id/room_public_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:drawableStart="@drawable/ic_lock"
+            android:layout_marginStart="16dp"
+            android:text="@string/edit_details_protected"/>
+
+
+        <Switch
+            android:id="@+id/alarm_settings_new_push_switch"
+            android:layout_width="wrap_content"
+            style="@style/Theme.AppCompat.Alarm.Settings.MarginEnd"
+            android:layout_height="32dp"
+            app:layout_constraintTop_toTopOf="@id/room_public_description"
+            app:layout_constraintBottom_toBottomOf="@id/room_public_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:track="@drawable/switch_track_selector"
+            android:thumb="@drawable/switch_thumb_selector"
+            android:checked="@{viewmodel.roomPublicPermitted}"
+            android:onCheckedChanged="@{(view, checked) -> viewmodel.onRoomPublicToggled(checked)}"/>
+
+
+        <LinearLayout
+            android:id="@+id/room_background_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_public_description"
+            app:layout_constraintVertical_bias="0.4">
+
+            <TextView
+                android:id="@+id/room_background_title"
+                style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/edit_details_room_background" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/background_recycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/room_background_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:overScrollMode="never"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/holder_edit_room_background">
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
