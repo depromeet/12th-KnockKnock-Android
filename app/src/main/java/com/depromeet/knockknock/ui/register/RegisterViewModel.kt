@@ -41,7 +41,7 @@ class RegisterViewModel @Inject constructor(
 
     fun oauthLogin(idToken: String, provider: String) {
         baseViewModelScope.launch {
-            Log.d("response!!!!", idToken)
+//            Log.d("response!!!!", idToken)
             oauthLoginUsecase.invoke(idToken = idToken, provider = provider)
                 .onSuccess {
                     _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginSuccess) }

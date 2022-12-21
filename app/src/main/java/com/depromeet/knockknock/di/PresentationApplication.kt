@@ -20,7 +20,7 @@ class PresentationApplication :Application(){
         // 다크모드 비활성화
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         KakaoSdk.init(this, "6776355fa5aec1a02126ce3817cce784")
-        val keyHash = Utility.getKeyHash(this)//onCreate 안에 입력해주자
+        val keyHash = Utility.getKeyHash(this)
         Log.d("HashKey", keyHash)
     }
 }

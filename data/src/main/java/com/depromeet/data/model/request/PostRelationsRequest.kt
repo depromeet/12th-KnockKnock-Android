@@ -2,6 +2,7 @@ package com.depromeet.data.model.request
 
 import com.google.gson.annotations.SerializedName
 
-data class GetUserNicknameRequest(
-    @SerializedName("nickname") val nickName: String
+
+data class PostRelationsRequest(
+    @SerializedName("user_id") val user_id: Int
 )
