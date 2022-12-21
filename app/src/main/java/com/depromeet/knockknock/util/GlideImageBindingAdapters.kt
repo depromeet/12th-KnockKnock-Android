@@ -29,3 +29,19 @@ fun ImageView.bindRoomImageImage(roomImgUri: String) {
         .transform(CenterCrop(), RoundedCorners(300))
         .into(this)
 }
+
+@BindingAdapter("roomBackgroundImage")
+fun ImageView.bindroomBackgroundImage(backgroundImageUri: String) {
+    Glide.with(context)
+        .load(backgroundImageUri)
+        .transform(CenterCrop(), RoundedCorners(50))
+        .into(this)
+}
+
+@BindingAdapter("roomThumbnailImage")
+fun ImageView.bindroomThumbnailImage(thumbnailImageUri: String) {
+    Glide.with(context)
+        .load(thumbnailImageUri)
+        .transform(CenterCrop(), RoundedCorners(50))
+        .into(this)
+}
