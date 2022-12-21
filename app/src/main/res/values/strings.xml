@@ -171,6 +171,7 @@
     <string name="edit_details_room_background">배경화면 지정</string>
     <string name="edit_details_room_thumbnail">썸네일 지정</string>
     <string name="edit_details_room_add_photo">사진 추가하기</string>
+    <string name="next">다음</string>
 
     <!--카테고리 설정-->
     <string name="category_title">카테고리 설정</string>
