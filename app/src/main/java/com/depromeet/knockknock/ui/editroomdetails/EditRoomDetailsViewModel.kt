@@ -21,6 +21,9 @@ class EditRoomDetailsViewModel @Inject constructor(
     private val _navigationHandler: MutableSharedFlow<EditRoomDetailsNavigationAction> = MutableSharedFlow<EditRoomDetailsNavigationAction>()
     val navigationHandler: SharedFlow<EditRoomDetailsNavigationAction> = _navigationHandler.asSharedFlow()
 
+
+    private val _saveBtnEnable: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+    val saveBtnEnable: StateFlow<Boolean> = _saveBtnEnable.asStateFlow()
     var inputRoomName = MutableStateFlow<String>("")
     var inputRoomNameCountEvent = MutableStateFlow<Int>(0)
     var inputRoomDescription = MutableStateFlow<String>("")
@@ -36,11 +39,9 @@ class EditRoomDetailsViewModel @Inject constructor(
     }
 
     override fun onThumbnailClicked(thumbnailId: Int) {
-        TODO("Not yet implemented")
     }
 
     override fun onSaveClicked() {
-        TODO("Not yet implemented")
     }
 
     init {

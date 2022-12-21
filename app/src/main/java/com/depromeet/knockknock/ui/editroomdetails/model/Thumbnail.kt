@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.category.model
+package com.depromeet.knockknock.ui.editroomdetails.model
 
 data class Thumbnail(
     val thumbnailId: Int,
