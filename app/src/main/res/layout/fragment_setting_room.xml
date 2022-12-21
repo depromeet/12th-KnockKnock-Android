@@ -88,6 +88,7 @@
             app:layout_constraintTop_toTopOf="@id/detail_info_title"
             app:layout_constraintBottom_toBottomOf="@id/detail_info_title"
             app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> viewmodel.onEditDetailClicked()}"
             android:text="@string/edit">
         </TextView>
 

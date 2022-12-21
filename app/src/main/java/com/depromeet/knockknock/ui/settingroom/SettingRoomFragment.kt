@@ -42,7 +42,7 @@ class SettingRoomFragment : BaseFragment<FragmentSettingRoomBinding, SettingRoom
                     is SettingRoomNavigationAction.NavigateToAddMember -> {}
                     is SettingRoomNavigationAction.NavigateToExportMember -> {}
                     is SettingRoomNavigationAction.NavigateToRemove -> {}
-                    is SettingRoomNavigationAction.NavigateToEditDetail -> {}
+                    is SettingRoomNavigationAction.NavigateToEditDetail -> {navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToEditRoomDetailsFragment())}
                 }
             }
         }
