@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/onboardFragment">
 
     <action
         android:id="@+id/action_main_fragment"
@@ -129,7 +129,9 @@
         android:label="OnboardFragment" >
         <action
             android:id="@+id/action_onboardFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:popExitAnim="@anim/exit_to_right"
+            app:enterAnim="@anim/enter_from_right" />
     </fragment>
 
     <fragment
@@ -138,7 +140,20 @@
         android:label="RegisterFragment" >
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popExitAnim="@anim/exit_to_right"
+            app:enterAnim="@anim/enter_from_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/setProfileFragment"
+        android:name="com.depromeet.knockknock.ui.setprofile.SetProfileFragment"
+        android:label="SetProfileFragment" >
+        <action
+            android:id="@+id/action_setProfileFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popExitAnim="@anim/exit_to_right"
+            app:enterAnim="@anim/enter_from_right" />
     </fragment>
 
     <fragment

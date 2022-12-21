@@ -11,7 +11,7 @@ class DataStorePreferences(
     private val context: Context
 ) {
 
-    private val Context.dataStore by preferencesDataStore(name = context.getString(R.string.prefs_key))
+    private val Context.dataStore by preferencesDataStore(name = "knockknock_prefs")
 
     // Token Variance
     private val accessTokenPreference = stringPreferencesKey("X-ACCESS-TOKEN")

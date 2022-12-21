@@ -32,8 +32,8 @@ fun CardView.bindImgLoadVisible(uri: String) {
 }
 
 @BindingAdapter("deleteTextVisible")
-fun TextView.bindDeleteTextVisible(textLength: Int) {
-    if (textLength == 0) {
+fun TextView.bindDeleteTextVisible(text: Int) {
+    if (text == 0) {
         this.setTextColor(Color.parseColor("#BDBDBD"))
         this.isClickable = false
     } else {

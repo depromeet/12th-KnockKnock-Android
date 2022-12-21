@@ -32,6 +32,10 @@ interface MainAPIService {
     @GET("/api/v1/credentials/oauth/link/google")
     suspend fun getGoogleLogin(@Body body: GetGoogleLoginRequest): GetGoogleLoginResponse
 
+    // Oauth Login 로그인
+    @POST("/api/v1/credentials/login")
+    suspend fun postOauthLogin(@Query("id_token") idToken: String, @Query("provider") provider: String): PostOauthLoginResponse
+
     // 유저 프로필 가져오기
     @GET("/api/v1/users/profile")
     suspend fun getUserProfile(): GetUserProfileResponse

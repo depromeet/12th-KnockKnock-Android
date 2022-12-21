@@ -6,16 +6,8 @@
     <data>
 
         <variable
-            name="kakaoRegisterViewModel"
-            type="com.depromeet.knockknock.ui.register.KakaoAuthViewModel" />
-
-        <variable
-            name="googleRegisterViewModel"
-            type="com.depromeet.knockknock.ui.register.GoogleAuthViewModel" />
-
-        <variable
-            name="testAlarmViewModel"
-            type="com.depromeet.knockknock.ui.register.TestAlarmViewModel" />
+            name="viewmodel"
+            type="com.depromeet.knockknock.ui.register.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,12 +63,11 @@
                 android:fontFamily="@font/pretendard_regular"
                 android:lineSpacingExtra="3sp"
                 android:text="새로쓰기"
-                android:onClick="@{_ -> testAlarmViewModel.onDeleteEditTextMessageClicked()}"
-                app:deleteTextVisible="@{testAlarmViewModel.editTextMessageCountEvent}"
+                android:onClick="@{() -> viewmodel.deleteMessage()}"
+                app:deleteBtnTextVisible="@{viewmodel.messageText}"
                 android:textColor="#BDBDBD"
                 android:translationY="-1.45sp"
-                android:layout_gravity="right"
-                />
+                android:layout_gravity="right" />
         </RelativeLayout>
 
         <androidx.cardview.widget.CardView
@@ -117,7 +108,7 @@
                     android:maxLength="200"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
-                    android:text="@={testAlarmViewModel.inputContent}"
+                    android:text="@={viewmodel.messageText}"
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:textColorHint="#757575"
@@ -153,7 +144,7 @@
             android:background="@drawable/custom_white_radius20"
             android:backgroundTint="#F6F6F6"
             android:fontFamily="@font/pretendard_medium"
-            android:onClick="@{() -> testAlarmViewModel.onSendTestPushAlarmClicked()}"
+            android:onClick="@{() -> viewmodel.onSendTestPushAlarmClicked()}"
             android:text="@string/register_send"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -189,7 +180,8 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/google_register_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> viewmodel.onKakaoLoginClicked()}"/>
 
         <ImageButton
             android:id="@+id/google_register_button"
@@ -205,7 +197,9 @@
             android:src="@drawable/onboard_google_register"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> viewmodel.onGoogleLoginClicked()}"/>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,11 +13,9 @@ interface  MainRepository {
 
     suspend fun getKakaoLogin(code: String): NetworkResult<KakaoLoginResponse>
 
-    suspend fun getKakaoLoginLink() : NetworkResult<KakaoLoginLinkResponse>
-
-    suspend fun getGoogleLoginLink() : NetworkResult<GoogleLoginLinkResponse>
-
     suspend fun getGoogleLogin(code: String): NetworkResult<GoogleLoginResponse>
+
+    suspend fun postOauthLogin(idToken: String, provider: String): NetworkResult<OauthLoginResponse>
 
     suspend fun getUserProfile(): NetworkResult<UserProfileResponse>
 

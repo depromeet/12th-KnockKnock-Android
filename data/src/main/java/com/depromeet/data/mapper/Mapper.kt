@@ -46,6 +46,13 @@ fun GetGoogleLoginResponse.toDomain() : GoogleLoginResponse {
     )
 }
 
+fun PostOauthLoginResponse.toDomain() : OauthLoginResponse {
+    return OauthLoginResponse(
+        accessToken = this.accessToken,
+        refreshToken = this.refreshToken
+    )
+}
+
 fun GetUserProfileResponse.toDomain() : UserProfileResponse {
     return UserProfileResponse(
         id = id,

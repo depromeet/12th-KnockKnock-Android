@@ -1,7 +1,6 @@
 package com.depromeet.data.interceptor
 
-import com.depromeet.data.DataApplication.Companion.dataStorePreferences
-import kotlinx.coroutines.runBlocking
+import com.depromeet.data.DataApplication
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -12,13 +11,16 @@ class XAccessTokenInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder: Request.Builder = chain.request().newBuilder()
 
-        runBlocking {
-            dataStorePreferences.getAccessToken()?.let { accessToken ->
-                builder.addHeader("Bearer ", accessToken)
-                return@let chain.proceed(builder.build())
+        try {
+            DataApplication.sSharedPreferences.getString("access-token", null).let { token ->
+                token?.let {
+                    builder.addHeader("Bearer ", it)
+                    return chain.proceed(builder.build())
+                }
             }
+        } catch (e: Exception) {
+            return chain.proceed(chain.request())
         }
-
         return chain.proceed(chain.request())
     }
 }

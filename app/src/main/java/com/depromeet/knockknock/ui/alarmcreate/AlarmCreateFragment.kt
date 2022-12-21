@@ -72,10 +72,10 @@ class AlarmCreateFragment :
                     is AlarmCreateNavigationAction.NavigateToRecommendationMessageText -> addRecommendationMessage(
                         it.message
                     )
-                    is AlarmCreateNavigationAction.NavigateToPreview ->
-                        navigate(
-                            AlarmCreateFragmentDirections.actionAlarmCreateFragmentToPreviewFragment(it.title, it.message, it.uri)
-                        )
+                    is AlarmCreateNavigationAction.NavigateToPreview -> {}
+//                        navigate(
+//                            AlarmCreateFragmentDirections.actionAlarmCreateFragmentToPreviewFragment(it.title, it.message, it.uri)
+//                        )
                     is AlarmCreateNavigationAction.NavigateToPushAlarm -> navController.popBackStack()
                 }
             }
