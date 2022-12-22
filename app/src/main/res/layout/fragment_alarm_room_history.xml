@@ -7,13 +7,13 @@
 
         <variable
             name="vm"
-            type="com.depromeet.knockknock.ui.alarmroomdetail.AlarmRoomDetailViewModel" />
+            type="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@drawable/alarm_room_detail_bg1">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,14 +24,13 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
             android:src="@drawable/secret"
-            app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent">
 
         </ImageView>
@@ -41,9 +40,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
-            android:paddingEnd="4dp"
             android:paddingStart="4dp"
             android:paddingTop="16dp"
+            android:paddingEnd="4dp"
             android:paddingBottom="16dp"
             android:text="audi A6"
             android:textSize="18dp"
@@ -83,6 +82,55 @@
             app:layout_constraintTop_toTopOf="@id/toolbar">
 
         </ImageView>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_backgroundwhiteblack_radius10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+
+            <TextView
+                android:id="@+id/preview_message_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLength="25"
+                android:text="이 방은 어떤 방인가요?"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/item_recycle_bundle_message" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

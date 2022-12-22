@@ -5,9 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
-import com.depromeet.knockknock.databinding.FragmentAlarmRoomBinding
 import com.depromeet.knockknock.databinding.FragmentNotificationBinding
-import com.depromeet.knockknock.ui.alarmroom.AlarmRoomViewModel
 import com.depromeet.knockknock.ui.notification.adapter.NotificationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
