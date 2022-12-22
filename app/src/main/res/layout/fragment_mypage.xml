@@ -24,7 +24,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="32dp"
             android:src="@drawable/img_default_user_profile"
-            android:scaleType="centerCrop">
+            android:scaleType="centerCrop"
+            app:glide1000="@{viewmodel.userProfile.profile_path}">
         </ImageView>
 
         <TextView
@@ -35,7 +36,8 @@
             app:layout_constraintTop_toBottomOf="@id/img_user_profile"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:text="@{viewmodel.userProfile.nickname}">
         </TextView>
 
         <TextView
@@ -46,7 +48,8 @@
             app:layout_constraintTop_toBottomOf="@id/user_name_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:text="@{viewmodel.userProfile.email}">
         </TextView>
 
         <androidx.constraintlayout.widget.ConstraintLayout

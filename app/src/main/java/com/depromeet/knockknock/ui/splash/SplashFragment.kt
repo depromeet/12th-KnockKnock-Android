@@ -9,6 +9,7 @@ import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentMypageBinding
 import com.depromeet.knockknock.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
@@ -27,9 +28,18 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(R.la
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
+        viewModel.loginCheck()
     }
 
     override fun initDataBinding() {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.navigationHandler.collectLatest {
+                when(it) {
+                    is SplashNavigationAction.NavigateToFirstLogin -> navigate(SplashFragmentDirections.actionSplashFragmentToOnboardFragment())
+                    is SplashNavigationAction.NavigateToAlreadyLogin -> navigate(SplashFragmentDirections.actionMainFragment())
+                }
+            }
+        }
     }
 
     override fun initAfterBinding() {
