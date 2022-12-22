@@ -1,19 +1,8 @@
 package com.depromeet.data.interceptor
 
-import com.depromeet.data.DataApplication
-import com.depromeet.data.api.ApiClient.BASE_URL
-import com.depromeet.data.api.MainAPIService
-import com.depromeet.data.api.handleApi
-import com.depromeet.data.model.error.ErrorResponseImpl
 import com.depromeet.data.model.error.InvalidAccessTokenException
-import com.depromeet.data.model.request.PostRefreshTokenRequest
-import com.depromeet.domain.onError
-import com.depromeet.domain.onSuccess
-import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 /*
@@ -38,26 +27,26 @@ class BearerInterceptor : Interceptor {
                 errorResponse = errorResponse
             )
             if(errorException is InvalidAccessTokenException) {
-                runBlocking {
-                    //토큰 갱신 api 호출
-                    DataApplication.dataStorePreferences.getRefreshToken()?.let {
-                        val request = PostRefreshTokenRequest(it)
-
-                        val result = handleApi {
-                            Retrofit.Builder()
-                                .baseUrl(BASE_URL)
-                                .addConverterFactory(GsonConverterFactory.create())
-                                .build()
-                                .create(MainAPIService::class.java).postRefreshToken(request)
-                        }
-
-                        result.onSuccess { response ->
-                            response.accessToken.let { token ->
-                                DataApplication.dataStorePreferences.setOauthToken(token, response.refreshToken)
-                                accessToken = token } }
-                            .onError { accessToken = "" }
-                    }
-                }
+//                runBlocking {
+//                    //토큰 갱신 api 호출
+//                    DataApplication.dataStorePreferences.getRefreshToken()?.let {
+//                        val request = PostRefreshTokenRequest(it)
+//
+//                        val result = handleApi {
+//                            Retrofit.Builder()
+//                                .baseUrl(BASE_URL)
+//                                .addConverterFactory(GsonConverterFactory.create())
+//                                .build()
+//                                .create(MainAPIService::class.java).postRefreshToken(request)
+//                        }
+//
+//                        result.onSuccess { response ->
+//                            response.accessToken.let { token ->
+//                                DataApplication.dataStorePreferences.setOauthToken(token, response.refreshToken)
+//                                accessToken = token } }
+//                            .onError { accessToken = "" }
+//                    }
+//                }
             }
             val newRequest = chain.request().newBuilder().addHeader("Bearer ", accessToken)
                 .build()

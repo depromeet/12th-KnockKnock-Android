@@ -28,3 +28,14 @@ fun textChangeColor(
 
     return builder
 }
+
+@BindingAdapter("deleteBtnTextVisible")
+fun TextView.bindDeleteBtnTextVisible(text: String) {
+    if (text.isEmpty()) {
+        this.setTextColor(Color.parseColor("#BDBDBD"))
+        this.isClickable = false
+    } else {
+        this.setTextColor(Color.parseColor("#212121"))
+        this.isClickable = true
+    }
+}

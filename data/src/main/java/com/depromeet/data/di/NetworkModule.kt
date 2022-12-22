@@ -34,24 +34,23 @@ object NetworkModule {
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
-            .addInterceptor(ErrorResponseInterceptor()) // Error Response
-            .addInterceptor(BearerInterceptor()) // Refresh Token
+//            .addInterceptor(ErrorResponseInterceptor()) // Error Response
+//            .addInterceptor(BearerInterceptor()) // Refresh Token
             .build()
     } else {
         OkHttpClient.Builder()
             .readTimeout(5000, TimeUnit.MILLISECONDS)
             .connectTimeout(5000, TimeUnit.MILLISECONDS)
             .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
-            .addInterceptor(ErrorResponseInterceptor()) // Error Response
-            .addInterceptor(BearerInterceptor()) // Refresh Token
+//            .addInterceptor(ErrorResponseInterceptor()) // Error Response
+//            .addInterceptor(BearerInterceptor()) // Refresh Token
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }
 
     @Singleton
     @Provides
-    @Named("Main")
-    fun provideRetrofit(@Named("Main") okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
@@ -59,7 +58,6 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    @Named("Main")
-    fun provideMainAPIService(@Named("Main") retrofit: Retrofit) : MainAPIService =
+    fun provideMainAPIService(retrofit: Retrofit) : MainAPIService =
         retrofit.create(MainAPIService::class.java)
 }

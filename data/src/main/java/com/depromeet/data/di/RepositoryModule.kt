@@ -15,9 +15,7 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun provideMainRepository(
-        @Named("Main") mainAPIService: MainAPIService
-    ): MainRepository {
+    fun provideMainRepository(mainAPIService: MainAPIService): MainRepository {
         return MainRepositoryImpl(mainAPIService)
     }
 }

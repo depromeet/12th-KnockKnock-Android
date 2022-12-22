@@ -1,13 +1,15 @@
 package com.depromeet.data.api
 
 import com.depromeet.data.model.request.*
-import com.depromeet.data.model.response.*
-import com.depromeet.domain.model.Admissions
-import com.depromeet.domain.model.Category
-import com.depromeet.domain.model.CategoryResponse
+import com.depromeet.data.model.response.BaseResponse
+import com.depromeet.data.model.response.PagingGroupList
+import com.depromeet.data.model.response.PagingNotification
+import com.depromeet.data.model.response.PagingNotificationList
+import com.depromeet.domain.model.*
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -16,145 +18,267 @@ import retrofit2.http.Query
 
 interface MainAPIService {
 
-    // FCM 디바이스 토큰 관련
-    @POST("/notifications/token")
-    suspend fun postNotificationToken(@Body body: PostNotifcationTokenRequest): Unit
+    // 등록 요청 <- 1번 false일 경우
+    @POST("/api/v1/credentials/register")
+    suspend fun postRegister(
+        @Query("id_token") idToken: String,
+        @Query("provider") provider: String,
+        @Body body: PostRegisterRequest
+    ): BaseResponse<LoginResponse>
 
-    // Refresh Token 재발급
+    // 토큰 리프래쉬
     @POST("/api/v1/credentials/refresh")
-    suspend fun postRefreshToken(@Body body: PostRefreshTokenRequest): PostRefreshTokenResponse
+    suspend fun postRefreshToken(@Body body: PostRefreshTokenRequest): BaseResponse<LoginResponse>
 
-    // Oauth Kakao 로그인
-    @GET("/api/v1/credentials/oauth/link/kakao")
-    suspend fun getKakaoLogin(@Body body: GetKakaoLoginRequest): GetKakaoLoginResponse
+    // 로그인 요청 <- 가입한 유저 <- 1번 true일 경우
+    @POST("/api/v1/credentials/login")
+    suspend fun postLogin(@Query("id_token") idToken: String, @Query("provider") provider: String): BaseResponse<LoginResponse>
 
-    // Oauth Google 로그인
-    @GET("/api/v1/credentials/oauth/link/google")
-    suspend fun getGoogleLogin(@Body body: GetGoogleLoginRequest): GetGoogleLoginResponse
+    // 토큰 검증 <- 로그인시 제일 처음 1번
+    @GET("/api/v1/credentials/oauth/valid/register")
+    suspend fun getTokenValidation(@Query("id_token") idToken: String, @Query("provider") provider: String): BaseResponse<isRegistedResponse>
 
-    // 유저 프로필 가져오기
+    // 회원 탈퇴
+    @GET("/api/v1/credentials/me")
+    suspend fun deleteUer(@Query("oauth_access_token") oauth_access_token: String): BaseResponse<Unit>
+
+    // 유저 프로필
     @GET("/api/v1/users/profile")
-    suspend fun getUserProfile(): GetUserProfileResponse
+    suspend fun getUserProfile(): BaseResponse<UserProfile>
 
-    // 유저 프로필 변경하기
+    // 유저 프로필 변경
     @PUT("/api/v1/users/profile")
-    suspend fun putUserProfile(@Body body: PutUserProfileRequest): GetUserProfileResponse
+    suspend fun putUserProfile(@Body body: PutUserProfileRequest): BaseResponse<UserProfile>
 
-    // 유저 닉네임 변경
-    @PUT("/api/v1/users/nickname")
-    suspend fun putUserNickname(@Body body: PutUserNicknameRequest): Unit
+    // 닉네임 변경
+    @PUT("/api/v1/users/profile")
+    suspend fun putUserNickname(@Body body: PutUserNicknameRequest): BaseResponse<Unit>
 
-    // 유저 닉네임 검색
-    @GET("/users/nickname")
-    suspend fun getUserNickname(@Body body: GetUserNicknameRequest): GetUserNicknameResponse
-
-    // 내 친구 리스트 가져오기
+    // 내 친구 리스트
     @GET("/api/v1/relations")
-    suspend fun getFriendList(): GetFriendListResponse
+    suspend fun getRelations(): BaseResponse<FriendList>
 
-    // 친구 요청 보내기
+    // 친구요청
     @POST("/api/v1/relations")
-    suspend fun postFriend(@Body body: PostFriendRequest): Unit
+    suspend fun postRelations(@Body body: PostRelationsRequest): BaseResponse<Unit>
 
     // 유저 닉네임 검색
     @GET("/api/v1/users/nickname/{nickname}")
-    suspend fun getSearchUser(@Path("nickname") nickname: String): GetSearchUserResponse
+    suspend fun getUsersNickname(@Path("nickname") nickname: String): BaseResponse<UserList>
 
-    // 그룹 정보
+    // 방 찾기
     @GET("/api/v1/groups/{id}")
-    suspend fun getGroup(@Path("id") id: Int): GetGroupResponse
+    suspend fun getGroup(@Path("id") id: Int): BaseResponse<Group>
 
-    // 그룹 찾기 <- 미적용
+    // 방 검색하기
     @GET("/api/v1/groups/open")
-    suspend fun getSearchGroup(
-        @Query("category") category: Int,
-        @Query("page") page: Int,
-        @Query("size") size: Int
-    )
-
-    // 그룹 검색 <- 미적용
-    @GET("/api/v1/groups/search/{searchString}")
-    suspend fun getSearchGroupKeyword(
+    suspend fun getOpenGroups(
         @Path("searchString") searchString: String,
         @Query("category") category: Int,
         @Query("page") page: Int,
         @Query("size") size: Int
-    )
+    ): BaseResponse<PagingGroupList>
 
-    // 참여중인 그룹 필터링 <- 미적용
-    @GET("/api/v1/groups/joined")
-    suspend fun getJoinedGroupFilter(
-        @Query("type") type: String,
+    // 방 검색하기 필터링
+    @GET("/api/v1/groups/open")
+    suspend fun getFilterGroups(
+        @Path("type") type: String,
         @Query("page") page: Int,
         @Query("size") size: Int
-    )
+    ): BaseResponse<PagingGroupList>
 
-    // 요즘 뜨는 그룹 <- 미적용
+    // 요즘 뜨는 방
     @GET("/api/v1/groups/famous")
-    suspend fun getHotGroups()
+    suspend fun getFamousGroups(): BaseResponse<FamousGroupList>
 
-    // 그룹 설정 변경(방장 권한)
-    @PUT("/groups/{id}")
-    suspend fun putGroup(@Path("id") id: Int, @Body body: PutGroupRequest): GetGroupResponse
+    // 그룹 수정
+    @PUT("/api/v1/groups/{id}")
+    suspend fun putGroup(@Path("id") id: Int, @Body body: PutGroupRequest): BaseResponse<Group>
 
-    // 그룹 설정 제거(방장 권한)
-    @DELETE("/groups/{id}")
-    suspend fun deleteGroup(@Path("id") id: Int): Unit
+    // 그룹 제거
+    @DELETE("/api/v1/groups/{id}")
+    suspend fun deleteGroup(@Path("id") id: Int): BaseResponse<Group>
 
-    // 그룹 설정 멤버 제거(방장 권한) <- 미적용
-    @DELETE("/groups/{id}")
-    suspend fun deleteUserInGroup(@Path("id") id: Int, @Path("user_id") userId: Int)
+    // 멤버 내쫒기
+    @DELETE("/api/v1/groups/{id}/members/{user_id}")
+    suspend fun removeMember(@Path("id") id: Int, @Path("user_id") userId: Int): BaseResponse<Group>
 
-    // 그룹 멤버 추가(방장 권한)
-    @POST("/groups/{id}/members")
-    suspend fun postAddGroupMember(@Path("id") id: Int, @Body body: PostAddGroupMemberRequest): GetGroupResponse
+    // 보관함 저장
+    @POST("/api/v1/storages/{notification_id}")
+    suspend fun postStorages(@Path("notification_id") notification_id: Int): BaseResponse<Unit>
 
-    // 그룹 가입 요청 살펴보기(방장 권한)
-    @GET("/groups/{id}/admissions")
-    suspend fun getGroupAdmissions(@Path("id") id: Int): GetGroupAdmissionsResponse
+    // 보관함 조회
+    @POST("/api/v1/storages")
+    suspend fun getStroages(
+        @Query("groupId") groupId: Int,
+        @Query("periodOfMonth") periodOfMonth: Int,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String
+    ): BaseResponse<PagingNotification>
+
+    // 보관함 삭제
+    @DELETE("/api/v1/storages")
+    suspend fun deleteStroages(@Body body: DeleteStorageRequest): BaseResponse<Unit>
+
+    // 리액션 등록
+    @POST("/api/v1/reactions")
+    suspend fun postReactions(@Body body: PostReactionRequest): BaseResponse<Unit>
+
+    // 리액션 삭제
+    @DELETE("/api/v1/reactions/{notification_reaction_id}")
+    suspend fun deleteReaction(@Path("notification_reaction_id") notification_reaction_id: Int): BaseResponse<Unit>
+
+    // 리액션 수정
+    @PATCH("/api/v1/reactions/{notification_reaction_id}")
+    suspend fun patchReaction(
+        @Path("notification_reaction_id") notification_reaction_id: Int,
+        @Body body: PostReactionRequest
+    ): BaseResponse<Unit>
+
+    // 리액션 알림 설정 <- 마이페이지
+    @POST("/api/v1/options/reaction")
+    suspend fun postOptionReaction(): BaseResponse<Unit>
+
+    // 리액션 알림 설정 하제  <- 마이페이지
+    @DELETE("/api/v1/options/reaction")
+    suspend fun deleteOptionReaction(): BaseResponse<Unit>
+
+    // 야간 푸시알림 설정 <- 마이페이지
+    @POST("/api/v1/options/night")
+    suspend fun postOptionNight(): BaseResponse<Unit>
+
+    // 야간 푸시알림 설정하제 <- 마이페이지
+    @DELETE("/api/v1/options/night")
+    suspend fun deleteOptionNight(): BaseResponse<Unit>
+
+    // 새로운 푸시알림 설정 <- 마이페이지
+    @POST("/api/v1/options/new")
+    suspend fun postOptionNew(): BaseResponse<Unit>
+
+    // 새로운 푸시알림 설정 해제 <- 마이페이지
+    @DELETE("/api/v1/options/new")
+    suspend fun deleteOptionNew(): BaseResponse<Unit>
+
+    // 최신 푸쉬 알림 리스트
+    @GET("/api/v1/notifications")
+    suspend fun getNotifications(): BaseResponse<NotificationList>
+
+    // 푸쉬 알림 보내기
+    @POST("/api/v1/notifications")
+    suspend fun postNotifications(@Body body: PostNotificationRequest): BaseResponse<Unit>
+
+    // FCM 토큰 등록
+    @POST("/api/v1/notifications/token")
+    suspend fun postNotificationToken(@Body body: PostNotificationTokenRequest): BaseResponse<Unit>
+
+    // 예약 푸쉬알림 발송
+    @POST("/api/v1/notifications/reservation")
+    suspend fun postNotificationReservation(@Body body: PostNotificationReservationRequest): BaseResponse<Unit>
+
+    // 예약 푸쉬알림 시간 수정
+    @PATCH("/api/v1/notifications/reservation")
+    suspend fun patchNotificationReservation(@Body body: PatchNotificationReservationRequest): BaseResponse<Unit>
+
+    // 똑똑 미리보기 체험 <- 본인한테 보내기
+    @PATCH("/api/v1/notifications/experience")
+    suspend fun postNotificationExperience(@Body body: PostNotificationExperienceRequest): BaseResponse<Unit>
+
+    // 알림방 푸쉬알림 리스트
+    @GET("/api/v1/notifications/{group_id}")
+    suspend fun getNotification(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String,
+        @Path("group_id") group_id: Int
+    ): BaseResponse<PagingNotificationList>
+
+    // 푸쉬 알림 삭제
+    @DELETE("/api/v1/notifications/{notification_id}")
+    suspend fun deleteNotification(@Path("notification_id") notification_id: Int): BaseResponse<Unit>
+
+    // 예약 푸쉬 알림 삭제
+    @DELETE("/api/v1/notifications/reservation/{reservation_id}")
+    suspend fun deleteNotificationReservation(@Path("reservation_id") reservation_id: Int): BaseResponse<Unit>
+
+    // 파일 URL로 바꾸기
+    @POST("/api/v1/images")
+    suspend fun postFileToUrl(@Body body: PostFileToUrlRequest): BaseResponse<ImageUrl>
+
+    // 내 친구목록 멤버 추가
+    @POST("/api/v1/groups/{id}/members")
+    suspend fun postAddMember(@Path("id") id: Int, @Body body: PostAddMemberRequest): BaseResponse<Group>
+
+    // 그룹 초대 토큰 검증 & 그룹 가입
+    @POST("/api/v1/groups/{id}/members/invite/{code}")
+    suspend fun postEnterMembers(@Path("id") id: Int, @Path("code") code: String): BaseResponse<Group>
+
+    // 그룹 초대 토큰 발급
+    @GET("/api/v1/groups/{id}/members/invite")
+    suspend fun getGroupToken(@Path("id") id: Int): BaseResponse<GroupToken>
+
+    // 그룹에서 나가기
+    @DELETE("/api/v1/groups/{id}/members/leave")
+    suspend fun deleteLeaveGroup(@Path("id") id: Int): BaseResponse<Group>
+
+    // 그룹 가입 요청 살펴보기
+    @GET("/api/v1/groups/{id}/admissions")
+    suspend fun getGroupAdmissions(@Path("id") id: Int): BaseResponse<Admissions>
 
     // 그룹 가입 요청
-    @POST("/groups/{id}/admissions")
-    suspend fun postGroupAdmissions(@Path("id") id: Int): Admissions
+    @POST("/api/v1/groups/{id}/admissions")
+    suspend fun postGroupAdmissions(@Path("id") id: Int): BaseResponse<Admission>
 
-    // 그룹 가입 거절(방장 권한)
-    @POST("/groups/{id}/admissions/{admission_id}/refuse")
-    suspend fun postRefuseGroupAdmissions(@Path("id") id: Int, @Path("admission_id") admissionId: Int): Admissions
+    // 그룹 가입 요청 거절
+    @POST("/api/v1/groups/{id}/admissions/{admission_id}/refuse")
+    suspend fun postGroupAdmissionsRefuse(@Path("id") id: Int, @Path("admission_id") admission_id: Int): BaseResponse<Admission>
 
-    // 그룹 가입 허용(방장 권한)
-    @POST("/groups/{id}/admissions/{admission_id}/allow")
-    suspend fun postAllowGroupAdmissions(@Path("id") id: Int, @Path("admission_id") admissionId: Int): Admissions
-
-    // 방 찾기
-    @GET("/groups/open")
-    suspend fun getOpenGroups(@Query("category") category: Int): GetOpenGroupsResponse
+    // 그룹 가입 요청 허락
+    @POST("/api/v1/groups/{id}/admissions/{admission_id}/allow")
+    suspend fun postGroupAdmissionsAllow(@Path("id") id: Int, @Path("admission_id") admission_id: Int): BaseResponse<Admission>
 
     // 공개 그룹 만들기
-    @POST("/groups/open")
-    suspend fun postOpenGroups(@Body body: PostOpenGroupRequest): GetGroupResponse
+    @POST("/api/v1/groups/open")
+    suspend fun postGroupOpen(@Body body: PostGroupOpenRequest): BaseResponse<Group>
 
-    // 친구 그룹 만들기
-    @POST("/groups/friend")
-    suspend fun postFriendGroups(@Body body: PostFriendGroupRequest): GetGroupResponse
+    // 친구그룹 만들기
+    @POST("/api/v1/groups/friend")
+    suspend fun postGroupFriend(@Body body: PostGroupFriendRequest): BaseResponse<Group>
 
-    // 카테고리 목록
-    @GET("/groups/categories")
-    suspend fun getCategories(): GetCategoriesResponse
+    // 추천 메세지 조회
+    @GET("/api/v1/recommendmessage")
+    suspend fun getRecommendMessage(): BaseResponse<RecommendMessageList>
 
-    // 카테고리 생성
-    @POST("/groups/categories")
-    suspend fun postCategories(@Body body: PostCategoryRequest): Category
+    // 그룹 카테고리
+    @GET("/api/v1/groups/categories")
+    suspend fun getGroupCategories(): BaseResponse<CategoryList>
 
-    // 방 검색하기
-    @GET("/groups/search/{searchString}")
-    suspend fun getSearchGroups(@Path("searchString") searchString: String): GetOpenGroupsResponse
+    // 추천 그룹 카테고리
+    @GET("/api/v1/groups/categories/famous")
+    suspend fun getGroupCategoriesFamous(): BaseResponse<CategoryList>
 
-    // 참여중인 그룹 필터링 (전체, 홀로, 친구들)
-    @GET("/groups/joined")
-    suspend fun getJoinedGroups(@Query("type") type: String): GetOpenGroupsResponse
+    // 앱버젼 체크
+    @GET("/api/v1/asset/version")
+    suspend fun getAppVersion(): BaseResponse<AppVersion>
 
-    // 멤버 제거 (방장 : 본인제외 모든 인원, 멤버 : 본인만) <- 방 나가기 처럼 사용
-    @DELETE("/groups/{id}/members/{user_id}")
-    suspend fun deleteGroupMember(@Path("id") id: Int, @Path("user_id") userId: Int): GetGroupResponse
+    // 썸네일 이미지
+    @GET("/api/v1/asset/thumbnails")
+    suspend fun getThumbnails(): BaseResponse<ThumbnailList>
+
+    // 리액션 이미지
+    @GET("/api/v1/asset/reactions")
+    suspend fun getReactions(): BaseResponse<ReactionList>
+
+    // 프로필 이미지
+    @GET("/api/v1/asset/profiles")
+    suspend fun getProfiles(): BaseResponse<ProfileList>
+
+    // 프로필 이미지 랜덤
+    @GET("/api/v1/asset/profiles/random")
+    suspend fun getProfilesRandom(): BaseResponse<Profile>
+
+    // 배경 이미지
+    @GET("/api/v1/asset/backgrounds")
+    suspend fun getBackgrounds(): BaseResponse<BackgroundList>
 
 }
