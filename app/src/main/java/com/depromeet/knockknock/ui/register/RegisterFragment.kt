@@ -64,7 +64,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
                     is RegisterNavigationAction.NavigateToNotificationAlarm -> createNotification()
                     is RegisterNavigationAction.NavigateToKakaoLogin -> kakaoLogin()
                     is RegisterNavigationAction.NavigateToGoogleLogin -> googleLogin()
-                    is RegisterNavigationAction.NavigateToLoginSuccess -> navigate(RegisterFragmentDirections.actionRegisterFragmentToHomeFragment())
+                    is RegisterNavigationAction.NavigateToLoginAlready -> navigate(RegisterFragmentDirections.actionRegisterFragmentToHomeFragment())
+                    is RegisterNavigationAction.NavigateToLoginFrist -> navigate(RegisterFragmentDirections.actionRegisterFragmentToSetProfileFragment())
                 }
             }
         }
@@ -169,9 +170,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
                     else -> toastMessage("카카오톡의 미로그인")
                 }
             } else if (token != null) {
-//                Log.d("response!!!!", token.accessToken)
-                Log.d("response!!!!", token.idToken.toString())
-                viewModel.oauthLogin(idToken = token.accessToken, provider = "KAKAO")
+                token.idToken?.let {
+                    viewModel.oauthLogin(idToken = it, provider = "KAKAO")
+                }
             }
         }
 
@@ -194,7 +195,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val idToken = completedTask.getResult(ApiException::class.java).idToken
-            Log.d("response!!!!", idToken.toString())
             idToken?.let { token ->
                 viewModel.oauthLogin(idToken = token, provider = "GOOGLE")
             }

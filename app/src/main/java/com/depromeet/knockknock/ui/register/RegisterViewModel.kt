@@ -1,14 +1,8 @@
 package com.depromeet.knockknock.ui.register
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.os.Build
-import android.util.Log
-import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
-import com.depromeet.domain.usecase.PostOauthLoginUsecase
+import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.bookmark.model.Room
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +10,7 @@ import kotlinx.coroutines.flow.*
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val oauthLoginUsecase: PostOauthLoginUsecase
+    private val mainRepository: MainRepository
 ) : BaseViewModel(), RegisterActionHandler {
 
     private val TAG = "RegisterViewModel"
@@ -41,10 +35,15 @@ class RegisterViewModel @Inject constructor(
 
     fun oauthLogin(idToken: String, provider: String) {
         baseViewModelScope.launch {
-//            Log.d("response!!!!", idToken)
-            oauthLoginUsecase.invoke(idToken = idToken, provider = provider)
+            mainRepository.getTokenValidation(idToken = idToken, provider = provider)
                 .onSuccess {
-                    _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginSuccess) }
+                    if(!it.is_registered) {
+                        _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginFrist)
+                    } else {
+                        mainRepository.postLogin(idToken = idToken, provider = provider)
+                            .onSuccess { _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginAlready) }
+                    }
+                }
         }
     }
 

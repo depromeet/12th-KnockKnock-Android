@@ -17,21 +17,29 @@ import retrofit2.http.Query
 
 interface MainAPIService {
 
-    // 등록 요청
+    // 등록 요청 <- 1번 false일 경우
     @POST("/api/v1/credentials/register")
-    suspend fun postRegister(@Query("id_token") idToken: String, @Query("provider") provider: String): LoginResponse
+    suspend fun postRegister(
+        @Query("id_token") idToken: String,
+        @Query("provider") provider: String,
+        @Body body: PostRegisterRequest
+    ): LoginResponse
 
     // 토큰 리프래쉬
     @POST("/api/v1/credentials/refresh")
     suspend fun postRefreshToken(@Body body: PostRefreshTokenRequest): LoginResponse
 
-    // 로그인 요청 <- 가입한 유저
+    // 로그인 요청 <- 가입한 유저 <- 1번 true일 경우
     @POST("/api/v1/credentials/login")
     suspend fun postLogin(@Query("id_token") idToken: String, @Query("provider") provider: String): LoginResponse
 
-    // 토큰 검증
+    // 토큰 검증 <- 로그인시 제일 처음 1번
     @GET("/api/v1/credentials/oauth/valid/register")
     suspend fun getTokenValidation(@Query("id_token") idToken: String, @Query("provider") provider: String): isRegistedResponse
+
+    // 회원 탈퇴
+    @GET("/api/v1/credentials/me")
+    suspend fun deleteUer(@Query("oauth_access_token") oauth_access_token: String): Unit
 
     // 유저 프로필
     @GET("/api/v1/users/profile")
@@ -124,7 +132,7 @@ interface MainAPIService {
     @PATCH("/api/v1/reactions/{notification_reaction_id}")
     suspend fun patchReaction(
         @Path("notification_reaction_id") notification_reaction_id: Int,
-        @Body body: PostRefreshTokenRequest
+        @Body body: PostReactionRequest
     ): Unit
 
     // 리액션 알림 설정 <- 마이페이지

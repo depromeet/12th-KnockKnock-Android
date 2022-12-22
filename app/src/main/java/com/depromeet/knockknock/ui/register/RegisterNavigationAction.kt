@@ -5,5 +5,6 @@ sealed class RegisterNavigationAction {
     object NavigateToNotificationAlarm : RegisterNavigationAction()
     object NavigateToKakaoLogin : RegisterNavigationAction()
     object NavigateToGoogleLogin : RegisterNavigationAction()
-    object NavigateToLoginSuccess : RegisterNavigationAction()
+    object NavigateToLoginFrist : RegisterNavigationAction()
+    object NavigateToLoginAlready : RegisterNavigationAction()
 }
