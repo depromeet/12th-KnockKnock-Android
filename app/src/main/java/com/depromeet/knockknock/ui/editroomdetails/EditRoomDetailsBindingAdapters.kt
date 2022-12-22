@@ -7,8 +7,8 @@ import androidx.databinding.BindingAdapter
 import com.depromeet.knockknock.R
 
 @SuppressLint("UseCompatLoadingForDrawables")
-@BindingAdapter("saveBtnEnable")
-fun TextView.bindSaveBtnEnable(enable: Boolean) {
+@BindingAdapter("detailSaveBtnEnable")
+fun TextView.bindDetailSaveBtnEnable(enable: Boolean) {
     if(enable) {
         this.setTextColor(context.getColor(R.color.black))
         this.background = context.getDrawable(R.drawable.custom_yellow_radius10)

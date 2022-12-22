@@ -48,9 +48,9 @@ class BackgroundAdapter(
             binding.holder = item
 
             if(beforeClicked == binding.holder!!.backgroundId)
-                binding.layoutMain.background = binding.root.context.getDrawable(R.drawable.custom_yellow_radius16_line_gray04)
+                binding.layoutMain.background = binding.root.context.getDrawable(R.drawable.custom_transparents_radius04_line_yellow)
             else
-                binding.layoutMain.background = binding.root.context.getDrawable(R.drawable.custom_transparents_radius16_line_gray04)
+                binding.layoutMain.background = binding.root.context.getDrawable(R.drawable.custom_transparents_radius04_line_transparent)
 
             binding.executePendingBindings()
         }
