@@ -161,9 +161,9 @@
     <string name="edit">편집</string>
 
     <!--알림방 상세정보 편집-->
-    <string name="edit_details_room_name">방 이름*</string>
+    <string name="edit_details_room_name">방 이름</string>
     <string name="edit_details_room_name_hint">방 이름을 입력해주세요.</string>
-    <string name="edit_details_room_description">방 설명*</string>
+    <string name="edit_details_room_description">방 설명</string>
     <string name="edit_details_room_description_hint">어떤 방인지 한 줄로 설명해주세요.</string>
     <string name="edit_details_public_scope">공개 범위</string>
     <string name="edit_details_protected">"  비공개 설정"</string>
