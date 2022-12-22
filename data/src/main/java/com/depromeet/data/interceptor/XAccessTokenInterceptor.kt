@@ -1,5 +1,6 @@
 package com.depromeet.data.interceptor
 
+import android.util.Log
 import com.depromeet.data.DataApplication
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -12,9 +13,9 @@ class XAccessTokenInterceptor : Interceptor {
         val builder: Request.Builder = chain.request().newBuilder()
 
         try {
-            DataApplication.sSharedPreferences.getString("id_token", null).let { token ->
+            DataApplication.sSharedPreferences.getString("access_token", null).let { token ->
                 token?.let {
-                    builder.addHeader("Bearer ", it)
+                    builder.addHeader("Authorization", "Bearer $it")
                     return chain.proceed(builder.build())
                 }
             }

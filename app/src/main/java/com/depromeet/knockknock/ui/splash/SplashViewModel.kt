@@ -26,7 +26,7 @@ class SplashViewModel @Inject constructor(
     private val _navigationHandler: MutableSharedFlow<SplashNavigationAction> = MutableSharedFlow<SplashNavigationAction>()
     val navigationHandler: SharedFlow<SplashNavigationAction> = _navigationHandler.asSharedFlow()
 
-    init {
+    fun loginCheck() {
         baseViewModelScope.launch {
             val isLogined = sSharedPreferences.getString("access_token", null)
             val refreshToken = sSharedPreferences.getString("refresh_token", null)
@@ -41,8 +41,7 @@ class SplashViewModel @Inject constructor(
                         editor.remove("access_token")
                         editor.remove("refresh_token")
                         editor.commit()
-                        _navigationHandler.emit(SplashNavigationAction.NavigateToFirstLogin)
-                    }
+                        _navigationHandler.emit(SplashNavigationAction.NavigateToFirstLogin) }
             }
 
             if(isLogined == null) {

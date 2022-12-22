@@ -28,10 +28,11 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(R.la
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
+        viewModel.loginCheck()
     }
 
     override fun initDataBinding() {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
                     is SplashNavigationAction.NavigateToFirstLogin -> navigate(SplashFragmentDirections.actionSplashFragmentToOnboardFragment())
