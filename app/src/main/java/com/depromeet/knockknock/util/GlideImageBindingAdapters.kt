@@ -34,7 +34,7 @@ fun ImageView.bindRoomImageImage(roomImgUri: String) {
 fun ImageView.bindroomBackgroundImage(backgroundImageUri: String) {
     Glide.with(context)
         .load(backgroundImageUri)
-        .transform(CenterCrop(), RoundedCorners(50))
+        .transform(CenterCrop(), RoundedCorners(20))
         .into(this)
 }
 
@@ -42,6 +42,6 @@ fun ImageView.bindroomBackgroundImage(backgroundImageUri: String) {
 fun ImageView.bindroomThumbnailImage(thumbnailImageUri: String) {
     Glide.with(context)
         .load(thumbnailImageUri)
-        .transform(CenterCrop(), RoundedCorners(50))
+        .transform(CenterCrop(), RoundedCorners(20))
         .into(this)
 }
