@@ -46,7 +46,14 @@ class RegisterViewModel @Inject constructor(
                         _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginFrist)
                     } else {
                         mainRepository.postLogin(idToken = idToken, provider = provider)
-                            .onSuccess { _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginAlready) }
+                            .onSuccess { response ->
+                                editor.putString("id_token", idToken)
+                                editor.putString("provider", provider)
+                                editor.putString("access_token", response.access_token)
+                                editor.putString("refresh_token", response.refresh_token)
+                                editor.commit()
+                                _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginAlready)
+                            }
                     }
                 }
         }

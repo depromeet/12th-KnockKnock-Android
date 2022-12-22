@@ -12,7 +12,7 @@ class XAccessTokenInterceptor : Interceptor {
         val builder: Request.Builder = chain.request().newBuilder()
 
         try {
-            DataApplication.sSharedPreferences.getString("access-token", null).let { token ->
+            DataApplication.sSharedPreferences.getString("id_token", null).let { token ->
                 token?.let {
                     builder.addHeader("Bearer ", it)
                     return chain.proceed(builder.build())
