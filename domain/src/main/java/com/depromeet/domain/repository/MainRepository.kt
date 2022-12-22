@@ -241,7 +241,7 @@ interface  MainRepository {
     suspend fun getProfiles(): NetworkResult<ProfileList>
 
     // 프로필 이미지 랜덤
-    suspend fun getProfilesRandom(): NetworkResult<ProfileList>
+    suspend fun getProfilesRandom(): NetworkResult<Profile>
 
     // 배경 이미지
     suspend fun getBackgrounds(): NetworkResult<BackgroundList>

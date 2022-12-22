@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="vm"
+            name="viewmodel"
             type="com.depromeet.knockknock.ui.setprofile.SetProfileViewModel" />
     </data>
 
@@ -38,7 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="119dp"
-            android:onClick="@{() -> vm.onProfileImageSetClicked()}">
+            android:onClick="@{() -> viewmodel.onProfileImageSetClicked()}">
 
             <ImageView
                 android:id="@+id/user_profile_edit"
@@ -50,7 +50,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                app:glide1000="@{viewmodel.profileImg.url}"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -157,7 +158,7 @@
                     android:layout_marginStart="0dp"
                     android:background="@color/transparent"
                     android:hint="@string/setprofile_nickname_hint"
-                    android:text="@={vm.inputContent}"
+                    android:text="@={viewmodel.inputContent}"
                     android:maxLength="15"
                     android:layout_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
@@ -336,7 +337,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> vm.onSelectionDoneClicked()}">
+            android:onClick="@{() -> viewmodel.onSelectionDoneClicked()}">
             <TextView
                 android:id="@+id/some_id"
                 android:layout_width="match_parent"
@@ -346,8 +347,7 @@
                 android:textSize="18dp"
                 android:text="선택 완료!"
                 android:textColor="@color/black"
-                android:lineSpacingExtra="4sp"
-                />
+                android:lineSpacingExtra="4sp" />
 
 
         </com.google.android.material.card.MaterialCardView>

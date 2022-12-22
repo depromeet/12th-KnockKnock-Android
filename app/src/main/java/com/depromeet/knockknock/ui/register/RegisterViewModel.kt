@@ -1,8 +1,10 @@
 package com.depromeet.knockknock.ui.register
 
+import com.depromeet.data.DataApplication
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.di.PresentationApplication.Companion.editor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,6 +40,9 @@ class RegisterViewModel @Inject constructor(
             mainRepository.getTokenValidation(idToken = idToken, provider = provider)
                 .onSuccess {
                     if(!it.is_registered) {
+                        editor.putString("id_token", idToken)
+                        editor.putString("provider", provider)
+                        editor.commit()
                         _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginFrist)
                     } else {
                         mainRepository.postLogin(idToken = idToken, provider = provider)

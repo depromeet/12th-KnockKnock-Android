@@ -43,7 +43,7 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
 
     override fun initStartView() {
         binding.apply {
-            this.vm = viewModel
+            this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
@@ -57,7 +57,8 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
             viewModel.navigationHandler.collectLatest {
                 when(it) {
                     is SetProfileNavigationAction.NavigateToSetProfileImage -> setProfileImageBottomSheet()
-//                    is SetProfileNavigationAction.NavigateToHome ->navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
+                    is SetProfileNavigationAction.NavigateToHome -> navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
+                    is SetProfileNavigationAction.NavigateToEmpty -> toastMessage("닉네임이 비어 있습니다!")
                 }
             }
         }
@@ -75,12 +76,11 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
                     val uri = intent.data
                     val file = uriToFile(uri!!,requireContext())
                     val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+
                     val requestBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
+                    val nicknamePart: MultipartBody.Part = MultipartBody.Part.createFormData("description", viewModel.inputContent.value)
 
-                    //TODO : 이후에 설명도 입력한걸로 넣기
-                    val nicknamePart: MultipartBody.Part = MultipartBody.Part.createFormData("description", "테스트 설명")
 
-                    // Update Profile API
                 }
             }
         }
@@ -138,7 +138,4 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
             }
         }
     }
-
-
-
 }

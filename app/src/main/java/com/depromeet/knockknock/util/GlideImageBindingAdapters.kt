@@ -7,25 +7,71 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 @BindingAdapter("userProfile")
-fun ImageView.bindUserProfile(profileUri: String) {
-    Glide.with(context)
-        .load(profileUri)
-        .transform(CenterCrop(), RoundedCorners(1000))
-        .into(this)
+fun ImageView.bindUserProfile(profileUri: String?) {
+    profileUri?.let {
+        Glide.with(context)
+            .load(it)
+            .transform(CenterCrop(), RoundedCorners(1000))
+            .into(this)
+    }
 }
 
 @BindingAdapter("bookmarkContentsImage")
-fun ImageView.bindBookmarkContentsImage(contentsImageUri: String) {
-    Glide.with(context)
-        .load(contentsImageUri)
-        .transform(CenterCrop(), RoundedCorners(50))
-        .into(this)
+fun ImageView.bindBookmarkContentsImage(contentsImageUri: String?) {
+    contentsImageUri?.let {
+        Glide.with(context)
+            .load(it)
+            .transform(CenterCrop(), RoundedCorners(50))
+            .into(this)
+    }
 }
 
 @BindingAdapter("roomImageImage")
-fun ImageView.bindRoomImageImage(roomImgUri: String) {
-    Glide.with(context)
-        .load(roomImgUri)
-        .transform(CenterCrop(), RoundedCorners(300))
-        .into(this)
+fun ImageView.bindRoomImageImage(roomImgUri: String?) {
+    roomImgUri?.let {
+        Glide.with(context)
+            .load(it)
+            .transform(CenterCrop(), RoundedCorners(300))
+            .into(this)
+    }
+}
+
+@BindingAdapter("glide1000")
+fun ImageView.bindGlide1000(uri: String?) {
+    uri?.let {
+        Glide.with(context)
+            .load(it)
+            .transform(CenterCrop(), RoundedCorners(1000))
+            .into(this)
+    }
+}
+
+@BindingAdapter("glide300")
+fun ImageView.bindGlide300(uri: String?) {
+    uri?.let {
+        Glide.with(context)
+            .load(it)
+            .transform(CenterCrop(), RoundedCorners(300))
+            .into(this)
+    }
+}
+
+@BindingAdapter("glide100")
+fun ImageView.bindGlide100(uri: String?) {
+    uri?.let {
+        Glide.with(context)
+            .load(it)
+            .transform(CenterCrop(), RoundedCorners(100))
+            .into(this)
+    }
+}
+
+@BindingAdapter("glide50")
+fun ImageView.bindGlide50(uri: String?) {
+    uri?.let {
+        Glide.with(context)
+            .load(it)
+            .transform(CenterCrop(), RoundedCorners(50))
+            .into(this)
+    }
 }

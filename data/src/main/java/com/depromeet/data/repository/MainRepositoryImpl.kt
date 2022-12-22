@@ -21,26 +21,26 @@ class MainRepositoryImpl @Inject constructor(
         profile_path: String
     ): NetworkResult<LoginResponse> {
         val body = PostRegisterRequest(nickname, profile_path)
-        return handleApi { mainAPIService.postRegister(idToken = idToken, provider = provider, body = body) }
+        return handleApi { mainAPIService.postRegister(idToken = idToken, provider = provider, body = body).data }
     }
 
     override suspend fun postRefreshToken(refresh_token: String): NetworkResult<LoginResponse> {
         val body = PostRefreshTokenRequest(refresh_token = refresh_token)
-        return handleApi { mainAPIService.postRefreshToken(body = body) }
+        return handleApi { mainAPIService.postRefreshToken(body = body).data }
     }
 
     override suspend fun postLogin(
         idToken: String,
         provider: String
     ): NetworkResult<LoginResponse> {
-        return handleApi { mainAPIService.postLogin(idToken = idToken, provider = provider) }
+        return handleApi { mainAPIService.postLogin(idToken = idToken, provider = provider).data }
     }
 
     override suspend fun getTokenValidation(
         idToken: String,
         provider: String
     ): NetworkResult<isRegistedResponse> {
-        return handleApi { mainAPIService.getTokenValidation(idToken = idToken, provider = provider) }
+        return handleApi { mainAPIService.getTokenValidation(idToken = idToken, provider = provider).data }
     }
 
     override suspend fun deleteUer(oauth_access_token: String): NetworkResult<Unit> {
@@ -48,7 +48,7 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getUserProfile(): NetworkResult<UserProfile> {
-        return handleApi { mainAPIService.getUserProfile() }
+        return handleApi { mainAPIService.getUserProfile().data }
     }
 
     override suspend fun putUserProfile(
@@ -56,7 +56,7 @@ class MainRepositoryImpl @Inject constructor(
         profile_path: String
     ): NetworkResult<UserProfile> {
         val body = PutUserProfileRequest(nickname = nickname, profile_path = profile_path)
-        return handleApi { mainAPIService.putUserProfile(body = body) }
+        return handleApi { mainAPIService.putUserProfile(body = body).data }
     }
 
     override suspend fun putUserNickname(nickname: String): NetworkResult<Unit> {
@@ -65,7 +65,7 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getRelations(): NetworkResult<FriendList> {
-        return handleApi { mainAPIService.getRelations() }
+        return handleApi { mainAPIService.getRelations().data }
     }
 
     override suspend fun postRelations(user_id: Int): NetworkResult<Unit> {
@@ -74,11 +74,11 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getUsersNickname(nickname: String): NetworkResult<UserList> {
-        return handleApi { mainAPIService.getUsersNickname(nickname = nickname) }
+        return handleApi { mainAPIService.getUsersNickname(nickname = nickname).data }
     }
 
     override suspend fun getGroup(id: Int): NetworkResult<Group> {
-        return handleApi { mainAPIService.getGroup(id = id) }
+        return handleApi { mainAPIService.getGroup(id = id).data }
     }
 
     override suspend fun getOpenGroups(
@@ -87,7 +87,7 @@ class MainRepositoryImpl @Inject constructor(
         page: Int,
         size: Int
     ): NetworkResult<GroupList> {
-        return handleApi { mainAPIService.getOpenGroups(searchString, category, page, size).toDomain() }
+        return handleApi { mainAPIService.getOpenGroups(searchString, category, page, size).data.toDomain() }
     }
 
     override suspend fun getFilterGroups(
@@ -95,11 +95,11 @@ class MainRepositoryImpl @Inject constructor(
         page: Int,
         size: Int
     ): NetworkResult<GroupList> {
-        return handleApi { mainAPIService.getFilterGroups(type = type, page = page, size = size).toDomain() }
+        return handleApi { mainAPIService.getFilterGroups(type = type, page = page, size = size).data.toDomain() }
     }
 
     override suspend fun getFamousGroups(): NetworkResult<FamousGroupList> {
-        return handleApi { mainAPIService.getFamousGroups() }
+        return handleApi { mainAPIService.getFamousGroups().data }
     }
 
     override suspend fun putGroup(
@@ -119,19 +119,19 @@ class MainRepositoryImpl @Inject constructor(
             background_image_path = background_image_path,
             category_id = category_id
         )
-        return handleApi { mainAPIService.putGroup(id = id, body = body) }
+        return handleApi { mainAPIService.putGroup(id = id, body = body).data }
     }
 
     override suspend fun deleteGroup(id: Int): NetworkResult<Group> {
-        return handleApi { mainAPIService.deleteGroup(id = id) }
+        return handleApi { mainAPIService.deleteGroup(id = id).data }
     }
 
     override suspend fun removeMember(id: Int, userId: Int): NetworkResult<Group> {
-        return handleApi { mainAPIService.removeMember(id = id, userId = userId) }
+        return handleApi { mainAPIService.removeMember(id = id, userId = userId).data }
     }
 
     override suspend fun postStorages(notification_id: Int): NetworkResult<Unit> {
-        return handleApi { mainAPIService.postStorages(notification_id = notification_id) }
+        return handleApi { mainAPIService.postStorages(notification_id = notification_id).data }
     }
 
     override suspend fun getStroages(
@@ -141,12 +141,12 @@ class MainRepositoryImpl @Inject constructor(
         size: Int,
         sort: String
     ): NetworkResult<NotificationContent> {
-        return handleApi { mainAPIService.getStroages(groupId, periodOfMonth, page, size, sort).pagingNotifications.toDomain() }
+        return handleApi { mainAPIService.getStroages(groupId, periodOfMonth, page, size, sort).data.pagingNotifications.toDomain() }
     }
 
     override suspend fun deleteStroages(storage_ids: List<Int>): NetworkResult<Unit> {
         val body = DeleteStorageRequest(storage_ids = storage_ids)
-        return handleApi { mainAPIService.deleteStroages(body = body) }
+        return handleApi { mainAPIService.deleteStroages(body = body).data }
     }
 
     override suspend fun postReactions(
@@ -154,11 +154,11 @@ class MainRepositoryImpl @Inject constructor(
         reaction_id: Int
     ): NetworkResult<Unit> {
         val body = PostReactionRequest(notification_id = notification_id, reaction_id = reaction_id)
-        return handleApi { mainAPIService.postReactions(body = body) }
+        return handleApi { mainAPIService.postReactions(body = body).data }
     }
 
     override suspend fun deleteReaction(notification_reaction_id: Int): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteReaction(notification_reaction_id = notification_reaction_id) }
+        return handleApi { mainAPIService.deleteReaction(notification_reaction_id = notification_reaction_id).data }
     }
 
     override suspend fun patchReaction(
@@ -169,36 +169,36 @@ class MainRepositoryImpl @Inject constructor(
         val body = PostReactionRequest(notification_id = notification_id, reaction_id = notification_reaction_id)
         return handleApi { mainAPIService.patchReaction(
             notification_reaction_id = notification_reaction_id,
-            body = body)
+            body = body).data
         }
     }
 
     override suspend fun postOptionReaction(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.postOptionReaction() }
+        return handleApi { mainAPIService.postOptionReaction().data }
     }
 
     override suspend fun deleteOptionReaction(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteOptionReaction() }
+        return handleApi { mainAPIService.deleteOptionReaction().data }
     }
 
     override suspend fun postOptionNight(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.postOptionNight() }
+        return handleApi { mainAPIService.postOptionNight().data }
     }
 
     override suspend fun deleteOptionNight(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteOptionNight() }
+        return handleApi { mainAPIService.deleteOptionNight().data }
     }
 
     override suspend fun postOptionNew(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.postOptionNew() }
+        return handleApi { mainAPIService.postOptionNew().data }
     }
 
     override suspend fun deleteOptionNew(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteOptionNew() }
+        return handleApi { mainAPIService.deleteOptionNew().data }
     }
 
     override suspend fun getNotifications(): NetworkResult<NotificationList> {
-        return handleApi { mainAPIService.getNotifications() }
+        return handleApi { mainAPIService.getNotifications().data }
     }
 
     override suspend fun postNotifications(
@@ -213,7 +213,7 @@ class MainRepositoryImpl @Inject constructor(
             content = content,
             image_url = image_url
         )
-        return handleApi { mainAPIService.postNotifications(body = body) }
+        return handleApi { mainAPIService.postNotifications(body = body).data }
     }
 
     override suspend fun postNotificationToken(
@@ -221,7 +221,7 @@ class MainRepositoryImpl @Inject constructor(
         token: String
     ): NetworkResult<Unit> {
         val body = PostNotificationTokenRequest(device_id = device_id, token = token)
-        return handleApi { mainAPIService.postNotificationToken(body = body) }
+        return handleApi { mainAPIService.postNotificationToken(body = body).data }
     }
 
     override suspend fun postNotificationReservation(
@@ -238,7 +238,7 @@ class MainRepositoryImpl @Inject constructor(
             image_url = image_url,
             send_at = send_at
         )
-        return handleApi { mainAPIService.postNotificationReservation(body = body) }
+        return handleApi { mainAPIService.postNotificationReservation(body = body).data }
     }
 
     override suspend fun patchNotificationReservation(
@@ -246,7 +246,7 @@ class MainRepositoryImpl @Inject constructor(
         send_at: String
     ): NetworkResult<Unit> {
         val body = PatchNotificationReservationRequest(reservation_id = reservation_id, send_at = send_at)
-        return handleApi { mainAPIService.patchNotificationReservation(body = body) }
+        return handleApi { mainAPIService.patchNotificationReservation(body = body).data }
     }
 
     override suspend fun postNotificationExperience(
@@ -254,7 +254,7 @@ class MainRepositoryImpl @Inject constructor(
         content: String
     ): NetworkResult<Unit> {
         val body = PostNotificationExperienceRequest(token = token, content = content)
-        return handleApi { mainAPIService.postNotificationExperience(body = body) }
+        return handleApi { mainAPIService.postNotificationExperience(body = body).data }
     }
 
     override suspend fun getNotification(
@@ -263,59 +263,59 @@ class MainRepositoryImpl @Inject constructor(
         sort: String,
         group_id: Int
     ): NetworkResult<NotificationContent> {
-        return handleApi { mainAPIService.getNotification(page = page, size = size, sort = sort, group_id = group_id).notifications }
+        return handleApi { mainAPIService.getNotification(page = page, size = size, sort = sort, group_id = group_id).data.notifications }
     }
 
     override suspend fun deleteNotification(notification_id: Int): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteNotification(notification_id = notification_id) }
+        return handleApi { mainAPIService.deleteNotification(notification_id = notification_id).data }
     }
 
     override suspend fun deleteNotificationReservation(reservation_id: Int): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteNotificationReservation(reservation_id = reservation_id) }
+        return handleApi { mainAPIService.deleteNotificationReservation(reservation_id = reservation_id).data }
     }
 
     override suspend fun postFileToUrl(file: String): NetworkResult<ImageUrl> {
         val body = PostFileToUrlRequest(file = file)
-        return handleApi { mainAPIService.postFileToUrl(body = body) }
+        return handleApi { mainAPIService.postFileToUrl(body = body).data }
     }
 
     override suspend fun postAddMember(id: Int, member_ids: List<Int>): NetworkResult<Group> {
         val body = PostAddMemberRequest(member_ids = member_ids)
-        return handleApi { mainAPIService.postAddMember(id = id, body = body) }
+        return handleApi { mainAPIService.postAddMember(id = id, body = body).data }
     }
 
     override suspend fun postEnterMembers(id: Int, code: String): NetworkResult<Group> {
-        return handleApi { mainAPIService.postEnterMembers(id = id, code = code) }
+        return handleApi { mainAPIService.postEnterMembers(id = id, code = code).data }
     }
 
     override suspend fun getGroupToken(id: Int): NetworkResult<GroupToken> {
-        return handleApi { mainAPIService.getGroupToken(id = id) }
+        return handleApi { mainAPIService.getGroupToken(id = id).data }
     }
 
     override suspend fun deleteLeaveGroup(id: Int): NetworkResult<Group> {
-        return handleApi { mainAPIService.deleteLeaveGroup(id = id) }
+        return handleApi { mainAPIService.deleteLeaveGroup(id = id).data }
     }
 
     override suspend fun getGroupAdmissions(id: Int): NetworkResult<Admissions> {
-        return handleApi { mainAPIService.getGroupAdmissions(id = id) }
+        return handleApi { mainAPIService.getGroupAdmissions(id = id).data }
     }
 
     override suspend fun postGroupAdmissions(id: Int): NetworkResult<Admission> {
-        return handleApi { mainAPIService.postGroupAdmissions(id = id) }
+        return handleApi { mainAPIService.postGroupAdmissions(id = id).data }
     }
 
     override suspend fun postGroupAdmissionsRefuse(
         id: Int,
         admission_id: Int
     ): NetworkResult<Admission> {
-        return handleApi { mainAPIService.postGroupAdmissionsRefuse(id = id, admission_id = admission_id) }
+        return handleApi { mainAPIService.postGroupAdmissionsRefuse(id = id, admission_id = admission_id).data }
     }
 
     override suspend fun postGroupAdmissionsAllow(
         id: Int,
         admission_id: Int
     ): NetworkResult<Admission> {
-        return handleApi { mainAPIService.postGroupAdmissionsAllow(id = id, admission_id = admission_id) }
+        return handleApi { mainAPIService.postGroupAdmissionsAllow(id = id, admission_id = admission_id).data }
     }
 
     override suspend fun postGroupOpen(
@@ -336,47 +336,47 @@ class MainRepositoryImpl @Inject constructor(
             category_id = category_id,
             member_ids = member_ids
         )
-        return handleApi { mainAPIService.postGroupOpen(body = body) }
+        return handleApi { mainAPIService.postGroupOpen(body = body).data }
     }
 
     override suspend fun postGroupFriend(member_ids: List<Int>): NetworkResult<Group> {
         val body = PostGroupFriendRequest(member_ids = member_ids)
-        return handleApi { mainAPIService.postGroupFriend(body = body) }
+        return handleApi { mainAPIService.postGroupFriend(body = body).data }
     }
 
     override suspend fun getRecommendMessage(): NetworkResult<RecommendMessageList> {
-        return handleApi { mainAPIService.getRecommendMessage() }
+        return handleApi { mainAPIService.getRecommendMessage().data }
     }
 
     override suspend fun getGroupCategories(): NetworkResult<CategoryList> {
-        return handleApi { mainAPIService.getGroupCategories() }
+        return handleApi { mainAPIService.getGroupCategories().data }
     }
 
     override suspend fun getGroupCategoriesFamous(): NetworkResult<CategoryList> {
-        return handleApi { mainAPIService.getGroupCategoriesFamous() }
+        return handleApi { mainAPIService.getGroupCategoriesFamous().data }
     }
 
     override suspend fun getAppVersion(): NetworkResult<AppVersion> {
-        return handleApi { mainAPIService.getAppVersion() }
+        return handleApi { mainAPIService.getAppVersion().data }
     }
 
     override suspend fun getThumbnails(): NetworkResult<ThumbnailList> {
-        return handleApi { mainAPIService.getThumbnails() }
+        return handleApi { mainAPIService.getThumbnails().data }
     }
 
     override suspend fun getReactions(): NetworkResult<ReactionList> {
-        return handleApi { mainAPIService.getReactions() }
+        return handleApi { mainAPIService.getReactions().data }
     }
 
     override suspend fun getProfiles(): NetworkResult<ProfileList> {
-        return handleApi { mainAPIService.getProfiles() }
+        return handleApi { mainAPIService.getProfiles().data }
     }
 
-    override suspend fun getProfilesRandom(): NetworkResult<ProfileList> {
-        return handleApi { mainAPIService.getProfilesRandom() }
+    override suspend fun getProfilesRandom(): NetworkResult<Profile> {
+        return handleApi { mainAPIService.getProfilesRandom().data }
     }
 
     override suspend fun getBackgrounds(): NetworkResult<BackgroundList> {
-        return handleApi { mainAPIService.getBackgrounds() }
+        return handleApi { mainAPIService.getBackgrounds().data }
     }
 }
