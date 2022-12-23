@@ -188,10 +188,19 @@
             app:destination="@id/categoryFragment"
             app:popExitAnim="@anim/exit_to_right"
             app:enterAnim="@anim/enter_from_right"/>
+        <action
+            android:id="@+id/action_settingRoomFragment_to_editRoomDetailsFragment"
+            app:destination="@id/editRoomDetailsFragment"
+            app:popExitAnim="@anim/exit_to_right"
+            app:enterAnim="@anim/enter_from_right"/>
     </fragment>
 
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.depromeet.knockknock.ui.category.CategoryFragment"
         android:label="CategoryFragment"/>
+    <fragment
+        android:id="@+id/editRoomDetailsFragment"
+        android:name="com.depromeet.knockknock.ui.editroomdetails.EditRoomDetailsFragment"
+        android:label="EditRoomDetailsFragment" />
 </navigation>

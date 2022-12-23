@@ -27,13 +27,27 @@ fun ImageView.bindBookmarkContentsImage(contentsImageUri: String?) {
 }
 
 @BindingAdapter("roomImageImage")
-fun ImageView.bindRoomImageImage(roomImgUri: String?) {
-    roomImgUri?.let {
-        Glide.with(context)
-            .load(it)
-            .transform(CenterCrop(), RoundedCorners(300))
-            .into(this)
-    }
+fun ImageView.bindRoomImageImage(roomImgUri: String) {
+    Glide.with(context)
+        .load(roomImgUri)
+        .transform(CenterCrop(), RoundedCorners(300))
+        .into(this)
+}
+
+@BindingAdapter("roomBackgroundImage")
+fun ImageView.bindroomBackgroundImage(backgroundImageUri: String) {
+    Glide.with(context)
+        .load(backgroundImageUri)
+        .transform(CenterCrop(), RoundedCorners(20))
+        .into(this)
+}
+
+@BindingAdapter("roomThumbnailImage")
+fun ImageView.bindroomThumbnailImage(thumbnailImageUri: String) {
+    Glide.with(context)
+        .load(thumbnailImageUri)
+        .transform(CenterCrop(), RoundedCorners(20))
+        .into(this)
 }
 
 @BindingAdapter("glide10000")
