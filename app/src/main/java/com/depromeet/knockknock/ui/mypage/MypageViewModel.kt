@@ -33,6 +33,14 @@ class MypageViewModel @Inject constructor(
         }
     }
 
+    fun getProfile() {
+        baseViewModelScope.launch {
+            mainRepository.getUserProfile()
+                .onSuccess { profile ->
+                    userProfile.emit(profile) }
+        }
+    }
+
 
     override fun onProfileEditClicked() {
         baseViewModelScope.launch {
