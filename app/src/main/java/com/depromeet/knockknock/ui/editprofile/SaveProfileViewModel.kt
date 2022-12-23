@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.editprofile
 
 import com.depromeet.domain.model.UserProfile
+import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
