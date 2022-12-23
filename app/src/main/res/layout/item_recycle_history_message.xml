@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp">
+        android:layout_marginBottom="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_main"
@@ -40,7 +40,8 @@
             </ImageView>
 
             <TextView
-                android:id="@+id/user_name"
+                android:id="@+id/user_name_text"
+                android:text="@{model.userName}"
                 style="@style/Theme.AppCompat.TextView.Home.Recent.UserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,12 +53,13 @@
 
             <TextView
                 android:id="@+id/date_time_text"
+                android:text="@{model.datetime}"
                 style="@style/Theme.AppCompat.TextView.Home.Recent.DateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/user_img"
                 app:layout_constraintBottom_toBottomOf="@id/user_img"
-                app:layout_constraintStart_toEndOf="@id/user_img"
+                app:layout_constraintStart_toEndOf="@id/user_name_text"
                 android:layout_marginStart="8dp">
             </TextView>
 
@@ -74,6 +76,7 @@
 
             <TextView
                 android:id="@+id/contents"
+                android:text="@{model.contents}"
                 style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -97,6 +100,7 @@
 
             <ImageView
                 android:id="@+id/contents_img"
+                app:bookmarkContentsImage="@{model.contentsImg}"
                 android:layout_width="match_parent"
                 android:layout_height="296dp"
                 android:layout_marginEnd="12dp"
@@ -107,6 +111,7 @@
 
         <TextView
             android:id="@+id/reaction_text"
+            android:text="@{model.reaction}"
             style="@style/Theme.AppCompat.TextView.Home.Recent.Reaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

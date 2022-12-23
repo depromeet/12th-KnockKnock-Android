@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.depromeet.knockknock.databinding.ItemRecycleHistoryBundleBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
+import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
+import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
 
 class AlarmRoomHistoryBundleAdapter(
     private val eventListener: AlarmRoomHistoryActionHandler,
-) : ListAdapter<HistoryBundle, AlarmRoomHistoryBundleViewHolder>(AlarmRoomHistoryBundleItemDiffCallback){
+    private val viewModel: AlarmRoomHistoryViewModel,
+
+    ) : ListAdapter<HistoryBundle, AlarmRoomHistoryBundleViewHolder>(AlarmRoomHistoryBundleItemDiffCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmRoomHistoryBundleViewHolder {
         return AlarmRoomHistoryBundleViewHolder(
@@ -22,7 +26,7 @@ class AlarmRoomHistoryBundleAdapter(
 
     override fun onBindViewHolder(holder: AlarmRoomHistoryBundleViewHolder, position: Int) {
         getItem(position)?.let { item ->
-            holder.bind(item)
+            holder.bind(item, viewModel)
         }
     }
 

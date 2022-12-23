@@ -45,13 +45,13 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     private fun getTempList2() {
-        val test1 = HistoryMessage(1)
-        val test2 = HistoryMessage(1)
-        val test3 = HistoryMessage(1)
-        val test4 = HistoryMessage(1)
-        val test5 = HistoryMessage(1)
-        val test6 = HistoryMessage(1)
-        val test7 = HistoryMessage(1)
+        val test1 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
+        val test2 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
+        val test3 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
+        val test4 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
+        val test5 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
+        val test6 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
+        val test7 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
 
         val testList = listOf(test1, test2, test3, test4, test5, test6, test7)
 

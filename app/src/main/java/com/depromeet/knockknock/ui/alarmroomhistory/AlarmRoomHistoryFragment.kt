@@ -20,7 +20,7 @@ class AlarmRoomHistoryFragment : BaseFragment<FragmentAlarmRoomHistoryBinding, A
     private val navController by lazy { findNavController() }
 
     override val viewModel : AlarmRoomHistoryViewModel by viewModels()
-    private val alarmRoomHistoryBundleAdapter by lazy { AlarmRoomHistoryBundleAdapter(viewModel) }
+    private val alarmRoomHistoryBundleAdapter by lazy { AlarmRoomHistoryBundleAdapter(viewModel, viewModel) }
 
     override fun initStartView() {
         binding.apply {
