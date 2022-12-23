@@ -6,12 +6,12 @@
 
     <data>
         <variable
-            name="holder"
-            type="com.depromeet.knockknock.ui.home.model.Alarm" />
+            name="model"
+            type="com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage" />
 
         <variable
             name="eventListener"
-            type="com.depromeet.knockknock.ui.home.HomeActionHandler" />
+            type="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,15 +29,14 @@
             android:background="@drawable/bg_gray_radius10"
             android:paddingEnd="4dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{() -> eventListener.onRecentAlarmClicked(holder.alarmId)}">
+            android:onClick="@{() -> eventListener.onRecentAlarmClicked(model.alarmId)}">
 
             <ImageView
                 android:id="@+id/user_img"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:userProfile="@{holder.userImg}">
+                app:layout_constraintStart_toStartOf="parent">
             </ImageView>
 
             <TextView
@@ -48,8 +47,7 @@
                 app:layout_constraintTop_toTopOf="@id/user_img"
                 app:layout_constraintBottom_toBottomOf="@id/user_img"
                 app:layout_constraintStart_toEndOf="@id/user_img"
-                android:layout_marginStart="8dp"
-                android:text="@{holder.userName}">
+                android:layout_marginStart="8dp">
             </TextView>
 
             <TextView
@@ -60,8 +58,7 @@
                 app:layout_constraintTop_toTopOf="@id/user_img"
                 app:layout_constraintBottom_toBottomOf="@id/user_img"
                 app:layout_constraintStart_toEndOf="@id/user_img"
-                android:layout_marginStart="8dp"
-                android:text="@{holder.datetime}">
+                android:layout_marginStart="8dp">
             </TextView>
 
             <ImageView
@@ -82,7 +79,6 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/user_img"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="@{holder.contents}"
                 android:layout_marginTop="8dp">
             </TextView>
 
@@ -104,7 +100,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="296dp"
                 android:layout_marginEnd="12dp"
-                app:bookmarkContentsImage="@{holder.contentsImg}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/expand_btn"/>
@@ -118,7 +113,6 @@
             app:layout_constraintTop_toBottomOf="@id/layout_main"
             app:layout_constraintEnd_toStartOf="@id/reaction_btn"
             android:background="@drawable/custom_gray08_radius100"
-            android:text="@{holder.reaction}"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="6dp"
             android:padding="6dp">
@@ -137,7 +131,7 @@
             android:paddingStart="8dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
-            android:onClick="@{() -> eventListener.onReactionClicked(holder.alarmId)}">
+            android:onClick="@{() -> eventListener.onReactionClicked(model.alarmId)}">
             <TextView
                 style="@style/Theme.AppCompat.TextView.Item.Reaction"
                 android:layout_width="wrap_content"

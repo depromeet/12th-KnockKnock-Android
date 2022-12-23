@@ -5,14 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="vm"
+            type="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel" />
 
         <variable
             name="model"
-            type="com.depromeet.knockknock.ui.alarmroomhistory.model.Message" />
+            type="com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle" />
 
         <variable
             name="eventListener"
-            type="com.depromeet.knockknock.ui.alarmcreate.AlarmCreateActionHandler" />
+            type="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler" />
     </data>
 
 
@@ -29,7 +32,7 @@
             android:layout_marginTop="16dp"
             android:gravity="top"
             android:lineSpacingExtra="5sp"
-            android:text="오늘"
+            android:text="@{model.date}"
             android:textColor="@color/gray01"
             android:textSize="24dp"
             android:translationY="-2.48sp"
@@ -53,14 +56,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:visibility=""
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:listitem="@layout/item_recycle_message" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
