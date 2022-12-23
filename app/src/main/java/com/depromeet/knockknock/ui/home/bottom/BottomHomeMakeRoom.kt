@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.Toast
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.home.HomeActionHandler
-import com.depromeet.knockknock.ui.home.adapter.HomeRoomAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -20,22 +18,23 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class BottomHomeMakeRoom(
     val roomList: List<Room>,
     val eventListener: HomeActionHandler
-) : BottomSheetDialogFragment(){
-    private lateinit var dlg : BottomSheetDialog
+) : BottomSheetDialogFragment() {
+    private lateinit var dlg: BottomSheetDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // 이 코드를 실행하지 않으면 XML에서 round 처리를 했어도 적용되지 않는다.
-        dlg = ( super.onCreateDialog(savedInstanceState).apply {
+        dlg = (super.onCreateDialog(savedInstanceState).apply {
             // window?.setDimAmount(0.2f) // Set dim amount here
             setOnShowListener {
-                val bottomSheet = findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
+                val bottomSheet =
+                    findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
                 bottomSheet.setBackgroundResource(android.R.color.transparent)
 
                 val behavior = BottomSheetBehavior.from(bottomSheet)
                 behavior.isDraggable = true
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
-        } ) as BottomSheetDialog
+        }) as BottomSheetDialog
         return dlg
     }
 
@@ -50,6 +49,19 @@ class BottomHomeMakeRoom(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val makingFriendsRoom =
+            requireView().findViewById<TextView>(R.id.tv_home_dialog_make_friends_room)
+        val makingAloneRoom =
+            requireView().findViewById<TextView>(R.id.tv_home_dialog_make_alone_room)
+
+        makingFriendsRoom.setOnClickListener {
+            Toast.makeText(context, "친구 푸시", Toast.LENGTH_SHORT).show()
+        }
+
+        makingAloneRoom.setOnClickListener {
+            Toast.makeText(context, "홀로 외침방", Toast.LENGTH_SHORT).show()
+        }
 
 //        val layoutEmpty = requireView().findViewById<ConstraintLayout>(R.id.layout_empty)
 //        val recycler = requireView().findViewById<RecyclerView>(R.id.room_recycler)
