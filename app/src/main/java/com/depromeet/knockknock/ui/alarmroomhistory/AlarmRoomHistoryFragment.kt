@@ -5,6 +5,8 @@ import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomHistoryBinding
+import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmRoomHistoryBundleAdapter
+import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmRoomHistoryMessageAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -18,6 +20,7 @@ class AlarmRoomHistoryFragment : BaseFragment<FragmentAlarmRoomHistoryBinding, A
     private val navController by lazy { findNavController() }
 
     override val viewModel : AlarmRoomHistoryViewModel by viewModels()
+    private val alarmRoomHistoryBundleAdapter by lazy { AlarmRoomHistoryBundleAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -26,6 +29,11 @@ class AlarmRoomHistoryFragment : BaseFragment<FragmentAlarmRoomHistoryBinding, A
         }
         exception = viewModel.errorEvent
         initToolbar()
+        initAdapter()
+    }
+
+    private fun initAdapter() {
+        binding.rvList.adapter = alarmRoomHistoryBundleAdapter
     }
 
     private fun initToolbar() {
