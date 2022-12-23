@@ -51,7 +51,7 @@ interface MainAPIService {
     suspend fun putUserProfile(@Body body: PutUserProfileRequest): BaseResponse<UserProfile>
 
     // 닉네임 변경
-    @PUT("/api/v1/users/profile")
+    @PUT("/api/v1/users/nickname")
     suspend fun putUserNickname(@Body body: PutUserNicknameRequest): BaseResponse<Unit>
 
     // 내 친구 리스트

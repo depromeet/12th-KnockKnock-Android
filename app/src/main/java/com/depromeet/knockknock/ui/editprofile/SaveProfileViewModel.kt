@@ -29,7 +29,7 @@ class SaveProfileViewModel @Inject constructor(
 
     val isGalleryImage: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
 
-    val beforeProfile: MutableStateFlow<UserProfile?> = MutableStateFlow(null)
+    var beforeProfile: UserProfile? = null
     val profileImg: MutableStateFlow<String> = MutableStateFlow("")
     val profileName: MutableStateFlow<String> = MutableStateFlow("")
 
@@ -37,7 +37,7 @@ class SaveProfileViewModel @Inject constructor(
         baseViewModelScope.launch {
             mainRepository.getUserProfile()
                 .onSuccess {
-                    beforeProfile.emit(it)
+                    beforeProfile = it
                     profileImg.emit(it.profile_path)
                     profileName.emit(it.nickname)
                 }
@@ -50,13 +50,9 @@ class SaveProfileViewModel @Inject constructor(
         }
     }
 
-    override fun onProfileEditClicked() {
-        TODO("Not yet implemented")
-    }
-
     override fun onProfileSaveClicked() {
         baseViewModelScope.launch {
-            if(beforeProfile.value!!.profile_path != profileImg.value) {
+            if(beforeProfile!!.profile_path != profileImg.value) {
                 mainRepository.putUserProfile(nickname = profileName.value, profile_path = profileImg.value)
                     .onSuccess {
                         _navigationHandler.emit(SaveProfileNavigationAction.NavigateToSuccess)
@@ -64,7 +60,7 @@ class SaveProfileViewModel @Inject constructor(
                     }
             }
 
-            if(beforeProfile.value!!.nickname != profileName.value) {
+            if(beforeProfile!!.nickname != profileName.value) {
                 mainRepository.putUserNickname(nickname = profileName.value)
                     .onSuccess {
                         _navigationHandler.emit(SaveProfileNavigationAction.NavigateToSuccess)

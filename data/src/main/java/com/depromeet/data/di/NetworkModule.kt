@@ -6,6 +6,7 @@ import com.depromeet.data.api.ApiClient.BASE_URL
 import com.depromeet.data.api.MainAPIService
 import com.depromeet.data.interceptor.BearerInterceptor
 import com.depromeet.data.interceptor.ErrorResponseInterceptor
+import com.depromeet.data.interceptor.NullOnEmptyConverterFactory
 import com.depromeet.data.interceptor.XAccessTokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -52,6 +53,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
+        .addConverterFactory(NullOnEmptyConverterFactory())
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
