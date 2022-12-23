@@ -26,6 +26,7 @@ import com.depromeet.knockknock.ui.editprofile.bottom.EditProfileImageBottomShee
 import com.depromeet.knockknock.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -44,31 +45,12 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
     override val viewModel : EditProfileViewModel by viewModels()
     private val navController by lazy { findNavController() }
 
-    private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
-    private lateinit var cameraLauncher: ActivityResultLauncher<Uri>
-    private var cameraUri: Uri? = null
-
-    // 요청하고자 하는 권한들
-    private val permissionList = arrayOf(
-        Manifest.permission.CAMERA,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE)
-
-    // 권한을 허용하도록 요청
-    private val requestMultiplePermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
-        results.forEach {
-            if(!it.value) toastMessage("권한 허용 필요")
-        }
-    }
-
     override fun initStartView() {
         binding.apply {
             this.viewmodel  = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
-        initRegisterForActivityResult()
-        initEditText()
         initToolbar()
     }
 
@@ -78,14 +60,19 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
                 when(it) {
                     is EditProfileNavigationAction.NavigateToLogout -> logOutDialog()
                     is EditProfileNavigationAction.NavigateToUserDelete -> userDeleteDialog()
-                    is EditProfileNavigationAction.NavigateToSplash -> Unit
-                    is EditProfileNavigationAction.NavigateToEditProfileImage -> editProfileImageBottomSheet()
+                    is EditProfileNavigationAction.NavigateToSplash -> navigate(EditProfileFragmentDirections.actionOnboardFragment())
+                    is EditProfileNavigationAction.NavigateToEditProfile -> navigate(EditProfileFragmentDirections.actionEditProfileFragmentToSaveProfileFragment())
                 }
             }
         }
     }
 
     override fun initAfterBinding() {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getProfile()
     }
 
     private fun initToolbar() {
@@ -109,7 +96,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
             alertDialogModel = res,
             clickToPositive = {
                 toastMessage("로그아웃")
-                viewModel.onUserDelete()
+                viewModel.onUserLogOut()
             },
             clickToNegative = {
                 toastMessage("취소")
@@ -129,84 +116,12 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
             alertDialogModel = res,
             clickToPositive = {
                 toastMessage("회원 탈퇴")
+                viewModel.onUserDelete()
             },
             clickToNegative = {
                 toastMessage("취소")
             }
         )
         dialog.show(childFragmentManager, TAG)
-    }
-
-    private fun editProfileImageBottomSheet() {
-        requestMultiplePermission.launch(permissionList)
-        val dialog = EditProfileImageBottomSheet {
-            if(it) getGalleryImage()
-            else getCaptureImage()
-        }
-        dialog.show(childFragmentManager, TAG)
-    }
-
-    private fun initRegisterForActivityResult() {
-        galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-            activityResult.data?.let {
-                createFile(it.data!!)
-            }
-        }
-
-        cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) {
-            if(it) { cameraUri?.let { uri ->
-                createFile(uri)
-            } }
-        }
-    }
-
-    private fun getGalleryImage() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        viewModel.isGalleryImage.value = true
-        galleryLauncher.launch(intent)
-
-    }
-
-    private fun getCaptureImage() {
-//        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE)
-//        } else {
-//            Intent(ACTION_IMAGE_CAPTURE)
-//        }
-        viewModel.isGalleryImage.value = false
-        cameraUri = createImageFile()
-        cameraLauncher.launch(cameraUri)
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun initEditText() {
-        binding.userNameContents.customOnFocusChangeListener(requireContext())
-        binding.profileEditMain.setOnTouchListener { _, _ ->
-            requireActivity().hideKeyboard()
-            binding.userNameContents.clearFocus()
-            false
-        }
-    }
-
-    private fun createImageFile(): Uri? {
-        val now = SimpleDateFormat("yyMMdd_HHmmss").format(Date())
-        val content = ContentValues().apply {
-            put(MediaStore.Images.Media.DISPLAY_NAME, "img_$now.jpg")
-            put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
-        }
-        return requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, content)
-    }
-
-    private fun createFile(uri: Uri) {
-        val file = uriToFile(uri, requireContext())
-        val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-        val requestBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
-        // Update Profile API
-
-        Glide.with(requireContext())
-            .load(uri)
-            .transform(CenterCrop(), RoundedCorners(300))
-            .into(binding.userProfileEdit)
     }
 }

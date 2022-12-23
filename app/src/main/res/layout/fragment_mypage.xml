@@ -25,7 +25,7 @@
             android:layout_marginTop="32dp"
             android:src="@drawable/img_default_user_profile"
             android:scaleType="centerCrop"
-            app:glide1000="@{viewmodel.userProfile.profile_path}">
+            app:glide10000="@{viewmodel.userProfile.profile_path}">
         </ImageView>
 
         <TextView

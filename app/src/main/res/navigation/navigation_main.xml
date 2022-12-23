@@ -97,7 +97,18 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.depromeet.knockknock.ui.editprofile.EditProfileFragment"
-        android:label="EditProfileFragment" />
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_saveProfileFragment"
+            app:destination="@id/saveProfileFragment"
+            app:popExitAnim="@anim/exit_to_right"
+            app:enterAnim="@anim/enter_from_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/saveProfileFragment"
+        android:name="com.depromeet.knockknock.ui.editprofile.SaveProfileFragment"
+        android:label="SaveProfileFragment" />
 
     <fragment
         android:id="@+id/alarmSettingFragment"

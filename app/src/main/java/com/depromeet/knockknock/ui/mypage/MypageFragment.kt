@@ -42,4 +42,9 @@ class MypageFragment : BaseFragment<FragmentMypageBinding, MypageViewModel>(R.la
 
     override fun initAfterBinding() {
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getProfile()
+    }
 }

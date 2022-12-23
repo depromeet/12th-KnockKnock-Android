@@ -36,6 +36,16 @@ fun ImageView.bindRoomImageImage(roomImgUri: String?) {
     }
 }
 
+@BindingAdapter("glide10000")
+fun ImageView.bindGlide10000(uri: String?) {
+    uri?.let {
+        Glide.with(context)
+            .load(it)
+            .transform(CenterCrop(), RoundedCorners(10000))
+            .into(this)
+    }
+}
+
 @BindingAdapter("glide1000")
 fun ImageView.bindGlide1000(uri: String?) {
     uri?.let {
