@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/alarm_room_detail_bg1">
+        android:background="@drawable/bg_purple">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -143,7 +143,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="28dp"
-            app:srcCompat="@drawable/ic_baseline_close_24"
+            app:srcCompat="@drawable/ic_bell"
             app:tint="@color/black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
