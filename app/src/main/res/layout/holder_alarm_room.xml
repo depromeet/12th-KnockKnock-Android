@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="holder"
+            type="com.depromeet.knockknock.ui.alarmroomsearch.model.AlarmRoom" />
+
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchActionHandler" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/room_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> eventListener.onRoomClicked(holder.roomId)}"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/room_img"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.333"
+                app:roomThumbnailImage="@{holder.roomThumbnail}" />
+
+            <LinearLayout
+                android:id="@+id/room_title_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toEndOf="@id/room_img"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/room_title"
+                    style="@style/Theme.AppCompat.TextView.Filter.Room.Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:text="@{holder.roomName}" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_secret"
+                    app:roomUnpublicIconEnable="@{holder.roomIsUnpublic}" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/room_description"
+                android:layout_width="243dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:ellipsize="end"
+                android:text="@{holder.roomDescription}"
+                android:textColor="@color/gray06"
+                android:textSize="16dp"
+                app:layout_constraintStart_toEndOf="@id/room_img"
+                app:layout_constraintTop_toBottomOf="@id/room_title_frame"
+                android:singleLine="true" />
+
+            <LinearLayout
+                android:id="@+id/member_count_category_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/room_img"
+                app:layout_constraintTop_toBottomOf="@id/room_description">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="멤버 "
+                    android:textColor="@color/gray06"
+                    android:textSize="14dp">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/member_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@{String.valueOf(holder.roomMemberCount)}"
+                    android:textColor="@color/gray06"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="명"
+                    android:textColor="@color/gray06"
+                    android:textSize="14dp">
+
+                </TextView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/custom_yellow_radius16"
+                    android:paddingStart="10dp"
+                    android:paddingTop="1dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="1dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@{holder.roomCategoryName}"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        app:layout_constraintBottom_toBottomOf="@id/room_layout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F6F6F6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
