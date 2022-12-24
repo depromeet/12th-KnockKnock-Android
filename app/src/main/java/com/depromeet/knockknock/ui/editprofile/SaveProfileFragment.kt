@@ -170,9 +170,6 @@ class SaveProfileFragment : BaseFragment<FragmentSaveProfileBinding, SaveProfile
         val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
         val requestBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
         // Update Profile API
-
-        lifecycleScope.launch {
-            viewModel.profileImg.value = uri.toString()
-        }
+        viewModel.setFileToUri(file = requestBody)
     }
 }

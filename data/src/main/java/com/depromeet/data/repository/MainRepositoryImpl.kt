@@ -7,6 +7,7 @@ import com.depromeet.data.model.toDomain
 import com.depromeet.domain.NetworkResult
 import com.depromeet.domain.model.*
 import com.depromeet.domain.repository.MainRepository
+import okhttp3.MultipartBody
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -274,9 +275,8 @@ class MainRepositoryImpl @Inject constructor(
         return handleApi { mainAPIService.deleteNotificationReservation(reservation_id = reservation_id).data }
     }
 
-    override suspend fun postFileToUrl(file: String): NetworkResult<ImageUrl> {
-        val body = PostFileToUrlRequest(file = file)
-        return handleApi { mainAPIService.postFileToUrl(body = body).data }
+    override suspend fun postFileToUrl(file : MultipartBody.Part): NetworkResult<ImageUrl> {
+        return handleApi { mainAPIService.postFileToUrl(file = file).data }
     }
 
     override suspend fun postAddMember(id: Int, member_ids: List<Int>): NetworkResult<Group> {
