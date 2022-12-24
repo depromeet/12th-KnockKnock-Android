@@ -3,7 +3,7 @@ package com.depromeet.knockknock.ui.register
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
-import android.util.Log
+import android.provider.Settings.Secure
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -19,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.user.UserApiClient
@@ -54,6 +55,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         exception = viewModel.errorEvent
         initEditText()
         countEditTextMessage()
+        createNotification()
     }
 
     override fun initDataBinding() {
@@ -150,8 +152,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         }
     }
 
+    @SuppressLint("HardwareIds")
     private fun createNotification() {
-
+        FirebaseMessaging.getInstance().token.addOnSuccessListener {
+            viewModel.firebaseToken.value = it
+            viewModel.deviceId.value = Secure.getString(requireContext().contentResolver, Secure.ANDROID_ID)
+        }
     }
 
     private fun kakaoLogin() {
