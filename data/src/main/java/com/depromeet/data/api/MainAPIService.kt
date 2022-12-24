@@ -6,14 +6,8 @@ import com.depromeet.data.model.response.PagingGroupList
 import com.depromeet.data.model.response.PagingNotification
 import com.depromeet.data.model.response.PagingNotificationList
 import com.depromeet.domain.model.*
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.POST
-import retrofit2.http.PUT
-import retrofit2.http.Path
-import retrofit2.http.Query
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 
 interface MainAPIService {
@@ -181,7 +175,7 @@ interface MainAPIService {
     suspend fun patchNotificationReservation(@Body body: PatchNotificationReservationRequest): BaseResponse<Unit>
 
     // 똑똑 미리보기 체험 <- 본인한테 보내기
-    @PATCH("/api/v1/notifications/experience")
+    @POST("/api/v1/notifications/experience")
     suspend fun postNotificationExperience(@Body body: PostNotificationExperienceRequest): BaseResponse<Unit>
 
     // 알림방 푸쉬알림 리스트
@@ -202,8 +196,9 @@ interface MainAPIService {
     suspend fun deleteNotificationReservation(@Path("reservation_id") reservation_id: Int): BaseResponse<Unit>
 
     // 파일 URL로 바꾸기
+    @Multipart
     @POST("/api/v1/images")
-    suspend fun postFileToUrl(@Body body: PostFileToUrlRequest): BaseResponse<ImageUrl>
+    suspend fun postFileToUrl(@Part file: MultipartBody.Part): BaseResponse<ImageUrl>
 
     // 내 친구목록 멤버 추가
     @POST("/api/v1/groups/{id}/members")

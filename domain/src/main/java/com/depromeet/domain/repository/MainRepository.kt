@@ -2,6 +2,7 @@ package com.depromeet.domain.repository
 
 import com.depromeet.domain.NetworkResult
 import com.depromeet.domain.model.*
+import okhttp3.MultipartBody
 
 interface  MainRepository {
 
@@ -178,7 +179,7 @@ interface  MainRepository {
 
     // 파일 URL로 바꾸기
     suspend fun postFileToUrl(
-        file: String
+        file : MultipartBody.Part
     ): NetworkResult<ImageUrl>
 
     // 내 친구목록 멤버 추가

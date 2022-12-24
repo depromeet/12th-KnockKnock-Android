@@ -55,7 +55,26 @@
     <fragment
         android:id="@+id/alarmCreateFragment"
         android:name="com.depromeet.knockknock.ui.alarmcreate.AlarmCreateFragment"
-        android:label="AlarmCreateFragment"/>
+        android:label="AlarmCreateFragment">
+        <action
+            android:id="@+id/action_alarmCreateFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.depromeet.knockknock.ui.preview.PreviewFragment"
+        android:label="PreviewFragment">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+        <argument
+            android:name="uri"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/alarmRoomFragment"

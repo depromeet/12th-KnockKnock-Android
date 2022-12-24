@@ -1,6 +1,8 @@
 package com.depromeet.knockknock.ui.register
 
-import com.depromeet.data.DataApplication
+import android.util.Log
+import com.depromeet.domain.flatMap
+import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
@@ -23,9 +25,23 @@ class RegisterViewModel @Inject constructor(
     val messageText: MutableStateFlow<String> = MutableStateFlow("")
     val notificationAgreed: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
 
+    val sendEnable: MutableStateFlow<Boolean> = MutableStateFlow(false)
+
+    val firebaseToken: MutableStateFlow<String> = MutableStateFlow("")
+    val deviceId: MutableStateFlow<String> = MutableStateFlow("")
+
     fun setNotification(enable: Boolean) {
         baseViewModelScope.launch {
-            notificationAgreed.value = enable
+            mainRepository.postNotificationToken(token = firebaseToken.value, device_id = deviceId.value)
+                .onSuccess {
+                    notificationAgreed.value = enable
+                }
+            mainRepository.postNotificationExperience(token = firebaseToken.value, content = messageText.value)
+                .onSuccess {
+                    Log.d("response!!", "Success")
+                }.onError {
+                    Log.d("response!!", it.toString())
+                }
         }
     }
 
@@ -61,10 +77,15 @@ class RegisterViewModel @Inject constructor(
 
     override fun onSendTestPushAlarmClicked() {
         baseViewModelScope.launch {
-            if (!notificationAgreed.value)
+            if(!sendEnable.value) {
+                return@launch
+            }
+
+            if (!notificationAgreed.value) {
                 _navigationHandler.emit(RegisterNavigationAction.NavigateToPushSetting)
-            else
+            } else {
                 _navigationHandler.emit(RegisterNavigationAction.NavigateToNotificationAlarm)
+            }
         }
     }
 

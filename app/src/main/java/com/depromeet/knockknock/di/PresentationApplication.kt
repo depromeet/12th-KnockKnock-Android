@@ -2,17 +2,14 @@ package com.depromeet.knockknock.di
 
 import android.app.Application
 import android.content.SharedPreferences
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
-import android.util.Base64
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.depromeet.data.DataApplication
+import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.HiltAndroidApp
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
+
 
 @HiltAndroidApp
 class PresentationApplication :Application(){

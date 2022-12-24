@@ -34,17 +34,17 @@ class PreviewFragment :
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
-//        val args: PreviewFragmentArgs by navArgs()
-//        viewModel.previewTitleEvent.value = args.title
-//        binding.previewMessageTextView.text = args.message
-//        viewModel.onImageUriChecked(args.uri)
+        val args: PreviewFragmentArgs by navArgs()
+        viewModel.previewTitleEvent.value = args.title
+        binding.previewMessageTextView.text = args.message
+        viewModel.onImageUriChecked(args.uri)
 
-//        if (args.message == "" && args.uri != "") {
-//            binding.previewMessageTextView.visibility = View.GONE
-//            binding.ivFold.visibility = View.GONE
-//            binding.messageImgCardView.layoutParams.height = 150f.toDp()
-//            binding.messageImgCardView.layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT
-//        }
+        if (args.message == "" && args.uri != "") {
+            binding.previewMessageTextView.visibility = View.GONE
+            binding.ivFold.visibility = View.GONE
+            binding.messageImgCardView.layoutParams.height = 150f.toDp()
+            binding.messageImgCardView.layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT
+        }
         isEllipsis(binding.previewMessageTextView)
 
         setupEvent()
