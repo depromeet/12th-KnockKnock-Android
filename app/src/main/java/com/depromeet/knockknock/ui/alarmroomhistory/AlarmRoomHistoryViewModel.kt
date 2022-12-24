@@ -4,6 +4,8 @@ import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateNavigationAction
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
+import com.depromeet.knockknock.ui.bookmark.BookmarkNavigationAction
+import com.depromeet.knockknock.ui.bookmark.model.Bookmark
 //import com.dida.android.presentation.views.nav.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -15,9 +17,8 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 ) : BaseViewModel(), AlarmRoomHistoryActionHandler {
 
     private val TAG = "AlarmRoomHistoryViewModel"
-    private val _navigationEvent: MutableSharedFlow<AlarmCreateNavigationAction> =
-        MutableSharedFlow<AlarmCreateNavigationAction>()
-    val navigationEvent: SharedFlow<AlarmCreateNavigationAction> = _navigationEvent.asSharedFlow()
+    private val _navigationEvent: MutableSharedFlow<AlarmNavigationAction> = MutableSharedFlow<AlarmNavigationAction>()
+    val navigationEvent: SharedFlow<AlarmNavigationAction> = _navigationEvent.asSharedFlow()
     private val _alarmRoomHistoryBundleEvent: MutableStateFlow<List<HistoryBundle>> = MutableStateFlow(emptyList())
     val alarmRoomHistoryBundleEvent: StateFlow<List<HistoryBundle>> = _alarmRoomHistoryBundleEvent
     private val _alarmRoomHistoryMessageEvent: MutableStateFlow<List<HistoryMessage>> = MutableStateFlow(emptyList())
@@ -45,15 +46,41 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     private fun getTempList2() {
-        val test1 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
-        val test2 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
-        val test3 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
-        val test4 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
-        val test5 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
-        val test6 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
-        val test7 = HistoryMessage(1, "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ", "ㅇㅇㅇ")
+        val test1 = HistoryMessage(
+            alarmId = 1,
+            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            userName = "라이언",
+            datetime = "오후 09:10",
+            contents = "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트",
+            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            roomName = "테스트1호점",
+            reactionContents = "",
+            reactionCount = 0,
+        )
+        val test2 = HistoryMessage(
+            alarmId = 1,
+            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            userName = "라이언",
+            datetime = "오후 09:10",
+            contents = "테스트테스트테스트",
+            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            roomName = "테스트1호점",
+            reactionContents = "",
+            reactionCount = 0,
+        )
+        val test3 = HistoryMessage(
+            alarmId = 1,
+            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            userName = "라이언",
+            datetime = "오후 09:10",
+            contents = "테스트테스트테스트",
+            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            roomName = "테스트1호점",
+            reactionContents = "",
+            reactionCount = 0,
+        )
 
-        val testList = listOf(test1, test2, test3, test4, test5, test6, test7)
+        val testList = listOf(test1, test2, test3)
 
         baseViewModelScope.launch {
             _alarmRoomHistoryMessageEvent.value = testList
@@ -72,8 +99,10 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun onReactionClicked(alarmId: Int) {
-        TODO("Not yet implemented")
+    override fun onReactionClicked(bookmarkIdx: Int) {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmNavigationAction.NavigateToReaction(bookmarkIdx))
+        }
     }
 
     override fun onNotificationClicked() {
