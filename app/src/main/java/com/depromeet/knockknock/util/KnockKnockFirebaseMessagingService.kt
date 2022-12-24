@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.util
 
 import android.R
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -29,7 +30,7 @@ class KnockKnockFirebaseMessagingService : FirebaseMessagingService() {
             applicationContext
         )
         var builder: NotificationCompat.Builder? = null
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (notificationManager.getNotificationChannel("KnockKnock") == null) {
                 val channel = NotificationChannel(
                     "KnockKnock",
@@ -38,23 +39,24 @@ class KnockKnockFirebaseMessagingService : FirebaseMessagingService() {
                 )
                 notificationManager.createNotificationChannel(channel)
             }
-            builder = NotificationCompat.Builder(applicationContext, "KnockKnock")
+            NotificationCompat.Builder(applicationContext, "KnockKnock")
         } else {
-            builder = NotificationCompat.Builder(applicationContext)
+            NotificationCompat.Builder(applicationContext)
         }
         val title = remoteMessage.notification!!.title
         val body = remoteMessage.notification!!.body
-        builder!!.setContentTitle(title)
+        builder.setContentTitle(title)
             .setContentText(body)
             .setSmallIcon(R.drawable.ic_delete)
         val notification: Notification = builder.build()
         notificationManager.notify(1, notification)
 
-        remoteMessage.notification?.let {
-            showNotification(it)
-        }
+//        remoteMessage.notification?.let {
+//            showNotification(it)
+//        }
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     @RequiresApi(Build.VERSION_CODES.M)
     private fun showNotification(notification: RemoteMessage.Notification) {
         val intent = Intent(this, MainActivity::class.java)

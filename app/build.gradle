@@ -128,4 +128,8 @@ dependencies {
 
     // FlexBox
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    // 코틀린을 쓰는 경우
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+
 }
