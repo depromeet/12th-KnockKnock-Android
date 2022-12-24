@@ -1,5 +1,7 @@
 package com.depromeet.knockknock.ui.editprofile
 
+import android.net.Uri
+import android.util.Log
 import com.depromeet.domain.model.UserProfile
 import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
@@ -14,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,6 +44,15 @@ class SaveProfileViewModel @Inject constructor(
                     beforeProfile = it
                     profileImg.emit(it.profile_path)
                     profileName.emit(it.nickname)
+                }
+        }
+    }
+
+    fun setFileToUri(file: MultipartBody.Part) {
+        baseViewModelScope.launch {
+            mainRepository.postFileToUrl(file = file)
+                .onSuccess {
+                    profileImg.value = it.image_url
                 }
         }
     }
