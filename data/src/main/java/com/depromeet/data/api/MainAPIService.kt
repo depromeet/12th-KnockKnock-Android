@@ -175,7 +175,7 @@ interface MainAPIService {
     suspend fun patchNotificationReservation(@Body body: PatchNotificationReservationRequest): BaseResponse<Unit>
 
     // 똑똑 미리보기 체험 <- 본인한테 보내기
-    @PATCH("/api/v1/notifications/experience")
+    @POST("/api/v1/notifications/experience")
     suspend fun postNotificationExperience(@Body body: PostNotificationExperienceRequest): BaseResponse<Unit>
 
     // 알림방 푸쉬알림 리스트

@@ -143,10 +143,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
                     binding.testAlarmButton.backgroundTintList =
                         requireContext().getColorStateList(R.color.background_white_mode)
                     binding.onboardBeforeWrite.setImageDrawable(requireContext().getDrawable(R.drawable.onboard_before_write))
+                    viewModel.sendEnable.value = false
                 } else {
                     binding.testAlarmButton.backgroundTintList =
                         requireContext().getColorStateList(R.color.main_yellow_light_mode)
                     binding.onboardBeforeWrite.setImageDrawable(requireContext().getDrawable(R.drawable.onboard_after_write))
+                    viewModel.sendEnable.value = true
                 }
             }
         }

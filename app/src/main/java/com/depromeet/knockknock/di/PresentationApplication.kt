@@ -28,8 +28,6 @@ class PresentationApplication :Application(){
         KakaoSdk.init(this, "6776355fa5aec1a02126ce3817cce784")
         val keyHash = Utility.getKeyHash(this)
         Log.d("HashKey", keyHash)
-        val token = FirebaseMessaging.getInstance().token.result
-        Log.d("FirebaseToken", token)
 
         DataApplication.sSharedPreferences = applicationContext.getSharedPreferences("KnockKnock", MODE_PRIVATE)
         DataApplication.editor = DataApplication.sSharedPreferences.edit()
