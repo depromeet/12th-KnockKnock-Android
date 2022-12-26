@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.depromeet.knockknock.databinding.ItemRecycleHistoryBundleBinding
+import com.depromeet.knockknock.databinding.ItemRecyclerHistoryBundleBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
-import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
 
 class AlarmRoomHistoryBundleAdapter(
     private val eventListener: AlarmRoomHistoryActionHandler,
@@ -18,7 +17,7 @@ class AlarmRoomHistoryBundleAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmRoomHistoryBundleViewHolder {
         return AlarmRoomHistoryBundleViewHolder(
-            ItemRecycleHistoryBundleBinding.inflate(LayoutInflater.from(parent.context), parent, false).apply {
+            ItemRecyclerHistoryBundleBinding.inflate(LayoutInflater.from(parent.context), parent, false).apply {
                 eventListener = this@AlarmRoomHistoryBundleAdapter.eventListener
             }
         )
@@ -26,7 +25,8 @@ class AlarmRoomHistoryBundleAdapter(
 
     override fun onBindViewHolder(holder: AlarmRoomHistoryBundleViewHolder, position: Int) {
         getItem(position)?.let { item ->
-            holder.bind(item, viewModel)
+            if (position in 0..1) holder.bind(item, viewModel, true) else holder.bind(item, viewModel, false)
+
         }
     }
 
