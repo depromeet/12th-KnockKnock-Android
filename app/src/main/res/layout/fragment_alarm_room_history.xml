@@ -91,6 +91,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="16dp"
+            android:padding="16dp"
             android:background="@drawable/custom_backgroundwhiteblack_radius10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -100,38 +101,225 @@
 
             <TextView
                 android:id="@+id/preview_message_text_view"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:maxLength="25"
-                android:text="이 방은 어떤 방인가요?"
+                android:maxLines="1"
+                android:text="이 방은 어떤 방인가요?이 방은 어떤 방인가?이 방은 어떤 방인가"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/expand_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.509" />
+
+            <TextView
+                android:id="@+id/expand_btn"
+                android:visibility="gone"
+                style="@style/Theme.AppCompat.TextView.EditBookmark.Expanded.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/more_contents"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/close_btn"
+                style="@style/Theme.AppCompat.TextView.EditBookmark.Expanded.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="접기"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/preview_message_text_view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_list"
-            alarmRoomHistoryBundleAdapter="@{vm.alarmRoomHistoryBundleEvent}"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_yellow_radius10"
+            android:padding="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <ImageView
+                android:id="@+id/iv_item_reservation_timer"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_reservation_timer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_item_reservation_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:paddingVertical="2.5dp"
+                android:text="오늘 19:00 발송 예정"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_item_reservation_timer"
+                app:layout_constraintStart_toEndOf="@+id/iv_item_reservation_timer"
+                app:layout_constraintTop_toTopOf="@+id/iv_item_reservation_timer" />
+
+
+
+            <ImageView
+                android:id="@+id/iv_item_reservation_up"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_up"
+                app:layout_constraintBottom_toBottomOf="@id/iv_item_reservation_timer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_item_reservation_timer" />
+
+            <TextView
+                android:id="@+id/tv_item_reservation_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="푸시알림 텍스트는 2줄까지만 보여주세요. 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/iv_item_reservation_timer"
+                app:layout_constraintTop_toBottomOf="@id/tv_item_reservation_title" />
+
+            <ImageView
+                android:id="@+id/contents_img"
+                android:visibility="gone"
+                android:src="@drawable/alarm_room_detail_bg1"
+                android:layout_width="match_parent"
+                android:layout_height="296dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_reservation_content" />
+
+            <LinearLayout
+                android:id="@+id/reservation_btn_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/contents_img"
+                tools:layout_editor_absoluteX="16dp">
+
+                <TextView
+                    android:id="@+id/reservation_delete_btn"
+                    style="@style/Theme.AppCompat.TextView.Notification.Button.Negative"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="삭제하기"
+                    app:layout_constraintTop_toBottomOf="@+id/alert_description" />
+
+                <TextView
+                    android:id="@+id/reservation_edit_btn"
+                    style="@style/Theme.AppCompat.TextView.Notification.Button.Negative"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="시간 수정하기"
+                    app:layout_constraintTop_toBottomOf="@+id/alert_description" />
+            </LinearLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/item_recycle_history_bundle" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintVertical_bias="0.0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+                    <TextView
+                        android:id="@+id/tv_invite_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="5sp"
+                        android:text="입장 요청 8"
+                        android:textColor="@color/gray01"
+                        android:textSize="24dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_invite_fold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:padding="16dp"
+                        android:src="@drawable/ic_arrow_up_white"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_invite_list"
+                    alarmInviteRoomBundleAdapter="@{vm.alarmInviteRoomEvent}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_recycler_invite_room" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    alarmRoomHistoryBundleAdapter="@{vm.alarmRoomHistoryBundleEvent}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:listitem="@layout/item_recycler_history_bundle" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"

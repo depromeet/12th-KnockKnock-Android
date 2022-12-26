@@ -1,11 +1,9 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateNavigationAction
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
-import com.depromeet.knockknock.ui.bookmark.BookmarkNavigationAction
-import com.depromeet.knockknock.ui.bookmark.model.Bookmark
+import com.depromeet.knockknock.ui.alarmroomhistory.model.InviteRoom
 //import com.dida.android.presentation.views.nav.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -17,8 +15,10 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 ) : BaseViewModel(), AlarmRoomHistoryActionHandler {
 
     private val TAG = "AlarmRoomHistoryViewModel"
-    private val _navigationEvent: MutableSharedFlow<AlarmNavigationAction> = MutableSharedFlow<AlarmNavigationAction>()
-    val navigationEvent: SharedFlow<AlarmNavigationAction> = _navigationEvent.asSharedFlow()
+    private val _navigationEvent: MutableSharedFlow<AlarmRoomHistoryNavigationAction> = MutableSharedFlow<AlarmRoomHistoryNavigationAction>()
+    val navigationEvent: SharedFlow<AlarmRoomHistoryNavigationAction> = _navigationEvent.asSharedFlow()
+    private val _alarmInviteRoomEvent: MutableStateFlow<List<InviteRoom>> = MutableStateFlow(emptyList())
+    val alarmInviteRoomEvent: StateFlow<List<InviteRoom>> = _alarmInviteRoomEvent
     private val _alarmRoomHistoryBundleEvent: MutableStateFlow<List<HistoryBundle>> = MutableStateFlow(emptyList())
     val alarmRoomHistoryBundleEvent: StateFlow<List<HistoryBundle>> = _alarmRoomHistoryBundleEvent
     private val _alarmRoomHistoryMessageEvent: MutableStateFlow<List<HistoryMessage>> = MutableStateFlow(emptyList())
@@ -27,6 +27,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     init {
         getTempList()
         getTempList2()
+        getTempList3()
     }
 
     private fun getTempList() {
@@ -87,6 +88,46 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
+//    val notificationId: Int,
+//    val roomId: Int,
+//    val userId: Int,
+//    val userName: String,
+//    val userImg: String,
+//    val contents: String,
+//    val dateTime: String,
+    private fun getTempList3() {
+        val test1 = InviteRoom(
+            notificationId = 1,
+            roomId = 1,
+            userId = 1,
+            userName = "라이언",
+            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            dateTime = "오후 09:10",
+        )
+        val test2 = InviteRoom(
+            notificationId = 1,
+            roomId = 1,
+            userId = 1,
+            userName = "라이언",
+            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            dateTime = "오후 09:10",
+        )
+        val test3 = InviteRoom(
+            notificationId = 1,
+            roomId = 1,
+            userId = 1,
+            userName = "라이언",
+            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+            dateTime = "오후 09:10",
+        )
+
+        val testList = listOf(test1, test2, test3)
+
+        baseViewModelScope.launch {
+            _alarmInviteRoomEvent.value = testList
+        }
+    }
+
     override fun onCreatePushClicked() {
         TODO("Not yet implemented")
     }
@@ -96,12 +137,12 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     override fun onRecentAlarmClicked(alarmId: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onReactionClicked(bookmarkIdx: Int) {
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmNavigationAction.NavigateToReaction(bookmarkIdx))
+            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToReaction(bookmarkIdx))
         }
     }
 
@@ -118,6 +159,8 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     override fun onRecentAlarmMoreClicked(alarmId: Int) {
-        TODO("Not yet implemented")
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToAlarmMore(alarmId))
+        }
     }
 }
