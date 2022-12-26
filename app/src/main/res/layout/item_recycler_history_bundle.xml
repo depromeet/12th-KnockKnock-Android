@@ -21,7 +21,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="40dp"
+        android:layout_marginTop="16dp"
+
+
+        >
 
 
         <TextView
@@ -29,13 +34,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:gravity="top"
             android:lineSpacingExtra="5sp"
             android:text="@{model.date}"
             android:textColor="@color/gray01"
             android:textSize="24dp"
-            android:translationY="-2.48sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,20 +48,23 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:padding="16dp"
-            android:src="@drawable/ic_arrow_down"
+            android:src="@drawable/ic_arrow_up_white"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
+            alarmRoomHistoryMessageAdapter="@{vm.alarmRoomHistoryMessageEvent}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:orientation="vertical"
-            alarmRoomHistoryMessageAdapter="@{vm.alarmRoomHistoryMessageEvent}"
+            android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
