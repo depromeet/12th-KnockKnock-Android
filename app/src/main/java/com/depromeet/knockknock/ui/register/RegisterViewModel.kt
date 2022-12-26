@@ -32,10 +32,6 @@ class RegisterViewModel @Inject constructor(
 
     fun setNotification(enable: Boolean) {
         baseViewModelScope.launch {
-            mainRepository.postNotificationToken(token = firebaseToken.value, device_id = deviceId.value)
-                .onSuccess {
-                    notificationAgreed.value = enable
-                }
             mainRepository.postNotificationExperience(token = firebaseToken.value, content = messageText.value)
                 .onSuccess {
                     Log.d("response!!", "Success")
@@ -55,20 +51,25 @@ class RegisterViewModel @Inject constructor(
         baseViewModelScope.launch {
             mainRepository.getTokenValidation(idToken = idToken, provider = provider)
                 .onSuccess {
+                    editor.putString("id_token", idToken)
+                    editor.putString("provider", provider)
+                    editor.putString("fcm_token", firebaseToken.value)
+                    editor.putString("device_id", deviceId.value)
+
                     if(!it.is_registered) {
-                        editor.putString("id_token", idToken)
-                        editor.putString("provider", provider)
                         editor.commit()
                         _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginFrist)
                     } else {
                         mainRepository.postLogin(idToken = idToken, provider = provider)
                             .onSuccess { response ->
-                                editor.putString("id_token", idToken)
-                                editor.putString("provider", provider)
                                 editor.putString("access_token", response.access_token)
                                 editor.putString("refresh_token", response.refresh_token)
                                 editor.commit()
-                                _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginAlready)
+
+                                mainRepository.postNotificationToken(token = firebaseToken.value, device_id = deviceId.value)
+                                    .onSuccess {
+                                        _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginAlready)
+                                    }
                             }
                     }
                 }

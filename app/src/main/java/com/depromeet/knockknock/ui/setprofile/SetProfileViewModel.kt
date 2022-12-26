@@ -65,14 +65,14 @@ class SetProfileViewModel @Inject constructor(
 
     override fun onSelectionDoneClicked() {
         baseViewModelScope.launch {
-            val id_token = sSharedPreferences.getString("id_token", null)
+            val idToken = sSharedPreferences.getString("id_token", null)
             val provider = sSharedPreferences.getString("provider", null)
             if(inputContent.value == "") {
                 _navigationHandler.emit(SetProfileNavigationAction.NavigateToEmpty)
             } else {
-                if(id_token != null && provider != null) {
+                if(idToken != null && provider != null) {
                     mainRepository.postRegister(
-                        idToken = id_token,
+                        idToken = idToken,
                         provider = provider,
                         profile_path = profileImg.value!!.url,
                         nickname = inputContent.value
@@ -80,8 +80,12 @@ class SetProfileViewModel @Inject constructor(
                         editor.putString("access_token", it.access_token)
                         editor.putString("refresh_token", it.refresh_token)
                         editor.commit()
-
-                        _navigationHandler.emit(SetProfileNavigationAction.NavigateToHome)
+                        val deviceId = sSharedPreferences.getString("device_id", null)
+                        val fcmToken = sSharedPreferences.getString("fcm_token", null)
+                        mainRepository.postNotificationToken(device_id = deviceId!!, token = fcmToken!!)
+                            .onSuccess {
+                                _navigationHandler.emit(SetProfileNavigationAction.NavigateToHome)
+                            }
                     }
                 }
             }
