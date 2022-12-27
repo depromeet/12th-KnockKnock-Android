@@ -40,7 +40,7 @@ class SettingRoomForUserFragment : BaseFragment<FragmentSettingRoomForUserBindin
                 when(it) {
                     //is SettingRoomForUserNavigationAction.NavigateToCategory -> navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToCategoryFragment())
                     is SettingRoomForUserNavigationAction.NavigateToLink -> {}
-                    is SettingRoomForUserNavigationAction.NavigateToAddMember -> {}
+                    is SettingRoomForUserNavigationAction.NavigateToAddMember -> {navigate(SettingRoomForUserFragmentDirections.actionSettingRoomForUserFragmentToInviteFriendToRoomFragment())}
                     //is SettingRoomForUserNavigationAction.NavigateToEditDetail -> {navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToEditRoomDetailsFragment())}
                 }
             }
