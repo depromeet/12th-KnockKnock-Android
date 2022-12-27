@@ -25,7 +25,7 @@ class SettingRoomFragment : BaseFragment<FragmentSettingRoomBinding, SettingRoom
 
     override fun initStartView() {
         binding.apply {
-            this.viewmodel = viewModel
+            this.settingroomviewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
@@ -39,7 +39,7 @@ class SettingRoomFragment : BaseFragment<FragmentSettingRoomBinding, SettingRoom
                 when(it) {
                     is SettingRoomNavigationAction.NavigateToCategory -> navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToCategoryFragment())
                     is SettingRoomNavigationAction.NavigateToLink -> {}
-                    is SettingRoomNavigationAction.NavigateToAddMember -> {}
+                    is SettingRoomNavigationAction.NavigateToAddMember -> navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToInviteFriendToRoomFragment())
                     is SettingRoomNavigationAction.NavigateToExportMember -> {}
                     is SettingRoomNavigationAction.NavigateToRemove -> {}
                     is SettingRoomNavigationAction.NavigateToEditDetail -> {navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToEditRoomDetailsFragment())}
