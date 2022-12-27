@@ -34,10 +34,10 @@ class EditRoomDetailsViewModel @Inject constructor(
     private val _onSaveSuccess: MutableSharedFlow<Boolean> = MutableSharedFlow<Boolean>()
     val onSaveSuccess: SharedFlow<Boolean> = _onSaveSuccess.asSharedFlow()
 
-    private val _backgroundStored: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+    var _backgroundStored: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val backgroundStored: StateFlow<Boolean> = _backgroundStored.asStateFlow()
 
-    private val _thumbnailStored: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+    var _thumbnailStored: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val thumbnailStored: StateFlow<Boolean> = _thumbnailStored.asStateFlow()
 
     private val _roomNameWritten: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
@@ -121,7 +121,7 @@ class EditRoomDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             (_roomNameWritten).debounce(0).collectLatest {
                 if(_roomDesWritten.value && _backgroundStored.value && _thumbnailStored.value)
-                _saveBtnEnable.emit(_roomNameWritten.value)
+                    _saveBtnEnable.emit(_roomNameWritten.value)
             }
         }
 
