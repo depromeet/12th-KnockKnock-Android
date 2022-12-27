@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="viewmodel"
+            name="settingroomviewmodel"
             type="com.depromeet.knockknock.ui.settingroom.SettingRoomViewModel" />
     </data>
 
@@ -43,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:padding="8dp"
             android:layout_marginEnd="8dp"
-            android:onClick="@{() -> viewmodel.onCategoryClicked()}">
+            android:onClick="@{() -> settingroomviewmodel.onCategoryClicked()}">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             app:layout_constraintTop_toTopOf="@id/detail_info_title"
             app:layout_constraintBottom_toBottomOf="@id/detail_info_title"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{() -> viewmodel.onEditDetailClicked()}"
+            android:onClick="@{() -> settingroomviewmodel.onEditDetailClicked()}"
             android:text="@string/edit">
         </TextView>
 
@@ -175,7 +175,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:paddingTop="4dp"
-            android:paddingBottom="4dp">
+            android:paddingBottom="4dp"
+            android:onClick="@{()-> settingroomviewmodel.onAddMemberClicked()}">
 
             <ImageView
                 android:id="@+id/add_img"
