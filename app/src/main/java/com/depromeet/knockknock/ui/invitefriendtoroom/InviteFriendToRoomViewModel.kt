@@ -1,7 +1,6 @@
 package com.depromeet.knockknock.ui.invitefriendtoroom
 
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.editbookmark.EditBookmarkNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -16,7 +15,7 @@ class InviteFriendToRoomViewModel @Inject constructor(
     private val _navigationHandler: MutableSharedFlow<InviteFriendToRoomNavigationAction> = MutableSharedFlow<InviteFriendToRoomNavigationAction>()
     val navigationHandler: SharedFlow<InviteFriendToRoomNavigationAction> = _navigationHandler.asSharedFlow()
 
-    private val _saveBtnEnable: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(true)
+    private val _saveBtnEnable: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val saveBtnEnable: StateFlow<Boolean> = _saveBtnEnable.asStateFlow()
 
     private val _clickUser: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
@@ -36,8 +35,6 @@ class InviteFriendToRoomViewModel @Inject constructor(
         _saveBtnEnable.value = inviteUserList.size > 0
 
         baseViewModelScope.launch {
-            //_onSaveSuccess.emit(true)
-            println("onsavesuccess is ${saveBtnEnable.value}")
             _saveBtnEnable.emit(_saveBtnEnable.value)
             _clickUser.emit(userIdx)
         }
