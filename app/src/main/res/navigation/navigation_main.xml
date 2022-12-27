@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/onboardFragment">
+    app:startDestination="@id/homeFragment">
 
     <action
         android:id="@+id/action_main_fragment"
@@ -222,4 +222,8 @@
         android:id="@+id/editRoomDetailsFragment"
         android:name="com.depromeet.knockknock.ui.editroomdetails.EditRoomDetailsFragment"
         android:label="EditRoomDetailsFragment" />
+    <fragment
+        android:id="@+id/alarmRoomSearchFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchFragment"
+        android:label="AlarmRoomSearchFragment" />
 </navigation>
