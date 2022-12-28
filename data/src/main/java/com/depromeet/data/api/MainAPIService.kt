@@ -158,6 +158,10 @@ interface MainAPIService {
     @DELETE("/api/v1/options/new")
     suspend fun deleteOptionNew(): Unit
 
+    // 유저의 알림 세팅
+    @GET("/api/v1/options")
+    suspend fun getOptions(): Options
+
     // 최신 푸쉬 알림 리스트
     @GET("/api/v1/notifications")
     suspend fun getNotifications(): BaseResponse<NotificationList>

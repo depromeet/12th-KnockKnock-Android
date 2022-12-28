@@ -132,6 +132,8 @@ interface  MainRepository {
     // 새로운 푸시알림 설정 해제 <- 마이페이지
     suspend fun deleteOptionNew(): NetworkResult<Unit>
 
+    suspend fun getOptions(): NetworkResult<Options>
+
     // 최신 푸쉬 알림 리스트
     suspend fun getNotifications(): NetworkResult<NotificationList>
 
