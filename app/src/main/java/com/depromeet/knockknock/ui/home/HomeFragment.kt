@@ -1,8 +1,5 @@
 package com.depromeet.knockknock.ui.home
 
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.depromeet.knockknock.R
@@ -12,14 +9,9 @@ import com.depromeet.knockknock.ui.home.adapter.HomeRecentAdapter
 import com.depromeet.knockknock.ui.home.bottom.AlarmMoreType
 import com.depromeet.knockknock.ui.home.bottom.BottomAlarmMore
 import com.depromeet.knockknock.ui.home.bottom.BottomHomeRoom
-import com.depromeet.knockknock.ui.home.model.Alarm
-import com.depromeet.knockknock.util.KnockKnockIntent
 import com.depromeet.knockknock.util.permission.PermissionManagerImpl
-import com.depromeet.knockknock.util.permission.PermissionRequester
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import java.security.Permissions
 
 
 @AndroidEntryPoint

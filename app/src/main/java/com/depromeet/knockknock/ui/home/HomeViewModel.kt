@@ -3,6 +3,7 @@ package com.depromeet.knockknock.ui.home
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.notification.NotificationNavigationAction
+import com.depromeet.knockknock.util.randomNum
 //import com.dida.android.presentation.views.nav.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -20,6 +21,8 @@ class HomeViewModel @Inject constructor(
 
     private val _roomList: MutableStateFlow<List<Room>> = MutableStateFlow<List<Room>>(emptyList())
     val roomList: StateFlow<List<Room>> = _roomList.asStateFlow()
+
+    val homeRandomNumber: Int = randomNum()
 
     override fun onCreatePushClicked() {
         baseViewModelScope.launch {

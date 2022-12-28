@@ -27,9 +27,10 @@
                 <ImageView
                     android:id="@+id/home_img"
                     android:layout_width="match_parent"
-                    android:layout_height="416dp"
+                    android:layout_height="393dp"
                     android:scaleType="centerCrop"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:homeImage="@{viewmodel.homeRandomNumber}">
                 </ImageView>
 
                 <ImageButton
