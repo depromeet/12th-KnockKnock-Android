@@ -1,7 +1,12 @@
 package com.depromeet.knockknock.ui.bookmark
 
 import android.util.Log
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.depromeet.domain.model.Notification
+import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.bookmark.adapter.createNotificationPager
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -10,6 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookmarkViewModel @Inject constructor(
+    private val mainRepository: MainRepository
 ) : BaseViewModel(), BookmarkActionHandler {
 
     private val TAG = "BookmarkViewModel"
@@ -25,6 +31,12 @@ class BookmarkViewModel @Inject constructor(
 
     private val _filterChecked: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val filterChecked: StateFlow<Boolean> = _filterChecked
+
+    var bookmarkList: Flow<PagingData<Notification>> = emptyFlow()
+
+    init {
+        bookmarkList = createNotificationPager(mainRepository).flow.cachedIn(baseViewModelScope)
+    }
 
     override fun onBookmarkEditClicked() {
         baseViewModelScope.launch {
@@ -71,6 +83,12 @@ class BookmarkViewModel @Inject constructor(
     override fun onReactionClicked(bookmarkIdx: Int) {
         baseViewModelScope.launch {
             _navigationHandler.emit(BookmarkNavigationAction.NavigateToReaction(bookmarkIdx))
+        }
+    }
+
+    override fun onNotificationClicked(bookmarkIdx: Int) {
+        baseViewModelScope.launch {
+            _navigationHandler.emit(BookmarkNavigationAction.NavigateToNotificationDetail(notification_id = bookmarkIdx))
         }
     }
 }

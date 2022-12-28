@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.domain.model.Notification
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderBookmarkBinding
 import com.depromeet.knockknock.ui.bookmark.BookmarkActionHandler
@@ -17,9 +19,7 @@ import com.depromeet.knockknock.util.toggleLayout
 
 class BookmarkAdapter(
     private val eventListener: BookmarkActionHandler
-) : ListAdapter<Bookmark, BookmarkAdapter.ViewHolder>(BookmarkItemDiffCallback){
-
-    init { setHasStableIds(true) }
+) : PagingDataAdapter<Notification, BookmarkAdapter.ViewHolder>(BookmarkItemDiffCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewDataBinding: HolderBookmarkBinding = DataBindingUtil.inflate(
@@ -28,20 +28,18 @@ class BookmarkAdapter(
             parent,
             false
         )
-        viewDataBinding.root.setOnClickListener {
-            eventListener.onReactionClicked(viewDataBinding.holder!!.bookmarkId)
-        }
+        viewDataBinding.eventListener = eventListener
         return ViewHolder(viewDataBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        getItem(position)?.let { holder.bind(it) }
     }
 
     class ViewHolder(private val binding: HolderBookmarkBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Bookmark) {
+        fun bind(item: Notification) {
             binding.holder = item
             binding.executePendingBindings()
             binding.expandBtn.setOnClickListener {
@@ -51,22 +49,24 @@ class BookmarkAdapter(
                     binding.expandBtn.apply {
                         this.text = context.getString(R.string.shorts_contents)
                     }
+                    binding.contentsImg.visibility = View.VISIBLE
                     binding.contentsText.maxLines = 9999
                 }
                 else {
                     binding.expandBtn.apply {
                         this.text = context.getString(R.string.more_contents)
                     }
+                    binding.contentsImg.visibility = View.GONE
                     binding.contentsText.maxLines = 2
                 }
             }
         } }
 }
 
-internal object BookmarkItemDiffCallback : DiffUtil.ItemCallback<Bookmark>() {
-    override fun areItemsTheSame(oldItem: Bookmark, newItem: Bookmark) =
-        oldItem.bookmarkId == newItem.bookmarkId
+internal object BookmarkItemDiffCallback : DiffUtil.ItemCallback<Notification>() {
+    override fun areItemsTheSame(oldItem: Notification, newItem: Notification) =
+        oldItem.notification_id == newItem.notification_id
 
-    override fun areContentsTheSame(oldItem: Bookmark, newItem: Bookmark) =
+    override fun areContentsTheSame(oldItem: Notification, newItem: Notification) =
         oldItem == newItem
 }

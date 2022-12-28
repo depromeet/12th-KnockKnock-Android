@@ -119,9 +119,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         binding.editTextMessage.onFocusChangeListener = View.OnFocusChangeListener { view, gainFocus ->
             //포커스가 주어졌을 때
             if (gainFocus)
-                view.background = requireContext().getDrawable(R.drawable.custom_backgroundgray03_radius10_line_gray08)
+                binding.editTextMessageLayout.background = requireContext().getDrawable(R.drawable.custom_backgroundgray03_radius10_line_gray08)
             else
-                view.background = requireContext().getDrawable(R.drawable.custom_backgroundgray03_radius10)
+                binding.editTextMessageLayout.background = requireContext().getDrawable(R.drawable.custom_backgroundgray03_radius10)
         }
         binding.registerMain.setOnTouchListener { _, _ ->
             requireActivity().hideKeyboard()

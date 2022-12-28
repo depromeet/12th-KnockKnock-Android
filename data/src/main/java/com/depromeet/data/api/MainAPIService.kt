@@ -106,13 +106,13 @@ interface MainAPIService {
     suspend fun postStorages(@Path("notification_id") notification_id: Int): Unit
 
     // 보관함 조회
-    @POST("/api/v1/storages")
+    @GET("/api/v1/storages")
     suspend fun getStroages(
-        @Query("groupId") groupId: Int,
-        @Query("periodOfMonth") periodOfMonth: Int,
+        @Body groupId: GetStorageRequest,
+        @Query("periodOfMonth") periodOfMonth: Int?,
         @Query("page") page: Int,
         @Query("size") size: Int,
-        @Query("sort") sort: String
+        @Query("sort") sort: String?
     ): BaseResponse<PagingNotification>
 
     // 보관함 삭제
