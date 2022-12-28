@@ -8,6 +8,7 @@ import com.depromeet.knockknock.databinding.FragmentHomeBinding
 import com.depromeet.knockknock.ui.home.adapter.HomeRecentAdapter
 import com.depromeet.knockknock.ui.home.bottom.AlarmMoreType
 import com.depromeet.knockknock.ui.home.bottom.BottomAlarmMore
+import com.depromeet.knockknock.ui.home.bottom.BottomHomeMakeRoom
 import com.depromeet.knockknock.ui.home.bottom.BottomHomeRoom
 import com.depromeet.knockknock.util.permission.PermissionManagerImpl
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                     is HomeNavigationAction.NavigateToRecentAlarm -> {}
                     is HomeNavigationAction.NavigateToAlarmReaction -> {}
                     is HomeNavigationAction.NavigateToSearchRoom -> {}
-                    is HomeNavigationAction.NavigateToCreateRoom -> {}
+                    is HomeNavigationAction.NavigateToCreateRoom -> initMakeRoomBottomSheet()
                     is HomeNavigationAction.NavigateToRecentAlarmMore -> {
                         initAlarmMoreBottomSheet(roomId = it.alarmId)
                     }
@@ -67,6 +68,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     private fun initAdapter() {
         binding.recentRecycle.adapter = HomeRecentAdapter(viewModel)
+    }
+
+    private fun initMakeRoomBottomSheet() {
+        val dialog = BottomHomeMakeRoom(
+            roomList = viewModel.roomList.value,
+            eventListener = viewModel
+        )
+        dialog.show(childFragmentManager, TAG)
     }
 
     private fun initRoomBottomSheet() {
