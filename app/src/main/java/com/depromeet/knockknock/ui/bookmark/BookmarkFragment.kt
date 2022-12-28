@@ -27,6 +27,8 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
     override val viewModel : BookmarkViewModel by viewModels()
     private val navController: NavController by lazy { findNavController() }
 
+    private val adapter by lazy { BookmarkAdapter(viewModel) }
+
     override fun initStartView() {
         binding.apply {
             this.viewmodel = viewModel
@@ -45,52 +47,20 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
                     is BookmarkNavigationAction.NavigateToBookmarkFilterRoom -> roomFilter()
                     is BookmarkNavigationAction.NavigateToBookmarkFilterPeriod -> periodFilter()
                     is BookmarkNavigationAction.NavigateToReaction -> {}
+                    is BookmarkNavigationAction.NavigateToNotificationDetail -> {}
                 }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.bookmarkList.collectLatest {
+                adapter.submitData(it)
             }
         }
     }
 
     override fun initAfterBinding() {
-        val adapter = BookmarkAdapter(viewModel)
         binding.bookmarkRecycler.adapter = adapter
-        val test1 = Bookmark(
-            bookmarkId = 1,
-            userIdx = 1,
-            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            userName = "라이언",
-            time = "2022-12-09",
-            contents = "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트",
-            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            roomName = "테스트1호점",
-            reactionContents = "",
-            reactionCount = 0,
-        )
-        val test2 = Bookmark(
-            bookmarkId = 1,
-            userIdx = 1,
-            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            userName = "라이언",
-            time = "2022-12-09",
-            contents = "테스트테스트테스트",
-            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            roomName = "테스트1호점",
-            reactionContents = "",
-            reactionCount = 0,
-        )
-        val test3 = Bookmark(
-            bookmarkId = 1,
-            userIdx = 1,
-            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            userName = "라이언",
-            time = "2022-12-09",
-            contents = "테스트테스트테스트",
-            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            roomName = "테스트1호점",
-            reactionContents = "",
-            reactionCount = 0,
-        )
-        val testList = listOf(test1, test2, test3)
-        adapter.submitList(testList)
     }
 
     private fun initToolbar() {

@@ -140,13 +140,14 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getStroages(
-        groupId: Int,
-        periodOfMonth: Int,
+        groupId: List<Int>,
+        periodOfMonth: Int?,
         page: Int,
         size: Int,
-        sort: String
+        sort: String?
     ): NetworkResult<NotificationContent> {
-        return handleApi { mainAPIService.getStroages(groupId, periodOfMonth, page, size, sort).data.pagingNotifications.toDomain() }
+        val body = GetStorageRequest(group_ids = groupId)
+        return handleApi { mainAPIService.getStroages(body, periodOfMonth, page, size, sort).data.pagingNotifications.toDomain() }
     }
 
     override suspend fun deleteStroages(storage_ids: List<Int>): NetworkResult<Unit> {

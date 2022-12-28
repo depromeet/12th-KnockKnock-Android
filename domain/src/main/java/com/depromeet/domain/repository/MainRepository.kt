@@ -91,11 +91,11 @@ interface  MainRepository {
 
     // 보관함 조회
     suspend fun getStroages(
-        groupId: Int,
-        periodOfMonth: Int,
+        groupId: List<Int> = emptyList(),
+        periodOfMonth: Int? = null,
         page: Int,
         size: Int,
-        sort: String
+        sort: String? = null
     ): NetworkResult<NotificationContent>
 
     // 보관함 삭제

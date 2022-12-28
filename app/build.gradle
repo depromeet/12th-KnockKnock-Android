@@ -132,4 +132,7 @@ dependencies {
     // 코틀린을 쓰는 경우
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
+    // paging
+    implementation "androidx.paging:paging-runtime-ktx:3.0.1"
+
 }
