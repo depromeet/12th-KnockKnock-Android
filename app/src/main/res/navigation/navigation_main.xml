@@ -256,4 +256,12 @@
             app:enterAnim="@anim/enter_from_right"
             app:destination="@id/inviteFriendToRoomFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/alarmRoomJoinedFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroomjoined.AlarmRoomJoinedFragment"
+        android:label="AlarmRoomJoinedFragment" >
+        <action
+            android:id="@+id/action_alarmRoomJoinedFragment_to_alarmRoomSearchFragment"
+            app:destination="@id/alarmRoomSearchFragment" />
+    </fragment>
 </navigation>
