@@ -68,8 +68,7 @@ class RegisterViewModel @Inject constructor(
 
                                 mainRepository.postNotificationToken(token = firebaseToken.value, device_id = deviceId.value)
                                     .onSuccess {
-                                        _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginAlready)
-                                    }
+                                        _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginAlready) }
                             }
                     }
                 }

@@ -26,7 +26,7 @@ interface MainAPIService {
 
     // 회원 탈퇴
     @POST("/api/v1/credentials/logout")
-    suspend fun postLogout(): BaseResponse<Unit>
+    suspend fun postLogout(): Unit
 
     // 로그인 요청 <- 가입한 유저 <- 1번 true일 경우
     @POST("/api/v1/credentials/login")
@@ -38,7 +38,7 @@ interface MainAPIService {
 
     // 회원 탈퇴
     @GET("/api/v1/credentials/me")
-    suspend fun deleteUer(@Query("oauth_access_token") oauth_access_token: String): BaseResponse<Unit>
+    suspend fun deleteUer(@Query("oauth_access_token") oauth_access_token: String): Unit
 
     // 유저 프로필
     @GET("/api/v1/users/profile")
@@ -50,7 +50,7 @@ interface MainAPIService {
 
     // 닉네임 변경
     @PUT("/api/v1/users/nickname")
-    suspend fun putUserNickname(@Body body: PutUserNicknameRequest): BaseResponse<Unit>
+    suspend fun putUserNickname(@Body body: PutUserNicknameRequest): Unit
 
     // 내 친구 리스트
     @GET("/api/v1/relations")
@@ -58,7 +58,7 @@ interface MainAPIService {
 
     // 친구요청
     @POST("/api/v1/relations")
-    suspend fun postRelations(@Body body: PostRelationsRequest): BaseResponse<Unit>
+    suspend fun postRelations(@Body body: PostRelationsRequest): Unit
 
     // 유저 닉네임 검색
     @GET("/api/v1/users/nickname/{nickname}")
@@ -103,7 +103,7 @@ interface MainAPIService {
 
     // 보관함 저장
     @POST("/api/v1/storages/{notification_id}")
-    suspend fun postStorages(@Path("notification_id") notification_id: Int): BaseResponse<Unit>
+    suspend fun postStorages(@Path("notification_id") notification_id: Int): Unit
 
     // 보관함 조회
     @POST("/api/v1/storages")
@@ -117,46 +117,46 @@ interface MainAPIService {
 
     // 보관함 삭제
     @DELETE("/api/v1/storages")
-    suspend fun deleteStroages(@Body body: DeleteStorageRequest): BaseResponse<Unit>
+    suspend fun deleteStroages(@Body body: DeleteStorageRequest): Unit
 
     // 리액션 등록
     @POST("/api/v1/reactions")
-    suspend fun postReactions(@Body body: PostReactionRequest): BaseResponse<Unit>
+    suspend fun postReactions(@Body body: PostReactionRequest): Unit
 
     // 리액션 삭제
     @DELETE("/api/v1/reactions/{notification_reaction_id}")
-    suspend fun deleteReaction(@Path("notification_reaction_id") notification_reaction_id: Int): BaseResponse<Unit>
+    suspend fun deleteReaction(@Path("notification_reaction_id") notification_reaction_id: Int): Unit
 
     // 리액션 수정
     @PATCH("/api/v1/reactions/{notification_reaction_id}")
     suspend fun patchReaction(
         @Path("notification_reaction_id") notification_reaction_id: Int,
         @Body body: PostReactionRequest
-    ): BaseResponse<Unit>
+    ): Unit
 
     // 리액션 알림 설정 <- 마이페이지
     @POST("/api/v1/options/reaction")
-    suspend fun postOptionReaction(): BaseResponse<Unit>
+    suspend fun postOptionReaction(): Unit
 
     // 리액션 알림 설정 하제  <- 마이페이지
     @DELETE("/api/v1/options/reaction")
-    suspend fun deleteOptionReaction(): BaseResponse<Unit>
+    suspend fun deleteOptionReaction(): Unit
 
     // 야간 푸시알림 설정 <- 마이페이지
     @POST("/api/v1/options/night")
-    suspend fun postOptionNight(): BaseResponse<Unit>
+    suspend fun postOptionNight(): Unit
 
     // 야간 푸시알림 설정하제 <- 마이페이지
     @DELETE("/api/v1/options/night")
-    suspend fun deleteOptionNight(): BaseResponse<Unit>
+    suspend fun deleteOptionNight(): Unit
 
     // 새로운 푸시알림 설정 <- 마이페이지
     @POST("/api/v1/options/new")
-    suspend fun postOptionNew(): BaseResponse<Unit>
+    suspend fun postOptionNew(): Unit
 
     // 새로운 푸시알림 설정 해제 <- 마이페이지
     @DELETE("/api/v1/options/new")
-    suspend fun deleteOptionNew(): BaseResponse<Unit>
+    suspend fun deleteOptionNew(): Unit
 
     // 최신 푸쉬 알림 리스트
     @GET("/api/v1/notifications")
@@ -164,23 +164,23 @@ interface MainAPIService {
 
     // 푸쉬 알림 보내기
     @POST("/api/v1/notifications")
-    suspend fun postNotifications(@Body body: PostNotificationRequest): BaseResponse<Unit>
+    suspend fun postNotifications(@Body body: PostNotificationRequest): Unit
 
     // FCM 토큰 등록
     @POST("/api/v1/notifications/token")
-    suspend fun postNotificationToken(@Body body: PostNotificationTokenRequest): BaseResponse<Unit>
+    suspend fun postNotificationToken(@Body body: PostNotificationTokenRequest): Unit
 
     // 예약 푸쉬알림 발송
     @POST("/api/v1/notifications/reservation")
-    suspend fun postNotificationReservation(@Body body: PostNotificationReservationRequest): BaseResponse<Unit>
+    suspend fun postNotificationReservation(@Body body: PostNotificationReservationRequest): Unit
 
     // 예약 푸쉬알림 시간 수정
     @PATCH("/api/v1/notifications/reservation")
-    suspend fun patchNotificationReservation(@Body body: PatchNotificationReservationRequest): BaseResponse<Unit>
+    suspend fun patchNotificationReservation(@Body body: PatchNotificationReservationRequest): Unit
 
     // 똑똑 미리보기 체험 <- 본인한테 보내기
     @POST("/api/v1/notifications/experience")
-    suspend fun postNotificationExperience(@Body body: PostNotificationExperienceRequest): BaseResponse<Unit>
+    suspend fun postNotificationExperience(@Body body: PostNotificationExperienceRequest): Unit
 
     // 알림방 푸쉬알림 리스트
     @GET("/api/v1/notifications/{group_id}")
@@ -193,11 +193,11 @@ interface MainAPIService {
 
     // 푸쉬 알림 삭제
     @DELETE("/api/v1/notifications/{notification_id}")
-    suspend fun deleteNotification(@Path("notification_id") notification_id: Int): BaseResponse<Unit>
+    suspend fun deleteNotification(@Path("notification_id") notification_id: Int): Unit
 
     // 예약 푸쉬 알림 삭제
     @DELETE("/api/v1/notifications/reservation/{reservation_id}")
-    suspend fun deleteNotificationReservation(@Path("reservation_id") reservation_id: Int): BaseResponse<Unit>
+    suspend fun deleteNotificationReservation(@Path("reservation_id") reservation_id: Int): Unit
 
     // 파일 URL로 바꾸기
     @Multipart

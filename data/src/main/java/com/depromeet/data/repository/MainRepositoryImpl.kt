@@ -136,7 +136,7 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun postStorages(notification_id: Int): NetworkResult<Unit> {
-        return handleApi { mainAPIService.postStorages(notification_id = notification_id).data }
+        return handleApi { mainAPIService.postStorages(notification_id = notification_id) }
     }
 
     override suspend fun getStroages(
@@ -151,7 +151,7 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun deleteStroages(storage_ids: List<Int>): NetworkResult<Unit> {
         val body = DeleteStorageRequest(storage_ids = storage_ids)
-        return handleApi { mainAPIService.deleteStroages(body = body).data }
+        return handleApi { mainAPIService.deleteStroages(body = body) }
     }
 
     override suspend fun postReactions(
@@ -159,11 +159,11 @@ class MainRepositoryImpl @Inject constructor(
         reaction_id: Int
     ): NetworkResult<Unit> {
         val body = PostReactionRequest(notification_id = notification_id, reaction_id = reaction_id)
-        return handleApi { mainAPIService.postReactions(body = body).data }
+        return handleApi { mainAPIService.postReactions(body = body) }
     }
 
     override suspend fun deleteReaction(notification_reaction_id: Int): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteReaction(notification_reaction_id = notification_reaction_id).data }
+        return handleApi { mainAPIService.deleteReaction(notification_reaction_id = notification_reaction_id) }
     }
 
     override suspend fun patchReaction(
@@ -174,32 +174,32 @@ class MainRepositoryImpl @Inject constructor(
         val body = PostReactionRequest(notification_id = notification_id, reaction_id = notification_reaction_id)
         return handleApi { mainAPIService.patchReaction(
             notification_reaction_id = notification_reaction_id,
-            body = body).data
+            body = body)
         }
     }
 
     override suspend fun postOptionReaction(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.postOptionReaction().data }
+        return handleApi { mainAPIService.postOptionReaction() }
     }
 
     override suspend fun deleteOptionReaction(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteOptionReaction().data }
+        return handleApi { mainAPIService.deleteOptionReaction() }
     }
 
     override suspend fun postOptionNight(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.postOptionNight().data }
+        return handleApi { mainAPIService.postOptionNight() }
     }
 
     override suspend fun deleteOptionNight(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteOptionNight().data }
+        return handleApi { mainAPIService.deleteOptionNight() }
     }
 
     override suspend fun postOptionNew(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.postOptionNew().data }
+        return handleApi { mainAPIService.postOptionNew() }
     }
 
     override suspend fun deleteOptionNew(): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteOptionNew().data }
+        return handleApi { mainAPIService.deleteOptionNew() }
     }
 
     override suspend fun getNotifications(): NetworkResult<NotificationList> {
@@ -218,7 +218,7 @@ class MainRepositoryImpl @Inject constructor(
             content = content,
             image_url = image_url
         )
-        return handleApi { mainAPIService.postNotifications(body = body).data }
+        return handleApi { mainAPIService.postNotifications(body = body) }
     }
 
     override suspend fun postNotificationToken(
@@ -226,7 +226,7 @@ class MainRepositoryImpl @Inject constructor(
         token: String
     ): NetworkResult<Unit> {
         val body = PostNotificationTokenRequest(device_id = device_id, token = token)
-        return handleApi { mainAPIService.postNotificationToken(body = body).data }
+        return handleApi { mainAPIService.postNotificationToken(body = body) }
     }
 
     override suspend fun postNotificationReservation(
@@ -243,7 +243,7 @@ class MainRepositoryImpl @Inject constructor(
             image_url = image_url,
             send_at = send_at
         )
-        return handleApi { mainAPIService.postNotificationReservation(body = body).data }
+        return handleApi { mainAPIService.postNotificationReservation(body = body) }
     }
 
     override suspend fun patchNotificationReservation(
@@ -251,7 +251,7 @@ class MainRepositoryImpl @Inject constructor(
         send_at: String
     ): NetworkResult<Unit> {
         val body = PatchNotificationReservationRequest(reservation_id = reservation_id, send_at = send_at)
-        return handleApi { mainAPIService.patchNotificationReservation(body = body).data }
+        return handleApi { mainAPIService.patchNotificationReservation(body = body) }
     }
 
     override suspend fun postNotificationExperience(
@@ -259,7 +259,7 @@ class MainRepositoryImpl @Inject constructor(
         content: String
     ): NetworkResult<Unit> {
         val body = PostNotificationExperienceRequest(token = token, content = content)
-        return handleApi { mainAPIService.postNotificationExperience(body = body).data }
+        return handleApi { mainAPIService.postNotificationExperience(body = body) }
     }
 
     override suspend fun getNotification(
@@ -272,11 +272,11 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteNotification(notification_id: Int): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteNotification(notification_id = notification_id).data }
+        return handleApi { mainAPIService.deleteNotification(notification_id = notification_id) }
     }
 
     override suspend fun deleteNotificationReservation(reservation_id: Int): NetworkResult<Unit> {
-        return handleApi { mainAPIService.deleteNotificationReservation(reservation_id = reservation_id).data }
+        return handleApi { mainAPIService.deleteNotificationReservation(reservation_id = reservation_id) }
     }
 
     override suspend fun postFileToUrl(file : MultipartBody.Part): NetworkResult<ImageUrl> {
