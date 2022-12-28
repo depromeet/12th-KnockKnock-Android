@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.depromeet.knockknock.databinding.ItemRecycleHistoryMessageBinding
+import com.depromeet.knockknock.databinding.ItemRecyclerHistoryMessageBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
 
@@ -14,7 +14,7 @@ class AlarmRoomHistoryMessageAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmRoomHistoryMessageViewHolder {
         return AlarmRoomHistoryMessageViewHolder(
-            ItemRecycleHistoryMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false).apply {
+            ItemRecyclerHistoryMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false).apply {
                 eventListener = this@AlarmRoomHistoryMessageAdapter.eventListener
             }
         )
