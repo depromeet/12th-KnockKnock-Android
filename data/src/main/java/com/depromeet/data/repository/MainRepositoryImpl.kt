@@ -204,7 +204,7 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getOptions(): NetworkResult<Options> {
-        return handleApi { mainAPIService.getOptions() }
+        return handleApi { mainAPIService.getOptions().data }
     }
 
     override suspend fun getNotifications(): NetworkResult<NotificationList> {

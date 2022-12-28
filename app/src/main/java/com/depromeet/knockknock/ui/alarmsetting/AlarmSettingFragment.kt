@@ -28,6 +28,7 @@ class AlarmSettingFragment : BaseFragment<FragmentAlarmSettingBinding, AlarmSett
         }
         exception = viewModel.errorEvent
         initToolbar()
+        viewModel.getOptions()
     }
 
     override fun initDataBinding() {

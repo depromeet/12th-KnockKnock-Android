@@ -160,7 +160,7 @@ interface MainAPIService {
 
     // 유저의 알림 세팅
     @GET("/api/v1/options")
-    suspend fun getOptions(): Options
+    suspend fun getOptions(): BaseResponse<Options>
 
     // 최신 푸쉬 알림 리스트
     @GET("/api/v1/notifications")
