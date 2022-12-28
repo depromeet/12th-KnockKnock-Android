@@ -93,8 +93,6 @@ class EditProfileViewModel @Inject constructor(
                     editor.commit()
                     _navigationHandler.emit(EditProfileNavigationAction.NavigateToSplash)
                 }
-            }
         }
     }
-
 }

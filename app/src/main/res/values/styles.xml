@@ -114,6 +114,12 @@
         <item name="fontFamily">@font/pretendard_medium</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.Medium.Gray05.Size16" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray05</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
 
     <!-- Regular -->
 
@@ -143,6 +149,12 @@
     <style name="Theme.AppCompat.TextView.Regular.Gray05.Size14" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/gray05</item>
         <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="Theme.AppCompat.TextView.Regular.Gray05.Size16" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/gray05</item>
+        <item name="android:textSize">16dp</item>
         <item name="fontFamily">@font/pretendard_regular</item>
     </style>
 
