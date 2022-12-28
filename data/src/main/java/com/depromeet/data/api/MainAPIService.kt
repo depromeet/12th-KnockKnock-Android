@@ -24,6 +24,10 @@ interface MainAPIService {
     @POST("/api/v1/credentials/refresh")
     suspend fun postRefreshToken(@Body body: PostRefreshTokenRequest): BaseResponse<LoginResponse>
 
+    // 회원 탈퇴
+    @POST("/api/v1/credentials/logout")
+    suspend fun postLogout(): BaseResponse<Unit>
+
     // 로그인 요청 <- 가입한 유저 <- 1번 true일 경우
     @POST("/api/v1/credentials/login")
     suspend fun postLogin(@Query("id_token") idToken: String, @Query("provider") provider: String): BaseResponse<LoginResponse>

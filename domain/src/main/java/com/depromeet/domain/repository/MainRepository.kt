@@ -3,6 +3,7 @@ package com.depromeet.domain.repository
 import com.depromeet.domain.NetworkResult
 import com.depromeet.domain.model.*
 import okhttp3.MultipartBody
+import retrofit2.http.POST
 
 interface  MainRepository {
 
@@ -19,6 +20,9 @@ interface  MainRepository {
 
     // 로그인 요청 <- 가입한 유저
     suspend fun postLogin(idToken: String,  provider: String): NetworkResult<LoginResponse>
+
+    // 회원 탈퇴
+    suspend fun postLogout(): NetworkResult<Unit>
 
     // 토큰 검증
     suspend fun getTokenValidation(idToken: String, provider: String): NetworkResult<isRegistedResponse>

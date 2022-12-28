@@ -66,9 +66,13 @@ class EditProfileViewModel @Inject constructor(
 
     fun onUserLogOut() {
         baseViewModelScope.launch {
-            editor.remove("access_token")
-            editor.commit()
-            _navigationHandler.emit(EditProfileNavigationAction.NavigateToSplash)
+            mainRepository.postLogout()
+                .onSuccess {
+                    editor.remove("access_token")
+                    editor.remove("refresh_token")
+                    editor.commit()
+                    _navigationHandler.emit(EditProfileNavigationAction.NavigateToSplash)
+                }
         }
     }
 
@@ -79,6 +83,7 @@ class EditProfileViewModel @Inject constructor(
                 mainRepository.deleteUer(it)
                     .onSuccess {
                         editor.remove("access_token")
+                        editor.remove("refresh_token")
                         editor.commit()
                         _navigationHandler.emit(EditProfileNavigationAction.NavigateToSplash) }
             }

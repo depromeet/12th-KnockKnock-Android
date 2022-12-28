@@ -37,6 +37,10 @@ class MainRepositoryImpl @Inject constructor(
         return handleApi { mainAPIService.postLogin(idToken = idToken, provider = provider).data }
     }
 
+    override suspend fun postLogout(): NetworkResult<Unit> {
+        return handleApi { mainAPIService.postLogout() }
+    }
+
     override suspend fun getTokenValidation(
         idToken: String,
         provider: String
