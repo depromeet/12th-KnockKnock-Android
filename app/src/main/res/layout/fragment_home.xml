@@ -22,8 +22,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/background_white_mode">
+                android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/home_img"
                     android:layout_width="match_parent"
@@ -91,6 +90,33 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginStart="16dp">
                 </TextView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/recent_push_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="12dp"
+                    app:homeEmptyRecentImg="@{viewmodel.notifications}">
+                    <ImageView
+                        android:id="@+id/empty_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/ic_empty_push_message"/>
+                    <TextView
+                        style="@style/Theme.AppCompat.TextView.Medium.Gray05.Size16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/empty_img"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:text="아직 받은 알림이 없어요"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recent_recycle"

@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.home
 
+import com.depromeet.domain.model.Notification
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
@@ -27,6 +28,16 @@ class HomeViewModel @Inject constructor(
 
     val homeRandomNumber: Int = randomNum()
     val recommendText: String = "똑똑!\n오늘은 누구의 문을\n두드려 볼까!?"
+
+    private val _notifications: MutableStateFlow<List<Notification>> = MutableStateFlow(emptyList())
+    val notifications: StateFlow<List<Notification>> = _notifications.asStateFlow()
+
+    fun getRecentNotifications() {
+        baseViewModelScope.launch {
+            mainRepository.getNotifications()
+                .onSuccess { _notifications.value = it.notifications }
+        }
+    }
 
     override fun onCreatePushClicked() {
         baseViewModelScope.launch {
