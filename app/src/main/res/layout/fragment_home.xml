@@ -33,6 +33,15 @@
                     app:homeImage="@{viewmodel.homeRandomNumber}">
                 </ImageView>
 
+                <TextView
+                    style="@style/Theme.AppCompat.TextView.SemiBold.Gray09.Size24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@{viewmodel.recommendText}"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"/>
+
                 <ImageButton
                     android:id="@+id/notification_btn"
                     android:layout_width="wrap_content"

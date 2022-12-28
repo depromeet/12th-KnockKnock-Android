@@ -1,5 +1,7 @@
 package com.depromeet.knockknock.ui.home
 
+import com.depromeet.domain.onSuccess
+import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.notification.NotificationNavigationAction
@@ -12,6 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    private val mainRepository: MainRepository
 ) : BaseViewModel(), HomeActionHandler {
 
     private val TAG = "HomeViewModel"
@@ -23,6 +26,7 @@ class HomeViewModel @Inject constructor(
     val roomList: StateFlow<List<Room>> = _roomList.asStateFlow()
 
     val homeRandomNumber: Int = randomNum()
+    val recommendText: String = "똑똑!\n오늘은 누구의 문을\n두드려 볼까!?"
 
     override fun onCreatePushClicked() {
         baseViewModelScope.launch {
