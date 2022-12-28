@@ -18,6 +18,18 @@ class AlarmSettingViewModel @Inject constructor(
 
     private val TAG = "AlarmSettingViewModel"
 
+    init {
+        baseViewModelScope.launch {
+            mainRepository.getOptions()
+                .onSuccess { options ->
+                    _alarmPushPermitted.value = options.new_option
+                    _reactionPushPermitted.value = options.reaction_option
+                    _notReceivedPushAtNightPermitted.value = options.night_option
+                }
+        }
+
+    }
+
     private val _alarmPushPermitted: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val alarmPushPermitted: StateFlow<Boolean> = _alarmPushPermitted
 
