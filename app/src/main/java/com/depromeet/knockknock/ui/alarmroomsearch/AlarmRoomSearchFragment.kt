@@ -55,6 +55,7 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
                 when(it) {
                     is AlarmRoomSearchNavigationAction.NavigateToRoom -> { moveToRoom(roomId = it.roomId) }
                     is AlarmRoomSearchNavigationAction.NavigateToHidePopularCategory -> {}
+                    is AlarmRoomSearchNavigationAction.NavigateToMakeRoom -> {}
                 }
             }
         }
@@ -172,10 +173,12 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
             viewModel.editTextMessageCountEvent.collectLatest {
                 if (it != 0) {
                     binding.popularCategoryFrame.visibility = View.GONE
+                    binding.makeRoomLayout.visibility = View.VISIBLE
                     binding.alarmRoomRecycler.visibility = View.VISIBLE
                 }
                 else{
                     binding.popularCategoryFrame.visibility = View.VISIBLE
+                    binding.makeRoomLayout.visibility = View.GONE
                     binding.alarmRoomRecycler.visibility = View.GONE
                 }
             }

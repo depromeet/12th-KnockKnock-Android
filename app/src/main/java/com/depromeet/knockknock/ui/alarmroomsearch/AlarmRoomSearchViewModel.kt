@@ -43,6 +43,12 @@ class AlarmRoomSearchViewModel @Inject constructor(
         }
     }
 
+    override fun onAlarmRoomGenerateClicked(roomName : String) {
+        baseViewModelScope.launch {
+            _navigationHandler.emit(AlarmRoomSearchNavigationAction.NavigateToMakeRoom(roomName = roomName))
+        }
+    }
+
     override fun onRoomClicked(roomId: Int) {
         baseViewModelScope.launch {
             _navigationHandler.emit(AlarmRoomSearchNavigationAction.NavigateToRoom(roomId = roomId))
