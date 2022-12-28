@@ -37,7 +37,7 @@ interface MainAPIService {
     suspend fun getTokenValidation(@Query("id_token") idToken: String, @Query("provider") provider: String): BaseResponse<isRegistedResponse>
 
     // 회원 탈퇴
-    @GET("/api/v1/credentials/me")
+    @DELETE("/api/v1/credentials/me")
     suspend fun deleteUer(@Query("oauth_access_token") oauth_access_token: String): Unit
 
     // 유저 프로필

@@ -79,13 +79,20 @@ class EditProfileViewModel @Inject constructor(
     fun onUserDelete() {
         baseViewModelScope.launch {
             // API Call
-            sSharedPreferences.getString("access_token", null)?.let {
-                mainRepository.deleteUer(it)
-                    .onSuccess {
-                        editor.remove("access_token")
-                        editor.remove("refresh_token")
-                        editor.commit()
-                        _navigationHandler.emit(EditProfileNavigationAction.NavigateToSplash) }
+//            sSharedPreferences.getString("access_token", null)?.let {
+//                mainRepository.deleteUer(it)
+//                    .onSuccess {
+//                        editor.remove("access_token")
+//                        editor.remove("refresh_token")
+//                        editor.commit()
+//                        _navigationHandler.emit(EditProfileNavigationAction.NavigateToSplash) }
+            mainRepository.postLogout()
+                .onSuccess {
+                    editor.remove("access_token")
+                    editor.remove("refresh_token")
+                    editor.commit()
+                    _navigationHandler.emit(EditProfileNavigationAction.NavigateToSplash)
+                }
             }
         }
     }
