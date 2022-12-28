@@ -51,12 +51,14 @@ class BookmarkAdapter(
                     binding.expandBtn.apply {
                         this.text = context.getString(R.string.shorts_contents)
                     }
+                    binding.contentsImg.visibility = View.VISIBLE
                     binding.contentsText.maxLines = 9999
                 }
                 else {
                     binding.expandBtn.apply {
                         this.text = context.getString(R.string.more_contents)
                     }
+                    binding.contentsImg.visibility = View.GONE
                     binding.contentsText.maxLines = 2
                 }
             }

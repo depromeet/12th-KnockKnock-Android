@@ -70,23 +70,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/user_img"
-                    app:layout_constraintEnd_toStartOf="@id/contents_img"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
                     android:gravity="start"
                     android:maxLines="2"
                     android:text="@{holder.contents}"/>
-                
-                <ImageView
-                    android:id="@+id/contents_img"
-                    android:layout_width="92dp"
-                    android:layout_height="64dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/contents_text"
-                    app:layout_constraintBottom_toBottomOf="@id/contents_text"
-                    app:bookmarkContentsImage="@{holder.contentsImg}">
-                </ImageView>
 
                 <TextView
                     android:id="@+id/expand_btn"
@@ -100,6 +90,18 @@
                     android:paddingTop="4dp"
                     android:paddingBottom="4dp">
                 </TextView>
+
+                <ImageView
+                    android:id="@+id/contents_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="296dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/expand_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:visibility="gone"
+                    app:bookmarkContentsImage="@{holder.contentsImg}">
+                </ImageView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
