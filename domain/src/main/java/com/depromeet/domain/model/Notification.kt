@@ -9,5 +9,6 @@ data class Notification(
     val groups: BookmarkGroups,
     val send_user_id: Int,
     val title: String,
-    var isExpanded: Boolean = false
+    var isExpanded: Boolean = false,
+    var isChecked: Boolean = false
 )

@@ -34,7 +34,7 @@ class BookmarkViewModel @Inject constructor(
 
     var bookmarkList: Flow<PagingData<Notification>> = emptyFlow()
 
-    init {
+    fun getStroage() {
         bookmarkList = createNotificationPager(
             mainRepository = mainRepository,
             groupids = _roomClicked,

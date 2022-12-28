@@ -24,6 +24,7 @@ class EditBookmarkFragment : BaseFragment<FragmentEditBookmarkBinding, EditBookm
 
     override val viewModel : EditBookmarkViewModel by viewModels()
     private val navController: NavController by lazy { findNavController() }
+    private val args: EditBookmarkFragmentArgs by lazy { EditBookmarkFragmentArgs() }
     private val adapter by lazy { EditBookmarkAdapter(viewModel) }
 
     override fun initStartView() {
@@ -32,6 +33,11 @@ class EditBookmarkFragment : BaseFragment<FragmentEditBookmarkBinding, EditBookm
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
+
+        viewModel.periodClicked.value = args.periodClicked
+        viewModel.roomClicked.value = args.roomClicked.asList()
+        viewModel.getStroage()
+
         initToolbar()
         initAdapter()
     }
@@ -40,14 +46,15 @@ class EditBookmarkFragment : BaseFragment<FragmentEditBookmarkBinding, EditBookm
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is EditBookmarkNavigationAction.NavigateToEditComplete -> deleteDialog()
+                    is EditBookmarkNavigationAction.NavigateToEditDialog -> deleteDialog()
+                    is EditBookmarkNavigationAction.NavigateToDeleteComplete -> navController.popBackStack()
                 }
             }
         }
 
         lifecycleScope.launchWhenStarted {
             viewModel.bookmarkList.collectLatest {
-                adapter.submitList(it)
+                adapter.submitData(it)
             }
         }
     }
@@ -77,7 +84,7 @@ class EditBookmarkFragment : BaseFragment<FragmentEditBookmarkBinding, EditBookm
         )
         val dialog = DefaultYellowAlertDialog(
             alertDialogModel = res,
-            clickToPositive = {},
+            clickToPositive = { viewModel.deleteStroage() },
             clickToNegative = {}
         )
         dialog.show(childFragmentManager, TAG)
