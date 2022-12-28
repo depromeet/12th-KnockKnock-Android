@@ -152,7 +152,14 @@
     <fragment
         android:id="@+id/editBookmarkFragment"
         android:name="com.depromeet.knockknock.ui.editbookmark.EditBookmarkFragment"
-        android:label="EditBookmarkFragment" />
+        android:label="EditBookmarkFragment">
+        <argument
+            android:name="room_clicked"
+            app:argType="integer[]" />
+        <argument
+            android:name="period_clicked"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/friendListFragment"

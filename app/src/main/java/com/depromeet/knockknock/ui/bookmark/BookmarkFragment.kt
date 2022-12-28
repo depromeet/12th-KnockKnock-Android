@@ -29,6 +29,11 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
 
     private val adapter by lazy { BookmarkAdapter(viewModel) }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getStroage()
+    }
+
     override fun initStartView() {
         binding.apply {
             this.viewmodel = viewModel
@@ -42,7 +47,11 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is BookmarkNavigationAction.NavigateToBookmarkEdit -> navigate(BookmarkFragmentDirections.actionBookmarkFragmentToEditBookmarkFragment())
+                    is BookmarkNavigationAction.NavigateToBookmarkEdit ->
+                        navigate(BookmarkFragmentDirections.actionBookmarkFragmentToEditBookmarkFragment(
+                            viewModel.roomClicked.value.toIntArray(),
+                            viewModel.periodClicked.value
+                        ))
                     is BookmarkNavigationAction.NavigateToBookmarkFilterReset -> {}
                     is BookmarkNavigationAction.NavigateToBookmarkFilterRoom -> roomFilter()
                     is BookmarkNavigationAction.NavigateToBookmarkFilterPeriod -> periodFilter()
