@@ -86,6 +86,7 @@ class EditRoomDetailsFragment :
     override fun initDataBinding() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.onSaveSuccess.collectLatest {
+                toastMessage("변경사항이 저장되었어요!")
                 navController.popBackStack()
             }
         }
@@ -93,9 +94,11 @@ class EditRoomDetailsFragment :
             viewModel.navigationHandler.collectLatest {
                 when (it) {
                     is EditRoomDetailsNavigationAction.NavigateToEditBackground -> {isBackground=true
-                        editProfileImageBottomSheet()}
+                        editProfileImageBottomSheet()
+                    viewModel._backgroundStored.value=true}
                     is EditRoomDetailsNavigationAction.NavigateToEditThumbnail -> {isBackground=false
-                        editProfileImageBottomSheet()}
+                        editProfileImageBottomSheet()
+                        viewModel._thumbnailStored.value=true}
                 }
             }
 

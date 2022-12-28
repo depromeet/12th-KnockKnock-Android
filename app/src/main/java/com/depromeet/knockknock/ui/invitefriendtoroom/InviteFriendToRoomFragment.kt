@@ -5,13 +5,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
-import com.depromeet.knockknock.base.DefaultYellowAlertDialog
-import com.depromeet.knockknock.databinding.FragmentInviteFriendBinding
-import com.depromeet.knockknock.ui.editroomdetails.adapter.BackgroundAdapter
-import com.depromeet.knockknock.ui.editroomdetails.model.Background
-import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
+import com.depromeet.knockknock.databinding.FragmentInviteFriendToRoomBinding
 import com.depromeet.knockknock.ui.friendlist.model.User
 import com.depromeet.knockknock.ui.invitefriendtoroom.adapter.InviteFriendToRoomAdapter
 import com.depromeet.knockknock.util.customOnFocusChangeListener
@@ -22,19 +17,19 @@ import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class InviteFriendToRoomFragment :
-    BaseFragment<FragmentInviteFriendBinding, InviteFriendToRoomViewModel>(R.layout.fragment_invite_friend) {
+    BaseFragment<FragmentInviteFriendToRoomBinding, InviteFriendToRoomViewModel>(R.layout.fragment_invite_friend_to_room) {
 
     private val TAG = "InviteFriendToRoomFragment"
 
     override val layoutResourceId: Int
-        get() = R.layout.fragment_invite_friend
+        get() = R.layout.fragment_invite_friend_to_room
 
     override val viewModel: InviteFriendToRoomViewModel by viewModels()
     private val navController by lazy { findNavController() }
 
     override fun initStartView() {
         binding.apply {
-            this.viewmodel = viewmodel
+            this.myviewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent

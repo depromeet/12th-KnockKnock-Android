@@ -50,6 +50,14 @@ fun ImageView.bindroomThumbnailImage(thumbnailImageUri: String) {
         .into(this)
 }
 
+@BindingAdapter("roomBackgroundImage10")
+fun ImageView.bindroomBackgroundImage10(backgroundImageUri: String) {
+    Glide.with(context)
+        .load(backgroundImageUri)
+        .transform(CenterCrop(), RoundedCorners(10))
+        .into(this)
+}
+
 @BindingAdapter("glide10000")
 fun ImageView.bindGlide10000(uri: String?) {
     uri?.let {

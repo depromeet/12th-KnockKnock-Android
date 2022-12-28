@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/onboardFragment">
 
     <action
         android:id="@+id/action_main_fragment"
@@ -212,6 +212,11 @@
             app:destination="@id/editRoomDetailsFragment"
             app:popExitAnim="@anim/exit_to_right"
             app:enterAnim="@anim/enter_from_right"/>
+        <action
+            android:id="@+id/action_settingRoomFragment_to_inviteFriendToRoomFragment"
+            app:destination="@id/inviteFriendToRoomFragment"
+            app:popExitAnim="@anim/exit_to_right"
+            app:enterAnim="@anim/enter_from_right"/>
     </fragment>
 
     <fragment
@@ -226,4 +231,18 @@
         android:id="@+id/alarmRoomSearchFragment"
         android:name="com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchFragment"
         android:label="AlarmRoomSearchFragment" />
+    <fragment
+        android:id="@+id/inviteFriendToRoomFragment"
+        android:name="com.depromeet.knockknock.ui.invitefriendtoroom.InviteFriendToRoomFragment"
+        android:label="InviteFriendToRoomFragment" />
+    <fragment
+        android:id="@+id/settingRoomForUserFragment"
+        android:name="com.depromeet.knockknock.ui.settingroomforuser.SettingRoomForUserFragment"
+        android:label="SettingRoomForUserFragment" >
+        <action
+            android:id="@+id/action_settingRoomForUserFragment_to_inviteFriendToRoomFragment"
+            app:popExitAnim="@anim/exit_to_right"
+            app:enterAnim="@anim/enter_from_right"
+            app:destination="@id/inviteFriendToRoomFragment" />
+    </fragment>
 </navigation>

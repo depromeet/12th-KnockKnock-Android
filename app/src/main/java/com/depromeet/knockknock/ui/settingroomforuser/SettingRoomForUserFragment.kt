@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.settingroom
+package com.depromeet.knockknock.ui.settingroomforuser
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -6,26 +6,27 @@ import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentSettingRoomBinding
-import com.depromeet.knockknock.ui.settingroom.adapter.ExportMemberAdapter
+import com.depromeet.knockknock.databinding.FragmentSettingRoomForUserBinding
+import com.depromeet.knockknock.ui.settingroomforuser.adapter.RoomMemberAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
-class SettingRoomFragment : BaseFragment<FragmentSettingRoomBinding, SettingRoomViewModel>(R.layout.fragment_setting_room) {
+class SettingRoomForUserFragment : BaseFragment<FragmentSettingRoomForUserBinding, SettingRoomForUserViewModel>(R.layout.fragment_setting_room_for_user) {
 
-    private val TAG = "SettingRoomFragment"
+    private val TAG = "SettingRoomForUserFragment"
 
     override val layoutResourceId: Int
-        get() = R.layout.fragment_setting_room
+        get() = R.layout.fragment_setting_room_for_user
 
-    override val viewModel : SettingRoomViewModel by viewModels()
+    override val viewModel : SettingRoomForUserViewModel by viewModels()
     private val navController by lazy { findNavController() }
-    private val adapter by lazy { ExportMemberAdapter(viewModel) }
+    private val adapter by lazy { RoomMemberAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
-            this.settingroomviewmodel = viewModel
+            this.settingroomforuserviewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
@@ -37,12 +38,10 @@ class SettingRoomFragment : BaseFragment<FragmentSettingRoomBinding, SettingRoom
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is SettingRoomNavigationAction.NavigateToCategory -> navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToCategoryFragment())
-                    is SettingRoomNavigationAction.NavigateToLink -> {}
-                    is SettingRoomNavigationAction.NavigateToAddMember -> navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToInviteFriendToRoomFragment())
-                    is SettingRoomNavigationAction.NavigateToExportMember -> {}
-                    is SettingRoomNavigationAction.NavigateToRemove -> {}
-                    is SettingRoomNavigationAction.NavigateToEditDetail -> {navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToEditRoomDetailsFragment())}
+                    //is SettingRoomForUserNavigationAction.NavigateToCategory -> navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToCategoryFragment())
+                    is SettingRoomForUserNavigationAction.NavigateToLink -> {}
+                    is SettingRoomForUserNavigationAction.NavigateToAddMember -> {navigate(SettingRoomForUserFragmentDirections.actionSettingRoomForUserFragmentToInviteFriendToRoomFragment())}
+                    //is SettingRoomForUserNavigationAction.NavigateToEditDetail -> {navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToEditRoomDetailsFragment())}
                 }
             }
         }
@@ -61,6 +60,6 @@ class SettingRoomFragment : BaseFragment<FragmentSettingRoomBinding, SettingRoom
     }
 
     private fun initAdapter() {
-        binding.friendRecycler.adapter = adapter
+        binding.memberRecycler.adapter = adapter
     }
 }
