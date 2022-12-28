@@ -35,7 +35,11 @@ class BookmarkViewModel @Inject constructor(
     var bookmarkList: Flow<PagingData<Notification>> = emptyFlow()
 
     init {
-        bookmarkList = createNotificationPager(mainRepository).flow.cachedIn(baseViewModelScope)
+        bookmarkList = createNotificationPager(
+            mainRepository = mainRepository,
+            groupids = _roomClicked,
+            periods = _periodClicked
+        ).flow.cachedIn(baseViewModelScope)
     }
 
     override fun onBookmarkEditClicked() {
