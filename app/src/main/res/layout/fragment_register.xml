@@ -177,7 +177,7 @@
             android:padding="0dp"
             android:scaleType="fitCenter"
             android:src="@drawable/onboard_kakao_register"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toTopOf="@+id/google_register_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -198,6 +198,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"
             android:onClick="@{() -> viewmodel.onGoogleLoginClicked()}"/>
 
 
