@@ -104,7 +104,7 @@
     <string name="black">신고</string>
     <string name="close">닫기</string>
 
-    <string name="add_friend_popup_title">%s님께 친구추가를\n요청할까요?</string>
+    <string name="add_friend_popup_title">님께 친구추가를\n요청할까요?</string>
     <string name="add_friend_popup_positive">요청하기</string>
 
     <string name="friend_approve_invite">요청하기</string>

@@ -46,7 +46,8 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is AddFriendNavigationAction.NavigateToAddFriend -> { addFriendPopUp(it.userIdx) }
+                    is AddFriendNavigationAction.NavigateToAddFriend -> { addFriendPopUp(it.userIdx, nickname = it.nickname) }
+                    is AddFriendNavigationAction.NavigateToAddSuccess -> toastMessage(it.nickname+"님께 친구 요청이 완료 되었습니다!")
                 }
             }
         }
@@ -68,18 +69,16 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
         binding.friendRecycler.adapter = FriendAddAdapter(viewModel)
     }
 
-    private fun addFriendPopUp(userIdx: Int) {
+    private fun addFriendPopUp(userIdx: Int, nickname: String) {
         val res = AlertDialogModel(
-            title = getString(R.string.add_friend_popup_title),
+            title = nickname+getString(R.string.add_friend_popup_title),
             description = null,
             positiveContents = getString(R.string.add_friend_popup_positive),
             negativeContents = getString(R.string.no)
         )
         val dialog: DefaultYellowAlertDialog = DefaultYellowAlertDialog(
             alertDialogModel = res,
-            clickToPositive = {
-                // 친구 추가 API
-                userIdx},
+            clickToPositive = { viewModel.addFriend(userIdx = userIdx, nickname = nickname) },
             clickToNegative = {}
         )
         dialog.show(requireActivity().supportFragmentManager, TAG)

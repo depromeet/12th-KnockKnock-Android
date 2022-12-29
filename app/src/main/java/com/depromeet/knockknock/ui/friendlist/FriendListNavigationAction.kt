@@ -5,4 +5,5 @@ sealed class FriendListNavigationAction {
     class NavigateToFriendMore(val userIdx: Int) : FriendListNavigationAction()
     object NavigateToDeleteSuccess: FriendListNavigationAction()
     object NavigateToDeclareSuccess: FriendListNavigationAction()
+    object NavigateToAddFriends: FriendListNavigationAction()
 }

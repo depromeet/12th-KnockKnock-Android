@@ -61,4 +61,10 @@ class FriendListViewModel @Inject constructor(
         }
     }
 
+    override fun onAddFriendClicked() {
+        baseViewModelScope.launch {
+            _navigationHandler.emit(FriendListNavigationAction.NavigateToAddFriends)
+        }
+    }
+
 }

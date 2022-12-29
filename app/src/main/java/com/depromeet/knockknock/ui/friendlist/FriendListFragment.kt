@@ -52,6 +52,7 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
                     is FriendListNavigationAction.NavigateToFriendMore -> { moreFriendPopUp(userIdx = it.userIdx) }
                     is FriendListNavigationAction.NavigateToDeleteSuccess -> viewModel.getFriends()
                     is FriendListNavigationAction.NavigateToDeclareSuccess -> viewModel.getFriends()
+                    is FriendListNavigationAction.NavigateToAddFriends -> navigate(FriendListFragmentDirections.actionFriendListFragmentToAddFriendFragment())
                 }
             }
         }
