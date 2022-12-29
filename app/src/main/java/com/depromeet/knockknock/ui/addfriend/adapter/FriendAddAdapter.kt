@@ -7,15 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.domain.model.Friend
+import com.depromeet.domain.model.User
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderFriendAddBinding
 import com.depromeet.knockknock.ui.addfriend.AddFriendActionHandler
-import com.depromeet.knockknock.ui.friendlist.FriendListActionHandler
-import com.depromeet.knockknock.ui.friendlist.model.User
 
 class FriendAddAdapter(
     private val eventListener: AddFriendActionHandler
-) : ListAdapter<Friend, FriendAddAdapter.ViewHolder>(FriendListItemDiffCallback){
+) : ListAdapter<User, FriendAddAdapter.ViewHolder>(FriendListItemDiffCallback){
 
     init { setHasStableIds(true) }
 
@@ -37,17 +36,17 @@ class FriendAddAdapter(
     class ViewHolder(private val binding: HolderFriendAddBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Friend) {
+        fun bind(item: User) {
             binding.holder = item
             binding.executePendingBindings()
         }
     }
 
-    internal object FriendListItemDiffCallback : DiffUtil.ItemCallback<Friend>() {
-        override fun areItemsTheSame(oldItem: Friend, newItem: Friend) =
+    internal object FriendListItemDiffCallback : DiffUtil.ItemCallback<User>() {
+        override fun areItemsTheSame(oldItem: User, newItem: User) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Friend, newItem: Friend) =
+        override fun areContentsTheSame(oldItem: User, newItem: User) =
             oldItem == newItem
     }
 }

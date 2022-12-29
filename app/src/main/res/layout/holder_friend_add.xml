@@ -7,7 +7,7 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.domain.model.Friend" />
+            type="com.depromeet.domain.model.User" />
         <variable
             name="eventListener"
             type="com.depromeet.knockknock.ui.addfriend.AddFriendActionHandler" />

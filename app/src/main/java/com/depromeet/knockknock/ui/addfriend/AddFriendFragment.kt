@@ -30,6 +30,7 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
 
     override val viewModel : AddFriendViewModel by viewModels()
     private val navController by lazy { findNavController() }
+    private val adapter by lazy { FriendAddAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -51,6 +52,12 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.userList.collectLatest {
+                adapter.submitList(it)
+            }
+        }
     }
 
     override fun initAfterBinding() {
@@ -66,7 +73,7 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
     }
 
     private fun initAdapter() {
-        binding.friendRecycler.adapter = FriendAddAdapter(viewModel)
+        binding.friendRecycler.adapter = adapter
     }
 
     private fun addFriendPopUp(userIdx: Int, nickname: String) {
