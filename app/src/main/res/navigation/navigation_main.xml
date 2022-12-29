@@ -164,7 +164,18 @@
     <fragment
         android:id="@+id/friendListFragment"
         android:name="com.depromeet.knockknock.ui.friendlist.FriendListFragment"
-        android:label="FriendListFragment" />
+        android:label="FriendListFragment" >
+        <action
+            android:id="@+id/action_friendListFragment_to_addFriendFragment"
+            app:destination="@id/addFriendFragment"
+            app:popExitAnim="@anim/exit_to_right"
+            app:enterAnim="@anim/enter_from_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addFriendFragment"
+        android:name="com.depromeet.knockknock.ui.addfriend.AddFriendFragment"
+        android:label="AddFriendFragment" />
 
     <fragment
         android:id="@+id/informationFragment"

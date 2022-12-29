@@ -7,7 +7,11 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.friendlist.model.User" />
+            type="com.depromeet.domain.model.Friend" />
+
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.friendlist.FriendListActionHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:userProfile="@{holder.userImg}">
+            app:userProfile="@{holder.profile_path}">
         </ImageView>
 
         <TextView
@@ -37,7 +41,7 @@
             app:layout_constraintStart_toEndOf="@id/room_img"
             app:layout_constraintEnd_toStartOf="@id/more_btn"
             android:layout_marginStart="16dp"
-            android:text="@{holder.userName}">
+            android:text="@{holder.nickname}">
         </TextView>
 
         <ImageView
@@ -48,7 +52,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_more">
+            android:src="@drawable/ic_more"
+            android:onClick="@{() -> eventListener.onFriendMoreClicked(holder.id)}">
         </ImageView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

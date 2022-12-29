@@ -23,6 +23,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:titleTextAppearance="@style/ToolBarStyle"/>
 
+        <ImageView
+            android:id="@+id/add_friend_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_add_friend"
+            android:padding="12dp"
+            android:layout_marginEnd="16dp"/>
+
         <EditText
             android:id="@+id/search_edit_text"
             style="@style/Theme.AppCompat.EditText.Friend.List.Search"

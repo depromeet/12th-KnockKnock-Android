@@ -30,6 +30,7 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
 
     override val viewModel : AddFriendViewModel by viewModels()
     private val navController by lazy { findNavController() }
+    private val adapter by lazy { FriendAddAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -46,8 +47,15 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is AddFriendNavigationAction.NavigateToAddFriend -> { addFriendPopUp(it.userIdx) }
+                    is AddFriendNavigationAction.NavigateToAddFriend -> { addFriendPopUp(it.userIdx, nickname = it.nickname) }
+                    is AddFriendNavigationAction.NavigateToAddSuccess -> toastMessage(it.nickname+"님께 친구 요청이 완료 되었습니다!")
                 }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.userList.collectLatest {
+                adapter.submitList(it)
             }
         }
     }
@@ -65,21 +73,19 @@ class AddFriendFragment : BaseFragment<FragmentAddFriendBinding, AddFriendViewMo
     }
 
     private fun initAdapter() {
-        binding.friendRecycler.adapter = FriendAddAdapter(viewModel)
+        binding.friendRecycler.adapter = adapter
     }
 
-    private fun addFriendPopUp(userIdx: Int) {
+    private fun addFriendPopUp(userIdx: Int, nickname: String) {
         val res = AlertDialogModel(
-            title = getString(R.string.add_friend_popup_title),
+            title = nickname+getString(R.string.add_friend_popup_title),
             description = null,
             positiveContents = getString(R.string.add_friend_popup_positive),
             negativeContents = getString(R.string.no)
         )
         val dialog: DefaultYellowAlertDialog = DefaultYellowAlertDialog(
             alertDialogModel = res,
-            clickToPositive = {
-                // 친구 추가 API
-                userIdx},
+            clickToPositive = { viewModel.addFriend(userIdx = userIdx, nickname = nickname) },
             clickToNegative = {}
         )
         dialog.show(requireActivity().supportFragmentManager, TAG)

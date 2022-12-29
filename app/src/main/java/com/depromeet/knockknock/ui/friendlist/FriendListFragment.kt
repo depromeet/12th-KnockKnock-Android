@@ -26,6 +26,12 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
 
     override val viewModel : FriendListViewModel by viewModels()
     private val navController by lazy { findNavController() }
+    private val adapter by lazy { FriendListAdapter(viewModel) }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getFriends()
+    }
 
     override fun initStartView() {
         binding.apply {
@@ -44,7 +50,16 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
                 when(it) {
                     is FriendListNavigationAction.NavigateToLink -> {}
                     is FriendListNavigationAction.NavigateToFriendMore -> { moreFriendPopUp(userIdx = it.userIdx) }
+                    is FriendListNavigationAction.NavigateToDeleteSuccess -> viewModel.getFriends()
+                    is FriendListNavigationAction.NavigateToDeclareSuccess -> viewModel.getFriends()
+                    is FriendListNavigationAction.NavigateToAddFriends -> navigate(FriendListFragmentDirections.actionFriendListFragmentToAddFriendFragment())
                 }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.friendList.collectLatest {
+                adapter.submitList(it)
             }
         }
     }
@@ -64,15 +79,15 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
     private fun moreFriendPopUp(userIdx: Int) {
         val dialog: BottomFriendMore = BottomFriendMore {
             when(it) {
-                is FriendMoreType.Black -> {}
-                is FriendMoreType.Delete -> {}
+                is FriendMoreType.Black -> viewModel.declareFriend(id = userIdx)
+                is FriendMoreType.Delete -> viewModel.deleteFriend(id = userIdx)
             }
         }
         dialog.show(requireActivity().supportFragmentManager, TAG)
     }
 
     private fun initAdapter() {
-        binding.friendRecycler.adapter = FriendListAdapter(viewModel)
+        binding.friendRecycler.adapter = adapter
     }
 
     @SuppressLint("ClickableViewAccessibility")
