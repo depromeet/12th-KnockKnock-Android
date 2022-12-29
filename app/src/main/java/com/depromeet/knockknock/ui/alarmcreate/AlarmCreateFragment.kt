@@ -119,7 +119,7 @@ class AlarmCreateFragment :
                      * 푸쉬알림을 발송했습니다!
                      * fcm API!!
                      * */
-//                    viewModel.onAlarmPush()
+//                    viewModel.onAlarmPushClicked()
                 }
             }
         })
@@ -133,7 +133,7 @@ class AlarmCreateFragment :
              * fcm API!!
              * */
             Log.d("ttt", it.toString())
-//            viewModel.onAlarmPush()
+//            viewModel.onReservationAlarmPushClicked(it.toString())
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

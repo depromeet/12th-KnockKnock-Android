@@ -105,6 +105,18 @@ class AlarmCreateViewModel @Inject constructor(
         }
     }
 
+    fun onReservationAlarmPushClicked(sendAt: String){
+        baseViewModelScope.launch {
+            mainRepository.postNotificationReservation(
+                group_id = 0,
+                title = editTextTitleEvent.value,
+                content = editTextMessageEvent.value,
+                image_url =  messageImgUri.value,
+                send_at =  sendAt,
+            )
+        }
+    }
+
     fun onImageUriChecked(uri: String) {
         baseViewModelScope.launch {
             messageImgUri.emit(uri)
