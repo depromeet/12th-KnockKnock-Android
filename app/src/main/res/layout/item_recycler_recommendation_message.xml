@@ -8,7 +8,11 @@
 
         <variable
             name="model"
-            type="com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage" />
+            type="com.depromeet.knockknock.ui.alarmcreate.model.RecommendMessage" />
+
+        <variable
+            name="holder"
+            type="com.depromeet.domain.model.RecommendMessage" />
 
         <variable
             name="eventListener"
