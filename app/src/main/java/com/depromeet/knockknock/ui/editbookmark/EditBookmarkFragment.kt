@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
@@ -24,7 +25,7 @@ class EditBookmarkFragment : BaseFragment<FragmentEditBookmarkBinding, EditBookm
 
     override val viewModel : EditBookmarkViewModel by viewModels()
     private val navController: NavController by lazy { findNavController() }
-    private val args: EditBookmarkFragmentArgs by lazy { EditBookmarkFragmentArgs() }
+    private val args: EditBookmarkFragmentArgs by navArgs()
     private val adapter by lazy { EditBookmarkAdapter(viewModel) }
 
     override fun initStartView() {
