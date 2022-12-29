@@ -92,7 +92,7 @@ class AlarmCreateViewModel @Inject constructor(
 
     override fun onAlarmPushClicked() {
         baseViewModelScope.launch {
-            if (editTextTitleEvent.value == "" && editTextMessageEvent.value == "" && messageImgUri.value == ""){
+            if (editTextTitleEvent.value == "" && editTextMessageEvent.value == "" && messageImgUri.value == "") {
                 mainRepository.postNotifications(
                     group_id = 0,
                     title = editTextTitleEvent.value,
@@ -105,14 +105,14 @@ class AlarmCreateViewModel @Inject constructor(
         }
     }
 
-    fun onReservationAlarmPushClicked(sendAt: String){
+    override fun onReservationAlarmPushClicked(sendAt: String) {
         baseViewModelScope.launch {
             mainRepository.postNotificationReservation(
                 group_id = 0,
                 title = editTextTitleEvent.value,
                 content = editTextMessageEvent.value,
-                image_url =  messageImgUri.value,
-                send_at =  sendAt,
+                image_url = messageImgUri.value,
+                send_at = sendAt,
             )
         }
     }
