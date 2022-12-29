@@ -106,14 +106,18 @@ class AlarmCreateViewModel @Inject constructor(
     }
 
     override fun onReservationAlarmPushClicked(sendAt: String) {
-        baseViewModelScope.launch {
-            mainRepository.postNotificationReservation(
-                group_id = 0,
-                title = editTextTitleEvent.value,
-                content = editTextMessageEvent.value,
-                image_url = messageImgUri.value,
-                send_at = sendAt,
-            )
+        if (editTextTitleEvent.value == "" && editTextMessageEvent.value == "" && messageImgUri.value == "") {
+            baseViewModelScope.launch {
+                mainRepository.postNotificationReservation(
+                    group_id = 0,
+                    title = editTextTitleEvent.value,
+                    content = editTextMessageEvent.value,
+                    image_url = messageImgUri.value,
+                    send_at = sendAt,
+                ).onSuccess {
+                    _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
+                }.onError {}
+            }
         }
     }
 
