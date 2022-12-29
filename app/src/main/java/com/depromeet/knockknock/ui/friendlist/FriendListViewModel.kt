@@ -21,9 +21,7 @@ class FriendListViewModel @Inject constructor(
 
     private val _navigationHandler: MutableSharedFlow<FriendListNavigationAction> = MutableSharedFlow<FriendListNavigationAction>()
     val navigationHandler: SharedFlow<FriendListNavigationAction> = _navigationHandler.asSharedFlow()
-
-    val searchQuery: MutableStateFlow<String> = MutableStateFlow<String>("")
-
+    
     private val _friendList: MutableStateFlow<List<Friend>> = MutableStateFlow(emptyList())
     val friendList: StateFlow<List<Friend>> = _friendList.asStateFlow()
 
