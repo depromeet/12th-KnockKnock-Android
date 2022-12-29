@@ -248,9 +248,13 @@
     <fragment
         android:id="@+id/alarmRoomJoinedFragment"
         android:name="com.depromeet.knockknock.ui.alarmroomjoined.AlarmRoomJoinedFragment"
-        android:label="AlarmRoomJoinedFragment" >
+        android:label="AlarmRoomJoinedFragment" />
+    <fragment
+        android:id="@+id/alarmRoomExploreFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroomexplore.AlarmRoomExploreFragment"
+        android:label="AlarmRoomExploreFragment" >
         <action
-            android:id="@+id/action_alarmRoomJoinedFragment_to_alarmRoomSearchFragment"
+            android:id="@+id/action_alarmRoomExploreFragment_to_alarmRoomSearchFragment"
             app:destination="@id/alarmRoomSearchFragment" />
     </fragment>
 </navigation>
