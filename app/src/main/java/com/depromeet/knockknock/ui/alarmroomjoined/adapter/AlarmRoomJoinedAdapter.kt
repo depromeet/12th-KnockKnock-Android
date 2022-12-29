@@ -7,6 +7,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.domain.model.Group
+import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderAlarmRoomBinding
 import com.depromeet.knockknock.ui.alarmroomjoined.AlarmRoomJoinedActionHandler
@@ -14,7 +16,7 @@ import com.depromeet.knockknock.ui.alarmroomsearch.model.AlarmRoom
 
 class AlarmRoomJoinedAdapter(
     private val eventListener: AlarmRoomJoinedActionHandler
-) : ListAdapter<AlarmRoom, AlarmRoomJoinedAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
+) : ListAdapter<GroupBriefInfo, AlarmRoomJoinedAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
 
     init { setHasStableIds(true) }
 
@@ -27,7 +29,7 @@ class AlarmRoomJoinedAdapter(
             false
         )
         viewDataBinding.layoutMain.setOnClickListener {
-            eventListener.onRoomClicked(viewDataBinding.holder!!.roomId)
+            eventListener.onRoomClicked(viewDataBinding.holder!!.group_id)
             this.notifyDataSetChanged()
         }
         return ViewHolder(viewDataBinding)
@@ -41,17 +43,17 @@ class AlarmRoomJoinedAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("UseCompatLoadingForDrawables")
-        fun bind(item: AlarmRoom) {
+        fun bind(item: GroupBriefInfo) {
             binding.holder = item
             binding.executePendingBindings()
         }
     }
 
-    internal object AlarmRoomListItemDiffCallback : DiffUtil.ItemCallback<AlarmRoom>() {
-        override fun areItemsTheSame(oldItem: AlarmRoom, newItem: AlarmRoom) =
-            oldItem.roomId == newItem.roomId
+    internal object AlarmRoomListItemDiffCallback : DiffUtil.ItemCallback<GroupBriefInfo>() {
+        override fun areItemsTheSame(oldItem: GroupBriefInfo, newItem: GroupBriefInfo) =
+            oldItem.group_id == newItem.group_id
 
-        override fun areContentsTheSame(oldItem: AlarmRoom, newItem: AlarmRoom) =
+        override fun areContentsTheSame(oldItem: GroupBriefInfo, newItem: GroupBriefInfo) =
             oldItem == newItem
     }
 }

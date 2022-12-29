@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomSearchBinding
@@ -62,40 +63,53 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
     }
 
     override fun initAfterBinding() {
+        binding.searchEditText.requestFocus()
         val alarmRoomAdapter = AlarmRoomSearchAdapter(viewModel)
         binding.alarmRoomRecycler.adapter = alarmRoomAdapter
 
-        val test1 = AlarmRoom(
-            roomType = "OPEN",
-            roomId = 1,
-            roomName = "sdf",
-            roomThumbnail = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            roomCategoryName = "취직",
-            roomDescription = "roomIsUnpublic을 true로 했을 떄, 실제로는 검색에서는 비공개방은 나타나지 않습니다.",
-            roomIsUnpublic = true,
-            roomMemberCount = 10
+        val test1 = GroupBriefInfo(
+            category = com.depromeet.domain.model.Category(
+                content = "취업",
+                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                id = 1
+            ),
+            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+            group_id = 1,
+            group_type = "OPEN",
+            member_count = 10,
+            public_access = true,
+            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+            title = "방 제목"
         )
 
-        val test2 = AlarmRoom(
-            roomType = "OPEN",
-            roomId = 1,
-            roomName = "sdf",
-            roomThumbnail = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            roomCategoryName = "라이프스타일",
-            roomDescription = "이것은 취직하고 싶어하는 사람들의 방입니다.",
-            roomIsUnpublic = false,
-            roomMemberCount = 20
+        val test2 = GroupBriefInfo(
+            category = com.depromeet.domain.model.Category(
+                content = "취업",
+                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                id = 1
+            ),
+            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+            group_id = 2,
+            group_type = "OPEN",
+            member_count = 10,
+            public_access = true,
+            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+            title = "방 제목"
         )
 
-        val test3 = AlarmRoom(
-            roomType = "OPEN",
-            roomId = 1,
-            roomName = "sdf",
-            roomThumbnail = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            roomCategoryName = "취직",
-            roomDescription = "이것은 취직하고 싶어하는 사람들의 방입니다.sdfsdfsdfsdfsdfsdfdsf",
-            roomIsUnpublic = false,
-            roomMemberCount = 10
+        val test3 = GroupBriefInfo(
+            category = com.depromeet.domain.model.Category(
+                content = "취업",
+                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                id = 1
+            ),
+            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+            group_id = 3,
+            group_type = "OPEN",
+            member_count = 10,
+            public_access = true,
+            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+            title = "방 제목"
         )
 
         val alarmRoomList = listOf(test1, test2, test3)
