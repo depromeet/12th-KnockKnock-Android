@@ -3,6 +3,7 @@ package com.depromeet.domain.repository
 import com.depromeet.domain.NetworkResult
 import com.depromeet.domain.model.*
 import okhttp3.MultipartBody
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface  MainRepository {
@@ -252,4 +253,10 @@ interface  MainRepository {
 
     // 배경 이미지
     suspend fun getBackgrounds(): NetworkResult<BackgroundList>
+
+    // 알림 가져오기
+    suspend fun getAlarms(): NetworkResult<AlarmList>
+
+    // 알림 있는지 확인
+    suspend fun getAlarmsCount(): NetworkResult<AlarmCount>
 }

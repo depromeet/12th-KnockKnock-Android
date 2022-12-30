@@ -32,6 +32,18 @@ class HomeViewModel @Inject constructor(
     private val _notifications: MutableStateFlow<List<Notification>> = MutableStateFlow(emptyList())
     val notifications: StateFlow<List<Notification>> = _notifications.asStateFlow()
 
+    private val _existedAlarm: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val existedAlarm: StateFlow<Boolean> = _existedAlarm.asStateFlow()
+
+    init {
+        baseViewModelScope.launch {
+            mainRepository.getAlarmsCount()
+                .onSuccess {
+                    _existedAlarm.value = it.count > 0
+                }
+        }
+    }
+
     fun getRecentNotifications() {
         baseViewModelScope.launch {
             mainRepository.getNotifications()
