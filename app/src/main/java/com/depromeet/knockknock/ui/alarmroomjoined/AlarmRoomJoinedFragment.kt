@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.domain.model.Group
 import com.depromeet.domain.model.GroupBriefInfo
+import com.depromeet.domain.model.GroupContent
 import com.depromeet.domain.model.Member
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
@@ -65,7 +66,7 @@ class AlarmRoomJoinedFragment :
         val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel)
         binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
 
-        val test1 = GroupBriefInfo(
+        val test1 = GroupContent(
             category = com.depromeet.domain.model.Category(
                 content = "취업",
                 emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
@@ -80,7 +81,7 @@ class AlarmRoomJoinedFragment :
             title = "방 제목"
         )
 
-        val test2 = GroupBriefInfo(
+        val test2 = GroupContent(
             category = com.depromeet.domain.model.Category(
                 content = "취업",
                 emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
@@ -95,7 +96,7 @@ class AlarmRoomJoinedFragment :
             title = "방 제목"
         )
 
-        val test3 = GroupBriefInfo(
+        val test3 = GroupContent(
             category = com.depromeet.domain.model.Category(
                 content = "취업",
                 emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",

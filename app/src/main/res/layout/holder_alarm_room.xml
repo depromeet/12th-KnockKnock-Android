@@ -7,7 +7,7 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.domain.model.GroupBriefInfo" />
+            type="com.depromeet.domain.model.GroupContent" />
 
         <variable
             name="eventListener"

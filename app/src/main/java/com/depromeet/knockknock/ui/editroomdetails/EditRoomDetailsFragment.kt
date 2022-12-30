@@ -24,6 +24,7 @@ import com.depromeet.knockknock.ui.editroomdetails.adapter.BackgroundAdapter
 import com.depromeet.knockknock.ui.editroomdetails.adapter.ThumbnailAdapter
 import com.depromeet.knockknock.ui.editroomdetails.model.Background
 import com.depromeet.knockknock.ui.editroomdetails.model.Thumbnail
+import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
 import com.depromeet.knockknock.ui.register.textChangeColor
 import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.uriToFile
@@ -48,6 +49,8 @@ class EditRoomDetailsFragment :
 
     override val viewModel: EditRoomDetailsViewModel by viewModels()
     private val navController by lazy { findNavController() }
+    private val thumbnailAdapter by lazy { ThumbnailAdapter(viewModel) }
+    private val backgroundAdapter by lazy { BackgroundAdapter(viewModel) }
 
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
     private lateinit var cameraLauncher: ActivityResultLauncher<Uri>
@@ -77,6 +80,7 @@ class EditRoomDetailsFragment :
         exception = viewModel.errorEvent
         initToolbar()
         initEditText()
+        initAdapter()
         initRegisterForActivityResult()
         countRoomDescription()
         countRoomName()
@@ -101,56 +105,22 @@ class EditRoomDetailsFragment :
                         viewModel._thumbnailStored.value=true}
                 }
             }
+        }
 
+        lifecycleScope.launchWhenStarted {
+            viewModel.thumbnailList.collectLatest {
+                thumbnailAdapter.submitList(it)
+            }
+        }
 
+        lifecycleScope.launchWhenStarted {
+            viewModel.backGroundList.collectLatest {
+                backgroundAdapter.submitList(it)
+            }
         }
     }
 
     override fun initAfterBinding() {
-        val backgroundAdapter = BackgroundAdapter(viewModel)
-        binding.backgroundRecycler.adapter = backgroundAdapter
-        val test1 = Background(
-            backgroundId = 1,
-            backgroundSrc = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-        )
-        val test2 = Background(
-            backgroundId = 2,
-            backgroundSrc = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-        )
-        val test3 = Background(
-            backgroundId = 3,
-            backgroundSrc = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-        )
-        val test4 = Background(
-            backgroundId = 4,
-            backgroundSrc = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-        )
-
-        backgroundList = listOf(test1, test2, test3,test4)
-
-        backgroundAdapter.submitList(backgroundList)
-
-
-        val thumbnailAdapter = ThumbnailAdapter(viewModel)
-        binding.thumbnailRecycler.adapter = thumbnailAdapter
-        val thumbnailTest1 = Thumbnail(
-            thumbnailId = 1,
-            thumbnailSrc = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-        )
-        val thumbnailTest2 = Thumbnail(
-            thumbnailId = 2,
-            thumbnailSrc = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-        )
-        val thumbnailTest3 = Thumbnail(
-            thumbnailId = 3,
-            thumbnailSrc = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-        )
-        val thumbnailTest4 = Thumbnail(
-            thumbnailId = 4,
-            thumbnailSrc = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-        )
-        thumbnailList = listOf(thumbnailTest1, thumbnailTest2, thumbnailTest3,thumbnailTest4)
-        thumbnailAdapter.submitList(thumbnailList)
     }
 
     private fun initToolbar() {
@@ -164,7 +134,8 @@ class EditRoomDetailsFragment :
 
 
     private fun initAdapter() {
-        //binding.friendRecycler.adapter = FriendListAdapter(viewModel)
+        binding.thumbnailRecycler.adapter = ThumbnailAdapter(viewModel)
+        binding.backgroundRecycler.adapter = BackgroundAdapter(viewModel)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -178,9 +149,6 @@ class EditRoomDetailsFragment :
             false
         }
     }
-
-
-
 
     private fun countRoomName() {
         lifecycleScope.launchWhenStarted {
@@ -222,19 +190,6 @@ class EditRoomDetailsFragment :
         }
     }
 
-
-    //배경화면 리스트에서 선택한 값을 띄우게 함
-//    private fun selectFromBackgroundList(){
-//        lifecycleScope.launchWhenCreated {
-//            viewModel.backgroundImgId.collectLatest {
-//                val backgroundSrc = backgroundList.get(it-1).backgroundSrc
-//                Glide.with(requireContext())
-//            .load(backgroundSrc)
-//            .transform(CenterCrop(), RoundedCorners(20))
-//            .into(binding.roomBackgroundImg)
-//            }
-//        }
-//    }
 
     private fun editProfileImageBottomSheet() {
         requestMultiplePermission.launch(permissionList)

@@ -9,10 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.domain.model.Background
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderEditRoomBackgroundBinding
 import com.depromeet.knockknock.ui.editroomdetails.EditRoomDetailsActionHandler
-import com.depromeet.knockknock.ui.editroomdetails.model.Background
 
 var beforeClicked = 0
 
@@ -31,8 +31,8 @@ class BackgroundAdapter(
             false
         )
         viewDataBinding.layoutMain.setOnClickListener {
-            beforeClicked = viewDataBinding.holder!!.backgroundId
-            eventListener.onBackgroundClicked(viewDataBinding.holder!!.backgroundId)
+            beforeClicked = viewDataBinding.holder!!.id
+            eventListener.onBackgroundClicked(viewDataBinding.holder!!.id)
             this.notifyDataSetChanged()
         }
         return ViewHolder(viewDataBinding)
@@ -49,7 +49,7 @@ class BackgroundAdapter(
         fun bind(item: Background) {
             binding.holder = item
 
-            if(beforeClicked == binding.holder!!.backgroundId) {
+            if(beforeClicked == binding.holder!!.id) {
                 binding.layoutMain.background =
                     binding.root.context.getDrawable(R.drawable.custom_transparents_radius04_line_yellow_thin)
                 binding.roomImg.setColorFilter(Color.parseColor("#48303030"))
@@ -67,7 +67,7 @@ class BackgroundAdapter(
 
     internal object BackgroundListItemDiffCallback : DiffUtil.ItemCallback<Background>() {
         override fun areItemsTheSame(oldItem: Background, newItem: Background) =
-            oldItem.backgroundId == newItem.backgroundId
+            oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Background, newItem: Background) =
             oldItem == newItem

@@ -1,6 +1,11 @@
 package com.depromeet.knockknock.ui.editroomdetails
 
 import androidx.lifecycle.viewModelScope
+import com.depromeet.domain.model.Background
+import com.depromeet.domain.model.Thumbnail
+import com.depromeet.domain.model.ThumbnailList
+import com.depromeet.domain.onSuccess
+import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.ui.friendlist.FriendListActionHandler
 import com.depromeet.knockknock.ui.friendlist.FriendListNavigationAction
 
@@ -15,6 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditRoomDetailsViewModel @Inject constructor(
+    private val mainRepository : MainRepository
 ) : BaseViewModel(), EditRoomDetailsActionHandler {
 
     private val TAG = "EditRoomDetailsViewModel"
@@ -54,11 +60,32 @@ class EditRoomDetailsViewModel @Inject constructor(
     var inputRoomDescription = MutableStateFlow<String>("")
     var inputRoomDescriptionCountEvent = MutableStateFlow<Int>(0)
 
-
     private val _isRoomUnpublic: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val isRoomUnpublic: StateFlow<Boolean> = _isRoomUnpublic
 
     val isGalleryImage: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+
+    private val _thumbnailList : MutableStateFlow<List<Thumbnail>> = MutableStateFlow(emptyList())
+    val thumbnailList: StateFlow<List<Thumbnail>> = _thumbnailList.asStateFlow()
+
+    private val _backgroundList : MutableStateFlow<List<Background>> = MutableStateFlow(emptyList())
+    val backGroundList: StateFlow<List<Background>> = _backgroundList.asStateFlow()
+
+    init{
+        baseViewModelScope.launch {
+            mainRepository.getThumbnails()
+                .onSuccess { response ->
+                    _thumbnailList.emit(response.thumbnails)
+                }
+        }
+
+        baseViewModelScope.launch {
+            mainRepository.getBackgrounds()
+                .onSuccess { response ->
+                    _backgroundList.emit(response.backgrounds)
+                }
+        }
+    }
 
     override fun onRoomUnpublicToggled(checked: Boolean) {
         baseViewModelScope.launch {

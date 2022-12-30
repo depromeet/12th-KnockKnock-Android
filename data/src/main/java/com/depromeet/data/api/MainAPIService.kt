@@ -30,11 +30,17 @@ interface MainAPIService {
 
     // 로그인 요청 <- 가입한 유저 <- 1번 true일 경우
     @POST("/api/v1/credentials/login")
-    suspend fun postLogin(@Query("id_token") idToken: String, @Query("provider") provider: String): BaseResponse<LoginResponse>
+    suspend fun postLogin(
+        @Query("id_token") idToken: String,
+        @Query("provider") provider: String
+    ): BaseResponse<LoginResponse>
 
     // 토큰 검증 <- 로그인시 제일 처음 1번
     @GET("/api/v1/credentials/oauth/valid/register")
-    suspend fun getTokenValidation(@Query("id_token") idToken: String, @Query("provider") provider: String): BaseResponse<isRegistedResponse>
+    suspend fun getTokenValidation(
+        @Query("id_token") idToken: String,
+        @Query("provider") provider: String
+    ): BaseResponse<isRegistedResponse>
 
     // 회원 탈퇴
     @DELETE("/api/v1/credentials/me")
@@ -71,11 +77,18 @@ interface MainAPIService {
     // 방 검색하기
     @GET("/api/v1/groups/open")
     suspend fun getOpenGroups(
-        @Path("searchString") searchString: String,
         @Query("category") category: Int,
         @Query("page") page: Int,
         @Query("size") size: Int
     ): BaseResponse<PagingGroupList>
+
+    // 참여중인 그룹 목록 전체 홀로외침 친구들 방 필터링
+    @GET("/api/v1/groups/joined")
+    suspend fun getJoinedGroups(
+        @Query("type") type: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ) : BaseResponse<PagingGroupList>
 
     // 방 검색하기 필터링
     @GET("/api/v1/groups/open")
@@ -210,11 +223,17 @@ interface MainAPIService {
 
     // 내 친구목록 멤버 추가
     @POST("/api/v1/groups/{id}/members")
-    suspend fun postAddMember(@Path("id") id: Int, @Body body: PostAddMemberRequest): BaseResponse<Group>
+    suspend fun postAddMember(
+        @Path("id") id: Int,
+        @Body body: PostAddMemberRequest
+    ): BaseResponse<Group>
 
     // 그룹 초대 토큰 검증 & 그룹 가입
     @POST("/api/v1/groups/{id}/members/invite/{code}")
-    suspend fun postEnterMembers(@Path("id") id: Int, @Path("code") code: String): BaseResponse<Group>
+    suspend fun postEnterMembers(
+        @Path("id") id: Int,
+        @Path("code") code: String
+    ): BaseResponse<Group>
 
     // 그룹 초대 토큰 발급
     @GET("/api/v1/groups/{id}/members/invite")
@@ -234,11 +253,17 @@ interface MainAPIService {
 
     // 그룹 가입 요청 거절
     @POST("/api/v1/groups/{id}/admissions/{admission_id}/refuse")
-    suspend fun postGroupAdmissionsRefuse(@Path("id") id: Int, @Path("admission_id") admission_id: Int): BaseResponse<Admission>
+    suspend fun postGroupAdmissionsRefuse(
+        @Path("id") id: Int,
+        @Path("admission_id") admission_id: Int
+    ): BaseResponse<Admission>
 
     // 그룹 가입 요청 허락
     @POST("/api/v1/groups/{id}/admissions/{admission_id}/allow")
-    suspend fun postGroupAdmissionsAllow(@Path("id") id: Int, @Path("admission_id") admission_id: Int): BaseResponse<Admission>
+    suspend fun postGroupAdmissionsAllow(
+        @Path("id") id: Int,
+        @Path("admission_id") admission_id: Int
+    ): BaseResponse<Admission>
 
     // 공개 그룹 만들기
     @POST("/api/v1/groups/open")
