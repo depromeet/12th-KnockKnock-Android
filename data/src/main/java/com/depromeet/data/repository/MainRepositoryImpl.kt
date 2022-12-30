@@ -87,12 +87,11 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getOpenGroups(
-        searchString: String,
         category: Int,
         page: Int,
         size: Int
     ): NetworkResult<GroupList> {
-        return handleApi { mainAPIService.getOpenGroups(searchString, category, page, size).data.toDomain() }
+        return handleApi { mainAPIService.getOpenGroups(category, page, size).data.toDomain() }
     }
 
     override suspend fun getFilterGroups(

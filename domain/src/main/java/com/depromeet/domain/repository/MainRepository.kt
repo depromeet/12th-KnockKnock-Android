@@ -54,7 +54,6 @@ interface  MainRepository {
 
     // 방 검색하기
     suspend fun getOpenGroups(
-        searchString: String,
         category: Int,
         page: Int,
         size: Int

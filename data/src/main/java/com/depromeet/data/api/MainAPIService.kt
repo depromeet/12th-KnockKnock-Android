@@ -71,7 +71,6 @@ interface MainAPIService {
     // 방 검색하기
     @GET("/api/v1/groups/open")
     suspend fun getOpenGroups(
-        @Path("searchString") searchString: String,
         @Query("category") category: Int,
         @Query("page") page: Int,
         @Query("size") size: Int
