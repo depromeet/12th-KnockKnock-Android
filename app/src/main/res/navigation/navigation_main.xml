@@ -33,7 +33,9 @@
             app:destination="@id/onboardFragment"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -205,7 +207,9 @@
             android:id="@+id/action_onboardFragment_to_registerFragment"
             app:destination="@id/registerFragment"
             app:popExitAnim="@anim/exit_to_right"
-            app:enterAnim="@anim/enter_from_right" />
+            app:enterAnim="@anim/enter_from_right"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -216,7 +220,9 @@
             android:id="@+id/action_registerFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popExitAnim="@anim/exit_to_right"
-            app:enterAnim="@anim/enter_from_right" />
+            app:enterAnim="@anim/enter_from_right"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_registerFragment_to_setProfileFragment"
             app:destination="@id/setProfileFragment"
@@ -232,7 +238,9 @@
             android:id="@+id/action_setProfileFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popExitAnim="@anim/exit_to_right"
-            app:enterAnim="@anim/enter_from_right" />
+            app:enterAnim="@anim/enter_from_right"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

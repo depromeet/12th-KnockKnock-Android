@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.util.LoadingDialog
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel>(layoutId: Int) : Fragment(layoutId) {
@@ -112,6 +113,13 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel>(layoutId: In
         initStartView()
         initDataBinding()
         initAfterBinding()
+
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.needLoginEvent.collectLatest {
+                findNavController().navigate(com.depromeet.knockknock.R.id.action_register_fragment)
+            }
+        }
         return binding.root
     }
 

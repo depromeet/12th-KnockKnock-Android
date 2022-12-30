@@ -47,9 +47,10 @@ fun createErrorResponse(responseBodyString: String): ErrorResponseImpl? =
 
 fun createErrorException(url: String?, httpCode: Int, errorResponse: ErrorResponseImpl?): Exception? =
     when (httpCode) {
-        400, 403 -> BadRequestException(Throwable(errorResponse?.message), url)
-        403 -> InvalidAccessTokenException(Throwable(errorResponse?.message), url)
-        404 -> ServerNotFoundException(Throwable(errorResponse?.message), url)
-        500 -> InternalServerErrorException(Throwable(errorResponse?.message), url)
+        400 -> BadRequestException(Throwable(errorResponse?.reason), url)
+        401 -> InvalidAccessTokenExpire(Throwable(errorResponse?.reason), url)
+        403 -> InvalidAccessTokenException(Throwable(errorResponse?.reason), url)
+        404 -> ServerNotFoundException(Throwable(errorResponse?.reason), url)
+        500 -> InternalServerErrorException(Throwable(errorResponse?.reason), url)
         else -> null
     }
