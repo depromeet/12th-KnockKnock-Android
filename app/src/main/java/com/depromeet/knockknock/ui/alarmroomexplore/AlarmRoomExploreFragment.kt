@@ -14,6 +14,7 @@ import com.depromeet.knockknock.ui.alarmroomexplore.adapter.CategoryAdapter
 import com.depromeet.knockknock.ui.alarmroomexplore.adapter.PopularRoomAdapter
 import com.depromeet.knockknock.ui.alarmroomjoined.adapter.AlarmRoomJoinedAdapter
 import com.depromeet.knockknock.ui.alarmroomsearch.adapter.AlarmRoomAdapter
+import com.depromeet.knockknock.ui.alarmroomsearch.adapter.AlarmRoomSearchAdapter
 import com.depromeet.knockknock.ui.alarmroomtab.AlarmRoomTabFragmentDirections
 import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.hideKeyboard
@@ -24,6 +25,7 @@ import com.google.android.flexbox.JustifyContent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
 
 
 @AndroidEntryPoint
@@ -36,6 +38,8 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
 
     override val viewModel : AlarmRoomExploreViewModel by viewModels()
     private val navController by lazy { findNavController() }
+    private val alarmRoomAdapter by lazy { AlarmRoomAdapter(viewModel) }
+
 
     override fun initStartView() {
         binding.apply {
@@ -44,6 +48,7 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
         }
         exception = viewModel.errorEvent
         initEditText()
+        initAdapter()
     }
 
     override fun initDataBinding() {
@@ -56,92 +61,15 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.roomList.collectLatest {
+                alarmRoomAdapter.submitList(it)
+            }
+        }
     }
 
     override fun initAfterBinding() {
-
-        val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
-        binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-
-        val test1 = GroupBriefInfo(
-        category = com.depromeet.domain.model.Category(
-            content = "취업",
-            emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            id = 2
-        ),
-        description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-        group_id = 1,
-        group_type = "OPEN",
-        member_count = 10,
-        public_access = true,
-        thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-        title = "방 제목"
-        )
-
-        val test2 = GroupBriefInfo(
-            category = com.depromeet.domain.model.Category(
-                content = "스터디",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 3
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 1,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-        val test3 = GroupBriefInfo(
-            category = Category(
-                content = "독서",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 4
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 1,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val test4 = GroupBriefInfo(
-            category = Category(
-                content = "독서",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 4
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 1,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val test5 = GroupBriefInfo(
-            category = Category(
-                content = "독서",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 4
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 1,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val alarmRoomList = listOf(test1, test2, test3, test4, test5)
-        alarmRoomAdapter.submitList(alarmRoomList)
-
-
-
         val categorySelectAdapter = CategoryAdapter(viewModel)
         binding.categorySelectRecycler.adapter = categorySelectAdapter
         val categoryTest1 = Category(
@@ -225,12 +153,12 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
             title = "방 제목"
         )
 
-        val popularRoomList = listOf(test1, test2, test3)
+        val popularRoomList = listOf(popularRoomTest1, popularRoomTest2, popularRoomTest3)
         popularRoomAdapter.submitList(popularRoomList)
 
         fun roomFilterByCategory(categoryId : Int) {
             if (categoryId != 1) {
-                val filteredAlarmRoomList = alarmRoomList.filter {
+                val filteredAlarmRoomList = viewModel.roomList.value.filter {
                     it.category.id == categoryId
                 }
                 val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
@@ -241,7 +169,7 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
             else{
                 val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
                 binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-                alarmRoomAdapter.submitList(alarmRoomList)
+                alarmRoomAdapter.submitList(viewModel.roomList.value)
             }
         }
 
@@ -250,6 +178,10 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
                 roomFilterByCategory(it)
             }
         }
+    }
+
+    private fun initAdapter(){
+        binding.alarmRoomRecycler.adapter = alarmRoomAdapter
     }
 
 
