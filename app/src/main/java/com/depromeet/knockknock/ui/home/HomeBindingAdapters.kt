@@ -47,3 +47,11 @@ fun ConstraintLayout.bindHomeEmptyRecentImg(notifications: List<Notification>) {
     else
         this.visibility = View.GONE
 }
+
+@BindingAdapter("existedAlarm")
+fun ImageView.bindExistedAlarm(existed: Boolean) {
+    if(existed)
+        this.visibility = View.VISIBLE
+    else
+        this.visibility = View.GONE
+}

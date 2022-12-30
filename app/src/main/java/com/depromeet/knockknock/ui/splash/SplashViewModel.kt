@@ -28,10 +28,10 @@ class SplashViewModel @Inject constructor(
 
     fun loginCheck() {
         baseViewModelScope.launch {
-            val isLogined = sSharedPreferences.getString("access_token", null)
+            val accessToken = sSharedPreferences.getString("access_token", null)
             val refreshToken = sSharedPreferences.getString("refresh_token", null)
-            if(isLogined != null && refreshToken != null) {
-                mainRepository.postRefreshToken(refreshToken)
+            accessToken?.let {
+                mainRepository.postRefreshToken(refreshToken!!)
                     .onSuccess {
                         editor.putString("access_token", it.access_token)
                         editor.putString("refresh_token", it.refresh_token)
@@ -44,7 +44,7 @@ class SplashViewModel @Inject constructor(
                         _navigationHandler.emit(SplashNavigationAction.NavigateToFirstLogin) }
             }
 
-            if(isLogined == null) {
+            if(accessToken == null) {
                 _navigationHandler.emit(SplashNavigationAction.NavigateToFirstLogin)
             }
         }

@@ -388,4 +388,12 @@ class MainRepositoryImpl @Inject constructor(
     override suspend fun getBackgrounds(): NetworkResult<BackgroundList> {
         return handleApi { mainAPIService.getBackgrounds().data }
     }
+
+    override suspend fun getAlarms(): NetworkResult<AlarmList> {
+        return handleApi { mainAPIService.getAlarms().data }
+    }
+
+    override suspend fun getAlarmsCount(): NetworkResult<AlarmCount> {
+        return handleApi { mainAPIService.getAlarmsCount().data }
+    }
 }

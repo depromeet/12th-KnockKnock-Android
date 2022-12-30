@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/onboardFragment">
+    app:startDestination="@id/splashFragment">
 
     <action
         android:id="@+id/action_main_fragment"
@@ -27,7 +27,9 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.depromeet.knockknock.ui.splash.SplashFragment"
-        android:label="SplashFragment" >
+        android:label="SplashFragment"
+        app:popUpTo="@id/navigation_graph"
+        app:popUpToInclusive="true" >
         <action
             android:id="@+id/action_splashFragment_to_onboardFragment"
             app:destination="@id/onboardFragment"
@@ -184,7 +186,9 @@
     <fragment
         android:id="@+id/onboardFragment"
         android:name="com.depromeet.knockknock.ui.onboard.OnboardFragment"
-        android:label="OnboardFragment" >
+        android:label="OnboardFragment"
+        app:popUpTo="@id/navigation_graph"
+        app:popUpToInclusive="true" >
         <action
             android:id="@+id/action_onboardFragment_to_registerFragment"
             app:destination="@id/registerFragment"

@@ -284,4 +284,12 @@ interface MainAPIService {
     @GET("/api/v1/asset/backgrounds")
     suspend fun getBackgrounds(): BaseResponse<BackgroundList>
 
+    // 알림 가져오기
+    @GET("/api/v1/alarms")
+    suspend fun getAlarms(): BaseResponse<AlarmList>
+
+    // 알림 있는지 확인
+    @GET("/api/v1/alarms/count")
+    suspend fun getAlarmsCount(): BaseResponse<AlarmCount>
+
 }
