@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="transparent">#00000000</color>
+    <color name="opacity_black">#99000000</color>
 
 
     <color name="gray10">#212121</color>

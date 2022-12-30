@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.depromeet.domain.model.Profile
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
@@ -19,6 +20,7 @@ import com.depromeet.knockknock.ui.editprofile.bottom.EditProfileImageBottomShee
 import com.depromeet.knockknock.ui.mypage.MypageFragmentDirections
 import com.depromeet.knockknock.util.KnockKnockIntent
 import com.depromeet.knockknock.util.customOnFocusChangeListener
+import com.depromeet.knockknock.util.defaultimage.DefaultImageDialog
 import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.uriToFile
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,15 +41,12 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
     override val viewModel : SetProfileViewModel by viewModels()
     private val navController by lazy { findNavController() }
 
-    private lateinit var requestUpdateProfile : ActivityResultLauncher<Intent>
-
     override fun initStartView() {
         binding.apply {
             this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
-        initRegisterForActivityResult()
         initEditText()
         countEditTextMessage()
     }
@@ -56,7 +55,7 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is SetProfileNavigationAction.NavigateToSetProfileImage -> setProfileImageBottomSheet()
+                    is SetProfileNavigationAction.NavigateToSetProfileImage -> { setProfileImageBottomSheet(profile = it.profile) }
                     is SetProfileNavigationAction.NavigateToHome -> navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
                     is SetProfileNavigationAction.NavigateToEmpty -> toastMessage("닉네임이 비어 있습니다!")
                 }
@@ -67,46 +66,15 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
     override fun initAfterBinding() {
     }
 
-    private fun initRegisterForActivityResult() {
-        requestUpdateProfile = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-            val isUpdateProfile = activityResult.data?.getBooleanExtra(KnockKnockIntent.RESULT_KEY_UPDATE_PROFILE, false) ?: false
-            if (isUpdateProfile) {
-                val intent = activityResult.data
-                if (intent != null) {
-                    val uri = intent.data
-                    val file = uriToFile(uri!!,requireContext())
-                    val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-
-                    val requestBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
-                    val nicknamePart: MultipartBody.Part = MultipartBody.Part.createFormData("description", viewModel.inputContent.value)
-
-
-                }
+    private fun setProfileImageBottomSheet(profile: Profile) {
+        val dialog = DefaultImageDialog(isCheckedImage = profile) { profile ->
+            lifecycleScope.launchWhenStarted {
+                viewModel.profileImg.value = profile
             }
         }
-    }
-
-    private fun setProfileImageBottomSheet() {
-        val dialog = EditProfileImageBottomSheet {
-            if(it) getGalleryImage()
-            else getCaptureImage()
+        if(!dialog.isVisible) {
+            dialog.show(requireActivity().supportFragmentManager, TAG)
         }
-        dialog.show(childFragmentManager, TAG)
-    }
-
-    private fun getGalleryImage() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        requestUpdateProfile.launch(intent)
-    }
-
-    private fun getCaptureImage() {
-        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE)
-        } else {
-            Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        }
-        requestUpdateProfile.launch(intent)
     }
 
     @SuppressLint("ClickableViewAccessibility")

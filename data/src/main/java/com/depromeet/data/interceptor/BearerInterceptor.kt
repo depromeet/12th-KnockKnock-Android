@@ -1,8 +1,22 @@
 package com.depromeet.data.interceptor
 
+import android.util.Log
+import com.depromeet.data.DataApplication.Companion.editor
+import com.depromeet.data.DataApplication.Companion.sSharedPreferences
+import com.depromeet.data.api.ApiClient.BASE_URL
+import com.depromeet.data.api.MainAPIService
+import com.depromeet.data.api.handleApi
 import com.depromeet.data.model.error.InvalidAccessTokenException
+import com.depromeet.data.model.request.PostRefreshTokenRequest
+import com.depromeet.data.model.response.BaseResponse
+import com.depromeet.domain.onSuccess
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.Interceptor
 import okhttp3.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 /*
@@ -19,34 +33,26 @@ class BearerInterceptor : Interceptor {
         var accessToken = ""
         val request = chain.request()
         val response = chain.proceed(request)
-        if(response.code == 400) {
-            val errorResponse = response.body?.string()?.let { createErrorResponse(it) }
-            val errorException = createErrorException(
-                url = request.url.toString(),
-                httpCode = response.code,
-                errorResponse = errorResponse
-            )
-            if(errorException is InvalidAccessTokenException) {
-//                runBlocking {
-//                    //토큰 갱신 api 호출
-//                    DataApplication.dataStorePreferences.getRefreshToken()?.let {
-//                        val request = PostRefreshTokenRequest(it)
-//
-//                        val result = handleApi {
-//                            Retrofit.Builder()
-//                                .baseUrl(BASE_URL)
-//                                .addConverterFactory(GsonConverterFactory.create())
-//                                .build()
-//                                .create(MainAPIService::class.java).postRefreshToken(request)
-//                        }
-//
-//                        result.onSuccess { response ->
-//                            response.accessToken.let { token ->
-//                                DataApplication.dataStorePreferences.setOauthToken(token, response.refreshToken)
-//                                accessToken = token } }
-//                            .onError { accessToken = "" }
-//                    }
-//                }
+        if(!response.isSuccessful && response.code == 401) {
+            val postRefreshTokenRequest = sSharedPreferences.getString("refresh_token", "")
+                ?.let { PostRefreshTokenRequest(it) }
+
+            postRefreshTokenRequest?.let {
+                CoroutineScope(Dispatchers.Default).launch {
+                    val result = handleApi {
+                        Retrofit.Builder()
+                            .baseUrl(BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build()
+                            .create(MainAPIService::class.java).postRefreshToken(it)
+                    }
+                    result.onSuccess { response ->
+                        editor.putString("access_token", response.data.access_token)
+                        editor.putString("refresh_token", response.data.refresh_token)
+                        editor.commit()
+                       accessToken = response.data.access_token
+                    }
+                }
             }
             val newRequest = chain.request().newBuilder().addHeader("Bearer ", accessToken)
                 .build()
