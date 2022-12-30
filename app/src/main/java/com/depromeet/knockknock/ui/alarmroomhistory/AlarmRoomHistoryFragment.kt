@@ -7,12 +7,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
+import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
+import com.depromeet.knockknock.base.DefaultRedAlertDialog
+import com.depromeet.knockknock.databinding.DialogRedDefaultAlertBinding
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomHistoryBinding
 import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateFragmentDirections
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmInviteRoomAdapter
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmRoomHistoryBundleAdapter
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmCopyRoom
+import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmReport
+import com.depromeet.knockknock.ui.bookmark.bottom.BottomPeriodFilter
 import com.depromeet.knockknock.ui.bookmark.bottom.BottomRoomFilter
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.home.bottom.AlarmMoreType
@@ -109,13 +114,50 @@ class AlarmRoomHistoryFragment :
     private fun initAlarmMoreBottomSheet(roomId: Int, message: String) {
         val dialog = com.depromeet.knockknock.ui.home.bottom.BottomAlarmMore {
             when (it) {
-                is AlarmMoreType.Copy -> {roomFilter(message)}
+                is AlarmMoreType.Copy -> roomFilter(message)
                 is AlarmMoreType.Save -> {}
-                is AlarmMoreType.Delete -> {}
-                is AlarmMoreType.Declare -> {}
-                is AlarmMoreType.Report -> {}
+                is AlarmMoreType.Delete -> alarmDeleteDialog()
+                is AlarmMoreType.Declare -> usersBlockDialog()
+                is AlarmMoreType.Report -> periodFilter()
             }
         }
+        dialog.show(childFragmentManager, TAG)
+    }
+    private fun alarmDeleteDialog() {
+        val res = AlertDialogModel(
+            title = "이 알림을 삭제할까요?",
+            description = "내 알림방에서만 볼 수 없어요",
+            positiveContents = "삭제하기",
+            negativeContents = getString(R.string.no)
+        )
+        val dialog: DefaultRedAlertDialog = DefaultRedAlertDialog(
+            alertDialogModel = res,
+            clickToPositive = {
+                toastMessage("알림 삭제")
+            },
+            clickToNegative = {
+                toastMessage("아니요")
+            }
+        )
+        dialog.show(childFragmentManager, TAG)
+    }
+
+    private fun usersBlockDialog() {
+        val res = AlertDialogModel(
+            title = "이 유저를 차단할까요?",
+            description = "앞으로 이 유저의 글을 볼 수 없어요",
+            positiveContents = "차단하기",
+            negativeContents = getString(R.string.no)
+        )
+        val dialog: DefaultRedAlertDialog = DefaultRedAlertDialog(
+            alertDialogModel = res,
+            clickToPositive = {
+                toastMessage("유저 차단")
+            },
+            clickToNegative = {
+                toastMessage("아니요")
+            }
+        )
         dialog.show(childFragmentManager, TAG)
     }
 
@@ -150,6 +192,16 @@ class AlarmRoomHistoryFragment :
             roomList = testList,
         ) { clickedRoom ->
             viewModel.onCopyRoomClicked(clickedRoom, copyMessage)
+        }
+        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
+    }
+
+    private fun periodFilter() {
+        val bottomSheet = BottomAlarmReport(
+            period = viewModel.periodClicked.value
+        ) { clickedPeriod ->
+            toastMessage("$clickedPeriod 선택함")
+//            viewModel.setPeriodFilter(clickedPeriod)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

@@ -23,6 +23,8 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     val alarmRoomHistoryBundleEvent: StateFlow<List<HistoryBundle>> = _alarmRoomHistoryBundleEvent
     private val _alarmRoomHistoryMessageEvent: MutableStateFlow<List<HistoryMessage>> = MutableStateFlow(emptyList())
     val alarmRoomHistoryMessageEvent: StateFlow<List<HistoryMessage>> = _alarmRoomHistoryMessageEvent
+    private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
+    val periodClicked: StateFlow<Int> = _periodClicked
 
     init {
         getTempList()
