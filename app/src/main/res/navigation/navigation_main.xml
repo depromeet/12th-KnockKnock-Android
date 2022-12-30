@@ -58,6 +58,14 @@
         android:id="@+id/alarmCreateFragment"
         android:name="com.depromeet.knockknock.ui.alarmcreate.AlarmCreateFragment"
         android:label="AlarmCreateFragment">
+
+        <argument
+            android:name="alarm_id"
+            app:argType="integer" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+
         <action
             android:id="@+id/action_alarmCreateFragment_to_previewFragment"
             app:destination="@id/previewFragment" />
@@ -86,7 +94,14 @@
     <fragment
         android:id="@+id/alarmRoomHistoryFragment"
         android:name="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryFragment"
-        android:label="AlarmRoomHistoryFragment" />
+        android:label="AlarmRoomHistoryFragment" >
+
+    <action
+        android:id="@+id/action_alarmRoomHistoryFragment_to_alarmCreateFragment"
+        app:destination="@id/alarmCreateFragment" />
+
+    </fragment>
+
 
     <fragment
         android:id="@+id/myPageFragment"
