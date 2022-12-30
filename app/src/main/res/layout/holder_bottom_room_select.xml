@@ -7,11 +7,11 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.bookmark.model.Room" />
+            type="com.depromeet.domain.model.GroupContent" />
 
         <variable
             name="eventListener"
-            type="com.depromeet.knockknock.ui.home.HomeActionHandler" />
+            type="com.depromeet.knockknock.ui.home.bottom.select.BottomRoomSelectActionHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
         android:paddingEnd="4dp"
-        android:onClick="@{() -> eventListener.onRoomClicked(holder.roomId)}">
+        android:onClick="@{() -> eventListener.onRoomClicked(holder.group_id)}">
 
         <ImageView
             android:id="@+id/room_img"
@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:roomImageImage="@{holder.roomImg}">
+            app:roomImageImage="@{holder.thumbnail_path}">
         </ImageView>
 
         <TextView
@@ -40,7 +40,7 @@
             app:layout_constraintStart_toEndOf="@id/room_img"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="16dp"
-            android:text="@{holder.roomName}">
+            android:text="@{holder.title}">
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
