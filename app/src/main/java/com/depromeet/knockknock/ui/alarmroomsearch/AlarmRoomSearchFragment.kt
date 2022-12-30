@@ -39,6 +39,7 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
 
     override val viewModel : AlarmRoomSearchViewModel by viewModels()
     private val navController by lazy { findNavController() }
+    private val alarmRoomAdapter by lazy {AlarmRoomSearchAdapter(viewModel)}
 
     override fun initStartView() {
         binding.apply {
@@ -47,6 +48,7 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
         }
         exception = viewModel.errorEvent
         initEditText()
+        initAdapter()
         countEditTextMessage()
     }
 
@@ -60,61 +62,16 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.roomList.collectLatest {
+                alarmRoomAdapter.submitList(it)
+            }
+        }
     }
 
     override fun initAfterBinding() {
         binding.searchEditText.requestFocus()
-        val alarmRoomAdapter = AlarmRoomSearchAdapter(viewModel)
-        binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-
-        val test1 = GroupBriefInfo(
-            category = com.depromeet.domain.model.Category(
-                content = "취업",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 1
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 1,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val test2 = GroupBriefInfo(
-            category = com.depromeet.domain.model.Category(
-                content = "취업",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 1
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 2,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val test3 = GroupBriefInfo(
-            category = com.depromeet.domain.model.Category(
-                content = "취업",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 1
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 3,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val alarmRoomList = listOf(test1, test2, test3)
-
-        alarmRoomAdapter.submitList(alarmRoomList)
 
         val popularCategoryAdapter = PopularCategoryAdapter(viewModel)
         binding.popularCategoryRecycler.adapter = popularCategoryAdapter
@@ -158,6 +115,10 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
             this.adapter = popularCategoryAdapter
             this.layoutManager = flexLayoutManager
         }
+    }
+
+    private fun initAdapter(){
+        binding.alarmRoomRecycler.adapter = alarmRoomAdapter
     }
 
 

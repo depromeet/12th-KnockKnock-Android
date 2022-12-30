@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.domain.model.GroupBriefInfo
+import com.depromeet.domain.model.GroupContent
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderAlarmRoomBinding
 import com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchActionHandler
@@ -15,7 +16,7 @@ import com.depromeet.knockknock.ui.alarmroomsearch.model.AlarmRoom
 
 class AlarmRoomSearchAdapter(
     private val eventListener: AlarmRoomSearchActionHandler
-) : ListAdapter<GroupBriefInfo, AlarmRoomSearchAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
+) : ListAdapter<GroupContent, AlarmRoomSearchAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
 
     init { setHasStableIds(true) }
 
@@ -42,17 +43,18 @@ class AlarmRoomSearchAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("UseCompatLoadingForDrawables")
-        fun bind(item: GroupBriefInfo) {
+        fun bind(item: GroupContent) {
             binding.holder = item
             binding.executePendingBindings()
         }
     }
 
-    internal object AlarmRoomListItemDiffCallback : DiffUtil.ItemCallback<GroupBriefInfo>() {
-        override fun areItemsTheSame(oldItem: GroupBriefInfo, newItem: GroupBriefInfo) =
+    internal object AlarmRoomListItemDiffCallback : DiffUtil.ItemCallback<GroupContent>() {
+        override fun areItemsTheSame(oldItem: GroupContent, newItem: GroupContent) =
             oldItem.group_id == newItem.group_id
 
-        override fun areContentsTheSame(oldItem: GroupBriefInfo, newItem: GroupBriefInfo) =
+        override fun areContentsTheSame(oldItem: GroupContent, newItem: GroupContent) =
             oldItem == newItem
+
     }
 }
