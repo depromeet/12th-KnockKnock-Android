@@ -6,7 +6,5 @@ interface HomeActionHandler {
     fun onRecentAlarmClicked(alarmId: Int)
     fun onReactionClicked(alarmId: Int)
     fun onNotificationClicked()
-    fun onSearchRoomClicked()
-    fun onCreateRoomClicked()
     fun onRecentAlarmMoreClicked(alarmId: Int)
 }

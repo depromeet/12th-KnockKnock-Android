@@ -9,7 +9,7 @@ import com.depromeet.knockknock.ui.home.adapter.HomeRecentAdapter
 import com.depromeet.knockknock.ui.home.bottom.AlarmMoreType
 import com.depromeet.knockknock.ui.home.bottom.BottomAlarmMore
 import com.depromeet.knockknock.ui.home.bottom.BottomHomeMakeRoom
-import com.depromeet.knockknock.ui.home.bottom.BottomHomeRoom
+import com.depromeet.knockknock.ui.home.bottom.select.BottomHomeSelectRoom
 import com.depromeet.knockknock.util.permission.PermissionManagerImpl
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -24,6 +24,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         get() = R.layout.fragment_home
 
     override val viewModel : HomeViewModel by viewModels()
+    private val adapter by lazy { HomeRecentAdapter(viewModel) }
 
     private val permissionManager = PermissionManagerImpl(this)
 //    private val notificationPermissionRequest: PermissionRequester = permissionManager.forPermission(Permissions.PostNotification)
@@ -61,13 +62,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.notifications.collectLatest {
+                adapter.submitList(it)
+            }
+        }
     }
 
     override fun initAfterBinding() {
     }
 
     private fun initAdapter() {
-        binding.recentRecycle.adapter = HomeRecentAdapter(viewModel)
+        binding.recentRecycle.adapter = adapter
     }
 
     private fun initMakeRoomBottomSheet() {
@@ -79,10 +86,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     }
 
     private fun initRoomBottomSheet() {
-        val dialog = BottomHomeRoom(
-            roomList = viewModel.roomList.value,
-            eventListener = viewModel
-        )
+        // -1: 알림방 탐색, -2: 알림방 생성하기, another: 방으로 이동
+        val dialog = BottomHomeSelectRoom { selectRoom ->
+            // 이동로작
+        }
         dialog.show(childFragmentManager, TAG)
     }
 
