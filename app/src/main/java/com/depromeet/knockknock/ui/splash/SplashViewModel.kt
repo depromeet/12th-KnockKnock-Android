@@ -39,11 +39,8 @@ class SplashViewModel @Inject constructor(
                         editor.putString("refresh_token", it.refresh_token)
                         editor.commit()
                         _navigationHandler.value = 2 }
-                    .onError {
-                        editor.remove("access_token")
-                        editor.remove("refresh_token")
-                        editor.commit()
-                        _navigationHandler.value = 1 }
+                    .onError { exception ->
+                        catchError(e = exception) }
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.home
 
 import com.depromeet.domain.model.Notification
+import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
@@ -39,8 +40,7 @@ class HomeViewModel @Inject constructor(
         baseViewModelScope.launch {
             mainRepository.getAlarmsCount()
                 .onSuccess {
-                    _existedAlarm.value = it.count > 0
-                }
+                    _existedAlarm.value = it.count > 0 }
         }
     }
 

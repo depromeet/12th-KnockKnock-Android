@@ -2,6 +2,8 @@ package com.depromeet.knockknock.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.depromeet.data.model.error.InvalidAccessTokenException
+import com.depromeet.knockknock.di.PresentationApplication.Companion.sSharedPreferences
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -27,20 +29,20 @@ abstract class BaseViewModel : ViewModel() {
     private val _needLoginEvent: MutableSharedFlow<Boolean> = MutableSharedFlow<Boolean>()
     val needLoginEvent: SharedFlow<Boolean> = _needLoginEvent
 
-//    fun catchError(e: Throwable?) {
-//        viewModelScope.launch(errorHandler) {
-//            e?.let {
-//                when(it) {
-//                    is HaveNotJwtTokenException -> {
-//                        DataApplication.dataStorePreferences.removeAccessToken()
-//                        _needLoginEvent.emit(true)
-//                    }
-//                    else -> _errorEvent.emit(it)
-//                }
-//            }
-//            dismissLoading()
-//        }
-//    }
+    fun catchError(e: Throwable?) {
+        viewModelScope.launch(errorHandler) {
+            e?.let {
+                when(it) {
+                    is InvalidAccessTokenException -> {
+                        sSharedPreferences
+                        _needLoginEvent.emit(true)
+                    }
+                    else -> _errorEvent.emit(it)
+                }
+            }
+            dismissLoading()
+        }
+    }
 
     fun showLoading() {
         baseViewModelScope.launch {
