@@ -10,9 +10,7 @@ import com.depromeet.knockknock.di.PresentationApplication.Companion.sSharedPref
 import com.depromeet.knockknock.ui.setprofile.SetProfileNavigationAction
 //import com.dida.android.presentation.views.nav.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,31 +21,30 @@ class SplashViewModel @Inject constructor(
 
     private val TAG = "SplashViewModel"
 
-    private val _navigationHandler: MutableSharedFlow<SplashNavigationAction> = MutableSharedFlow<SplashNavigationAction>()
-    val navigationHandler: SharedFlow<SplashNavigationAction> = _navigationHandler.asSharedFlow()
+    private val _navigationHandler: MutableStateFlow<Int> = MutableStateFlow(0)
+    val navigationHandler: StateFlow<Int> = _navigationHandler.asStateFlow()
 
-    fun loginCheck() {
+    init {
         baseViewModelScope.launch {
             val accessToken = sSharedPreferences.getString("access_token", null)
             val refreshToken = sSharedPreferences.getString("refresh_token", null)
-            accessToken?.let {
+            if(accessToken == null) {
+                _navigationHandler.value = 1
+            }
+
+            accessToken.let {
                 mainRepository.postRefreshToken(refreshToken!!)
                     .onSuccess {
                         editor.putString("access_token", it.access_token)
                         editor.putString("refresh_token", it.refresh_token)
                         editor.commit()
-                        _navigationHandler.emit(SplashNavigationAction.NavigateToAlreadyLogin) }
+                        _navigationHandler.value = 2 }
                     .onError {
                         editor.remove("access_token")
                         editor.remove("refresh_token")
                         editor.commit()
-                        _navigationHandler.emit(SplashNavigationAction.NavigateToFirstLogin) }
-            }
-
-            if(accessToken == null) {
-                _navigationHandler.emit(SplashNavigationAction.NavigateToFirstLogin)
+                        _navigationHandler.value = 1 }
             }
         }
     }
-
 }

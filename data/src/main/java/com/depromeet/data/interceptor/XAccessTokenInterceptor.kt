@@ -1,6 +1,5 @@
 package com.depromeet.data.interceptor
 
-import android.util.Log
 import com.depromeet.data.DataApplication
 import okhttp3.Interceptor
 import okhttp3.Request

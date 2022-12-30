@@ -60,7 +60,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, EditProfile
                 when(it) {
                     is EditProfileNavigationAction.NavigateToLogout -> logOutDialog()
                     is EditProfileNavigationAction.NavigateToUserDelete -> userDeleteDialog()
-                    is EditProfileNavigationAction.NavigateToSplash -> navigate(EditProfileFragmentDirections.actionOnboardFragment())
+                    is EditProfileNavigationAction.NavigateToSplash -> navigate(EditProfileFragmentDirections.actionRegisterFragment())
                     is EditProfileNavigationAction.NavigateToEditProfile -> navigate(EditProfileFragmentDirections.actionEditProfileFragmentToSaveProfileFragment())
                 }
             }
