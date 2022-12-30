@@ -94,6 +94,14 @@ class MainRepositoryImpl @Inject constructor(
         return handleApi { mainAPIService.getOpenGroups(category, page, size).data.toDomain() }
     }
 
+    override suspend fun getJoinedGroups(
+        type: String,
+        page: Int,
+        size: Int
+    ): NetworkResult<GroupList> {
+        return handleApi { mainAPIService.getJoinedGroups(type = type, page = page, size = size).data.toDomain() }
+    }
+
     override suspend fun getFilterGroups(
         type: String,
         page: Int,

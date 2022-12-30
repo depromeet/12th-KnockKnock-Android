@@ -59,6 +59,13 @@ interface  MainRepository {
         size: Int
     ): NetworkResult<GroupList>
 
+    // 참여중인 그룹 목록 전체 홀로외침 친구들 방 필터링
+    suspend fun getJoinedGroups(
+        type: String,
+        page: Int,
+        size: Int
+    ): NetworkResult<GroupList>
+
     // 방 검색하기 필터링
     suspend fun getFilterGroups(
         type: String,
