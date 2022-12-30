@@ -15,8 +15,8 @@
         app:popUpToInclusive="true" />
 
     <action
-        android:id="@+id/action_onboard_fragment"
-        app:destination="@id/onboardFragment"
+        android:id="@+id/action_register_fragment"
+        app:destination="@id/registerFragment"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_enter_anim"
@@ -27,12 +27,11 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.depromeet.knockknock.ui.splash.SplashFragment"
-        android:label="SplashFragment"
-        app:popUpTo="@id/navigation_graph"
-        app:popUpToInclusive="true" >
+        android:label="SplashFragment" >
         <action
             android:id="@+id/action_splashFragment_to_onboardFragment"
             app:destination="@id/onboardFragment"
+            app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
@@ -201,9 +200,7 @@
     <fragment
         android:id="@+id/onboardFragment"
         android:name="com.depromeet.knockknock.ui.onboard.OnboardFragment"
-        android:label="OnboardFragment"
-        app:popUpTo="@id/navigation_graph"
-        app:popUpToInclusive="true" >
+        android:label="OnboardFragment" >
         <action
             android:id="@+id/action_onboardFragment_to_registerFragment"
             app:destination="@id/registerFragment"

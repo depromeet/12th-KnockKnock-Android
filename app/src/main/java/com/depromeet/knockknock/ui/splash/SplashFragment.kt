@@ -1,12 +1,10 @@
 package com.depromeet.knockknock.ui.splash
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
-import com.depromeet.knockknock.databinding.FragmentMypageBinding
 import com.depromeet.knockknock.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -24,19 +22,19 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(R.la
 
     override fun initStartView() {
         binding.apply {
-            this.vm = viewModel
+            this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
-        viewModel.loginCheck()
     }
 
     override fun initDataBinding() {
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is SplashNavigationAction.NavigateToFirstLogin -> navigate(SplashFragmentDirections.actionSplashFragmentToOnboardFragment())
-                    is SplashNavigationAction.NavigateToAlreadyLogin -> navigate(SplashFragmentDirections.actionMainFragment())
+                    1 -> navigate(SplashFragmentDirections.actionSplashFragmentToOnboardFragment())
+                    2 -> navigate(SplashFragmentDirections.actionMainFragment())
+                    else -> Unit
                 }
             }
         }

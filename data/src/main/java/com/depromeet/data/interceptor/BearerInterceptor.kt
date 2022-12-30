@@ -33,6 +33,11 @@ class BearerInterceptor : Interceptor {
         var accessToken = ""
         val request = chain.request()
         val response = chain.proceed(request)
+        Log.d("response!!!!", sSharedPreferences.getString("access_token", "").toString())
+        Log.d("response!!!!", sSharedPreferences.getString("refresh_token", "").toString())
+        Log.d("response!!!", response.isSuccessful.toString())
+        Log.d("response!!!", response.code.toString())
+
         if(!response.isSuccessful && response.code == 401) {
             val postRefreshTokenRequest = sSharedPreferences.getString("refresh_token", "")
                 ?.let { PostRefreshTokenRequest(it) }

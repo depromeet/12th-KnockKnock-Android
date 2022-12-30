@@ -34,7 +34,7 @@ object NetworkModule {
             .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
             .addInterceptor(EmptyBodyInterceptor())
 //            .addInterceptor(ErrorResponseInterceptor()) // Error Response
-//            .addInterceptor(BearerInterceptor()) // Refresh Token
+            .addInterceptor(BearerInterceptor()) // Refresh Token
             .build()
     } else {
         OkHttpClient.Builder()
@@ -43,7 +43,7 @@ object NetworkModule {
             .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
             .addInterceptor(EmptyBodyInterceptor())
 //            .addInterceptor(ErrorResponseInterceptor()) // Error Response
-//            .addInterceptor(BearerInterceptor()) // Refresh Token
+            .addInterceptor(BearerInterceptor()) // Refresh Token
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }
@@ -52,7 +52,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(NullOnEmptyConverterFactory())
+//        .addConverterFactory(NullOnEmptyConverterFactory())
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
