@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="viewmodel"
+            name="exploreviewmodel"
             type="com.depromeet.knockknock.ui.alarmroomexplore.AlarmRoomExploreViewModel" />
     </data>
 
@@ -34,7 +34,7 @@
             android:paddingEnd="35dp"
             android:paddingBottom="12dp"
             android:focusableInTouchMode="false"
-            android:onClick="@{()->viewmodel.onAlarmRoomEditTextClicked()}"
+            android:onClick="@{()->exploreviewmodel.onAlarmRoomEditTextClicked()}"
             app:layout_constraintTop_toTopOf="parent" />
 
 

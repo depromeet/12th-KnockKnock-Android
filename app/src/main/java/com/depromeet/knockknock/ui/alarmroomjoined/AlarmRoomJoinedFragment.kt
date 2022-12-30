@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.alarmroomjoined
 
 import android.annotation.SuppressLint
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -43,7 +44,6 @@ class AlarmRoomJoinedFragment :
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
-        initEditText()
     }
 
     override fun initDataBinding() {
@@ -53,6 +53,8 @@ class AlarmRoomJoinedFragment :
                     is AlarmRoomJoinedNavigationAction.NavigateToRoom -> {
                         moveToRoom(roomId = it.roomId)
                     }
+                    is AlarmRoomJoinedNavigationAction.NavigateToMakeRoom -> {
+                        println("moving to making room")}
                 }
             }
         }
@@ -147,22 +149,24 @@ class AlarmRoomJoinedFragment :
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.currentRoomCount.collectLatest {
+                if(it>0){
+                    binding.layoutWhenNoRoom.visibility = View.GONE
+                    binding.alarmRoomRecycler.visibility = View.VISIBLE
+                }
+                else{
+                    binding.layoutWhenNoRoom.visibility = View.VISIBLE
+                    binding.alarmRoomRecycler.visibility = View.GONE
+                }
+            }
+        }
     }
 
 
     //  해당하는 방으로 이동하는 로직
     private fun moveToRoom(roomId: Int) {
-    }
-
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun initEditText() {
-        binding.searchEditText.customOnFocusChangeListener(requireContext())
-        binding.layoutMain.setOnTouchListener { _, _ ->
-            requireActivity().hideKeyboard()
-            binding.searchEditText.clearFocus()
-            false
-        }
     }
 
 }

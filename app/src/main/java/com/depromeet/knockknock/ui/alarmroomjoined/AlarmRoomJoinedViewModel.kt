@@ -28,13 +28,10 @@ class AlarmRoomJoinedViewModel @Inject constructor(
 
     private val _roomAloneClicked : MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val roomAloneClicked : StateFlow<Boolean> = _roomAloneClicked.asStateFlow()
-    
-    
-    override fun onAlarmRoomEditTextClicked() {
-//        baseViewModelScope.launch {
-//            _navigationHandler.emit(AlarmRoomJoinedNavigationAction.NavigateToAlarmRoomSearch)
-//        }
-    }
+
+    private val _currentRoomCount : MutableStateFlow<Int> = MutableStateFlow<Int>(0)
+    val currentRoomCount : StateFlow<Int> = _currentRoomCount.asStateFlow()
+
 
     override fun onRoomTypeAllClicked() {
         baseViewModelScope.launch { 
@@ -64,6 +61,12 @@ class AlarmRoomJoinedViewModel @Inject constructor(
     override fun onRoomClicked(roomId: Int) {
         baseViewModelScope.launch {
             _navigationHandler.emit(AlarmRoomJoinedNavigationAction.NavigateToRoom(roomId = roomId))
+        }
+    }
+
+    override fun onMakeRoomClicked(){
+        baseViewModelScope.launch {
+            _navigationHandler.emit(AlarmRoomJoinedNavigationAction.NavigateToMakeRoom)
         }
     }
 

@@ -14,6 +14,7 @@ import com.depromeet.knockknock.ui.alarmroomexplore.adapter.CategoryAdapter
 import com.depromeet.knockknock.ui.alarmroomexplore.adapter.PopularRoomAdapter
 import com.depromeet.knockknock.ui.alarmroomjoined.adapter.AlarmRoomJoinedAdapter
 import com.depromeet.knockknock.ui.alarmroomsearch.adapter.AlarmRoomAdapter
+import com.depromeet.knockknock.ui.alarmroomtab.AlarmRoomTabFragmentDirections
 import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.hideKeyboard
 import com.google.android.flexbox.AlignItems
@@ -38,7 +39,7 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
 
     override fun initStartView() {
         binding.apply {
-            this.viewmodel = viewModel
+            this.exploreviewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
@@ -50,7 +51,7 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
             viewModel.navigationHandler.collectLatest {
                 when(it) {
                     is AlarmRoomExploreNavigationAction.NavigateToRoom -> { moveToRoom(roomId = it.roomId) }
-                    is AlarmRoomExploreNavigationAction.NavigateToAlarmRoomSearch -> {navigate(AlarmRoomExploreFragmentDirections.actionAlarmRoomExploreFragmentToAlarmRoomSearchFragment())}
+                    is AlarmRoomExploreNavigationAction.NavigateToAlarmRoomSearch -> {navController.navigate(R.id.action_alarmRoomTabFragment_to_alarmRoomSearchFragment)}
                     is AlarmRoomExploreNavigationAction.NavigateToMakeRoom -> {}
                 }
             }
@@ -106,7 +107,37 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
             title = "방 제목"
         )
 
-        val alarmRoomList = listOf(test1, test2, test3)
+        val test4 = GroupBriefInfo(
+            category = Category(
+                content = "독서",
+                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                id = 4
+            ),
+            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+            group_id = 1,
+            group_type = "OPEN",
+            member_count = 10,
+            public_access = true,
+            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+            title = "방 제목"
+        )
+
+        val test5 = GroupBriefInfo(
+            category = Category(
+                content = "독서",
+                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                id = 4
+            ),
+            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+            group_id = 1,
+            group_type = "OPEN",
+            member_count = 10,
+            public_access = true,
+            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+            title = "방 제목"
+        )
+
+        val alarmRoomList = listOf(test1, test2, test3, test4, test5)
         alarmRoomAdapter.submitList(alarmRoomList)
 
 

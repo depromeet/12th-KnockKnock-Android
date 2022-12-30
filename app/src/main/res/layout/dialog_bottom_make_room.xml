@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="221dp"
+    android:orientation="vertical"
+    app:behavior_draggable="true"
+    app:behavior_hideable="true"
+    android:background="@drawable/custom_bottom_sheet"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+
+        <TextView
+            style="@style/Theme.AppCompat.TextView.Friend.More"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="똑똑 두드리기"
+            android:textSize="18dp"
+            android:textColor="#212121"
+            android:gravity="center"
+            />
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/choose_make_friend_room"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="24dp"
+            >
+
+            <ImageView
+                android:id="@+id/friend_room_emoji"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/img_default_friendroom_emoji"
+                />
+
+            <TextView
+                android:id="@+id/select_friend_room"
+                style="@style/Theme.AppCompat.TextView.Medium.Size18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:textSize="18dp"
+                android:text="내 친구랑 방 만들기"
+                app:layout_constraintStart_toEndOf="@id/friend_room_emoji"
+                app:layout_constraintTop_toTopOf="@id/friend_room_emoji"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Theme.AppCompat.TextView.Regular.Gray07.Size12"
+                android:textColor="@color/gray05"
+                android:text="친구와 서로 푸시알림을 주고 받아요"
+                app:layout_constraintTop_toBottomOf="@id/select_friend_room"
+                app:layout_constraintStart_toStartOf="@id/select_friend_room"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/choose_make_alone_room"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginTop="12dp"
+        >
+
+        <ImageView
+            android:id="@+id/alone_room_emoji"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/img_default_user_profile"
+            />
+
+        <TextView
+            android:id="@+id/select_alone_room"
+            style="@style/Theme.AppCompat.TextView.Medium.Size18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="18dp"
+            android:text="나 홀로 외침 방 만들기"
+            app:layout_constraintStart_toEndOf="@id/alone_room_emoji"
+            app:layout_constraintTop_toTopOf="@id/alone_room_emoji"
+            android:textColor="@color/black"
+            android:lineSpacingExtra="4sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Theme.AppCompat.TextView.Regular.Gray07.Size12"
+            android:textColor="@color/gray05"
+            android:text="나 혼자 사람들에게 푸시알림을 보내요"
+            app:layout_constraintTop_toBottomOf="@id/select_alone_room"
+            app:layout_constraintStart_toStartOf="@id/select_alone_room"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
