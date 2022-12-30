@@ -257,4 +257,11 @@
             android:id="@+id/action_alarmRoomExploreFragment_to_alarmRoomSearchFragment"
             app:destination="@id/alarmRoomSearchFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/alarmRoomTabFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroomtab.AlarmRoomTabFragment"
+        android:label="AlarmRoomTabFragment" />
+    <action
+        android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomSearchFragment"
+        app:destination="@id/alarmRoomSearchFragment" />
 </navigation>
