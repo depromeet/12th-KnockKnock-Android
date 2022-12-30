@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.alarmroomjoined.adapter
+package com.depromeet.knockknock.ui.alarmroomsearch.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,16 +7,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.depromeet.domain.model.Group
 import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderAlarmRoomBinding
-import com.depromeet.knockknock.ui.alarmroomjoined.AlarmRoomJoinedActionHandler
-import com.depromeet.knockknock.ui.alarmroomsearch.model.AlarmRoom
+import com.depromeet.knockknock.ui.alarmroomexplore.AlarmRoomExploreActionHandler
 
-class AlarmRoomJoinedAdapter(
-    private val eventListener: AlarmRoomJoinedActionHandler
-) : ListAdapter<GroupBriefInfo, AlarmRoomJoinedAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
+class AlarmRoomAdapter(
+    private val eventListener: AlarmRoomExploreActionHandler
+) : ListAdapter<GroupBriefInfo, AlarmRoomAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
 
     init { setHasStableIds(true) }
 

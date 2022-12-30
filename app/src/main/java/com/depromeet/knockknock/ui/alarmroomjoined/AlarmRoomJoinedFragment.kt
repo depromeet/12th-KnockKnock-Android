@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.depromeet.domain.model.Group
+import com.depromeet.domain.model.GroupBriefInfo
+import com.depromeet.domain.model.Member
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomJoinedBinding
@@ -23,14 +26,15 @@ import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
-class AlarmRoomJoinedFragment : BaseFragment<FragmentAlarmRoomJoinedBinding, AlarmRoomJoinedViewModel>(R.layout.fragment_alarm_room_joined) {
+class AlarmRoomJoinedFragment :
+    BaseFragment<FragmentAlarmRoomJoinedBinding, AlarmRoomJoinedViewModel>(R.layout.fragment_alarm_room_joined) {
 
     private val TAG = "AlarmRoomJoinedFragment"
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_alarm_room_joined
 
-    override val viewModel : AlarmRoomJoinedViewModel by viewModels()
+    override val viewModel: AlarmRoomJoinedViewModel by viewModels()
     private val navController by lazy { findNavController() }
 
     override fun initStartView() {
@@ -45,9 +49,10 @@ class AlarmRoomJoinedFragment : BaseFragment<FragmentAlarmRoomJoinedBinding, Ala
     override fun initDataBinding() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
-                when(it) {
-                    is AlarmRoomJoinedNavigationAction.NavigateToRoom -> { moveToRoom(roomId = it.roomId) }
-                    is AlarmRoomJoinedNavigationAction.NavigateToAlarmRoomSearch -> navigate(AlarmRoomJoinedFragmentDirections.actionAlarmRoomJoinedFragmentToAlarmRoomSearchFragment())
+                when (it) {
+                    is AlarmRoomJoinedNavigationAction.NavigateToRoom -> {
+                        moveToRoom(roomId = it.roomId)
+                    }
                 }
             }
         }
@@ -58,52 +63,64 @@ class AlarmRoomJoinedFragment : BaseFragment<FragmentAlarmRoomJoinedBinding, Ala
         val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel)
         binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
 
-        val test1 = AlarmRoom(
-            roomType = "OPEN",
-            roomId = 1,
-            roomName = "친구랑",
-            roomThumbnail = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            roomCategoryName = "취직",
-            roomDescription = "roomIsUnpublic을 true로 했을 떄, 실제로는 검색에서는 비공개방은 나타나지 않습니다.",
-            roomIsUnpublic = true,
-            roomMemberCount = 10
+        val test1 = GroupBriefInfo(
+            category = com.depromeet.domain.model.Category(
+                content = "취업",
+                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                id = 1
+            ),
+            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+            group_id = 1,
+            group_type = "OPEN",
+            member_count = 10,
+            public_access = true,
+            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+            title = "방 제목"
         )
 
-        val test2 = AlarmRoom(
-            roomType = "OPEN",
-            roomId = 1,
-            roomName = "친구랑",
-            roomThumbnail = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            roomCategoryName = "라이프스타일",
-            roomDescription = "이것은 취직하고 싶어하는 사람들의 방입니다.",
-            roomIsUnpublic = true,
-            roomMemberCount = 20
+        val test2 = GroupBriefInfo(
+            category = com.depromeet.domain.model.Category(
+                content = "취업",
+                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                id = 1
+            ),
+            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+            group_id = 2,
+            group_type = "OPEN",
+            member_count = 10,
+            public_access = true,
+            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+            title = "방 제목"
         )
 
-        val test3 = AlarmRoom(
-            roomType = "CLOSE",
-            roomId = 1,
-            roomName = "홀로외침방",
-            roomThumbnail = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            roomCategoryName = "취직",
-            roomDescription = "이것은 취직하고 싶어하는 사람들의 방입니다.sdfsdfsdfsdfsdfsdfdsf",
-            roomIsUnpublic = false,
-            roomMemberCount = 10
+        val test3 = GroupBriefInfo(
+            category = com.depromeet.domain.model.Category(
+                content = "취업",
+                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                id = 1
+            ),
+            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+            group_id = 3,
+            group_type = "OPEN",
+            member_count = 10,
+            public_access = true,
+            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+            title = "방 제목"
         )
 
         val alarmRoomList = listOf(test1, test2, test3)
         val friendAlarmRoomList = alarmRoomList.filter {
-            it.roomType == "OPEN"
+            it.group_type == "OPEN"
         }
         val aloneAlarmRoomList = alarmRoomList.filter {
-            it.roomType == "CLOSE"
+            it.group_type == "CLOSE"
         }
 
         alarmRoomJoinedAdapter.submitList(alarmRoomList)
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomAllClicked.collectLatest {
-                if(it) {
+                if (it) {
                     val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
                     alarmRoomJoinedAdapter.submitList(alarmRoomList)
@@ -113,7 +130,7 @@ class AlarmRoomJoinedFragment : BaseFragment<FragmentAlarmRoomJoinedBinding, Ala
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomFriendClicked.collectLatest {
-                if(it) {
+                if (it) {
                     val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
                     alarmRoomJoinedAdapter.submitList(friendAlarmRoomList)
@@ -123,7 +140,7 @@ class AlarmRoomJoinedFragment : BaseFragment<FragmentAlarmRoomJoinedBinding, Ala
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomAloneClicked.collectLatest {
-                if(it) {
+                if (it) {
                     val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
                     alarmRoomJoinedAdapter.submitList(aloneAlarmRoomList)
@@ -133,8 +150,7 @@ class AlarmRoomJoinedFragment : BaseFragment<FragmentAlarmRoomJoinedBinding, Ala
     }
 
 
-
-//  해당하는 방으로 이동하는 로직
+    //  해당하는 방으로 이동하는 로직
     private fun moveToRoom(roomId: Int) {
     }
 

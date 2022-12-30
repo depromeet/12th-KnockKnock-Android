@@ -107,3 +107,11 @@ fun ImageView.bindGlide50(uri: String?) {
             .into(this)
     }
 }
+
+
+@BindingAdapter("imageNoRadius")
+fun ImageView.bindImageNoRadius(roomImgUri: String) {
+    Glide.with(context)
+        .load(roomImgUri)
+        .into(this)
+}

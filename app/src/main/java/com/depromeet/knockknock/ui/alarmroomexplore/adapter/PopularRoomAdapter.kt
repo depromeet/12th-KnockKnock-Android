@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.alarmroomjoined.adapter
+package com.depromeet.knockknock.ui.alarmroomexplore.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,28 +10,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.domain.model.Group
 import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.databinding.HolderAlarmRoomBinding
-import com.depromeet.knockknock.ui.alarmroomjoined.AlarmRoomJoinedActionHandler
-import com.depromeet.knockknock.ui.alarmroomsearch.model.AlarmRoom
+import com.depromeet.knockknock.databinding.HolderCategoryBinding
+import com.depromeet.knockknock.databinding.HolderPopularRoomBinding
+import com.depromeet.knockknock.ui.alarmroomexplore.AlarmRoomExploreActionHandler
+import com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchActionHandler
+import com.depromeet.knockknock.ui.category.model.Category
 
-class AlarmRoomJoinedAdapter(
-    private val eventListener: AlarmRoomJoinedActionHandler
-) : ListAdapter<GroupBriefInfo, AlarmRoomJoinedAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
+
+class PopularRoomAdapter(
+    private val eventListener: AlarmRoomExploreActionHandler
+) : ListAdapter<GroupBriefInfo, PopularRoomAdapter.ViewHolder>(RoomListItemDiffCallback){
 
     init { setHasStableIds(true) }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewDataBinding: HolderAlarmRoomBinding = DataBindingUtil.inflate(
+        val viewDataBinding: HolderPopularRoomBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.holder_alarm_room,
+            R.layout.holder_popular_room,
             parent,
             false
         )
-        viewDataBinding.layoutMain.setOnClickListener {
-            eventListener.onRoomClicked(viewDataBinding.holder!!.group_id)
-            this.notifyDataSetChanged()
-        }
         return ViewHolder(viewDataBinding)
     }
 
@@ -39,7 +38,7 @@ class AlarmRoomJoinedAdapter(
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: HolderAlarmRoomBinding) :
+    class ViewHolder(private val binding: HolderPopularRoomBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("UseCompatLoadingForDrawables")
@@ -49,7 +48,7 @@ class AlarmRoomJoinedAdapter(
         }
     }
 
-    internal object AlarmRoomListItemDiffCallback : DiffUtil.ItemCallback<GroupBriefInfo>() {
+    internal object RoomListItemDiffCallback : DiffUtil.ItemCallback<GroupBriefInfo>() {
         override fun areItemsTheSame(oldItem: GroupBriefInfo, newItem: GroupBriefInfo) =
             oldItem.group_id == newItem.group_id
 

@@ -7,15 +7,17 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.category.model.CategoryWithEmoji" />
+            type="com.depromeet.domain.model.Category" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_main"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/custom_backgroundwhite_radius80"
             android:id="@+id/category_emoji_frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,7 +36,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:userProfile="@{holder.categoryEmoji}" />
+                app:imageNoRadius="@{holder.emoji}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -42,7 +44,7 @@
             style="@style/Theme.AppCompat.TextView.Regular.Black.Size14"
             android:layout_width="match_parent"
             android:layout_height="16dp"
-            android:text="@{holder.categoryName}"
+            android:text="@{holder.content}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/category_emoji_frame">
