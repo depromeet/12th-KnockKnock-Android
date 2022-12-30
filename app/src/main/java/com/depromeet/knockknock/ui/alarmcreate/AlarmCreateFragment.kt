@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
@@ -23,6 +24,7 @@ import com.depromeet.knockknock.ui.alarmcreate.adapter.RecommendationAdapter
 import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomAlarmReservationPicker
 import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomAlarmSend
 import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomImageAdd
+import com.depromeet.knockknock.ui.preview.PreviewFragmentArgs
 import com.depromeet.knockknock.util.KnockKnockIntent
 import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.showKeyboard
@@ -52,6 +54,8 @@ class AlarmCreateFragment :
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
+        val args: AlarmCreateFragmentArgs by navArgs()
+        viewModel.editTextMessageEvent.value = args.message
 
         initEditText()
         initRegisterForActivityResult()
@@ -119,7 +123,7 @@ class AlarmCreateFragment :
                      * 푸쉬알림을 발송했습니다!
                      * fcm API!!
                      * */
-//                    viewModel.onAlarmPush()
+//                    viewModel.onAlarmPushClicked()
                 }
             }
         })
@@ -133,7 +137,7 @@ class AlarmCreateFragment :
              * fcm API!!
              * */
             Log.d("ttt", it.toString())
-//            viewModel.onAlarmPush()
+//            viewModel.onReservationAlarmPushClicked(it.toString())
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

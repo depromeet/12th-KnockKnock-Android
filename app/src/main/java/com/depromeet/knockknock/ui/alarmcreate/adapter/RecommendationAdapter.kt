@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.depromeet.domain.model.RecommendMessage
 import com.depromeet.knockknock.databinding.ItemRecyclerRecommendationMessageBinding
 import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateActionHandler
-import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
 
 class RecommendationAdapter(
     private val eventListener: AlarmCreateActionHandler,
-) : ListAdapter<RecommendationMessage, RecommendationViewHolder>(RecommendationItemDiffCallback){
+) : ListAdapter<RecommendMessage, RecommendationViewHolder>(RecommendationItemDiffCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendationViewHolder {
         return RecommendationViewHolder(
@@ -26,11 +26,11 @@ class RecommendationAdapter(
         }
     }
 
-    internal object RecommendationItemDiffCallback : DiffUtil.ItemCallback<RecommendationMessage>() {
-        override fun areItemsTheSame(oldItem: RecommendationMessage, newItem: RecommendationMessage) =
+    internal object RecommendationItemDiffCallback : DiffUtil.ItemCallback<RecommendMessage>() {
+        override fun areItemsTheSame(oldItem: RecommendMessage, newItem: RecommendMessage) =
             oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: RecommendationMessage, newItem: RecommendationMessage) =
+        override fun areContentsTheSame(oldItem: RecommendMessage, newItem: RecommendMessage) =
             oldItem.equals(newItem)
     }
 }

@@ -8,5 +8,5 @@ interface AlarmRoomHistoryActionHandler {
     fun onNotificationClicked()
     fun onSearchRoomClicked()
     fun onCreateRoomClicked()
-    fun onRecentAlarmMoreClicked(alarmId: Int)
+    fun onRecentAlarmMoreClicked(alarmId: Int, message: String)
 }

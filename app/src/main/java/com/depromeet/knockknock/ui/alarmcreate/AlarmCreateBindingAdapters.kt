@@ -15,9 +15,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.domain.model.RecommendMessageList
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.ui.alarmcreate.adapter.RecommendationAdapter
-import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
 
 @BindingAdapter("addImageCardViewVisible")
 fun CardView.bindAddImageCardViewVisible(uri: String) {
@@ -54,10 +54,10 @@ fun TextView.bindEditTextVisible(textLength: Int) {
 }
 
 @BindingAdapter("recommendationAdapter")
-fun RecyclerView.bindTodo(itemList: List<RecommendationMessage>) {
+fun RecyclerView.bindRecommendationAdapter(itemList: RecommendMessageList) {
     val boundAdapter = this.adapter
     if (boundAdapter is RecommendationAdapter) {
-        boundAdapter.submitList(itemList)
+        boundAdapter.submitList(itemList.recommend_message)
     }
 }
 

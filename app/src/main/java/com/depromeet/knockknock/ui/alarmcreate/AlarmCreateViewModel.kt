@@ -1,19 +1,19 @@
 package com.depromeet.knockknock.ui.alarmcreate
 
-import android.net.Uri
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.util.Log
+import com.depromeet.domain.model.RecommendMessageList
+import com.depromeet.domain.onError
+import com.depromeet.domain.onSuccess
+import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.alarmcreate.model.RecommendationMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
 class AlarmCreateViewModel @Inject constructor(
+    private val mainRepository: MainRepository
 ) : BaseViewModel(), AlarmCreateActionHandler {
 
     private val TAG = "AlarmCreateViewModel"
@@ -25,8 +25,9 @@ class AlarmCreateViewModel @Inject constructor(
     var editTextMessageEvent = MutableStateFlow<String>("")
     var editTextMessageCountEvent = MutableStateFlow<Int>(0)
     val messageImgUri: MutableStateFlow<String> = MutableStateFlow<String>("")
-    private val _recommendationMessageEvent: MutableStateFlow<List<RecommendationMessage>> = MutableStateFlow(emptyList())
-    val recommendationMessageEvent: StateFlow<List<RecommendationMessage>> = _recommendationMessageEvent
+    private val _recommendationMessageEvent: MutableStateFlow<RecommendMessageList> =
+        MutableStateFlow(RecommendMessageList(emptyList()))
+    val recommendationMessageEvent: StateFlow<RecommendMessageList> = _recommendationMessageEvent
 
     init {
         baseViewModelScope.launch {
@@ -38,20 +39,17 @@ class AlarmCreateViewModel @Inject constructor(
         baseViewModelScope.launch {
             editTextTitleEvent.emit("주호민")
         }
-
-        getTempList()
+        getRecommendMessage()
     }
 
-    private fun getTempList() {
-        val test1 = RecommendationMessage("\uD83D\uDCAA\uD83D\uDCAA\uD83D\uDCAA")
-        val test2 = RecommendationMessage("탈락?오히려좋아")
-        val test3 = RecommendationMessage("꿈은 없고요 그냥 놀고 싶습니다.")
-        val test4 = RecommendationMessage("서류 접수 하셨나요")
-        val test5 = RecommendationMessage(String(Character.toChars(0x1F971)))
-        val testList = listOf(test1, test2, test3, test4, test5)
-
+    private fun getRecommendMessage() {
         baseViewModelScope.launch {
-            _recommendationMessageEvent.value = testList
+            mainRepository.getRecommendMessage().onSuccess {
+                Log.d("ttt success", it.toString())
+                _recommendationMessageEvent.value = it
+            }.onError {
+                Log.d("ttt error", it.toString())
+            }
         }
     }
 
@@ -75,7 +73,11 @@ class AlarmCreateViewModel @Inject constructor(
 
     override fun onRecommendationMessageClicked(message: String) {
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToRecommendationMessageText(message))
+            _navigationEvent.emit(
+                AlarmCreateNavigationAction.NavigateToRecommendationMessageText(
+                    message
+                )
+            )
         }
     }
 
@@ -87,7 +89,32 @@ class AlarmCreateViewModel @Inject constructor(
 
     override fun onAlarmPushClicked() {
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
+            if (editTextTitleEvent.value == "" && editTextMessageEvent.value == "" && messageImgUri.value == "") {
+                mainRepository.postNotifications(
+                    group_id = 0,
+                    title = editTextTitleEvent.value,
+                    content = editTextMessageEvent.value,
+                    image_url = messageImgUri.value
+                ).onSuccess {
+                    _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
+                }.onError {}
+            }
+        }
+    }
+
+    override fun onReservationAlarmPushClicked(sendAt: String) {
+        if (editTextTitleEvent.value == "" && editTextMessageEvent.value == "" && messageImgUri.value == "") {
+            baseViewModelScope.launch {
+                mainRepository.postNotificationReservation(
+                    group_id = 0,
+                    title = editTextTitleEvent.value,
+                    content = editTextMessageEvent.value,
+                    image_url = messageImgUri.value,
+                    send_at = sendAt,
+                ).onSuccess {
+                    _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
+                }.onError {}
+            }
         }
     }
 
@@ -97,7 +124,7 @@ class AlarmCreateViewModel @Inject constructor(
         }
     }
 
-    override fun onPreviewClicked(title: String, message: String, uri : String) {
+    override fun onPreviewClicked(title: String, message: String, uri: String) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmCreateNavigationAction.NavigateToPreview(title, message, uri)

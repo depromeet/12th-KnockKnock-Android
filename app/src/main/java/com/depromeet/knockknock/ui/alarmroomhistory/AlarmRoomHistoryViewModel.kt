@@ -88,13 +88,6 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-//    val notificationId: Int,
-//    val roomId: Int,
-//    val userId: Int,
-//    val userName: String,
-//    val userImg: String,
-//    val contents: String,
-//    val dateTime: String,
     private fun getTempList3() {
         val test1 = InviteRoom(
             notificationId = 1,
@@ -146,6 +139,12 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
+    fun onCopyRoomClicked(roomId: Int, copyMessage: String){
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(roomId, copyMessage))
+        }
+    }
+
     override fun onNotificationClicked() {
         TODO("Not yet implemented")
     }
@@ -158,9 +157,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun onRecentAlarmMoreClicked(alarmId: Int) {
+    override fun onRecentAlarmMoreClicked(alarmId: Int, message: String) {
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToAlarmMore(alarmId))
+            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToAlarmMore(alarmId, message))
         }
     }
 }
