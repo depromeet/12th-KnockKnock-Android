@@ -59,7 +59,9 @@ class SetProfileViewModel @Inject constructor(
 
     override fun onProfileImageSetClicked() {
         baseViewModelScope.launch {
-            _navigationHandler.emit(SetProfileNavigationAction.NavigateToSetProfileImage)
+            profileImg.value?.let {
+                _navigationHandler.emit(SetProfileNavigationAction.NavigateToSetProfileImage(profile = it))
+            }
         }
     }
 
