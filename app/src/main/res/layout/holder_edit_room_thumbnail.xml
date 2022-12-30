@@ -7,7 +7,7 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.editroomdetails.model.Thumbnail"/>
+            type="com.depromeet.domain.model.Thumbnail"/>
 
         <variable
             name="eventListener"
@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:roomThumbnailImage="@{holder.thumbnailSrc}">
+            app:roomThumbnailImage="@{holder.url}">
         </ImageView>
 
         <ImageView
