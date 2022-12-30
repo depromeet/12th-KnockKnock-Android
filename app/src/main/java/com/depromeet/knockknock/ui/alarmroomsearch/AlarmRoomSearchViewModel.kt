@@ -109,7 +109,6 @@ class AlarmRoomSearchViewModel @Inject constructor(
                 if(it.isNotEmpty()) {
                     mainRepository.getOpenGroups(1,0,10)
                         .onSuccess { response ->
-                            _roomList.emit(response.groupContent)
                             _roomList.emit(response.groupContent.filter { room -> room.title.contains(it) }) }
                 } else {
                     mainRepository.getOpenGroups(1,0,10)
