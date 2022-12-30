@@ -73,7 +73,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/user_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_more_black"
-                android:onClick="@{() -> eventListener.onRecentAlarmMoreClicked(model.alarmId)}">
+                android:onClick="@{() -> eventListener.onRecentAlarmMoreClicked(model.alarmId, model.contents)}">
 
             </ImageView>
 
