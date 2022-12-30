@@ -21,6 +21,7 @@ import com.depromeet.knockknock.ui.bookmark.bottom.BottomPeriodFilter
 import com.depromeet.knockknock.ui.bookmark.bottom.BottomRoomFilter
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.home.bottom.AlarmMoreType
+import com.depromeet.knockknock.ui.home.bottom.BottomAlarmMore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -112,7 +113,7 @@ class AlarmRoomHistoryFragment :
     }
 
     private fun initAlarmMoreBottomSheet(roomId: Int, message: String) {
-        val dialog = com.depromeet.knockknock.ui.home.bottom.BottomAlarmMore {
+        val dialog : BottomAlarmMore = BottomAlarmMore {
             when (it) {
                 is AlarmMoreType.Copy -> roomFilter(message)
                 is AlarmMoreType.Save -> {}
@@ -191,7 +192,7 @@ class AlarmRoomHistoryFragment :
         val bottomSheet = BottomAlarmCopyRoom(
             roomList = testList,
         ) { clickedRoom ->
-            viewModel.onCopyRoomClicked(clickedRoom, copyMessage)
+            viewModel.onAlarmCreateClicked(clickedRoom, copyMessage)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

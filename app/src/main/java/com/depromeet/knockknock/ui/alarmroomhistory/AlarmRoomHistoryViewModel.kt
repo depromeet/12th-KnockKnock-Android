@@ -25,6 +25,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     val alarmRoomHistoryMessageEvent: StateFlow<List<HistoryMessage>> = _alarmRoomHistoryMessageEvent
     private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val periodClicked: StateFlow<Int> = _periodClicked
+    val emptyMessage: String = ""
 
     init {
         getTempList()
@@ -141,7 +142,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onCopyRoomClicked(roomId: Int, copyMessage: String){
+    fun onAlarmCreateClicked(roomId: Int, copyMessage: String){
         baseViewModelScope.launch {
             _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(roomId, copyMessage))
         }
