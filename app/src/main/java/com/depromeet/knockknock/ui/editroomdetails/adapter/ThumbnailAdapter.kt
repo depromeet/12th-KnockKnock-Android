@@ -9,10 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.domain.model.Thumbnail
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderEditRoomThumbnailBinding
 import com.depromeet.knockknock.ui.editroomdetails.EditRoomDetailsActionHandler
-import com.depromeet.knockknock.ui.editroomdetails.model.Thumbnail
 
 var ThumbnailbeforeClicked = 0
 
@@ -31,8 +31,8 @@ class ThumbnailAdapter(
             false
         )
         viewDataBinding.layoutMain.setOnClickListener {
-            ThumbnailbeforeClicked = viewDataBinding.holder!!.thumbnailId
-            eventListener.onThumbnailClicked(viewDataBinding.holder!!.thumbnailId)
+            ThumbnailbeforeClicked = viewDataBinding.holder!!.id
+            eventListener.onThumbnailClicked(viewDataBinding.holder!!.id)
             this.notifyDataSetChanged()
         }
         return ViewHolder(viewDataBinding)
@@ -49,7 +49,7 @@ class ThumbnailAdapter(
         fun bind(item: Thumbnail) {
             binding.holder = item
 
-            if(ThumbnailbeforeClicked == binding.holder!!.thumbnailId) {
+            if(ThumbnailbeforeClicked == binding.holder!!.id) {
                 binding.layoutMain.background =
                     binding.root.context.getDrawable(R.drawable.custom_transparents_radius04_line_yellow_thin)
                 binding.roomImg.setColorFilter(Color.parseColor("#48303030"))
@@ -68,7 +68,7 @@ class ThumbnailAdapter(
 
     internal object ThumbnailListItemDiffCallback : DiffUtil.ItemCallback<Thumbnail>() {
         override fun areItemsTheSame(oldItem: Thumbnail, newItem: Thumbnail) =
-            oldItem.thumbnailId == newItem.thumbnailId
+            oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Thumbnail, newItem: Thumbnail) =
             oldItem == newItem
