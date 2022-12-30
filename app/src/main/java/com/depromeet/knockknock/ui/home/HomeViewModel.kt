@@ -81,18 +81,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    override fun onSearchRoomClicked() {
-        baseViewModelScope.launch {
-            _navigationHandler.emit(HomeNavigationAction.NavigateToSearchRoom)
-        }
-    }
-
-    override fun onCreateRoomClicked() {
-        baseViewModelScope.launch {
-            _navigationHandler.emit(HomeNavigationAction.NavigateToCreateRoom)
-        }
-    }
-
     override fun onRecentAlarmMoreClicked(alarmId: Int) {
         baseViewModelScope.launch {
             _navigationHandler.emit(HomeNavigationAction.NavigateToRecentAlarmMore(alarmId = alarmId))

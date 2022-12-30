@@ -54,8 +54,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                     is HomeNavigationAction.NavigateToRoom -> {}
                     is HomeNavigationAction.NavigateToRecentAlarm -> {}
                     is HomeNavigationAction.NavigateToAlarmReaction -> {}
-                    is HomeNavigationAction.NavigateToSearchRoom -> {}
-                    is HomeNavigationAction.NavigateToCreateRoom -> initMakeRoomBottomSheet()
                     is HomeNavigationAction.NavigateToRecentAlarmMore -> {
                         initAlarmMoreBottomSheet(roomId = it.alarmId)
                     }
@@ -77,18 +75,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         binding.recentRecycle.adapter = adapter
     }
 
-    private fun initMakeRoomBottomSheet() {
-        val dialog = BottomHomeMakeRoom(
-            roomList = viewModel.roomList.value,
-            eventListener = viewModel
-        )
-        dialog.show(childFragmentManager, TAG)
-    }
-
     private fun initRoomBottomSheet() {
         // -1: 알림방 탐색, -2: 알림방 생성하기, another: 방으로 이동
         val dialog = BottomHomeSelectRoom { selectRoom ->
             // 이동로작
+            when(selectRoom) {
+                -2 -> initCreateRoomBottomSheet()
+                -1 -> {}
+                else -> {}
+            }
+        }
+        dialog.show(childFragmentManager, TAG)
+    }
+
+    private fun initCreateRoomBottomSheet() {
+        val dialog = BottomHomeMakeRoom { isOpenRoom ->
+            // 알림방 생성관련 로직
+            if(isOpenRoom) {}
+            else {}
         }
         dialog.show(childFragmentManager, TAG)
     }

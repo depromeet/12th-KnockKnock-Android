@@ -16,8 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomHomeMakeRoom(
-    val roomList: List<Room>,
-    val eventListener: HomeActionHandler
+    val callback: (isOpenRoom: Boolean) -> Unit
 ) : BottomSheetDialogFragment() {
     private lateinit var dlg: BottomSheetDialog
 
@@ -56,37 +55,13 @@ class BottomHomeMakeRoom(
             requireView().findViewById<TextView>(R.id.tv_home_dialog_make_alone_room)
 
         makingFriendsRoom.setOnClickListener {
-            Toast.makeText(context, "친구 푸시", Toast.LENGTH_SHORT).show()
+            callback.invoke(false)
+            dismiss()
         }
 
         makingAloneRoom.setOnClickListener {
-            Toast.makeText(context, "홀로 외침방", Toast.LENGTH_SHORT).show()
+            callback.invoke(true)
+            dismiss()
         }
-
-//        val layoutEmpty = requireView().findViewById<ConstraintLayout>(R.id.layout_empty)
-//        val recycler = requireView().findViewById<RecyclerView>(R.id.room_recycler)
-//        val searchBtn = requireView().findViewById<TextView>(R.id.search_btn)
-//        val createBtn = requireView().findViewById<TextView>(R.id.create_btn)
-//
-//        val adapter = HomeRoomAdapter(eventListener)
-//        adapter.submitList(roomList)
-//        recycler.adapter = adapter
-//
-//        if(roomList.isEmpty()) {
-//            layoutEmpty.visibility = View.VISIBLE
-//            recycler.visibility = View.GONE
-//        } else {
-//            layoutEmpty.visibility = View.GONE
-//            recycler.visibility = View.VISIBLE
-//        }
-//
-//        searchBtn.setOnClickListener {
-//            eventListener.onSearchRoomClicked()
-//            dismiss()
-//        }
-//        createBtn.setOnClickListener {
-//            eventListener.onCreateRoomClicked()
-//            dismiss()
-//        }
     }
 }
