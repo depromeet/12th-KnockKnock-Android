@@ -8,7 +8,7 @@
         android:title="@string/bottom_home"/>
 
     <item
-        android:id="@+id/alarmRoomFragment"
+        android:id="@+id/alarmRoomTabFragment"
         android:enabled="true"
         android:icon="@drawable/ic_notification"
         android:title="@string/bottom_alarm_room"/>

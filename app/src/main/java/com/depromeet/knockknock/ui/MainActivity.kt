@@ -48,7 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.homeFragment -> showBottomNav()
-                R.id.alarmRoomFragment -> showBottomNav()
+                R.id.alarmRoomTabFragment -> showBottomNav()
                 R.id.myPageFragment -> showBottomNav()
                 else -> hideBottomNav()
             }
@@ -59,7 +59,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.bottomNavi.setOnItemReselectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.homeFragment -> {}
-                R.id.alarmRoomFragment -> {}
+                R.id.alarmRoomTabFragment -> {}
                 R.id.myPageFragment -> {}
             }
         }
