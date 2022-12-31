@@ -29,14 +29,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+
+
+            <TextView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:imageNoRadius="@{holder.emoji}" />
+                android:paddingTop="3dp"
+                android:paddingStart="4dp"
+                android:text="@{holder.emoji}"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

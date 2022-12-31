@@ -35,14 +35,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:imageNoRadius="@{holder.category.emoji}" />-->
+
+                <TextView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:imageNoRadius="@{holder.category.emoji}" />
+                    android:paddingTop="1dp"
+                    android:paddingStart="2dp"
+                    android:textSize="9dp"
+                    android:text="@{holder.category.emoji}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
