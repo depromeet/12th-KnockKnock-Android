@@ -3,11 +3,11 @@ package com.depromeet.knockknock.ui.category
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.depromeet.domain.model.Category
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentCategoryBinding
 import com.depromeet.knockknock.ui.category.adapter.CategoryAdapter
-import com.depromeet.knockknock.ui.category.model.Category
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -59,32 +59,39 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     private fun initAdapter() {
         val test1 = Category(
-            categoryId = 1,
-            categoryName = "\uD83D\uDCD2 스터디"
+            id = 1,
+            content = "스터디",
+            emoji = "\uD83D\uDCD2"
         )
         val test2 = Category(
-            categoryId = 2,
-            categoryName = "\uD83D\uDCD2 스터디"
+            id = 1,
+            content = "스터디",
+            emoji = "\uD83D\uDCD2"
         )
         val test3 = Category(
-            categoryId = 3,
-            categoryName = "\uD83D\uDCD2 스터디"
+            id = 1,
+            content = "스터디",
+            emoji = "\uD83D\uDCD2"
         )
         val test4 = Category(
-            categoryId = 4,
-            categoryName = "\uD83D\uDCD2 스터디"
+            id = 1,
+            content = "스터디",
+            emoji = "\uD83D\uDCD2"
         )
         val test5 = Category(
-            categoryId = 5,
-            categoryName = "\uD83D\uDCD2 스터디"
+            id = 1,
+            content = "스터디",
+            emoji = "\uD83D\uDCD2"
         )
         val test6 = Category(
-            categoryId = 6,
-            categoryName = "\uD83D\uDCD2 스터디"
+            id = 1,
+            content = "스터디",
+            emoji = "\uD83D\uDCD2"
         )
         val test7 = Category(
-            categoryId = 7,
-            categoryName = "\uD83D\uDCD2 스터디"
+            id = 1,
+            content = "스터디",
+            emoji = "\uD83D\uDCD2"
         )
         val testList = listOf(test1, test2, test3, test4, test5, test6, test7)
         categoryAdapter.submitList(testList)

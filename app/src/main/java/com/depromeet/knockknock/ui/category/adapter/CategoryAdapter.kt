@@ -7,11 +7,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.domain.model.Category
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderCategoryBinding
 import com.depromeet.knockknock.ui.category.CategoryActionHandler
-import com.depromeet.knockknock.ui.category.bindCategoryClicked
-import com.depromeet.knockknock.ui.category.model.Category
 
 var beforeClicked = 0
 
@@ -30,8 +29,8 @@ class CategoryAdapter(
             false
         )
         viewDataBinding.layoutMain.setOnClickListener {
-            beforeClicked = viewDataBinding.holder!!.categoryId
-            eventListener.onCategoryClicked(viewDataBinding.holder!!.categoryId)
+            beforeClicked = viewDataBinding.holder!!.id
+            eventListener.onCategoryClicked(viewDataBinding.holder!!.id)
             this.notifyDataSetChanged()
         }
         return ViewHolder(viewDataBinding)
@@ -48,7 +47,7 @@ class CategoryAdapter(
         fun bind(item: Category) {
             binding.holder = item
 
-            if(beforeClicked == binding.holder!!.categoryId)
+            if(beforeClicked == binding.holder!!.id)
                 binding.layoutMain.background = binding.root.context.getDrawable(R.drawable.custom_yellow_radius16_line_gray04)
             else
                 binding.layoutMain.background = binding.root.context.getDrawable(R.drawable.custom_transparents_radius16_line_gray04)
@@ -59,7 +58,7 @@ class CategoryAdapter(
 
     internal object FriendListItemDiffCallback : DiffUtil.ItemCallback<Category>() {
         override fun areItemsTheSame(oldItem: Category, newItem: Category) =
-            oldItem.categoryId == newItem.categoryId
+            oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Category, newItem: Category) =
             oldItem == newItem
