@@ -1,5 +1,10 @@
 package com.depromeet.knockknock.ui.alarmroomjoined
 
+import com.depromeet.domain.model.Friend
+import com.depromeet.domain.model.Group
+import com.depromeet.domain.model.GroupContent
+import com.depromeet.domain.onSuccess
+import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -8,6 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlarmRoomJoinedViewModel @Inject constructor(
+    private val mainRepository: MainRepository
 ) : BaseViewModel(), AlarmRoomJoinedActionHandler {
 
     private val TAG = "AlarmRoomSearchViewModel"
@@ -32,6 +38,17 @@ class AlarmRoomJoinedViewModel @Inject constructor(
     private val _currentRoomCount : MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val currentRoomCount : StateFlow<Int> = _currentRoomCount.asStateFlow()
 
+    private val _roomList: MutableStateFlow<List<GroupContent>> = MutableStateFlow(emptyList())
+    val roomList: StateFlow<List<GroupContent>> = _roomList.asStateFlow()
+
+    init{
+        baseViewModelScope.launch {
+            mainRepository.getJoinedGroups("ALL",0,10)
+                .onSuccess { response ->
+                    _roomList.emit(response.groupContent)
+                }
+        }
+    }
 
     override fun onRoomTypeAllClicked() {
         baseViewModelScope.launch { 
