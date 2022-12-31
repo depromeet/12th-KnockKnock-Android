@@ -31,11 +31,23 @@ class PopularRoomAdapter(
             parent,
             false
         )
+        viewDataBinding.layoutMain.setOnClickListener {
+            eventListener.onRoomClicked(viewDataBinding.holder!!.group_id)
+            this.notifyDataSetChanged()
+        }
         return ViewHolder(viewDataBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     class ViewHolder(private val binding: HolderPopularRoomBinding) :

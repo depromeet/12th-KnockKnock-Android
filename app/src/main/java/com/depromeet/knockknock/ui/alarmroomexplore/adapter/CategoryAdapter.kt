@@ -30,6 +30,7 @@ class CategoryAdapter(
             parent,
             false
         )
+
         viewDataBinding.layoutMain.setOnClickListener {
             beforeClicked = viewDataBinding.holder!!.id
             eventListener.onCategoryClicked(viewDataBinding.holder!!.id)
@@ -39,7 +40,15 @@ class CategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        getItem(position)?.let { holder.bind(it) }
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     class ViewHolder(private val binding: HolderCategoryRoundBinding) :
