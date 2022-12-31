@@ -22,7 +22,7 @@ class SettingRoomForUserFragment : BaseFragment<FragmentSettingRoomForUserBindin
 
     override val viewModel : SettingRoomForUserViewModel by viewModels()
     private val navController by lazy { findNavController() }
-    private val adapter by lazy { RoomMemberAdapter(viewModel) }
+    private val memberAdapter by lazy { RoomMemberAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -48,6 +48,12 @@ class SettingRoomForUserFragment : BaseFragment<FragmentSettingRoomForUserBindin
     }
 
     override fun initAfterBinding() {
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.roomMemberList.collectLatest {
+                memberAdapter.submitList(it)
+            }
+        }
     }
 
     private fun initToolbar() {
@@ -60,6 +66,6 @@ class SettingRoomForUserFragment : BaseFragment<FragmentSettingRoomForUserBindin
     }
 
     private fun initAdapter() {
-        binding.memberRecycler.adapter = adapter
+        binding.memberRecycler.adapter = memberAdapter
     }
 }
