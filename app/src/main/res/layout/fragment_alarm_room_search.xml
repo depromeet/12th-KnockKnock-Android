@@ -34,7 +34,10 @@
             android:paddingEnd="35dp"
             android:paddingBottom="12dp"
             android:text="@={viewmodel.roomInputState}"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <requestFocus />
+        </EditText>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/popular_category_frame"
@@ -59,7 +62,7 @@
                 app:layout_constraintTop_toBottomOf="@id/popular_category_title"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="27dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
                 android:overScrollMode="never"
                 tools:listitem="@layout/holder_category"
@@ -73,7 +76,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="12dp"
-            android:paddingBottom="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/popular_category_frame"
             android:onClick="@{()->viewmodel.onAlarmRoomGenerateClicked(viewmodel.roomInputState)}">
@@ -136,23 +138,25 @@
                 app:layout_constraintTop_toTopOf="@+id/room_img" />
 
 
+            <View
+                app:layout_constraintTop_toBottomOf="@id/room_img"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
+                android:background="#F6F6F6" />
+
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-        <View
-            app:layout_constraintBottom_toBottomOf="@id/make_room_layout"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#F6F6F6" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/alarm_room_recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
             android:orientation="vertical"
             android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

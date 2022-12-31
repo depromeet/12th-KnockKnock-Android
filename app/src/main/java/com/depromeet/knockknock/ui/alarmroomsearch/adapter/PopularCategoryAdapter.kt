@@ -7,13 +7,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.domain.model.Category
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderCategoryBinding
 import com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchActionHandler
-import com.depromeet.knockknock.ui.category.CategoryActionHandler
-import com.depromeet.knockknock.ui.category.bindCategoryClicked
-import com.depromeet.knockknock.ui.category.bindSaveBtnEnable
-import com.depromeet.knockknock.ui.category.model.Category
 
 
 class PopularCategoryAdapter(
@@ -51,7 +48,7 @@ class PopularCategoryAdapter(
 
     internal object FriendListItemDiffCallback : DiffUtil.ItemCallback<Category>() {
         override fun areItemsTheSame(oldItem: Category, newItem: Category) =
-            oldItem.categoryId == newItem.categoryId
+            oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Category, newItem: Category) =
             oldItem == newItem

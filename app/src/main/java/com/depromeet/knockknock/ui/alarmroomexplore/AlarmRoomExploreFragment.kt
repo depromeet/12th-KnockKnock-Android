@@ -39,6 +39,8 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
     override val viewModel : AlarmRoomExploreViewModel by viewModels()
     private val navController by lazy { findNavController() }
     private val alarmRoomAdapter by lazy { AlarmRoomAdapter(viewModel) }
+    private val categoryAdapter by lazy { CategoryAdapter(viewModel) }
+    private val popularRoomAdapter by lazy { PopularRoomAdapter(viewModel) }
 
 
     override fun initStartView() {
@@ -49,6 +51,9 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
         exception = viewModel.errorEvent
         initEditText()
         initAdapter()
+
+        binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+        alarmRoomAdapter.submitList(viewModel.roomList.value)
     }
 
     override fun initDataBinding() {
@@ -61,127 +66,45 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
                 }
             }
         }
-
         lifecycleScope.launchWhenStarted {
             viewModel.roomList.collectLatest {
                 alarmRoomAdapter.submitList(it)
             }
         }
-    }
 
-    override fun initAfterBinding() {
-        val categorySelectAdapter = CategoryAdapter(viewModel)
-        binding.categorySelectRecycler.adapter = categorySelectAdapter
-        val categoryTest1 = Category(
-            id = 1,
-            emoji = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/eyes_1f440.png",
-            content = "전체"
-        )
-
-        val categoryTest2 = Category(
-            id = 2,
-            emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            content = "취업"
-        )
-
-        val categoryTest3 = Category(
-            id = 3,
-            emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            content = "스터디"
-        )
-
-        val categoryTest4 = Category(
-            id = 4,
-            emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            content = "독서"
-        )
-
-        val categoryTest5 = Category(
-            id = 5,
-            emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            content = "5번째 카테고리"
-        )
-
-        val categoryList = listOf(categoryTest1, categoryTest2, categoryTest3, categoryTest4, categoryTest5)
-        categorySelectAdapter.submitList(categoryList)
-
-
-        val popularRoomAdapter = PopularRoomAdapter(viewModel)
-        binding.popularRoomRecycler.adapter = popularRoomAdapter
-
-        val popularRoomTest1 = GroupBriefInfo(
-            category = Category(
-                content = "취업",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 2
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 1,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val popularRoomTest2 = GroupBriefInfo(
-            category = com.depromeet.domain.model.Category(
-                content = "스터디",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 3
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 1,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-        val popularRoomTest3 = GroupBriefInfo(
-            category = Category(
-                content = "독서",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 4
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 1,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val popularRoomList = listOf(popularRoomTest1, popularRoomTest2, popularRoomTest3)
-        popularRoomAdapter.submitList(popularRoomList)
-
-        fun roomFilterByCategory(categoryId : Int) {
-            if (categoryId != 1) {
-                val filteredAlarmRoomList = viewModel.roomList.value.filter {
-                    it.category.id == categoryId
-                }
-                val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
-                binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-                alarmRoomAdapter.submitList(filteredAlarmRoomList)
-            }
-
-            else{
-                val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
-                binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-                alarmRoomAdapter.submitList(viewModel.roomList.value)
+        lifecycleScope.launchWhenStarted {
+            viewModel.categoryList.collectLatest {
+                categoryAdapter.submitList(it)
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.clickedCategoryName.collectLatest {
+        lifecycleScope.launchWhenStarted {
+            viewModel.clickedCategoryId.collectLatest {
                 roomFilterByCategory(it)
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.popularRoomList.collectLatest {
+                popularRoomAdapter.submitList(it)
+            }
+        }
+    }
+
+    override fun initAfterBinding() {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getGroups()
+        viewModel.getCategory()
+        viewModel.getFamousGroups()
     }
 
     private fun initAdapter(){
         binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+        binding.categorySelectRecycler.adapter = categoryAdapter
+        binding.popularRoomRecycler.adapter = popularRoomAdapter
     }
 
 
@@ -198,6 +121,23 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
             requireActivity().hideKeyboard()
             binding.searchEditText.clearFocus()
             false
+        }
+    }
+
+    private fun roomFilterByCategory(categoryId : Int) {
+        if (categoryId != 1) {
+            val filteredAlarmRoomList = viewModel.roomList.value.filter {
+                it.category.id == categoryId
+            }
+            val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
+            binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+            alarmRoomAdapter.submitList(filteredAlarmRoomList)
+        }
+
+        else{
+            val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
+            binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+            alarmRoomAdapter.submitList(viewModel.roomList.value)
         }
     }
 

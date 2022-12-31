@@ -25,6 +25,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
 
 
 @AndroidEntryPoint
@@ -38,6 +39,10 @@ class AlarmRoomJoinedFragment :
 
     override val viewModel: AlarmRoomJoinedViewModel by viewModels()
     private val navController by lazy { findNavController() }
+    private val roomAdapter by lazy { AlarmRoomJoinedAdapter(viewModel) }
+    private lateinit var alarmRoomList : List<GroupContent>
+    private lateinit var friendAlarmRoomList : List<GroupContent>
+    private lateinit var aloneAlarmRoomList : List<GroupContent>
 
     override fun initStartView() {
         binding.apply {
@@ -45,6 +50,7 @@ class AlarmRoomJoinedFragment :
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
+        initAdapter()
     }
 
     override fun initDataBinding() {
@@ -59,67 +65,22 @@ class AlarmRoomJoinedFragment :
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.roomList.collectLatest {
+                alarmRoomList = it
+                friendAlarmRoomList = alarmRoomList.filter {
+                    it.group_type == "OPEN"
+                }
+                aloneAlarmRoomList = alarmRoomList.filter {
+                    it.group_type == "CLOSE"
+                }
+                roomAdapter.submitList(it)
+            }
+        }
     }
 
     override fun initAfterBinding() {
-
-        val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel)
-        binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
-
-        val test1 = GroupContent(
-            category = com.depromeet.domain.model.Category(
-                content = "취업",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 1
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 1,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val test2 = GroupContent(
-            category = com.depromeet.domain.model.Category(
-                content = "취업",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 1
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 2,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val test3 = GroupContent(
-            category = com.depromeet.domain.model.Category(
-                content = "취업",
-                emoji = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                id = 1
-            ),
-            description = "취업을 위한 방 어쩌구 저쩌구 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-            group_id = 3,
-            group_type = "OPEN",
-            member_count = 10,
-            public_access = true,
-            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-            title = "방 제목"
-        )
-
-        val alarmRoomList = listOf(test1, test2, test3)
-        val friendAlarmRoomList = alarmRoomList.filter {
-            it.group_type == "OPEN"
-        }
-        val aloneAlarmRoomList = alarmRoomList.filter {
-            it.group_type == "CLOSE"
-        }
-
-        alarmRoomJoinedAdapter.submitList(alarmRoomList)
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomAllClicked.collectLatest {
@@ -163,6 +124,10 @@ class AlarmRoomJoinedFragment :
                 }
             }
         }
+    }
+
+    private fun initAdapter() {
+        binding.alarmRoomRecycler.adapter = roomAdapter
     }
 
 

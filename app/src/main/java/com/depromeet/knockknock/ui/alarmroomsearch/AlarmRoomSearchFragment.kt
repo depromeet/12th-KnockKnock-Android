@@ -1,24 +1,18 @@
 package com.depromeet.knockknock.ui.alarmroomsearch
 
 import android.annotation.SuppressLint
-import android.opengl.Visibility
+import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomSearchBinding
-import com.depromeet.knockknock.databinding.FragmentFriendListBinding
 import com.depromeet.knockknock.ui.alarmroomsearch.adapter.AlarmRoomSearchAdapter
 import com.depromeet.knockknock.ui.alarmroomsearch.adapter.PopularCategoryAdapter
-import com.depromeet.knockknock.ui.alarmroomsearch.model.AlarmRoom
-import com.depromeet.knockknock.ui.category.model.Category
-import com.depromeet.knockknock.ui.editroomdetails.model.Background
-import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
-import com.depromeet.knockknock.ui.friendlist.bottom.BottomFriendMore
-import com.depromeet.knockknock.ui.friendlist.bottom.FriendMoreType
 import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.hideKeyboard
 import com.google.android.flexbox.AlignItems
@@ -40,6 +34,7 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
     override val viewModel : AlarmRoomSearchViewModel by viewModels()
     private val navController by lazy { findNavController() }
     private val alarmRoomAdapter by lazy {AlarmRoomSearchAdapter(viewModel)}
+    private val popularCategoryAdapter by lazy { PopularCategoryAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -68,42 +63,28 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
                 alarmRoomAdapter.submitList(it)
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.popularCategoryList.collectLatest {
+                popularCategoryAdapter.submitList(it)
+            }
+        }
     }
 
     override fun initAfterBinding() {
+
+        //editText 자동 포커스 및 키보드 띄우기
         binding.searchEditText.requestFocus()
+        val imm = requireActivity().getSystemService(
+            Context.INPUT_METHOD_SERVICE
+        ) as InputMethodManager
+        imm!!.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
-        val popularCategoryAdapter = PopularCategoryAdapter(viewModel)
-        binding.popularCategoryRecycler.adapter = popularCategoryAdapter
+    }
 
+    private fun initAdapter(){
+        binding.alarmRoomRecycler.adapter = alarmRoomAdapter
 
-        val categoryTest1 = Category(
-            categoryId = 1,
-            categoryName = "\uD83D\uDCD2 스터디"
-        )
-
-        val categoryTest2 = Category(
-            categoryId = 2,
-            categoryName = "\uD83D\uDCD2 스터디"
-        )
-
-        val categoryTest3 = Category(
-            categoryId = 3,
-            categoryName = "\uD83D\uDCD2 스터디"
-        )
-
-        val categoryTest4 = Category(
-            categoryId = 4,
-            categoryName = "\uD83D\uDCD2 스터디"
-        )
-
-        val categoryTest5 = Category(
-            categoryId = 5,
-            categoryName = "\uD83D\uDCD2 스터디"
-        )
-
-        val popularCategoryList = listOf(categoryTest1, categoryTest2, categoryTest3, categoryTest4, categoryTest5)
-        popularCategoryAdapter.submitList(popularCategoryList)
 
         val flexLayoutManager = FlexboxLayoutManager(requireContext()).apply {
             this.flexDirection = FlexDirection.ROW
@@ -117,10 +98,6 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
         }
     }
 
-    private fun initAdapter(){
-        binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-    }
-
 
 
 //  해당하는 방으로 이동하는 로직
@@ -128,9 +105,6 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
 
     }
 
-    private fun hidePopularCategoty(){
-        binding.popularCategoryFrame.visibility = View.GONE
-    }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initEditText() {

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.category.model.Category" />
+            type="com.depromeet.domain.model.Category" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,9 +23,20 @@
         android:layout_marginEnd="8dp">
 
         <TextView
+            android:id="@+id/category_emoji"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@{holder.categoryName}">
+            android:text="@{holder.emoji}">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/category_emoji"
+            android:text="@{holder.content}">
+
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

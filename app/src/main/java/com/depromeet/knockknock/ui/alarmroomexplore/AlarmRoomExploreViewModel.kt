@@ -1,5 +1,7 @@
 package com.depromeet.knockknock.ui.alarmroomexplore
 
+import com.depromeet.domain.model.Category
+import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.domain.model.GroupContent
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
@@ -23,12 +25,47 @@ class AlarmRoomExploreViewModel @Inject constructor(
     val roomIsPublic : StateFlow<Boolean> = _roomIsPublic.asStateFlow()
 
     private val _clickedCategoryId : MutableStateFlow<Int> = MutableStateFlow<Int>(1)
-    val clickedCategoryName : StateFlow<Int> = _clickedCategoryId.asStateFlow()
+    val clickedCategoryId : StateFlow<Int> = _clickedCategoryId.asStateFlow()
 
     private val _roomList: MutableStateFlow<List<GroupContent>> = MutableStateFlow(emptyList())
     val roomList: StateFlow<List<GroupContent>> = _roomList.asStateFlow()
 
+    private val _categoryList: MutableStateFlow<List<Category>> = MutableStateFlow(emptyList())
+    val categoryList: StateFlow<List<Category>> = _categoryList.asStateFlow()
+
+    private val _popularRoomList: MutableStateFlow<List<GroupBriefInfo>> = MutableStateFlow(emptyList())
+    val popularRoomList: StateFlow<List<GroupBriefInfo>> = _popularRoomList.asStateFlow()
+
     init {
+        baseViewModelScope.launch {
+            mainRepository.getOpenGroups(1,0,10)
+                .onSuccess { response ->
+                    _roomList.emit(
+                        (response.groupContent)
+                    )
+                }
+        }
+
+        baseViewModelScope.launch {
+            mainRepository.getGroupCategories()
+                .onSuccess { response ->
+                    _categoryList.emit(listOf(Category(
+                        id = 1,
+                        content = "전체",
+                        emoji = "\uD83D\uDC40",
+                    )) + response.categories)
+                }
+        }
+
+        baseViewModelScope.launch {
+            mainRepository.getFamousGroups()
+                .onSuccess { response->
+                    _popularRoomList.emit(response.group_brief_infos)
+                }
+        }
+    }
+
+    fun getGroups(){
         baseViewModelScope.launch {
             mainRepository.getOpenGroups(1,0,10)
                 .onSuccess { response ->
@@ -36,6 +73,29 @@ class AlarmRoomExploreViewModel @Inject constructor(
                 }
         }
     }
+
+    fun getCategory(){
+        baseViewModelScope.launch {
+            mainRepository.getGroupCategories()
+                .onSuccess { response ->
+                    _categoryList.emit(listOf(Category(
+                        id = 1,
+                        content = "전체",
+                        emoji = "\uD83D\uDC40",
+                    )) + response.categories)
+                }
+        }
+    }
+
+    fun getFamousGroups(){
+        baseViewModelScope.launch {
+            mainRepository.getFamousGroups()
+                .onSuccess { response->
+                    _popularRoomList.emit(response.group_brief_infos)
+                }
+        }
+    }
+
 
     override fun onAlarmRoomEditTextClicked() {
         baseViewModelScope.launch {
