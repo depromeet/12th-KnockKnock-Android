@@ -65,6 +65,9 @@
         <argument
             android:name="message"
             app:argType="string" />
+        <argument
+            android:name="reservation"
+            app:argType="boolean" />
 
         <action
             android:id="@+id/action_alarmCreateFragment_to_previewFragment"

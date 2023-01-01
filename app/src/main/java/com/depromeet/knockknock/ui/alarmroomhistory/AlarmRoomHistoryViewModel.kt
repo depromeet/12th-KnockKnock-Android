@@ -26,11 +26,18 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val periodClicked: StateFlow<Int> = _periodClicked
     val emptyMessage: String = ""
+    var reservationTimeEvent = MutableStateFlow<String>("")
+    var reservationTitleEvent = MutableStateFlow<String>("")
+    var reservationMessageEvent = MutableStateFlow<String>("")
+    val reservationMessageImgUri: MutableStateFlow<String> = MutableStateFlow<String>("")
 
     init {
         getTempList()
         getTempList2()
         getTempList3()
+        reservationTimeEvent.value = "오늘 19:00 발송 예정"
+        reservationTitleEvent.value = "푸시알림 텍스트는 2줄까지만 보여주세요. 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는"
+        reservationMessageImgUri.value = ""
     }
 
     private fun getTempList() {
@@ -142,9 +149,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onAlarmCreateClicked(roomId: Int, copyMessage: String){
+    fun onAlarmCreateClicked(roomId: Int, copyMessage: String, reservation : Boolean){
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(roomId, copyMessage))
+            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(roomId, copyMessage, reservation))
         }
     }
 

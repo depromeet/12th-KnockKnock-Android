@@ -57,6 +57,8 @@ class AlarmCreateFragment :
         val args: AlarmCreateFragmentArgs by navArgs()
         viewModel.editTextMessageEvent.value = args.message
 
+        if (args.reservation) alarmReservationSend()
+
         initEditText()
         initRegisterForActivityResult()
         initToolbar()
@@ -73,9 +75,7 @@ class AlarmCreateFragment :
                     is AlarmCreateNavigationAction.NavigateToAlarmSend -> alarmSend()
                     is AlarmCreateNavigationAction.NavigateToFocusTitleText -> focusTitleText()
                     is AlarmCreateNavigationAction.NavigateToDeleteMessageText -> deleteMessageText()
-                    is AlarmCreateNavigationAction.NavigateToRecommendationMessageText -> addRecommendationMessage(
-                        it.message
-                    )
+                    is AlarmCreateNavigationAction.NavigateToRecommendationMessageText -> addRecommendationMessage(it.message)
                     is AlarmCreateNavigationAction.NavigateToPreview -> navigate(
                             AlarmCreateFragmentDirections.actionAlarmCreateFragmentToPreviewFragment(it.title, it.message, it.uri)
                         )

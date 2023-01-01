@@ -95,6 +95,10 @@ class AlarmRoomHistoryFragment :
                     ivInviteFold.animate().setDuration(200).rotation(180f)
                 }
             }
+
+            reservationDeleteBtn.setOnClickListener {
+//                viewModel.onAlarmCreateClicked(clickedRoom, copyMessage, true)
+            }
         }
     }
 
@@ -105,7 +109,7 @@ class AlarmRoomHistoryFragment :
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmMore -> initAlarmMoreBottomSheet(
                         roomId = it.roomId, message = it.message)
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate -> navigate(
-                        AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmCreateFragment(it.roomId, it.copyMessage)
+                        AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmCreateFragment(it.roomId, it.copyMessage, it.reservation)
                     )
                 }
             }
@@ -192,7 +196,7 @@ class AlarmRoomHistoryFragment :
         val bottomSheet = BottomAlarmCopyRoom(
             roomList = testList,
         ) { clickedRoom ->
-            viewModel.onAlarmCreateClicked(clickedRoom, copyMessage)
+            viewModel.onAlarmCreateClicked(clickedRoom, copyMessage, false)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
