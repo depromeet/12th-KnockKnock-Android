@@ -3,11 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingTop="20dp"
-    android:paddingBottom="20dp"
     android:background="@drawable/custom_bottom_sheet">
 
     <TextView
@@ -205,25 +204,27 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
+                android:minHeight="80dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="150dp"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/year_btn">
 
                 <LinearLayout
-                    android:id="@+id/linear_layout_edit_text"
+                    android:id="@+id/linear_layout_edit_text_report"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:minHeight="80dp"
                     android:background="@drawable/custom_backgroundgray03_radius10"
                     android:elevation="1dp"
                     android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/edit_text_message"
+                        android:id="@+id/edit_text_report"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -233,12 +234,10 @@
                         android:background="@null"
                         android:drawablePadding="8dp"
                         android:fontFamily="@font/pretendard_regular"
-                        android:hint="메시지를 작성해주세요!"
-                        android:maxHeight="110dp"
+                        android:hint="직접 작성하기"
                         android:maxLength="200"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        android:text="@={vm.editTextMessageEvent}"
                         android:textColor="#000000"
                         android:textColorHint="#757575"
                         android:textSize="16sp" />
@@ -255,9 +254,14 @@
         style="@style/Theme.AppCompat.TextView.Period.Save.Btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/custom_yellow_radius10"
         android:text="신고하기"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="16dp">
 
     </TextView>
 

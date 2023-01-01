@@ -6,11 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.depromeet.knockknock.R
+import com.depromeet.knockknock.ui.alarmcreate.messageTextOnFocusChangeListener
+import com.depromeet.knockknock.util.customOnFocusChangeListener
+import com.depromeet.knockknock.util.hideKeyboard
+import com.depromeet.knockknock.util.showKeyboard
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -38,7 +44,13 @@ class BottomAlarmReport(
     private val year by lazy {  requireView().findViewById<ConstraintLayout>(R.id.year_btn) }
     private val yearCheck by lazy {  requireView().findViewById<CheckBox>(R.id.year_check) }
 
+    private val editTextReport by lazy {  requireView().findViewById<EditText>(R.id.edit_text_report) }
+    private val linearLayoutEditTextReport by lazy {  requireView().findViewById<LinearLayout>(R.id.linear_layout_edit_text_report) }
+
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        setStyle(STYLE_NORMAL, R.style.DialogStyle)
+
         // 이 코드를 실행하지 않으면 XML에서 round 처리를 했어도 적용되지 않는다.
         dlg = ( super.onCreateDialog(savedInstanceState).apply {
             // window?.setDimAmount(0.2f) // Set dim amount here
@@ -47,7 +59,7 @@ class BottomAlarmReport(
                 bottomSheet.setBackgroundResource(android.R.color.transparent)
 
                 val behavior = BottomSheetBehavior.from(bottomSheet)
-                behavior.isDraggable = true
+                behavior.isDraggable = false
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
         } ) as BottomSheetDialog
@@ -94,22 +106,34 @@ class BottomAlarmReport(
         all.setOnClickListener {
             periodCheck(type = PeriodType.All)
             periodType = PeriodType.All
+            requireActivity().hideKeyboard()
+            editTextReport.clearFocus()
         }
         one.setOnClickListener {
             periodCheck(type = PeriodType.One)
             periodType = PeriodType.One
+            requireActivity().hideKeyboard()
+            editTextReport.clearFocus()
         }
         three.setOnClickListener {
             periodCheck(type = PeriodType.Three)
             periodType = PeriodType.Three
+            requireActivity().hideKeyboard()
+            editTextReport.clearFocus()
         }
         six.setOnClickListener {
             periodCheck(type = PeriodType.Six)
             periodType = PeriodType.Six
+            requireActivity().hideKeyboard()
+            editTextReport.clearFocus()
         }
         year.setOnClickListener {
             periodCheck(type = PeriodType.Year)
             periodType = PeriodType.Year
+            editTextReport.messageTextOnFocusChangeListener(requireContext(),linearLayoutEditTextReport )
+            requireActivity().showKeyboard(editTextReport)
+            editTextReport.requestFocus()
+
         }
     }
 
