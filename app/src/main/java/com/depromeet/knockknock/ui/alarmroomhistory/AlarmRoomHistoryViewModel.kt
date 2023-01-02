@@ -36,8 +36,8 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         getTempList2()
         getTempList3()
         reservationTimeEvent.value = "오늘 19:00 발송 예정"
-        reservationTitleEvent.value = "푸시알림 텍스트는 2줄까지만 보여주세요. 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는"
-        reservationMessageImgUri.value = ""
+        reservationTitleEvent.value = ""
+        reservationMessageEvent.value = "푸시알림 텍스트는 2줄까지만 보여주세요. 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는"
     }
 
     private fun getTempList() {
@@ -50,6 +50,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         val test7 = HistoryBundle("2022년 12월 17일")
 
         val testList = listOf(test1, test2, test3, test4, test5, test6, test7)
+
 
         baseViewModelScope.launch {
             _alarmRoomHistoryBundleEvent.value = testList

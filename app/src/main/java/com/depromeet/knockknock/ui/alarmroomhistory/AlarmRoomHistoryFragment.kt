@@ -1,6 +1,5 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.viewModels
@@ -10,15 +9,11 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.base.DefaultRedAlertDialog
-import com.depromeet.knockknock.databinding.DialogRedDefaultAlertBinding
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomHistoryBinding
-import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateFragmentDirections
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmInviteRoomAdapter
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmRoomHistoryBundleAdapter
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmCopyRoom
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmReport
-import com.depromeet.knockknock.ui.bookmark.bottom.BottomPeriodFilter
-import com.depromeet.knockknock.ui.bookmark.bottom.BottomRoomFilter
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.home.bottom.AlarmMoreType
 import com.depromeet.knockknock.ui.home.bottom.BottomAlarmMore
@@ -94,10 +89,6 @@ class AlarmRoomHistoryFragment :
                     rvInviteList.visibility = View.GONE
                     ivInviteFold.animate().setDuration(200).rotation(180f)
                 }
-            }
-
-            reservationDeleteBtn.setOnClickListener {
-//                viewModel.onAlarmCreateClicked(clickedRoom, copyMessage, true)
             }
         }
     }

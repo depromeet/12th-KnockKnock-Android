@@ -194,7 +194,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@={vm.reservationMessageEvent}"
+                android:text="@{vm.reservationMessageEvent}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -241,6 +241,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     android:text="시간 수정하기"
+                    onSingleClick="@{() -> vm.onAlarmCreateClicked(1, vm.reservationMessageEvent, true)}"
                     app:layout_constraintTop_toBottomOf="@+id/alert_description" />
             </LinearLayout>
 
