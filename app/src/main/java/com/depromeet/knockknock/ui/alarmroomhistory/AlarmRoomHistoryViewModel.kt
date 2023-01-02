@@ -1,5 +1,7 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
+import android.util.Log
+import com.depromeet.domain.model.Admission
 import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
@@ -24,9 +26,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         MutableSharedFlow<AlarmRoomHistoryNavigationAction>()
     val navigationEvent: SharedFlow<AlarmRoomHistoryNavigationAction> =
         _navigationEvent.asSharedFlow()
-    private val _alarmInviteRoomEvent: MutableStateFlow<List<InviteRoom>> =
+    private val _alarmInviteRoomEvent: MutableStateFlow<List<Admission>> =
         MutableStateFlow(emptyList())
-    val alarmInviteRoomEvent: StateFlow<List<InviteRoom>> = _alarmInviteRoomEvent
+    val alarmInviteRoomEvent: StateFlow<List<Admission>> = _alarmInviteRoomEvent
     private val _alarmRoomHistoryBundleEvent: MutableStateFlow<List<HistoryBundle>> =
         MutableStateFlow(emptyList())
     val alarmRoomHistoryBundleEvent: StateFlow<List<HistoryBundle>> = _alarmRoomHistoryBundleEvent
@@ -37,6 +39,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val periodClicked: StateFlow<Int> = _periodClicked
     val emptyMessage: String = ""
+    var groupId = MutableStateFlow<Int>(0)
     var reservationId = MutableStateFlow<Int>(0)
     var reservationTimeEvent = MutableStateFlow<String>("")
     var reservationTitleEvent = MutableStateFlow<String>("")
@@ -54,6 +57,14 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     private fun getTempList() {
+
+//        baseViewModelScope.launch {
+//            mainRepository.getNotification().onSuccess {
+//
+//            }.onError {
+//
+//            }
+//        }
         val test1 = HistoryBundle("오늘")
         val test2 = HistoryBundle("어제")
         val test3 = HistoryBundle("2022년 12월 21일")
@@ -113,36 +124,50 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     private fun getTempList3() {
-        val test1 = InviteRoom(
-            notificationId = 1,
-            roomId = 1,
-            userId = 1,
-            userName = "라이언",
-            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            dateTime = "오후 09:10",
-        )
-        val test2 = InviteRoom(
-            notificationId = 1,
-            roomId = 1,
-            userId = 1,
-            userName = "라이언",
-            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            dateTime = "오후 09:10",
-        )
-        val test3 = InviteRoom(
-            notificationId = 1,
-            roomId = 1,
-            userId = 1,
-            userName = "라이언",
-            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            dateTime = "오후 09:10",
-        )
-
-        val testList = listOf(test1, test2, test3)
 
         baseViewModelScope.launch {
-            _alarmInviteRoomEvent.value = testList
+            mainRepository.getGroupAdmissions(groupId.value).onSuccess {
+                _alarmInviteRoomEvent.value = it.admissions
+
+            }.onSuccess {
+                Log.d("ttt", "성공")
+            }.onError {
+                    Log.d("ttt", it.toString())
+                    Log.d("ttt", "실패")
+                }
         }
+
+
+//        val test1 = InviteRoom(
+//            notificationId = 1,
+//            roomId = 1,
+//            userId = 1,
+//            userName = "라이언",
+//            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+//            dateTime = "오후 09:10",
+//        )
+//        val test2 = InviteRoom(
+//            notificationId = 1,
+//            roomId = 1,
+//            userId = 1,
+//            userName = "라이언",
+//            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+//            dateTime = "오후 09:10",
+//        )
+//        val test3 = InviteRoom(
+//            notificationId = 1,
+//            roomId = 1,
+//            userId = 1,
+//            userName = "라이언",
+//            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+//            dateTime = "오후 09:10",
+//        )
+//
+//        val testList = listOf(test1, test2, test3)
+//
+//        baseViewModelScope.launch {
+//            _alarmInviteRoomEvent.value = testList
+//        }
     }
 
     override fun onCreatePushClicked() {
@@ -167,7 +192,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         baseViewModelScope.launch {
             mainRepository.deleteNotificationReservation(
                 reservation_id = reservationId,
-                ).onSuccess {
+            ).onSuccess {
 
             }.onError {}
         }

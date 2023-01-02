@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.viewModels
@@ -221,6 +222,8 @@ class AlarmRoomHistoryFragment :
         binding.rvList.adapter = alarmRoomHistoryBundleAdapter
         binding.rvInviteList.adapter = alarmInviteRoomAdapter
 
+        if (viewModel.alarmInviteRoomEvent.value.isEmpty()) binding.inviteConstraintLayout.visibility = View.GONE
+        else binding.inviteConstraintLayout.visibility = View.VISIBLE
     }
 
     private fun initToolbar() {
