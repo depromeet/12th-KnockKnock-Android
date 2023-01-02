@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/onboardFragment">
 
     <action
         android:id="@+id/action_main_fragment"
@@ -268,11 +268,72 @@
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.depromeet.knockknock.ui.category.CategoryFragment"
-        android:label="CategoryFragment"/>
+        android:label="CategoryFragment">
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+        <argument
+            android:name="group_title"
+            app:argType="string" />
+
+        <argument
+            android:name="group_description"
+            app:argType="string" />
+
+        <argument
+            android:name="group_thumbnail_path"
+            app:argType="string" />
+
+        <argument
+            android:name="group_background_path"
+            app:argType="string" />
+
+        <argument
+            android:name="group_public_access"
+            app:argType="boolean" />
+
+        <argument
+        android:name="group_category_id"
+        app:argType="integer" />
+
+
+    </fragment>
     <fragment
         android:id="@+id/editRoomDetailsFragment"
         android:name="com.depromeet.knockknock.ui.editroomdetails.EditRoomDetailsFragment"
-        android:label="EditRoomDetailsFragment" />
+        android:label="EditRoomDetailsFragment">
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+        <argument
+            android:name="group_title"
+            app:argType="string" />
+
+        <argument
+            android:name="group_description"
+            app:argType="string" />
+
+        <argument
+            android:name="group_thumbnail_path"
+            app:argType="string" />
+
+        <argument
+            android:name="group_background_path"
+            app:argType="string" />
+
+        <argument
+            android:name="group_public_access"
+            app:argType="boolean" />
+
+        <argument
+            android:name="group_category_id"
+            app:argType="integer" />
+
+    </fragment>
     <fragment
         android:id="@+id/alarmRoomSearchFragment"
         android:name="com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchFragment"
@@ -280,7 +341,13 @@
     <fragment
         android:id="@+id/inviteFriendToRoomFragment"
         android:name="com.depromeet.knockknock.ui.invitefriendtoroom.InviteFriendToRoomFragment"
-        android:label="InviteFriendToRoomFragment" />
+        android:label="InviteFriendToRoomFragment">
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+    </fragment>
     <fragment
         android:id="@+id/settingRoomForUserFragment"
         android:name="com.depromeet.knockknock.ui.settingroomforuser.SettingRoomForUserFragment"
