@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.domain.model.Member
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderExportMemberBinding
 import com.depromeet.knockknock.ui.friendlist.model.User
@@ -13,7 +14,7 @@ import com.depromeet.knockknock.ui.settingroom.SettingRoomActionHandler
 
 class ExportMemberAdapter(
     val eventListener: SettingRoomActionHandler
-) : ListAdapter<User, ExportMemberAdapter.ViewHolder>(FriendListItemDiffCallback){
+) : ListAdapter<Member, ExportMemberAdapter.ViewHolder>(FriendListItemDiffCallback){
 
     init { setHasStableIds(true) }
 
@@ -25,7 +26,7 @@ class ExportMemberAdapter(
             false
         )
         viewDataBinding.exportBtn.setOnClickListener {
-            eventListener.onExportClicked(viewDataBinding.holder!!.userIdx)
+            eventListener.onExportClicked(viewDataBinding.holder!!.user_id)
         }
         return ViewHolder(viewDataBinding)
     }
@@ -37,17 +38,17 @@ class ExportMemberAdapter(
     class ViewHolder(private val binding: HolderExportMemberBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: User) {
+        fun bind(item: Member) {
             binding.holder = item
             binding.executePendingBindings()
         }
     }
 
-    internal object FriendListItemDiffCallback : DiffUtil.ItemCallback<User>() {
-        override fun areItemsTheSame(oldItem: User, newItem: User) =
-            oldItem.userIdx == newItem.userIdx
+    internal object FriendListItemDiffCallback : DiffUtil.ItemCallback<Member>() {
+        override fun areItemsTheSame(oldItem: Member, newItem: Member) =
+            oldItem.user_id == newItem.user_id
 
-        override fun areContentsTheSame(oldItem: User, newItem: User) =
+        override fun areContentsTheSame(oldItem: Member, newItem: Member) =
             oldItem == newItem
     }
 }

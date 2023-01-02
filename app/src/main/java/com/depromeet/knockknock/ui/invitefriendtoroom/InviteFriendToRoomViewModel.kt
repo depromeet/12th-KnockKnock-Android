@@ -42,6 +42,14 @@ class InviteFriendToRoomViewModel @Inject constructor(
 
     val searchQuery: MutableStateFlow<String> = MutableStateFlow<String>("")
 
+    init{
+        baseViewModelScope.launch {
+            mainRepository.getRelations()
+                .onSuccess { response ->
+                    _friendList.emit(response.friend_list) }
+        }
+    }
+
 
     override fun onInviteFriendClicked(userIdx: Int, isChecked: Boolean) {
         if(isChecked) inviteUserList.add(userIdx)
@@ -50,7 +58,6 @@ class InviteFriendToRoomViewModel @Inject constructor(
 
         baseViewModelScope.launch {
             _saveBtnEnable.emit(_saveBtnEnable.value)
-            _clickUser.emit(userIdx)
         }
 
         baseViewModelScope.launch {

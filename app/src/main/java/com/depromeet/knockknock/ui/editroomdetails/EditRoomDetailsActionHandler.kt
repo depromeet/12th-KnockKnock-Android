@@ -2,8 +2,8 @@ package com.depromeet.knockknock.ui.editroomdetails
 
 interface EditRoomDetailsActionHandler {
     fun onRoomUnpublicToggled(checked: Boolean)
-    fun onBackgroundClicked(backgroundId: Int)
-    fun onThumbnailClicked(thumbnailId: Int)
+    fun onBackgroundClicked(backgroundUrl: String)
+    fun onThumbnailClicked(thumbnailUrl: String)
     fun onBackgroundEditClicked()
     fun onThumbnailEditClicked()
     fun onSaveClicked()

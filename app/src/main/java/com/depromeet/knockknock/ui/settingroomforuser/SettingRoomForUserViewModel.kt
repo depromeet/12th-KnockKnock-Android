@@ -134,8 +134,6 @@ class SettingRoomForUserViewModel @Inject constructor(
 
     }
 
-
-
     override fun onAddMemberClicked() {
         baseViewModelScope.launch {
             _navigationHandler.emit(SettingRoomForUserNavigationAction.NavigateToAddMember(roomId = roomInfo.value.group_id))

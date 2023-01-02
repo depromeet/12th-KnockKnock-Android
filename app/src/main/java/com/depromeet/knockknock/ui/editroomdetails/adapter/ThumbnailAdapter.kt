@@ -32,7 +32,7 @@ class ThumbnailAdapter(
         )
         viewDataBinding.layoutMain.setOnClickListener {
             ThumbnailbeforeClicked = viewDataBinding.holder!!.id
-            eventListener.onThumbnailClicked(viewDataBinding.holder!!.id)
+            eventListener.onThumbnailClicked(viewDataBinding.holder!!.url)
             this.notifyDataSetChanged()
         }
         return ViewHolder(viewDataBinding)
@@ -40,6 +40,14 @@ class ThumbnailAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     class ViewHolder(private val binding: HolderEditRoomThumbnailBinding) :

@@ -14,6 +14,7 @@ import com.depromeet.knockknock.R
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -25,6 +26,7 @@ import com.depromeet.knockknock.ui.editroomdetails.adapter.ThumbnailAdapter
 import com.depromeet.knockknock.ui.editroomdetails.model.Background
 import com.depromeet.knockknock.ui.editroomdetails.model.Thumbnail
 import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
+import com.depromeet.knockknock.ui.invitefriendtoroom.InviteFriendToRoomFragmentArgs
 import com.depromeet.knockknock.ui.register.textChangeColor
 import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.uriToFile
@@ -47,6 +49,8 @@ class EditRoomDetailsFragment :
     override val layoutResourceId: Int
         get() = R.layout.fragment_edit_room_details
 
+    private val args: EditRoomDetailsFragmentArgs by navArgs()
+
     override val viewModel: EditRoomDetailsViewModel by viewModels()
     private val navController by lazy { findNavController() }
     private val thumbnailAdapter by lazy { ThumbnailAdapter(viewModel) }
@@ -54,8 +58,6 @@ class EditRoomDetailsFragment :
 
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
     private lateinit var cameraLauncher: ActivityResultLauncher<Uri>
-    private lateinit var backgroundList : List<Background>
-    private lateinit var thumbnailList : List<Thumbnail>
     private var cameraUri: Uri? = null
     private var isBackground: Boolean = true
 
@@ -73,14 +75,22 @@ class EditRoomDetailsFragment :
     }
 
     override fun initStartView() {
+        viewModel.group_id.value= args.groupId
+        viewModel.group_category_id.value = args.groupCategoryId
+        viewModel.inputRoomDescription.value = args.groupDescription
+        viewModel.inputRoomName.value = args.groupTitle
+        viewModel.isRoomUnpublic.value = !args.groupPublicAccess
+        viewModel.backgroundImg.value = args.groupBackgroundPath
+        viewModel.thumbnailImg.value = args.groupThumbnailPath
+
         binding.apply {
             this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
+        initAdapter()
         initToolbar()
         initEditText()
-        initAdapter()
         initRegisterForActivityResult()
         countRoomDescription()
         countRoomName()
@@ -103,7 +113,8 @@ class EditRoomDetailsFragment :
                     is EditRoomDetailsNavigationAction.NavigateToEditThumbnail -> {isBackground=false
                         editProfileImageBottomSheet()
                         viewModel._thumbnailStored.value=true}
-                }
+                    is EditRoomDetailsNavigationAction.NavigateToSetBackgroundFromList -> {setBackgroundFromList(it.backgroundUrl)}
+                    is EditRoomDetailsNavigationAction.NavigateToSetThumbnailFromList -> {setThumbnailFromList(it.thumbnailUrl)}}
             }
         }
 
@@ -121,6 +132,12 @@ class EditRoomDetailsFragment :
     }
 
     override fun initAfterBinding() {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getThumbnails()
+        viewModel.getBackgrounds()
     }
 
     private fun initToolbar() {
@@ -251,6 +268,7 @@ class EditRoomDetailsFragment :
             isBackground -> binding.roomBackgroundImg
             else -> {binding.roomThumbnailImg}
         }
+        viewModel.setFileToUri(file = requestBody, isBackground = isBackground)
 
         val invisibleDescriptionView = when{
             isBackground->binding.roomBackgroundAddDescription
@@ -265,6 +283,23 @@ class EditRoomDetailsFragment :
         invisibleDescriptionView.visibility = View.INVISIBLE
     }
 
+    private fun setBackgroundFromList(url : String){
+        Glide.with(requireContext())
+            .load(url)
+            .transform(CenterCrop(), RoundedCorners(20))
+            .into(binding.roomBackgroundImg)
+
+        binding.roomBackgroundAddDescription.visibility = View.INVISIBLE
+    }
+
+    private fun setThumbnailFromList(url : String){
+        Glide.with(requireContext())
+            .load(url)
+            .transform(CenterCrop(), RoundedCorners(20))
+            .into(binding.roomThumbnailImg)
+
+        binding.roomThumbnailAddDescription.visibility = View.INVISIBLE
+    }
 
 }
 
