@@ -1,6 +1,10 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
+import com.depromeet.domain.onError
+import com.depromeet.domain.onSuccess
+import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateNavigationAction
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
 import com.depromeet.knockknock.ui.alarmroomhistory.model.InviteRoom
@@ -12,20 +16,28 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlarmRoomHistoryViewModel @Inject constructor(
+    private val mainRepository: MainRepository
 ) : BaseViewModel(), AlarmRoomHistoryActionHandler {
 
     private val TAG = "AlarmRoomHistoryViewModel"
-    private val _navigationEvent: MutableSharedFlow<AlarmRoomHistoryNavigationAction> = MutableSharedFlow<AlarmRoomHistoryNavigationAction>()
-    val navigationEvent: SharedFlow<AlarmRoomHistoryNavigationAction> = _navigationEvent.asSharedFlow()
-    private val _alarmInviteRoomEvent: MutableStateFlow<List<InviteRoom>> = MutableStateFlow(emptyList())
+    private val _navigationEvent: MutableSharedFlow<AlarmRoomHistoryNavigationAction> =
+        MutableSharedFlow<AlarmRoomHistoryNavigationAction>()
+    val navigationEvent: SharedFlow<AlarmRoomHistoryNavigationAction> =
+        _navigationEvent.asSharedFlow()
+    private val _alarmInviteRoomEvent: MutableStateFlow<List<InviteRoom>> =
+        MutableStateFlow(emptyList())
     val alarmInviteRoomEvent: StateFlow<List<InviteRoom>> = _alarmInviteRoomEvent
-    private val _alarmRoomHistoryBundleEvent: MutableStateFlow<List<HistoryBundle>> = MutableStateFlow(emptyList())
+    private val _alarmRoomHistoryBundleEvent: MutableStateFlow<List<HistoryBundle>> =
+        MutableStateFlow(emptyList())
     val alarmRoomHistoryBundleEvent: StateFlow<List<HistoryBundle>> = _alarmRoomHistoryBundleEvent
-    private val _alarmRoomHistoryMessageEvent: MutableStateFlow<List<HistoryMessage>> = MutableStateFlow(emptyList())
-    val alarmRoomHistoryMessageEvent: StateFlow<List<HistoryMessage>> = _alarmRoomHistoryMessageEvent
+    private val _alarmRoomHistoryMessageEvent: MutableStateFlow<List<HistoryMessage>> =
+        MutableStateFlow(emptyList())
+    val alarmRoomHistoryMessageEvent: StateFlow<List<HistoryMessage>> =
+        _alarmRoomHistoryMessageEvent
     private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val periodClicked: StateFlow<Int> = _periodClicked
     val emptyMessage: String = ""
+    var reservationId = MutableStateFlow<Int>(0)
     var reservationTimeEvent = MutableStateFlow<String>("")
     var reservationTitleEvent = MutableStateFlow<String>("")
     var reservationMessageEvent = MutableStateFlow<String>("")
@@ -37,7 +49,8 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         getTempList3()
         reservationTimeEvent.value = "오늘 19:00 발송 예정"
         reservationTitleEvent.value = ""
-        reservationMessageEvent.value = "푸시알림 텍스트는 2줄까지만 보여주세요. 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는"
+        reservationMessageEvent.value =
+            "푸시알림 텍스트는 2줄까지만 보여주세요. 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는"
     }
 
     private fun getTempList() {
@@ -150,9 +163,35 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onAlarmCreateClicked(roomId: Int, copyMessage: String, reservation : Boolean){
+    override fun onDeleteReservationAlarmClicked(reservationId: Int) {
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(roomId, copyMessage, reservation))
+            mainRepository.deleteNotificationReservation(
+                reservation_id = reservationId,
+                ).onSuccess {
+
+            }.onError {}
+        }
+    }
+
+    fun onDeleteAlarmClicked(notificationId: Int) {
+        baseViewModelScope.launch {
+            mainRepository.deleteNotification(
+                notification_id = notificationId,
+            ).onSuccess {
+
+            }.onError {}
+        }
+    }
+
+    fun onAlarmCreateClicked(roomId: Int, copyMessage: String, reservation: Boolean) {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(
+                AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(
+                    roomId,
+                    copyMessage,
+                    reservation
+                )
+            )
         }
     }
 
@@ -170,7 +209,12 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
     override fun onRecentAlarmMoreClicked(alarmId: Int, message: String) {
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToAlarmMore(alarmId, message))
+            _navigationEvent.emit(
+                AlarmRoomHistoryNavigationAction.NavigateToAlarmMore(
+                    alarmId,
+                    message
+                )
+            )
         }
     }
 }

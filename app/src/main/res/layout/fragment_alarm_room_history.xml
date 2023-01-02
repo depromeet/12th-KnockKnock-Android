@@ -231,6 +231,7 @@
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:text="삭제하기"
+                    onSingleClick="@{() -> vm.onDeleteReservationAlarmClicked(vm.reservationId)}"
                     app:layout_constraintTop_toBottomOf="@+id/alert_description" />
 
                 <TextView
@@ -241,7 +242,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     android:text="시간 수정하기"
-                    onSingleClick="@{() -> vm.onAlarmCreateClicked(1, vm.reservationMessageEvent, true)}"
+                    onSingleClick="@{() -> vm.onAlarmCreateClicked(vm.reservationId, vm.reservationMessageEvent, true)}"
                     app:layout_constraintTop_toBottomOf="@+id/alert_description" />
             </LinearLayout>
 

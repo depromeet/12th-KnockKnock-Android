@@ -98,7 +98,7 @@ class AlarmRoomHistoryFragment :
             viewModel.navigationEvent.collectLatest {
                 when (it) {
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmMore -> initAlarmMoreBottomSheet(
-                        roomId = it.roomId, message = it.message)
+                        alarmId = it.alarmId, message = it.message)
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate -> navigate(
                         AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmCreateFragment(it.roomId, it.copyMessage, it.reservation)
                     )
@@ -107,19 +107,19 @@ class AlarmRoomHistoryFragment :
         }
     }
 
-    private fun initAlarmMoreBottomSheet(roomId: Int, message: String) {
+    private fun initAlarmMoreBottomSheet(alarmId: Int, message: String) {
         val dialog : BottomAlarmMore = BottomAlarmMore {
             when (it) {
                 is AlarmMoreType.Copy -> roomFilter(message)
                 is AlarmMoreType.Save -> {}
-                is AlarmMoreType.Delete -> alarmDeleteDialog()
+                is AlarmMoreType.Delete -> alarmDeleteDialog(alarmId)
                 is AlarmMoreType.Declare -> usersBlockDialog()
                 is AlarmMoreType.Report -> periodFilter()
             }
         }
         dialog.show(childFragmentManager, TAG)
     }
-    private fun alarmDeleteDialog() {
+    private fun alarmDeleteDialog(notificationId : Int) {
         val res = AlertDialogModel(
             title = "이 알림을 삭제할까요?",
             description = "내 알림방에서만 볼 수 없어요",
@@ -130,6 +130,7 @@ class AlarmRoomHistoryFragment :
             alertDialogModel = res,
             clickToPositive = {
                 toastMessage("알림 삭제")
+                viewModel.onDeleteAlarmClicked(notificationId)
             },
             clickToNegative = {
                 toastMessage("아니요")

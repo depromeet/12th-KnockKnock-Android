@@ -9,4 +9,5 @@ interface AlarmRoomHistoryActionHandler {
     fun onSearchRoomClicked()
     fun onCreateRoomClicked()
     fun onRecentAlarmMoreClicked(alarmId: Int, message: String)
+    fun onDeleteReservationAlarmClicked(reservation_id: Int)
 }

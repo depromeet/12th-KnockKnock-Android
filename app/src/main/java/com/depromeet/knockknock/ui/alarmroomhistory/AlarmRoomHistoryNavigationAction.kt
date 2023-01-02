@@ -6,7 +6,7 @@ sealed class AlarmRoomHistoryNavigationAction {
     object NavigateToBookmarkFilterRoom: AlarmRoomHistoryNavigationAction()
     object NavigateToBookmarkFilterPeriod: AlarmRoomHistoryNavigationAction()
     class NavigateToReaction(val bookmarkIdx: Int) : AlarmRoomHistoryNavigationAction()
-    class NavigateToAlarmMore(val roomId: Int, val message: String) : AlarmRoomHistoryNavigationAction()
+    class NavigateToAlarmMore(val alarmId : Int, val message : String) : AlarmRoomHistoryNavigationAction()
     class NavigateToAlarmCreate(val roomId: Int, val copyMessage : String, val reservation : Boolean) : AlarmRoomHistoryNavigationAction()
 
 }
