@@ -7,7 +7,7 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.bookmark.model.Room" />
+            type="com.depromeet.domain.model.GroupContent" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:roomImageImage="@{holder.roomImg}">
+            app:roomImageImage="@{holder.thumbnail_path}">
         </ImageView>
 
         <TextView
@@ -38,7 +38,7 @@
             app:layout_constraintStart_toEndOf="@id/room_img"
             app:layout_constraintEnd_toStartOf="@id/room_check"
             android:layout_marginStart="16dp"
-            android:text="@{holder.roomName}">
+            android:text="@{holder.title}">
         </TextView>
 
         <CheckBox
@@ -52,7 +52,7 @@
             android:button="@android:color/transparent"
             android:background="@drawable/custom_square_checkbox"
             android:clickable="false"
-            android:checked="@={holder.checked}">
+            android:checked="@={holder.}">
         </CheckBox>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

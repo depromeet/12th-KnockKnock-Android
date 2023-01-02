@@ -8,5 +8,6 @@ data class GroupContent(
     val member_count: Int,
     val public_access: Boolean,
     val thumbnail_path: String,
-    val title: String
+    val title: String,
+    var isSelected: Boolean? = false
 )
