@@ -24,7 +24,21 @@ class SplashViewModel @Inject constructor(
     private val _navigationHandler: MutableStateFlow<Int> = MutableStateFlow(0)
     val navigationHandler: StateFlow<Int> = _navigationHandler.asStateFlow()
 
-    init {
+    private val _isVersionCheck: MutableSharedFlow<Unit> = MutableSharedFlow()
+    val isVersionCheck: SharedFlow<Unit> = _isVersionCheck.asSharedFlow()
+
+    fun checkVersion(version: String) {
+        baseViewModelScope.launch {
+            mainRepository.getAppVersion()
+                .onSuccess {
+                    if(version == it.version) {
+                        _isVersionCheck.emit(Unit)
+                    }
+                }
+        }
+    }
+
+    fun getUserToken() {
         baseViewModelScope.launch {
             val accessToken = sSharedPreferences.getString("access_token", null)
             val refreshToken = sSharedPreferences.getString("refresh_token", null)
