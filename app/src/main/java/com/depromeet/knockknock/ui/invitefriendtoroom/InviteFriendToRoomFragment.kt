@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentInviteFriendToRoomBinding
@@ -21,19 +22,25 @@ class InviteFriendToRoomFragment :
 
     private val TAG = "InviteFriendToRoomFragment"
 
+    private val args: InviteFriendToRoomFragmentArgs by navArgs()
+
+
     override val layoutResourceId: Int
         get() = R.layout.fragment_invite_friend_to_room
 
     override val viewModel: InviteFriendToRoomViewModel by viewModels()
     private val navController by lazy { findNavController() }
+    private val inviteFriendToRoomAdapter by lazy{InviteFriendToRoomAdapter(viewModel)}
 
     override fun initStartView() {
+        viewModel.groupId.value = args.groupId
         binding.apply {
             this.myviewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
         initToolbar()
+        initAdpater()
         initEditText()
     }
 
@@ -45,43 +52,27 @@ class InviteFriendToRoomFragment :
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.navigationHandler.collectLatest {
-                when (it) {
-//                    is InviteFriendToRoomNavigationAction.NavigateToCheckFriend -> {
-//                        addFriendsToInvite(it.userIdx)
-//                    }
-                    is InviteFriendToRoomNavigationAction.NavigateToInviteComplete ->
-                    {}                }
+//        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+//            viewModel.navigationHandler.collectLatest {
+//                when (it) {
+//                    is InviteFriendToRoomNavigationAction.NavigateToInviteComplete ->
+//                    {}                }
+//            }
+//        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.friendList.collectLatest {
+                inviteFriendToRoomAdapter.submitList(it)
             }
         }
     }
 
     override fun initAfterBinding() {
-        val inviteFriendToRoomAdapter = InviteFriendToRoomAdapter(viewModel)
+
+    }
+
+    private fun initAdpater(){
         binding.friendRecycler.adapter = inviteFriendToRoomAdapter
-        val test1 = User(
-            userIdx = 1,
-            userName = "이영준",
-            userImg = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23"
-        )
-
-        val test2 = User(
-            userIdx = 2,
-            userName = "이영준",
-            userImg = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23"
-        )
-
-        val test3 = User(
-            userIdx = 3,
-            userName = "이영준",
-            userImg = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23"
-        )
-
-            val friendList = listOf(test1, test2, test3)
-
-        inviteFriendToRoomAdapter.submitList(friendList)
-
     }
 
     private fun initToolbar() {
@@ -91,10 +82,6 @@ class InviteFriendToRoomFragment :
             this.setNavigationIcon(R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
-    }
-
-    private fun addFriendsToInvite(userIdx: Int) {
-
     }
 
     @SuppressLint("ClickableViewAccessibility")

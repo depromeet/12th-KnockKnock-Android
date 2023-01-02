@@ -40,11 +40,16 @@ class SettingRoomForUserFragment : BaseFragment<FragmentSettingRoomForUserBindin
                 when(it) {
                     //is SettingRoomForUserNavigationAction.NavigateToCategory -> navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToCategoryFragment())
                     is SettingRoomForUserNavigationAction.NavigateToLink -> {}
-                    is SettingRoomForUserNavigationAction.NavigateToAddMember -> {navigate(SettingRoomForUserFragmentDirections.actionSettingRoomForUserFragmentToInviteFriendToRoomFragment())}
+                    is SettingRoomForUserNavigationAction.NavigateToAddMember -> {navigate(SettingRoomForUserFragmentDirections.actionSettingRoomForUserFragmentToInviteFriendToRoomFragment(it.roomId))}
                     //is SettingRoomForUserNavigationAction.NavigateToEditDetail -> {navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToEditRoomDetailsFragment())}
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getGroupInfo()
     }
 
     override fun initAfterBinding() {

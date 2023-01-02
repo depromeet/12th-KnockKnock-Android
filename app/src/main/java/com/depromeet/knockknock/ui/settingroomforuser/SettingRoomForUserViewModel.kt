@@ -123,6 +123,17 @@ class SettingRoomForUserViewModel @Inject constructor(
 
     }
 
+    fun getGroupInfo(){
+        baseViewModelScope.launch {
+            mainRepository.getGroup(id = _receivedRoomId.value)
+                .onSuccess {
+                    _roomInfo.emit(it)
+                    _roomMemberList.emit(it.members)
+                }
+        }
+
+    }
+
 
 
     override fun onAddMemberClicked() {
