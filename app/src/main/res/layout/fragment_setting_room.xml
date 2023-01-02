@@ -238,7 +238,8 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:text="@string/remove_room"
-            android:gravity="center">
+            android:gravity="center"
+            android:onClick="@{()->settingroomviewmodel.onDeleteClicked()}">
         </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
