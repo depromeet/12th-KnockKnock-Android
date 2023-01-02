@@ -66,6 +66,7 @@
             <TextView
                 android:id="@+id/negative_btn"
                 style="@style/Theme.AppCompat.TextView.Notification.Button.Negative"
+                onSingleClick="@{() -> eventListener.onGroupAdmissionsRefuse(model.id)}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -76,6 +77,7 @@
             <TextView
                 android:id="@+id/positive_btn"
                 style="@style/Theme.AppCompat.TextView.Notification.Button.Positive"
+                onSingleClick="@{() -> eventListener.postGroupAdmissionsAllow(model.id)}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"

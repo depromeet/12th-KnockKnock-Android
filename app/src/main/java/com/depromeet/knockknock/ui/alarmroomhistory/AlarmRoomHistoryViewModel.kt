@@ -132,9 +132,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
             }.onSuccess {
                 Log.d("ttt", "성공")
             }.onError {
-                    Log.d("ttt", it.toString())
-                    Log.d("ttt", "실패")
-                }
+                Log.d("ttt", it.toString())
+                Log.d("ttt", "실패")
+            }
         }
 
 
@@ -168,6 +168,32 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 //        baseViewModelScope.launch {
 //            _alarmInviteRoomEvent.value = testList
 //        }
+    }
+
+    override fun postGroupAdmissionsAllow(admissionId: Int) {
+        baseViewModelScope.launch {
+            mainRepository.postGroupAdmissionsAllow(groupId.value, admissionId).onSuccess {
+
+            }.onSuccess {
+                Log.d("ttt", "성공")
+            }.onError {
+                Log.d("ttt", it.toString())
+                Log.d("ttt", "실패")
+            }
+        }
+    }
+
+    override fun onGroupAdmissionsRefuse(admissionId: Int) {
+        baseViewModelScope.launch {
+            mainRepository.postGroupAdmissionsRefuse(groupId.value, admissionId).onSuccess {
+
+            }.onSuccess {
+                Log.d("ttt", "성공")
+            }.onError {
+                Log.d("ttt", it.toString())
+                Log.d("ttt", "실패")
+            }
+        }
     }
 
     override fun onCreatePushClicked() {
