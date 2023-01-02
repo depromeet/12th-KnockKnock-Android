@@ -49,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@{settingroomforuserviewmodel.roomInfo.roomCategoryName}">
+                android:text="@{settingroomforuserviewmodel.roomInfo.category.content}">
             </TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -88,7 +88,7 @@
             app:layout_constraintTop_toTopOf="@id/room_name_title"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
-            android:text="@{settingroomforuserviewmodel.roomInfo.roomName}">
+            android:text="@{settingroomforuserviewmodel.roomInfo.title}">
         </TextView>
 
         <TextView
@@ -113,7 +113,7 @@
             app:layout_constraintTop_toTopOf="@id/room_description_title"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
-            android:text="@{settingroomforuserviewmodel.roomInfo.roomDescription}">
+            android:text="@{settingroomforuserviewmodel.roomInfo.description}">
         </TextView>
 
         <TextView
@@ -137,7 +137,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="12dp"
-            app:roomBackgroundImage10="@{settingroomforuserviewmodel.roomInfo.roomThumbnail}">
+            app:roomBackgroundImage10="@{settingroomforuserviewmodel.roomInfo.thumbnail_path}">
         </ImageView>
 
         <TextView
@@ -161,7 +161,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="12dp"
-            app:roomBackgroundImage10="@{settingroomforuserviewmodel.roomInfo.roomThumbnail}">
+            app:roomBackgroundImage10="@{settingroomforuserviewmodel.roomInfo.thumbnail_path}">
         </ImageView>
 
         <TextView

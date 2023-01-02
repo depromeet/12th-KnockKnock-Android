@@ -22,7 +22,7 @@ class SettingRoomForUserFragment : BaseFragment<FragmentSettingRoomForUserBindin
 
     override val viewModel : SettingRoomForUserViewModel by viewModels()
     private val navController by lazy { findNavController() }
-    private val adapter by lazy { RoomMemberAdapter(viewModel) }
+    private val memberAdapter by lazy { RoomMemberAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -40,14 +40,25 @@ class SettingRoomForUserFragment : BaseFragment<FragmentSettingRoomForUserBindin
                 when(it) {
                     //is SettingRoomForUserNavigationAction.NavigateToCategory -> navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToCategoryFragment())
                     is SettingRoomForUserNavigationAction.NavigateToLink -> {}
-                    is SettingRoomForUserNavigationAction.NavigateToAddMember -> {navigate(SettingRoomForUserFragmentDirections.actionSettingRoomForUserFragmentToInviteFriendToRoomFragment())}
+                    is SettingRoomForUserNavigationAction.NavigateToAddMember -> {navigate(SettingRoomForUserFragmentDirections.actionSettingRoomForUserFragmentToInviteFriendToRoomFragment(it.roomId))}
                     //is SettingRoomForUserNavigationAction.NavigateToEditDetail -> {navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToEditRoomDetailsFragment())}
                 }
             }
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getGroupInfo()
+    }
+
     override fun initAfterBinding() {
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.roomMemberList.collectLatest {
+                memberAdapter.submitList(it)
+            }
+        }
     }
 
     private fun initToolbar() {
@@ -60,6 +71,6 @@ class SettingRoomForUserFragment : BaseFragment<FragmentSettingRoomForUserBindin
     }
 
     private fun initAdapter() {
-        binding.memberRecycler.adapter = adapter
+        binding.memberRecycler.adapter = memberAdapter
     }
 }

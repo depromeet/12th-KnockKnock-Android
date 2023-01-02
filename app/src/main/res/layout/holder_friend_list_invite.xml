@@ -7,7 +7,7 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.friendlist.model.User" />
+            type="com.depromeet.domain.model.Friend" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:userProfile="@{holder.userImg}">
+            app:userProfile="@{holder.profile_path}">
         </ImageView>
 
         <TextView
@@ -38,7 +38,7 @@
             app:layout_constraintStart_toEndOf="@id/room_img"
             app:layout_constraintEnd_toStartOf="@id/friend_is_checked"
             android:layout_marginStart="16dp"
-            android:text="@{holder.userName}">
+            android:text="@{holder.nickname}">
         </TextView>
 
 

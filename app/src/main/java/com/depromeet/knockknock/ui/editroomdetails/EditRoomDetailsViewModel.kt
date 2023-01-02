@@ -1,21 +1,16 @@
 package com.depromeet.knockknock.ui.editroomdetails
 
 import androidx.lifecycle.viewModelScope
-import com.depromeet.domain.model.Background
-import com.depromeet.domain.model.Thumbnail
-import com.depromeet.domain.model.ThumbnailList
+import com.depromeet.domain.model.*
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
-import com.depromeet.knockknock.ui.friendlist.FriendListActionHandler
-import com.depromeet.knockknock.ui.friendlist.FriendListNavigationAction
 
 
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.bookmark.BookmarkNavigationAction
-import com.depromeet.knockknock.ui.editprofile.EditProfileNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,11 +26,13 @@ class EditRoomDetailsViewModel @Inject constructor(
         _navigationHandler.asSharedFlow()
 
     //이미지 id를 사용할 경우 주석해제
-//    private val _backgroundImgId : MutableSharedFlow<Int> = MutableSharedFlow<Int>()
-//    val backgroundImgId: SharedFlow<Int> = _backgroundImgId.asSharedFlow()
+//    private val _backgroundImgUrl : MutableSharedFlow<String> = MutableSharedFlow<String>()
+//    val backgroundImgUrl: SharedFlow<String> = _backgroundImgUrl.asSharedFlow()
 //
-//    private val _thumbnailImgId : MutableSharedFlow<Int> = MutableSharedFlow<Int>()
-//    val thumbnailImgId: SharedFlow<Int> = _thumbnailImgId.asSharedFlow()
+//    private val _thumbnailImgUrl : MutableSharedFlow<String> = MutableSharedFlow<String>()
+//    val thumbnailImgUrl: SharedFlow<String> = _thumbnailImgUrl.asSharedFlow()
+
+    var groupId = MutableStateFlow<Int>(0)
 
     private val _onSaveSuccess: MutableSharedFlow<Boolean> = MutableSharedFlow<Boolean>()
     val onSaveSuccess: SharedFlow<Boolean> = _onSaveSuccess.asSharedFlow()
@@ -55,20 +52,27 @@ class EditRoomDetailsViewModel @Inject constructor(
     private val _saveBtnEnable: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val saveBtnEnable: StateFlow<Boolean> = _saveBtnEnable.asStateFlow()
 
-    var inputRoomName = MutableStateFlow<String>("")
+
     var inputRoomNameCountEvent = MutableStateFlow<Int>(0)
-    var inputRoomDescription = MutableStateFlow<String>("")
     var inputRoomDescriptionCountEvent = MutableStateFlow<Int>(0)
 
-    private val _isRoomUnpublic: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
-    val isRoomUnpublic: StateFlow<Boolean> = _isRoomUnpublic
+    var group_id = MutableStateFlow<Int>(1)
+    var inputRoomName = MutableStateFlow<String>("")
+    var inputRoomDescription = MutableStateFlow<String>("")
+    var thumbnailImg = MutableStateFlow<String>("https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23")
+    var backgroundImg = MutableStateFlow<String>("https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23")
+    var group_category_id = MutableStateFlow<Int>(0)
+    var isRoomUnpublic = MutableStateFlow<Boolean>(false)
+
 
     val isGalleryImage: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
 
     private val _thumbnailList : MutableStateFlow<List<Thumbnail>> = MutableStateFlow(emptyList())
     val thumbnailList: StateFlow<List<Thumbnail>> = _thumbnailList.asStateFlow()
 
-    private val _backgroundList : MutableStateFlow<List<Background>> = MutableStateFlow(emptyList())
+    private val _backgroundList : MutableStateFlow<List<Background>> = MutableStateFlow(listOf(
+        Background(1, "https://user-images.githubusercontent.com/13329304/207665698-4c5b7a46-08fc-47bc-8041-a73d60d0f22e.png")
+    ))
     val backGroundList: StateFlow<List<Background>> = _backgroundList.asStateFlow()
 
     init{
@@ -80,6 +84,29 @@ class EditRoomDetailsViewModel @Inject constructor(
         }
 
         baseViewModelScope.launch {
+//            mainRepository.getBackgrounds()
+//                .onSuccess { response ->
+//                    _backgroundList.emit(response.backgrounds)
+//                }
+            _backgroundList.emit(
+                listOf(
+                    Background(1, "https://user-images.githubusercontent.com/13329304/207665698-4c5b7a46-08fc-47bc-8041-a73d60d0f22e.png")
+                )
+            )
+        }
+    }
+
+    fun getThumbnails(){
+        baseViewModelScope.launch {
+            mainRepository.getThumbnails()
+                .onSuccess { response ->
+                    _thumbnailList.emit(response.thumbnails)
+                }
+        }
+    }
+
+    fun getBackgrounds(){
+        baseViewModelScope.launch {
             mainRepository.getBackgrounds()
                 .onSuccess { response ->
                     _backgroundList.emit(response.backgrounds)
@@ -89,27 +116,27 @@ class EditRoomDetailsViewModel @Inject constructor(
 
     override fun onRoomUnpublicToggled(checked: Boolean) {
         baseViewModelScope.launch {
-            _isRoomUnpublic.emit(!_isRoomUnpublic.value)
+            isRoomUnpublic.emit(!isRoomUnpublic.value)
         }
     }
 
-    override fun onBackgroundClicked(backgroundId: Int) {
+    override fun onBackgroundClicked(backgroundUrl: String) {
         _backgroundStored.value = true
 
-        //배경화면 imgid 사용할 경우 주석해제
-//        baseViewModelScope.launch {
-//            _backgroundImgId.emit(backgroundId)
-//            _navigationHandler.emit(EditRoomDetailsNavigationAction.NavigateToStoreBackground)
-//        }
+        baseViewModelScope.launch {
+            backgroundImg.emit(backgroundUrl)
+            _navigationHandler.emit(EditRoomDetailsNavigationAction.NavigateToSetBackgroundFromList(backgroundUrl = backgroundUrl))
+        }
 
     }
 
-    override fun onThumbnailClicked(thumbnailId: Int) {
+    override fun onThumbnailClicked(thumbnailUrl: String) {
         _thumbnailStored.value = true
-//        baseViewModelScope.launch {
-//            _thumbnailImgId.emit(thumbnailId)
-//            _navigationHandler.emit(EditRoomDetailsNavigationAction.NavigateToStoreThumbnail)
-//        }
+
+        baseViewModelScope.launch {
+            thumbnailImg.emit(thumbnailUrl)
+            _navigationHandler.emit(EditRoomDetailsNavigationAction.NavigateToSetThumbnailFromList(thumbnailUrl = thumbnailUrl))
+        }
 
     }
 
@@ -127,7 +154,21 @@ class EditRoomDetailsViewModel @Inject constructor(
 
     override fun onSaveClicked() {
         baseViewModelScope.launch {
+            mainRepository.putGroup(
+                id = group_id.value,
+                title = inputRoomName.value,
+                description = inputRoomDescription.value,
+                public_access = !isRoomUnpublic.value,
+                thumbnail_path = thumbnailImg.value,
+                background_image_path = backgroundImg.value,
+                category_id = group_category_id.value
+                ,)
+                .onSuccess {
+                    //_onSaveSuccess.emit(true)
+                }
             _onSaveSuccess.emit(true)
+
+
         }
     }
 
@@ -183,6 +224,18 @@ class EditRoomDetailsViewModel @Inject constructor(
     private fun onRoomDescriptionCount(count: Int) {
         viewModelScope.launch {
             inputRoomDescriptionCountEvent.value = count
+        }
+    }
+
+    fun setFileToUri(file: MultipartBody.Part, isBackground : Boolean) {
+        baseViewModelScope.launch {
+            mainRepository.postFileToUrl(file = file)
+                .onSuccess {
+                    if(isBackground)
+                        backgroundImg.value = it.image_url
+                    else
+                        thumbnailImg.value = it.image_url
+                }
         }
     }
 

@@ -32,7 +32,7 @@ class BackgroundAdapter(
         )
         viewDataBinding.layoutMain.setOnClickListener {
             beforeClicked = viewDataBinding.holder!!.id
-            eventListener.onBackgroundClicked(viewDataBinding.holder!!.id)
+            eventListener.onBackgroundClicked(viewDataBinding.holder!!.url)
             this.notifyDataSetChanged()
         }
         return ViewHolder(viewDataBinding)
@@ -40,6 +40,14 @@ class BackgroundAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     class ViewHolder(private val binding: HolderEditRoomBackgroundBinding) :
