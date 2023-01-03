@@ -23,7 +23,7 @@ class SettingRoomFragment :
 
     override val viewModel: SettingRoomViewModel by viewModels()
     private val navController by lazy { findNavController() }
-    private val adapter by lazy { ExportMemberAdapter(viewModel) }
+    private val memberAdapter by lazy { ExportMemberAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -76,6 +76,11 @@ class SettingRoomFragment :
                 }
             }
         }
+        lifecycleScope.launchWhenStarted {
+            viewModel.roomMemberList.collectLatest {
+                memberAdapter.submitList(it)
+            }
+        }
     }
 
     override fun initAfterBinding() {
@@ -96,6 +101,6 @@ class SettingRoomFragment :
     }
 
     private fun initAdapter() {
-        binding.friendRecycler.adapter = adapter
+        binding.friendRecycler.adapter = memberAdapter
     }
 }

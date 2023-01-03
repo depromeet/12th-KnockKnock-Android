@@ -70,9 +70,7 @@ class EditRoomDetailsViewModel @Inject constructor(
     private val _thumbnailList : MutableStateFlow<List<Thumbnail>> = MutableStateFlow(emptyList())
     val thumbnailList: StateFlow<List<Thumbnail>> = _thumbnailList.asStateFlow()
 
-    private val _backgroundList : MutableStateFlow<List<Background>> = MutableStateFlow(listOf(
-        Background(1, "https://user-images.githubusercontent.com/13329304/207665698-4c5b7a46-08fc-47bc-8041-a73d60d0f22e.png")
-    ))
+    private val _backgroundList : MutableStateFlow<List<Background>> = MutableStateFlow(emptyList())
     val backGroundList: StateFlow<List<Background>> = _backgroundList.asStateFlow()
 
     init{
@@ -84,15 +82,10 @@ class EditRoomDetailsViewModel @Inject constructor(
         }
 
         baseViewModelScope.launch {
-//            mainRepository.getBackgrounds()
-//                .onSuccess { response ->
-//                    _backgroundList.emit(response.backgrounds)
-//                }
-            _backgroundList.emit(
-                listOf(
-                    Background(1, "https://user-images.githubusercontent.com/13329304/207665698-4c5b7a46-08fc-47bc-8041-a73d60d0f22e.png")
-                )
-            )
+            mainRepository.getBackgrounds()
+                .onSuccess { response ->
+                    _backgroundList.emit(response.backgrounds)
+                }
         }
     }
 

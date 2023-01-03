@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -23,15 +24,10 @@ import com.depromeet.knockknock.databinding.FragmentEditRoomDetailsBinding
 import com.depromeet.knockknock.ui.editprofile.bottom.EditProfileImageBottomSheet
 import com.depromeet.knockknock.ui.editroomdetails.adapter.BackgroundAdapter
 import com.depromeet.knockknock.ui.editroomdetails.adapter.ThumbnailAdapter
-import com.depromeet.knockknock.ui.editroomdetails.model.Background
-import com.depromeet.knockknock.ui.editroomdetails.model.Thumbnail
-import com.depromeet.knockknock.ui.friendlist.adapter.FriendListAdapter
-import com.depromeet.knockknock.ui.invitefriendtoroom.InviteFriendToRoomFragmentArgs
 import com.depromeet.knockknock.ui.register.textChangeColor
 import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.uriToFile
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -151,8 +147,9 @@ class EditRoomDetailsFragment :
 
 
     private fun initAdapter() {
-        binding.thumbnailRecycler.adapter = ThumbnailAdapter(viewModel)
-        binding.backgroundRecycler.adapter = BackgroundAdapter(viewModel)
+        binding.thumbnailRecycler.adapter = thumbnailAdapter
+        binding.backgroundRecycler.adapter = backgroundAdapter
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
