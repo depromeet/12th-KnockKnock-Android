@@ -9,11 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.domain.model.Friend
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.databinding.HolderFriendAddBinding
 import com.depromeet.knockknock.databinding.HolderFriendListInviteBinding
-import com.depromeet.knockknock.ui.editroomdetails.adapter.beforeClicked
-import com.depromeet.knockknock.ui.editroomdetails.model.Background
-import com.depromeet.knockknock.ui.friendlist.model.User
 import com.depromeet.knockknock.ui.invitefriendtoroom.InviteFriendToRoomActionHandler
 
 var userIdxList : MutableList<Int> = mutableListOf()
