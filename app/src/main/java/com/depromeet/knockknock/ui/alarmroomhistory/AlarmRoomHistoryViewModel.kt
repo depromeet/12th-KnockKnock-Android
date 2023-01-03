@@ -1,15 +1,20 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
 import android.util.Log
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.depromeet.domain.model.Admission
+import com.depromeet.domain.model.Notification
 import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateNavigationAction
+import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryPager
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
 import com.depromeet.knockknock.ui.alarmroomhistory.model.InviteRoom
+import com.depromeet.knockknock.ui.bookmark.adapter.createNotificationPager
 //import com.dida.android.presentation.views.nav.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -41,10 +46,12 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     val emptyMessage: String = ""
     var groupId = MutableStateFlow<Int>(0)
     var reservationId = MutableStateFlow<Int>(0)
+    var sort = MutableStateFlow<String>("")
     var reservationTimeEvent = MutableStateFlow<String>("")
     var reservationTitleEvent = MutableStateFlow<String>("")
     var reservationMessageEvent = MutableStateFlow<String>("")
     val reservationMessageImgUri: MutableStateFlow<String> = MutableStateFlow<String>("")
+    var pushAlarmList: Flow<PagingData<Notification>> = emptyFlow()
 
     init {
         getTempList()
@@ -54,6 +61,14 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         reservationTitleEvent.value = ""
         reservationMessageEvent.value =
             "푸시알림 텍스트는 2줄까지만 보여주세요. 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는"
+    }
+
+    fun getPushAlarm() {
+        pushAlarmList = createAlarmRoomHistoryPager(
+            mainRepository = mainRepository,
+            groupId = groupId,
+            sort = sort
+        ).flow.cachedIn(baseViewModelScope)
     }
 
     private fun getTempList() {
