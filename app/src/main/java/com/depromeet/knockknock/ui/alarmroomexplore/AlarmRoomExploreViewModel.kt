@@ -118,6 +118,4 @@ class AlarmRoomExploreViewModel @Inject constructor(
             _navigationHandler.emit(AlarmRoomExploreNavigationAction.NavigateToRoom(roomId = roomId))
         }
     }
-
-
 }
