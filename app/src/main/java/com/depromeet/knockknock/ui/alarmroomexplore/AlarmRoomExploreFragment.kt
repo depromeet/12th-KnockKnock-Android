@@ -50,11 +50,8 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
-        initEditText()
         initAdapter()
-
-        binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-        alarmRoomAdapter.submitList(viewModel.roomList.value)
+        initEditText()
     }
 
     override fun initDataBinding() {
@@ -67,9 +64,12 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
                 }
             }
         }
+
         lifecycleScope.launchWhenStarted {
             viewModel.roomList.collectLatest {
-                alarmRoomAdapter.submitList(it)
+                val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
+                binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+                alarmRoomAdapter.submitList(viewModel.roomList.value)
             }
         }
 
@@ -141,7 +141,4 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
             alarmRoomAdapter.submitList(viewModel.roomList.value)
         }
     }
-
-
-
 }

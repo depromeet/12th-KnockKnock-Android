@@ -24,7 +24,7 @@ class AlarmRoomExploreViewModel @Inject constructor(
     private val _roomIsPublic : MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(true)
     val roomIsPublic : StateFlow<Boolean> = _roomIsPublic.asStateFlow()
 
-    private val _clickedCategoryId : MutableStateFlow<Int> = MutableStateFlow<Int>(1)
+    private val _clickedCategoryId : MutableStateFlow<Int> = MutableStateFlow<Int>(2)
     val clickedCategoryId : StateFlow<Int> = _clickedCategoryId.asStateFlow()
 
     private val _roomList: MutableStateFlow<List<GroupContent>> = MutableStateFlow(emptyList())
