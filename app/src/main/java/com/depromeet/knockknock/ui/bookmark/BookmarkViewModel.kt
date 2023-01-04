@@ -32,15 +32,12 @@ class BookmarkViewModel @Inject constructor(
     private val _filterChecked: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val filterChecked: StateFlow<Boolean> = _filterChecked
 
-    var bookmarkList: Flow<PagingData<Notification>> = emptyFlow()
-
-    fun getStroage() {
-        bookmarkList = createNotificationPager(
+    var bookmarkList: Flow<PagingData<Notification>> =
+        createNotificationPager(
             mainRepository = mainRepository,
             groupids = _roomClicked,
             periods = _periodClicked
         ).flow.cachedIn(baseViewModelScope)
-    }
 
     override fun onBookmarkEditClicked() {
         baseViewModelScope.launch {
@@ -66,9 +63,7 @@ class BookmarkViewModel @Inject constructor(
 
     fun setRoomFilter(roomFilter: List<Int>) = baseViewModelScope.launch {
         _roomClicked.emit(roomFilter)
-
-        if(roomClicked.value.size == 0 && periodClicked.value == 0) _filterChecked.value = false
-        else _filterChecked.value = true
+        _filterChecked.value = !(roomClicked.value.isEmpty() && periodClicked.value == 0)
     }
 
     override fun onFilterPeriodClicked() {
@@ -79,9 +74,7 @@ class BookmarkViewModel @Inject constructor(
 
     fun setPeriodFilter(periodCheckCount: Int) = baseViewModelScope.launch {
         _periodClicked.value = periodCheckCount
-
-        if(roomClicked.value.size == 0 && periodClicked.value == 0) _filterChecked.value = false
-        else _filterChecked.value = true
+        _filterChecked.value = !(roomClicked.value.isEmpty() && periodClicked.value == 0)
     }
 
     override fun onReactionClicked(bookmarkIdx: Int) {

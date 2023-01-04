@@ -62,7 +62,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="32dp"
             android:background="@drawable/custom_yellow_radius10"
-            android:text="@string/accept">
+            android:text="@string/accept"
+            android:onClick="@{() -> viewmodel.onSelectClicked()}">
         </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

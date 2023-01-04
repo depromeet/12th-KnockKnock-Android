@@ -29,11 +29,6 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
 
     private val adapter by lazy { BookmarkAdapter(viewModel) }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getStroage()
-    }
-
     override fun initStartView() {
         binding.apply {
             this.viewmodel = viewModel
