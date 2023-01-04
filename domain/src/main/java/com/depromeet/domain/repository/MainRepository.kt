@@ -3,6 +3,8 @@ package com.depromeet.domain.repository
 import com.depromeet.domain.NetworkResult
 import com.depromeet.domain.model.*
 import okhttp3.MultipartBody
+import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 
@@ -45,6 +47,9 @@ interface  MainRepository {
 
     // 친구요청
     suspend fun postRelations(user_id: Int): NetworkResult<Unit>
+
+    // 친구삭제
+    suspend fun deleteRelations(user_id: Int): NetworkResult<Unit>
 
     // 유저 닉네임 검색
     suspend fun getUsersNickname(nickname: String): NetworkResult<UserList>

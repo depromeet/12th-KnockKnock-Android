@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.addfriend
 
+import android.util.Log
 import com.depromeet.domain.model.User
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository

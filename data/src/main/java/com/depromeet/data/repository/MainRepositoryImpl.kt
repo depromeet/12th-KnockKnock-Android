@@ -78,6 +78,11 @@ class MainRepositoryImpl @Inject constructor(
         return handleApi { mainAPIService.postRelations(body = body) }
     }
 
+    override suspend fun deleteRelations(user_id: Int): NetworkResult<Unit> {
+        val body = PostRelationsRequest(user_id = user_id)
+        return handleApi { mainAPIService.deleteRelations(body) }
+    }
+
     override suspend fun getUsersNickname(nickname: String): NetworkResult<UserList> {
         return handleApi { mainAPIService.getUsersNickname(nickname = nickname).data }
     }
