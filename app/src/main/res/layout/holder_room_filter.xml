@@ -8,6 +8,10 @@
         <variable
             name="holder"
             type="com.depromeet.domain.model.GroupContent" />
+
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.bookmark.bottom.BottomRoomActionHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +21,8 @@
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
         android:paddingStart="16dp"
-        android:paddingEnd="4dp">
+        android:paddingEnd="4dp"
+        android:onClick="@{() -> eventListener.onRoomClicked(holder.group_id)}">
 
         <ImageView
             android:id="@+id/room_img"

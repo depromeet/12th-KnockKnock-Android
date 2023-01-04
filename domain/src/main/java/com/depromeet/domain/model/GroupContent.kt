@@ -9,5 +9,5 @@ data class GroupContent(
     val public_access: Boolean,
     val thumbnail_path: String,
     val title: String,
-    var isSelected: Boolean? = false
+    var isSelected: Boolean = false
 )

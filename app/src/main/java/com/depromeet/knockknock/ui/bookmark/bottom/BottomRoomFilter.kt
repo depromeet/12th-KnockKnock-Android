@@ -49,7 +49,7 @@ class BottomRoomFilter(
                 bottomSheet.setBackgroundResource(android.R.color.transparent)
 
                 val behavior = BottomSheetBehavior.from(bottomSheet)
-                behavior.isDraggable = true
+                behavior.isDraggable = false
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
         } ) as BottomSheetDialog
