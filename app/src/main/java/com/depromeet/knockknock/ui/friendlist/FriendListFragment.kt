@@ -51,7 +51,6 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
                     is FriendListNavigationAction.NavigateToLink -> {}
                     is FriendListNavigationAction.NavigateToFriendMore -> { moreFriendPopUp(userIdx = it.userIdx) }
                     is FriendListNavigationAction.NavigateToDeleteSuccess -> viewModel.getFriends()
-                    is FriendListNavigationAction.NavigateToDeclareSuccess -> viewModel.getFriends()
                     is FriendListNavigationAction.NavigateToAddFriends -> navigate(FriendListFragmentDirections.actionFriendListFragmentToAddFriendFragment())
                 }
             }
@@ -79,7 +78,6 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
     private fun moreFriendPopUp(userIdx: Int) {
         val dialog: BottomFriendMore = BottomFriendMore {
             when(it) {
-                is FriendMoreType.Black -> viewModel.declareFriend(id = userIdx)
                 is FriendMoreType.Delete -> viewModel.deleteFriend(id = userIdx)
             }
         }
