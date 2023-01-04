@@ -46,8 +46,10 @@ class HomeViewModel @Inject constructor(
 
     fun getRecentNotifications() {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.getNotifications()
                 .onSuccess { _notifications.value = it.notifications }
+            dismissLoading()
         }
     }
 

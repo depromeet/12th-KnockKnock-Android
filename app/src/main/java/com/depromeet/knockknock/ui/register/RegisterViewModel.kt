@@ -49,6 +49,7 @@ class RegisterViewModel @Inject constructor(
 
     fun oauthLogin(idToken: String, provider: String) {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.getTokenValidation(idToken = idToken, provider = provider)
                 .onSuccess {
                     editor.putString("id_token", idToken)
@@ -73,6 +74,7 @@ class RegisterViewModel @Inject constructor(
                             }
                     }
                 }
+            dismissLoading()
         }
     }
 

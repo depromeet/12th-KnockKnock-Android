@@ -27,17 +27,21 @@ class MypageViewModel @Inject constructor(
 
     init {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.getUserProfile()
                 .onSuccess { profile ->
                     userProfile.emit(profile) }
+            dismissLoading()
         }
     }
 
     fun getProfile() {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.getUserProfile()
                 .onSuccess { profile ->
                     userProfile.emit(profile) }
+            dismissLoading()
         }
     }
 
