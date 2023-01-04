@@ -9,13 +9,9 @@ import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.alarmcreate.AlarmCreateNavigationAction
-import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryPager
+import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryBundlePager
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
-import com.depromeet.knockknock.ui.alarmroomhistory.model.InviteRoom
-import com.depromeet.knockknock.ui.bookmark.adapter.createNotificationPager
-//import com.dida.android.presentation.views.nav.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -61,10 +57,12 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         reservationTitleEvent.value = ""
         reservationMessageEvent.value =
             "푸시알림 텍스트는 2줄까지만 보여주세요. 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는"
+
+        getPushAlarm()
     }
 
     fun getPushAlarm() {
-        pushAlarmList = createAlarmRoomHistoryPager(
+        pushAlarmList = createAlarmRoomHistoryBundlePager(
             mainRepository = mainRepository,
             groupId = groupId,
             sort = sort

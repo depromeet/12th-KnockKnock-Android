@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.map
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
@@ -14,7 +15,6 @@ import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmInviteRoomAdapt
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmRoomHistoryBundleAdapter
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmCopyRoom
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmReport
-import com.depromeet.knockknock.ui.alarmroomhistory.adapter.BookmarkAdapter2
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.home.bottom.AlarmMoreType
 import com.depromeet.knockknock.ui.home.bottom.BottomAlarmMore
@@ -40,7 +40,6 @@ class AlarmRoomHistoryFragment :
         )
     }
     private val alarmInviteRoomAdapter by lazy { AlarmInviteRoomAdapter(viewModel) }
-    private val adapter by lazy { BookmarkAdapter2(viewModel, viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -220,13 +219,13 @@ class AlarmRoomHistoryFragment :
     }
 
     private fun initAdapter() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.pushAlarmList.collectLatest {
-                adapter.submitData(it)
-            }
-        }
         binding.rvList.adapter = alarmRoomHistoryBundleAdapter
         binding.rvInviteList.adapter = alarmInviteRoomAdapter
+        lifecycleScope.launchWhenStarted {
+            viewModel.pushAlarmList.collectLatest {
+                alarmRoomHistoryBundleAdapter.submitData(it)
+            }
+        }
 
         if (viewModel.alarmInviteRoomEvent.value.isEmpty()) binding.inviteConstraintLayout.visibility = View.GONE
         else binding.inviteConstraintLayout.visibility = View.VISIBLE

@@ -9,7 +9,7 @@ import com.depromeet.domain.model.Notification
 import com.depromeet.domain.repository.MainRepository
 import kotlinx.coroutines.flow.StateFlow
 
-fun createAlarmRoomHistoryPager(
+fun createAlarmRoomHistoryBundlePager(
     mainRepository: MainRepository,
     groupId: StateFlow<Int>,
     sort: StateFlow<String>
@@ -17,7 +17,7 @@ fun createAlarmRoomHistoryPager(
     config = PagingConfig(pageSize = 10, initialLoadSize = 10, enablePlaceholders = true),
     initialKey = 0,
     pagingSourceFactory = {
-        AlarmRoomHistoryPagingSource(
+        AlarmRoomHistoryBundlePagingSource(
             mainRepository = mainRepository,
             groupId = groupId,
             sort = sort
@@ -25,7 +25,7 @@ fun createAlarmRoomHistoryPager(
     }
 )
 
-class AlarmRoomHistoryPagingSource(
+class AlarmRoomHistoryBundlePagingSource(
     private val mainRepository: MainRepository,
     private val groupId: StateFlow<Int>,
     private val sort: StateFlow<String>
