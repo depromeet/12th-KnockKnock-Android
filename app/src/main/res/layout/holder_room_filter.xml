@@ -52,7 +52,7 @@
             android:button="@android:color/transparent"
             android:background="@drawable/custom_square_checkbox"
             android:clickable="false"
-            android:checked="@={holder.}">
+            android:checked="@{holder.isSelected}">
         </CheckBox>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

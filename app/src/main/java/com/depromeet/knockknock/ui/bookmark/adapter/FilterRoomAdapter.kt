@@ -23,9 +23,9 @@ class FilterRoomAdapter(
             false
         )
         viewDataBinding.layoutMain.setOnClickListener {
-            eventListener.onRoomClicked(viewDataBinding.holder.group_id)
-            viewDataBinding.holder.isSelected = !viewDataBinding.holder.isSelected!!
-            viewDataBinding.roomCheck.isChecked = viewDataBinding.holder.isSelected!!
+            eventListener.onRoomClicked(viewDataBinding.holder!!.group_id)
+            viewDataBinding.holder!!.isSelected = !viewDataBinding.holder!!.isSelected!!
+            viewDataBinding.roomCheck.isChecked = viewDataBinding.holder!!.isSelected!!
         }
         return ViewHolder(viewDataBinding)
     }
