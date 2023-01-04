@@ -45,16 +45,21 @@ class FriendListViewModel @Inject constructor(
 
     fun getFriends() {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.getRelations()
                 .onSuccess {
                     _friendList.value = it.friend_list
                 }
+            dismissLoading()
         }
     }
 
     fun deleteFriend(id: Int) {
         baseViewModelScope.launch {
-            _navigationHandler.emit(FriendListNavigationAction.NavigateToDeleteSuccess)
+            showLoading()
+            mainRepository.deleteRelations(user_id = id)
+                .onSuccess { _navigationHandler.emit(FriendListNavigationAction.NavigateToDeleteSuccess) }
+            dismissLoading()
         }
     }
 
