@@ -227,7 +227,9 @@
             android:id="@+id/action_registerFragment_to_setProfileFragment"
             app:destination="@id/setProfileFragment"
             app:popExitAnim="@anim/exit_to_right"
-            app:enterAnim="@anim/enter_from_right" />
+            app:enterAnim="@anim/enter_from_right"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
