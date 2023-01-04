@@ -32,7 +32,7 @@ class BookmarkViewModel @Inject constructor(
     private val _filterChecked: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val filterChecked: StateFlow<Boolean> = _filterChecked
 
-    var bookmarkList: Flow<PagingData<Notification>> =
+    val bookmarkList: Flow<PagingData<Notification>> =
         createNotificationPager(
             mainRepository = mainRepository,
             groupids = _roomClicked,

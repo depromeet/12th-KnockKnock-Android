@@ -66,6 +66,10 @@ interface MainAPIService {
     @POST("/api/v1/relations")
     suspend fun postRelations(@Body body: PostRelationsRequest): Unit
 
+    // 친구삭제
+    @DELETE("/api/v1/relations")
+    suspend fun deleteRelations(@Body body: PostRelationsRequest): Unit
+
     // 유저 닉네임 검색
     @GET("/api/v1/users/nickname/{nickname}")
     suspend fun getUsersNickname(@Path("nickname") nickname: String): BaseResponse<UserList>
