@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
+import androidx.paging.filter
 import com.depromeet.domain.model.Group
 import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.domain.model.GroupContent
@@ -39,10 +41,10 @@ class AlarmRoomJoinedFragment :
 
     override val viewModel: AlarmRoomJoinedViewModel by viewModels()
     private val navController by lazy { findNavController() }
-    private val roomAdapter by lazy { AlarmRoomJoinedAdapter(viewModel) }
-    private lateinit var alarmRoomList : List<GroupContent>
-    private lateinit var friendAlarmRoomList : List<GroupContent>
-    private lateinit var aloneAlarmRoomList : List<GroupContent>
+    private val roomAdapter by lazy { AlarmRoomJoinedAdapter(viewModel,viewModel) }
+    private lateinit var alarmRoomList : PagingData<GroupContent>
+    private lateinit var friendAlarmRoomList : PagingData<GroupContent>
+    private lateinit var aloneAlarmRoomList : PagingData<GroupContent>
 
     override fun initStartView() {
         binding.apply {
@@ -67,7 +69,7 @@ class AlarmRoomJoinedFragment :
         }
 
         lifecycleScope.launchWhenStarted {
-            viewModel.roomList.collectLatest {
+            viewModel.joinedRoomList.collectLatest {
                 alarmRoomList = it
                 friendAlarmRoomList = alarmRoomList.filter {
                     it.group_type == "OPEN"
@@ -75,7 +77,7 @@ class AlarmRoomJoinedFragment :
                 aloneAlarmRoomList = alarmRoomList.filter {
                     it.group_type == "CLOSE"
                 }
-                roomAdapter.submitList(it)
+                roomAdapter.submitData(it)
             }
         }
     }
@@ -85,9 +87,9 @@ class AlarmRoomJoinedFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomAllClicked.collectLatest {
                 if (it) {
-                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel)
+                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel,viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
-                    alarmRoomJoinedAdapter.submitList(alarmRoomList)
+                    alarmRoomJoinedAdapter.submitData(alarmRoomList)
                 }
             }
         }
@@ -95,9 +97,9 @@ class AlarmRoomJoinedFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomFriendClicked.collectLatest {
                 if (it) {
-                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel)
+                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel,viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
-                    alarmRoomJoinedAdapter.submitList(friendAlarmRoomList)
+                    alarmRoomJoinedAdapter.submitData(friendAlarmRoomList)
                 }
             }
         }
@@ -105,9 +107,9 @@ class AlarmRoomJoinedFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomAloneClicked.collectLatest {
                 if (it) {
-                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel)
+                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel,viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
-                    alarmRoomJoinedAdapter.submitList(aloneAlarmRoomList)
+                    alarmRoomJoinedAdapter.submitData(aloneAlarmRoomList)
                 }
             }
         }

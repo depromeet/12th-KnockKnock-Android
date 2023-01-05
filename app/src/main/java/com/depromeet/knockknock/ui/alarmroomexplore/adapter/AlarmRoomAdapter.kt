@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,12 +13,13 @@ import com.depromeet.domain.model.GroupContent
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderAlarmRoomBinding
 import com.depromeet.knockknock.ui.alarmroomexplore.AlarmRoomExploreActionHandler
+import com.depromeet.knockknock.ui.alarmroomexplore.AlarmRoomExploreViewModel
 
 class AlarmRoomAdapter(
-    private val eventListener: AlarmRoomExploreActionHandler
-) : ListAdapter<GroupContent, AlarmRoomAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
+    private val eventListener: AlarmRoomExploreActionHandler,
+    private val viewModel : AlarmRoomExploreViewModel
+) : PagingDataAdapter<GroupContent, AlarmRoomAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
 
-    init { setHasStableIds(true) }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,10 +38,6 @@ class AlarmRoomAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
     }
 
     override fun getItemViewType(position: Int): Int {
