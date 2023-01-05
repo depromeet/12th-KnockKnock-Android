@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.splash
 
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(R.la
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.main_purple)
         viewModel.checkVersion(getString(R.string.app_version))
     }
 
