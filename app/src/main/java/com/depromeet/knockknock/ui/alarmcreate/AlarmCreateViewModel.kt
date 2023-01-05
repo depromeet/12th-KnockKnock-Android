@@ -118,6 +118,19 @@ class AlarmCreateViewModel @Inject constructor(
         }
     }
 
+    override fun onUpdateReservationAlarmPushClicked(reservationId : Int, sendAt: String) {
+        if (editTextTitleEvent.value == "" && editTextMessageEvent.value == "" && messageImgUri.value == "") {
+            baseViewModelScope.launch {
+                mainRepository.patchNotificationReservation(
+                    reservation_id = reservationId,
+                    send_at = sendAt,
+                ).onSuccess {
+                    _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
+                }.onError {}
+            }
+        }
+    }
+
     fun onImageUriChecked(uri: String) {
         baseViewModelScope.launch {
             messageImgUri.emit(uri)

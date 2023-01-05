@@ -495,4 +495,11 @@
     <style name="Theme.AppCompat.TextView.Category.Contents" parent="Theme.AppCompat.TextView.Regular.Black.Size16"/>
     <style name="Theme.AppCompat.TextView.Category.Save.Btn" parent="Theme.AppCompat.TextView.Medium.Size18"/>
 
+    <!-- bottom sheet 키보드 설정 -->
+    <style name="DialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
 </resources>

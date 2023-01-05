@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.splash
 
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -7,13 +8,15 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(R.layout.fragment_splash) {
 
-    private val TAG = "MypageFragment"
+    private val TAG = "SplashFragment"
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_splash
@@ -26,11 +29,20 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(R.la
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.main_purple)
+        viewModel.checkVersion(getString(R.string.app_version))
     }
 
     override fun initDataBinding() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.isVersionCheck.collectLatest {
+                viewModel.getUserToken()
+            }
+        }
+
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.navigationHandler.collectLatest {
+                delay(1000)
                 when(it) {
                     1 -> navigate(SplashFragmentDirections.actionSplashFragmentToOnboardFragment())
                     2 -> navigate(SplashFragmentDirections.actionMainFragment())
@@ -43,5 +55,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(R.la
     override fun initAfterBinding() {
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
+    }
 }

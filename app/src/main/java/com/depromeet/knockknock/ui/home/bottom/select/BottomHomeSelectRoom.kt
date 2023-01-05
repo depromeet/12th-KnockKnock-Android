@@ -56,8 +56,10 @@ class BottomHomeSelectRoom(
         // -1: 알림방 탐색, -2: 알림방 생성하기
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.selectRoom.collectLatest {
-                callback.invoke(it)
-                dismiss()
+                if(it != 0) {
+                    callback.invoke(it)
+                    dismiss()
+                }
             }
         }
 

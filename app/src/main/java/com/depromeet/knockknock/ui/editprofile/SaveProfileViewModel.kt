@@ -39,21 +39,25 @@ class SaveProfileViewModel @Inject constructor(
 
     init {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.getUserProfile()
                 .onSuccess {
                     beforeProfile = it
                     profileImg.emit(it.profile_path)
                     profileName.emit(it.nickname)
                 }
+            dismissLoading()
         }
     }
 
     fun setFileToUri(file: MultipartBody.Part) {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.postFileToUrl(file = file)
                 .onSuccess {
                     profileImg.value = it.image_url
                 }
+            dismissLoading()
         }
     }
 
@@ -65,10 +69,12 @@ class SaveProfileViewModel @Inject constructor(
 
     override fun onProfileSaveClicked() {
         baseViewModelScope.launch {
+            showLoading()
             if(beforeProfile!!.profile_path != profileImg.value) {
                 mainRepository.putUserProfile(nickname = profileName.value, profile_path = profileImg.value)
                     .onSuccess {
                         _navigationHandler.emit(SaveProfileNavigationAction.NavigateToSuccess)
+                        dismissLoading()
                         return@launch
                     }
             }
@@ -77,6 +83,7 @@ class SaveProfileViewModel @Inject constructor(
                 mainRepository.putUserNickname(nickname = profileName.value)
                     .onSuccess {
                         _navigationHandler.emit(SaveProfileNavigationAction.NavigateToSuccess)
+                        dismissLoading()
                         return@launch
                     }
             }

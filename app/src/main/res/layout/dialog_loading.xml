@@ -11,5 +11,5 @@
     android:maxHeight="65dip"
     android:minWidth="65dip"
     android:minHeight="65dip"
-    app:SpinKit_Color="@color/white">
+    app:SpinKit_Color="@color/main_yellow_light_mode">
 </com.github.ybq.android.spinkit.SpinKitView>

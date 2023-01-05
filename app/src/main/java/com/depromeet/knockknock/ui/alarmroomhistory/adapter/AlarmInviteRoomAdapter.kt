@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.depromeet.domain.model.Admission
 import com.depromeet.knockknock.databinding.ItemRecyclerHistoryBundleBinding
 import com.depromeet.knockknock.databinding.ItemRecyclerInviteRoomBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
@@ -13,7 +14,7 @@ import com.depromeet.knockknock.ui.alarmroomhistory.model.InviteRoom
 
 class AlarmInviteRoomAdapter(
     private val eventListener: AlarmRoomHistoryActionHandler
-    ) : ListAdapter<InviteRoom, AlarmInviteRoomViewHolder>(AlarmInviteRoomItemDiffCallback){
+    ) : ListAdapter<Admission, AlarmInviteRoomViewHolder>(AlarmInviteRoomItemDiffCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmInviteRoomViewHolder {
         return AlarmInviteRoomViewHolder(
@@ -30,11 +31,11 @@ class AlarmInviteRoomAdapter(
         }
     }
 
-    internal object AlarmInviteRoomItemDiffCallback : DiffUtil.ItemCallback<InviteRoom>() {
-        override fun areItemsTheSame(oldItem: InviteRoom, newItem: InviteRoom) =
+    internal object AlarmInviteRoomItemDiffCallback : DiffUtil.ItemCallback<Admission>() {
+        override fun areItemsTheSame(oldItem: Admission, newItem: Admission) =
             oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: InviteRoom, newItem: InviteRoom) =
+        override fun areContentsTheSame(oldItem: Admission, newItem: Admission) =
             oldItem.equals(newItem)
     }
 }

@@ -9,4 +9,5 @@ interface AlarmCreateActionHandler {
     fun onRecommendationMessageClicked(message: String)
     fun onPreviewClicked(title: String, message: String, uri: String)
     fun onAlarmSendClicked()
+    fun  onUpdateReservationAlarmPushClicked(reservationId : Int, sendAt: String)
 }

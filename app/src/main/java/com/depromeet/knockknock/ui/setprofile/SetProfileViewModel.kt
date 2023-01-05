@@ -37,10 +37,12 @@ class SetProfileViewModel @Inject constructor(
 
     init {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.getProfilesRandom()
                 .onSuccess { profile ->
                     profileImg.emit(profile)
                 }
+            dismissLoading()
         }
 
         viewModelScope.launch {
@@ -67,6 +69,7 @@ class SetProfileViewModel @Inject constructor(
 
     override fun onSelectionDoneClicked() {
         baseViewModelScope.launch {
+            showLoading()
             val idToken = sSharedPreferences.getString("id_token", null)
             val provider = sSharedPreferences.getString("provider", null)
             if(inputContent.value == "") {
@@ -91,6 +94,7 @@ class SetProfileViewModel @Inject constructor(
                     }
                 }
             }
+            dismissLoading()
         }
     }
 

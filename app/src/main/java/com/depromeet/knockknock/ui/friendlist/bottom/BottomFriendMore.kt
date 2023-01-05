@@ -50,15 +50,10 @@ class BottomFriendMore(
         super.onViewCreated(view, savedInstanceState)
 
         val delete = requireView().findViewById<TextView>(R.id.delete_btn)
-        val black = requireView().findViewById<TextView>(R.id.black_btn)
         val close = requireView().findViewById<TextView>(R.id.close_btn)
 
         delete.setOnClickListener {
             callback.invoke(FriendMoreType.Delete)
-            dismiss()
-        }
-        black.setOnClickListener {
-            callback.invoke(FriendMoreType.Black)
             dismiss()
         }
         close.setOnClickListener {

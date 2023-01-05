@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/onboardFragment">
+    app:startDestination="@id/splashFragment">
 
     <action
         android:id="@+id/action_main_fragment"
@@ -66,6 +66,9 @@
         <argument
             android:name="message"
             app:argType="string" />
+        <argument
+            android:name="reservation"
+            app:argType="boolean" />
 
         <action
             android:id="@+id/action_alarmCreateFragment_to_previewFragment"
@@ -227,7 +230,9 @@
             android:id="@+id/action_registerFragment_to_setProfileFragment"
             app:destination="@id/setProfileFragment"
             app:popExitAnim="@anim/exit_to_right"
-            app:enterAnim="@anim/enter_from_right" />
+            app:enterAnim="@anim/enter_from_right"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

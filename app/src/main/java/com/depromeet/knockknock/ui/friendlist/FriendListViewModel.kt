@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.friendlist
 
+import android.util.Log
 import com.depromeet.domain.model.Friend
 import com.depromeet.domain.model.User
 import com.depromeet.domain.onSuccess
@@ -45,22 +46,21 @@ class FriendListViewModel @Inject constructor(
 
     fun getFriends() {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.getRelations()
                 .onSuccess {
                     _friendList.value = it.friend_list
                 }
+            dismissLoading()
         }
     }
 
     fun deleteFriend(id: Int) {
         baseViewModelScope.launch {
-            _navigationHandler.emit(FriendListNavigationAction.NavigateToDeleteSuccess)
-        }
-    }
-
-    fun declareFriend(id: Int) {
-        baseViewModelScope.launch {
-            _navigationHandler.emit(FriendListNavigationAction.NavigateToDeclareSuccess)
+            showLoading()
+            mainRepository.deleteRelations(user_id = id)
+                .onSuccess { _navigationHandler.emit(FriendListNavigationAction.NavigateToDeleteSuccess) }
+            dismissLoading()
         }
     }
 
