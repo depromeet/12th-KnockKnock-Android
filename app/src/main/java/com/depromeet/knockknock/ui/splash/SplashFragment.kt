@@ -53,5 +53,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(R.la
     override fun initAfterBinding() {
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
+    }
 }
