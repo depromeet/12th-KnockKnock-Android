@@ -31,12 +31,7 @@ class InviteFriendToRoomViewModel @Inject constructor(
     private val _onSaveSuccess: MutableSharedFlow<Boolean> = MutableSharedFlow<Boolean>()
     val onSaveSuccess: SharedFlow<Boolean> = _onSaveSuccess.asSharedFlow()
 
-    private val _friendList : MutableStateFlow<List<Friend>> = MutableStateFlow(listOf(
-        Friend(
-        1,
-        nickname = "영준",
-        profile_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23"
-    )))
+    private val _friendList : MutableStateFlow<List<Friend>> = MutableStateFlow(emptyList())
     val friendList : StateFlow<List<Friend>> = _friendList.asStateFlow()
     val inviteUserList = mutableListOf<Int>()
 

@@ -62,62 +62,37 @@ class SettingRoomForUserViewModel @Inject constructor(
     init{
 
         baseViewModelScope.launch {
-//            mainRepository.getGroup(id = _receivedRoomId.value)
-//                .onSuccess {
-//                    _roomInfo.emit(it)
-//                    _roomMemberList.emit(it.members)
-//                }
-//                .onError {
-//                    val testGroup = Group(
-//                        background_image_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-//                        category = Category(
-//                            id = 2,
-//                            content = "스터디",
-//                            emoji = "1"
-//                        ),
-//                        description = "무슨무슨 방입니다",
-//                        group_id = 17,
-//                        group_type = "OPEN",
-//                        ihost = true,
-//                        members = listOf(
-//                            Member(
-//                                nick_name = "이영준",
-//                                profile_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-//                                user_id = 1
-//                            )
-//                        ),
-//                        public_access = true,
-//                        thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-//                        title = "방 이름"
-//                    )
-//                    _roomInfo.emit(testGroup)
-//                    _roomMemberList.emit(testGroup.members)
-//                }
-
-            val testGroup = Group(
-                background_image_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                category = Category(
-                    id = 3,
-                    content = "취업",
-                    emoji = "1"
-                ),
-                description = "무슨무슨 방입니다",
-                group_id = 17,
-                group_type = "OPEN",
-                ihost = true,
-                members = listOf(
-                    Member(
-                        nick_name = "이영준",
-                        profile_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                        user_id = 1
+            mainRepository.getGroup(id = _receivedRoomId.value)
+                .onSuccess {
+                    _roomInfo.emit(it)
+                    _roomMemberList.emit(it.members)
+                }
+                .onError {
+                    val testGroup = Group(
+                        background_image_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                        category = Category(
+                            id = 2,
+                            content = "스터디",
+                            emoji = "1"
+                        ),
+                        description = "무슨무슨 방입니다",
+                        group_id = 17,
+                        group_type = "OPEN",
+                        ihost = true,
+                        members = listOf(
+                            Member(
+                                nick_name = "이영준",
+                                profile_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                                user_id = 1
+                            )
+                        ),
+                        public_access = true,
+                        thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
+                        title = "방 이름"
                     )
-                ),
-                public_access = true,
-                thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-                title = "방 이름"
-            )
-            _roomInfo.emit(testGroup)
-            _roomMemberList.emit(testGroup.members)
+                    _roomInfo.emit(testGroup)
+                    _roomMemberList.emit(testGroup.members)
+                }
         }
 
     }
