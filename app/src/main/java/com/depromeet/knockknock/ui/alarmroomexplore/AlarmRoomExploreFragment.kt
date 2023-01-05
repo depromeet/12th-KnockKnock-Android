@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.filter
 import com.depromeet.domain.model.Category
 import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.knockknock.R
@@ -27,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 
 
 @AndroidEntryPoint
@@ -39,7 +41,7 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
 
     override val viewModel : AlarmRoomExploreViewModel by viewModels()
     private val navController by lazy { findNavController() }
-    private val alarmRoomAdapter by lazy { AlarmRoomAdapter(viewModel) }
+    private val alarmRoomAdapter by lazy { AlarmRoomAdapter(viewModel,viewModel) }
     private val categoryAdapter by lazy { CategoryAdapter(viewModel) }
     private val popularRoomAdapter by lazy { PopularRoomAdapter(viewModel) }
 
@@ -67,9 +69,9 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
 
         lifecycleScope.launchWhenStarted {
             viewModel.roomList.collectLatest {
-                val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
+                val alarmRoomAdapter = AlarmRoomAdapter(viewModel,viewModel)
                 binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-                alarmRoomAdapter.submitList(viewModel.roomList.value)
+                alarmRoomAdapter.submitData(it)
             }
         }
 
@@ -127,18 +129,34 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
 
     private fun roomFilterByCategory(categoryId : Int) {
         if (categoryId != 1) {
-            val filteredAlarmRoomList = viewModel.roomList.value.filter {
-                it.category.id == categoryId
+//            val filteredAlarmRoomList = viewModel.roomList.filter {
+//                it.category.id == categoryId
+//            }
+
+            val filteredAlarmRoomList = viewModel.roomList.map {
+                    pagingData ->
+                pagingData.filter{
+                    it.category.id==categoryId
+                }
             }
-            val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
-            binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-            alarmRoomAdapter.submitList(filteredAlarmRoomList)
+            lifecycleScope.launchWhenStarted {
+                filteredAlarmRoomList.collectLatest {
+                    val alarmRoomAdapter = AlarmRoomAdapter(viewModel,viewModel)
+                    binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+                    alarmRoomAdapter.submitData(it)
+                }
+            }
+
         }
 
         else{
-            val alarmRoomAdapter = AlarmRoomAdapter(viewModel)
-            binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-            alarmRoomAdapter.submitList(viewModel.roomList.value)
+            lifecycleScope.launchWhenStarted {
+                viewModel.roomList.collectLatest {
+                    val alarmRoomAdapter = AlarmRoomAdapter(viewModel,viewModel)
+                    binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+                    alarmRoomAdapter.submitData(it)
+                }
+            }
         }
     }
 }

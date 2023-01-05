@@ -1,11 +1,16 @@
 package com.depromeet.knockknock.ui.alarmroomexplore
 
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.depromeet.domain.model.Category
 import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.domain.model.GroupContent
+import com.depromeet.domain.model.Notification
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.alarmroomexplore.adapter.createAlarmRoomPager
+import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryBundlePager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -24,11 +29,11 @@ class AlarmRoomExploreViewModel @Inject constructor(
     private val _roomIsPublic : MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(true)
     val roomIsPublic : StateFlow<Boolean> = _roomIsPublic.asStateFlow()
 
-    private val _clickedCategoryId : MutableStateFlow<Int> = MutableStateFlow<Int>(2)
+    private val _clickedCategoryId : MutableStateFlow<Int> = MutableStateFlow<Int>(1)
     val clickedCategoryId : StateFlow<Int> = _clickedCategoryId.asStateFlow()
 
-    private val _roomList: MutableStateFlow<List<GroupContent>> = MutableStateFlow(emptyList())
-    val roomList: StateFlow<List<GroupContent>> = _roomList.asStateFlow()
+    var roomList: Flow<PagingData<GroupContent>> = emptyFlow()
+    var initCategory : MutableStateFlow<Int> = MutableStateFlow(1)
 
     private val _categoryList: MutableStateFlow<List<Category>> = MutableStateFlow(emptyList())
     val categoryList: StateFlow<List<Category>> = _categoryList.asStateFlow()
@@ -37,14 +42,7 @@ class AlarmRoomExploreViewModel @Inject constructor(
     val popularRoomList: StateFlow<List<GroupBriefInfo>> = _popularRoomList.asStateFlow()
 
     init {
-        baseViewModelScope.launch {
-            mainRepository.getOpenGroups(1,0,10)
-                .onSuccess { response ->
-                    _roomList.emit(
-                        (response.groupContent)
-                    )
-                }
-        }
+        getGroups()
 
         baseViewModelScope.launch {
             mainRepository.getGroupCategories()
@@ -66,12 +64,10 @@ class AlarmRoomExploreViewModel @Inject constructor(
     }
 
     fun getGroups(){
-        baseViewModelScope.launch {
-            mainRepository.getOpenGroups(1,0,10)
-                .onSuccess { response ->
-                    _roomList.emit(response.groupContent)
-                }
-        }
+        roomList = createAlarmRoomPager(
+            mainRepository = mainRepository,
+            category = initCategory,
+        ).flow.cachedIn(baseViewModelScope)
     }
 
     fun getCategory(){
