@@ -1,5 +1,7 @@
 package com.depromeet.knockknock.ui.home
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.depromeet.knockknock.R
@@ -34,6 +36,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 //        ) }
 //        .subscribe(this)
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun initStartView() {
         binding.apply {
             this.viewmodel = viewModel
@@ -42,6 +45,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         exception = viewModel.errorEvent
 //        initNotificationPermission()
         viewModel.getRecentNotifications()
+        requireActivity().setStatusBarColor(viewModel.homeRandomNumber)
         initAdapter()
     }
 

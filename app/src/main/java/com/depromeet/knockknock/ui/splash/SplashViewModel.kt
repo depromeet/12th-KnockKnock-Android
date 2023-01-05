@@ -33,8 +33,9 @@ class SplashViewModel @Inject constructor(
                 .onSuccess {
                     if(version == it.version) {
                         _isVersionCheck.emit(Unit)
-                    }
-                }
+                    } }
+                .onError { exception ->
+                    catchError(e = exception) }
         }
     }
 
