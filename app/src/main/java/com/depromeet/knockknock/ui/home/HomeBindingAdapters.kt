@@ -42,19 +42,6 @@ fun ImageView.bindHomeImage(number: Int) {
     }
 }
 
-@SuppressLint("ResourceType")
-@RequiresApi(Build.VERSION_CODES.M)
-fun Activity.setStatusBarColor(number: Int) {
-    var color: Int = 0
-    when(number) {
-        1 -> color = getColor(R.color.main_yellow_light_mode)
-        2 -> color = getColor(R.color.main_purple)
-        3 -> color = getColor(R.color.main_yellow_light_mode)
-        4 -> color = getColor(R.color.main_purple)
-    }
-    this.window.statusBarColor = ContextCompat.getColor(this, color)
-}
-
 @BindingAdapter("homeEmptyRecentImg")
 fun ConstraintLayout.bindHomeEmptyRecentImg(notifications: List<Notification>) {
     if(notifications.isEmpty())

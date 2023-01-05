@@ -45,7 +45,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         exception = viewModel.errorEvent
 //        initNotificationPermission()
         viewModel.getRecentNotifications()
-        requireActivity().setStatusBarColor(viewModel.homeRandomNumber)
         initAdapter()
     }
 

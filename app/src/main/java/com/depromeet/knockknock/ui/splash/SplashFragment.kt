@@ -8,6 +8,7 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -41,6 +42,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(R.la
 
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.navigationHandler.collectLatest {
+                delay(1000)
                 when(it) {
                     1 -> navigate(SplashFragmentDirections.actionSplashFragmentToOnboardFragment())
                     2 -> navigate(SplashFragmentDirections.actionMainFragment())
