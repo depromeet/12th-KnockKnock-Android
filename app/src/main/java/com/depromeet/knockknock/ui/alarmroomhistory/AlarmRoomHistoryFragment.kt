@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.viewModels
@@ -219,11 +220,12 @@ class AlarmRoomHistoryFragment :
     }
 
     private fun initAdapter() {
-        binding.rvList.adapter = alarmRoomHistoryBundleAdapter
-        binding.rvInviteList.adapter = alarmInviteRoomAdapter
+
         lifecycleScope.launchWhenStarted {
             viewModel.pushAlarmList.collectLatest {
+                Log.d("ttt 알림방 히스토리", it.toString())
                 alarmRoomHistoryBundleAdapter.submitData(it)
+
             }
         }
 
@@ -242,5 +244,7 @@ class AlarmRoomHistoryFragment :
     }
 
     override fun initAfterBinding() {
+        binding.rvList.adapter = alarmRoomHistoryBundleAdapter
+        binding.rvInviteList.adapter = alarmInviteRoomAdapter
     }
 }

@@ -40,7 +40,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val periodClicked: StateFlow<Int> = _periodClicked
     val emptyMessage: String = ""
-    var groupId = MutableStateFlow<Int>(0)
+    var groupId = MutableStateFlow<Int>(30)
     var reservationId = MutableStateFlow<Int>(0)
     var sort = MutableStateFlow<String>("")
     var reservationTimeEvent = MutableStateFlow<String>("")
@@ -52,7 +52,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     init {
         getTempList()
         getTempList2()
-        getTempList3()
+        getGroupAdmissions()
         reservationTimeEvent.value = "오늘 19:00 발송 예정"
         reservationTitleEvent.value = ""
         reservationMessageEvent.value =
@@ -67,6 +67,8 @@ class AlarmRoomHistoryViewModel @Inject constructor(
             groupId = groupId,
             sort = sort
         ).flow.cachedIn(baseViewModelScope)
+
+
     }
 
     private fun getTempList() {
@@ -136,51 +138,19 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    private fun getTempList3() {
+    // 방장 권한이 있어야 함
+    private fun getGroupAdmissions() {
 
         baseViewModelScope.launch {
             mainRepository.getGroupAdmissions(groupId.value).onSuccess {
                 _alarmInviteRoomEvent.value = it.admissions
 
             }.onSuccess {
-                Log.d("ttt", "성공")
+                Log.d("ttt", "초대 확인 성공")
             }.onError {
-                Log.d("ttt", it.toString())
-                Log.d("ttt", "실패")
+                Log.d("ttt", "초대 확인 실패")
             }
         }
-
-
-//        val test1 = InviteRoom(
-//            notificationId = 1,
-//            roomId = 1,
-//            userId = 1,
-//            userName = "라이언",
-//            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-//            dateTime = "오후 09:10",
-//        )
-//        val test2 = InviteRoom(
-//            notificationId = 1,
-//            roomId = 1,
-//            userId = 1,
-//            userName = "라이언",
-//            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-//            dateTime = "오후 09:10",
-//        )
-//        val test3 = InviteRoom(
-//            notificationId = 1,
-//            roomId = 1,
-//            userId = 1,
-//            userName = "라이언",
-//            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-//            dateTime = "오후 09:10",
-//        )
-//
-//        val testList = listOf(test1, test2, test3)
-//
-//        baseViewModelScope.launch {
-//            _alarmInviteRoomEvent.value = testList
-//        }
     }
 
     override fun postGroupAdmissionsAllow(admissionId: Int) {
@@ -188,10 +158,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
             mainRepository.postGroupAdmissionsAllow(groupId.value, admissionId).onSuccess {
 
             }.onSuccess {
-                Log.d("ttt", "성공")
+                Log.d("ttt", "초대 승인 성공")
             }.onError {
-                Log.d("ttt", it.toString())
-                Log.d("ttt", "실패")
+                Log.d("ttt", "초대 승인 실패")
             }
         }
     }
@@ -201,10 +170,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
             mainRepository.postGroupAdmissionsRefuse(groupId.value, admissionId).onSuccess {
 
             }.onSuccess {
-                Log.d("ttt", "성공")
+                Log.d("ttt", "초대 거절 성공")
             }.onError {
-                Log.d("ttt", it.toString())
-                Log.d("ttt", "실패")
+                Log.d("ttt", "초대 거절 실패")
             }
         }
     }
@@ -242,8 +210,10 @@ class AlarmRoomHistoryViewModel @Inject constructor(
             mainRepository.deleteNotification(
                 notification_id = notificationId,
             ).onSuccess {
-
-            }.onError {}
+                Log.d("ttt", "알림 삭제 성공")
+            }.onError {
+                Log.d("ttt", "알림 삭제 실패")
+            }
         }
     }
 

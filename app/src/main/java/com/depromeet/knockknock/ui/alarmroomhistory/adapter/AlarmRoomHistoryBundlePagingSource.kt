@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.alarmroomhistory.adapter
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
@@ -43,6 +44,17 @@ class AlarmRoomHistoryBundlePagingSource(
             group_id = groupId.value,
 
         )
+        Log.d("ttt 알림방 히스토리", result.fold(
+            onSuccess = { contents ->
+                LoadResult.Page(
+                    data = contents.content,
+                    prevKey = null,
+                    nextKey = if (contents.last) pageIndex + 1 else null
+                )
+            },
+            onError = { e -> LoadResult.Error(e) }
+        ).toString())
+
         return result.fold(
             onSuccess = { contents ->
                 LoadResult.Page(
