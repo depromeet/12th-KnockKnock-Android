@@ -57,6 +57,8 @@ class AlarmCreateFragment :
         val args: AlarmCreateFragmentArgs by navArgs()
         viewModel.editTextMessageEvent.value = args.message
 
+        if (args.reservation) updateReservationAlarmSend(0)
+
         initEditText()
         initRegisterForActivityResult()
         initToolbar()
@@ -77,8 +79,12 @@ class AlarmCreateFragment :
                         it.message
                     )
                     is AlarmCreateNavigationAction.NavigateToPreview -> navigate(
-                            AlarmCreateFragmentDirections.actionAlarmCreateFragmentToPreviewFragment(it.title, it.message, it.uri)
+                        AlarmCreateFragmentDirections.actionAlarmCreateFragmentToPreviewFragment(
+                            it.title,
+                            it.message,
+                            it.uri
                         )
+                    )
                     is AlarmCreateNavigationAction.NavigateToPushAlarm -> navController.popBackStack()
                 }
             }
@@ -88,7 +94,7 @@ class AlarmCreateFragment :
     private fun addRecommendationMessage(message: String) = binding.editTextMessage.let {
         val editTextMessageStart = it.text.substring(0 until it.selectionStart)
         val editTextMessageEnd = it.text.substring(it.selectionStart until it.length())
-        if(it.text.length + message.length <= 200) {
+        if (it.text.length + message.length <= 200) {
             it.setText(editTextMessageStart + message + editTextMessageEnd)
             it.setSelection(editTextMessageStart.length + message.length)
         }
@@ -116,7 +122,7 @@ class AlarmCreateFragment :
             when (it) {
                 0 -> {
                     // 예약 보내가 버튼 클릭
-                    alarmReservationSend()
+                    reservationAlarmSend()
                 }
                 1 -> {
                     /**
@@ -130,7 +136,7 @@ class AlarmCreateFragment :
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 
-    private fun alarmReservationSend() {
+    private fun reservationAlarmSend() {
         val bottomSheet = BottomAlarmReservationPicker(callback = {
             /**
              * 예약 푸쉬알림을 발송했습니다!
@@ -138,6 +144,19 @@ class AlarmCreateFragment :
              * */
             Log.d("ttt", it.toString())
 //            viewModel.onReservationAlarmPushClicked(it.toString())
+        })
+        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
+    }
+
+
+    private fun updateReservationAlarmSend(reservationId: Int) {
+        val bottomSheet = BottomAlarmReservationPicker(callback = {
+            /**
+             * 예약 푸쉬알림을 업데이트 했습니다!
+             * fcm API!!
+             * */
+            Log.d("ttt", it.toString())
+            viewModel.onUpdateReservationAlarmPushClicked(reservationId, it.toString())
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

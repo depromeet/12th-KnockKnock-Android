@@ -2,6 +2,7 @@ package com.depromeet.knockknock.ui.alarmroomhistory.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.domain.model.Admission
 import com.depromeet.knockknock.databinding.ItemRecyclerHistoryBundleBinding
 import com.depromeet.knockknock.databinding.ItemRecyclerInviteRoomBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel
@@ -12,7 +13,7 @@ class AlarmInviteRoomViewHolder(
     private val binding: ItemRecyclerInviteRoomBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: InviteRoom) {
+    fun bind(item: Admission) {
         binding.apply {
             model = item
             executePendingBindings()

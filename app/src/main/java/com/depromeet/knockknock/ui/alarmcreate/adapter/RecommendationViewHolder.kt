@@ -10,7 +10,7 @@ class RecommendationViewHolder(
 
     fun bind(item: RecommendMessage) {
         binding.apply {
-            holder = item
+            model = item
             executePendingBindings()
         }
     }
