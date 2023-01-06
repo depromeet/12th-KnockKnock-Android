@@ -4,9 +4,6 @@ import com.depromeet.domain.model.Alarm
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.friendlist.FriendListNavigationAction
-import com.depromeet.knockknock.ui.notification.model.Notification
-//import com.dida.android.presentation.views.nav.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

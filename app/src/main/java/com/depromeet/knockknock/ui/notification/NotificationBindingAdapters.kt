@@ -6,7 +6,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.depromeet.domain.model.Alarm
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.ui.notification.model.Notification
 
 @SuppressLint("UseCompatLoadingForDrawables")
 @BindingAdapter("notificationIsEmptyBackgroundColor")

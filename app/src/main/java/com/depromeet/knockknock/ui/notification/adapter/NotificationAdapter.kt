@@ -12,7 +12,6 @@ import com.depromeet.knockknock.databinding.HolderInviteFriendBinding
 import com.depromeet.knockknock.databinding.HolderInviteRoomBinding
 import com.depromeet.knockknock.databinding.HolderNotificationAlarmBinding
 import com.depromeet.knockknock.ui.notification.NotificationActionHandler
-import com.depromeet.knockknock.ui.notification.model.*
 
 class NotificationAdapter(
     private val eventListener: NotificationActionHandler
@@ -55,10 +54,9 @@ class NotificationAdapter(
 
     override fun getItemViewType(position: Int): Int =
         when(getItem(position).type) {
-            NotificationType.INVITEROOM.toString() -> R.layout.holder_invite_room
-            NotificationType.INVITEFRIEND.toString() -> R.layout.holder_invite_friend
-            NotificationType.NOTIFICATIONALARM.toString() -> R.layout.holder_notification_alarm
-            else -> 0
+            "INVITE_ROOM" -> R.layout.holder_invite_room
+            "FRIEND_REQUEST" -> R.layout.holder_invite_friend
+            else -> R.layout.holder_notification_alarm
         }
 
     internal object NotificationItemDiffCallback : DiffUtil.ItemCallback<Alarm>() {
