@@ -25,7 +25,6 @@ import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -38,6 +37,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     override val viewModel : RegisterViewModel by viewModels()
     private val navController by lazy { findNavController() }
+    private var isNotificationAllow: Boolean = false
 
     private var googleLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == 1) {
@@ -63,7 +63,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is RegisterNavigationAction.NavigateToPushSetting -> pushSettingDialog()
+                    is RegisterNavigationAction.NavigateToPushSetting -> {
+                        if(!isNotificationAllow) pushSettingDialog()
+                        else viewModel.sendNotification() }
                     is RegisterNavigationAction.NavigateToNotificationAlarm -> createNotification()
                     is RegisterNavigationAction.NavigateToKakaoLogin -> kakaoLogin()
                     is RegisterNavigationAction.NavigateToGoogleLogin -> googleLogin()
@@ -89,7 +91,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             alertDialogModel = res,
             clickToPositive = {
                 toastMessage("푸쉬 알림 적용 완료")
-                viewModel.setNotification(true)
+                viewModel.sendNotification()
             },
             clickToNegative = {
                 toastMessage("푸쉬 알림 적용 해제")
