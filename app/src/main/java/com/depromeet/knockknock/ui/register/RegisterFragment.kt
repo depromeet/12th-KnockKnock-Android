@@ -64,8 +64,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             viewModel.navigationHandler.collectLatest {
                 when(it) {
                     is RegisterNavigationAction.NavigateToPushSetting -> {
-                        if(!isNotificationAllow) pushSettingDialog()
-                        else viewModel.sendNotification() }
+                        if(!isNotificationAllow) {
+                            pushSettingDialog()
+                        } else {
+                            viewModel.sendNotification()
+                            toastMessage("푸쉬 알림 전송 완료")
+                        } }
                     is RegisterNavigationAction.NavigateToNotificationAlarm -> createNotification()
                     is RegisterNavigationAction.NavigateToKakaoLogin -> kakaoLogin()
                     is RegisterNavigationAction.NavigateToGoogleLogin -> googleLogin()
