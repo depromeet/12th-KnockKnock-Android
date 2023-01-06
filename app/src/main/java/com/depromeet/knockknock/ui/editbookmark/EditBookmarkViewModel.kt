@@ -45,9 +45,11 @@ class EditBookmarkViewModel @Inject constructor(
 
     fun deleteStroage() {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.deleteStroages(deleteBookmarkList)
                 .onSuccess {
                     _navigationHandler.emit(EditBookmarkNavigationAction.NavigateToDeleteComplete) }
+            dismissLoading()
         }
     }
 

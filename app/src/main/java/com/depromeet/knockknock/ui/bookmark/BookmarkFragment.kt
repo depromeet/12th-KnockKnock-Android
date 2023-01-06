@@ -10,8 +10,6 @@ import com.depromeet.knockknock.databinding.FragmentBookmarkBinding
 import com.depromeet.knockknock.ui.bookmark.adapter.BookmarkAdapter
 import com.depromeet.knockknock.ui.bookmark.bottom.BottomPeriodFilter
 import com.depromeet.knockknock.ui.bookmark.bottom.BottomRoomFilter
-import com.depromeet.knockknock.ui.bookmark.model.Bookmark
-import com.depromeet.knockknock.ui.bookmark.model.Room
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
