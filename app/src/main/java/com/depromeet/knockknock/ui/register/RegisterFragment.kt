@@ -92,6 +92,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             clickToPositive = {
                 toastMessage("푸쉬 알림 적용 완료")
                 viewModel.sendNotification()
+                isNotificationAllow = true
             },
             clickToNegative = {
                 toastMessage("푸쉬 알림 적용 해제")
