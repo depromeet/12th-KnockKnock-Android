@@ -12,8 +12,8 @@ data class Notification(
     val dateTime: String,
 )
 
-enum class NotificationType(type: Int) {
-    NOTIFICATIONALARM(0),
-    INVITEROOM(1),
-    INVITEFRIEND(2)
+enum class NotificationType(type: String) {
+    NOTIFICATIONALARM("NOTIFICATION_ALARM"),
+    INVITEROOM("INVITE_ROOM"),
+    INVITEFRIEND("FRIEND_REQUEST")
 }

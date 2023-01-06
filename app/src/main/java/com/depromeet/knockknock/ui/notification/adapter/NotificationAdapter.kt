@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.depromeet.domain.model.Alarm
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderInviteFriendBinding
 import com.depromeet.knockknock.databinding.HolderInviteRoomBinding
@@ -15,7 +16,7 @@ import com.depromeet.knockknock.ui.notification.model.*
 
 class NotificationAdapter(
     private val eventListener: NotificationActionHandler
-) : ListAdapter<Notification, NotificationViewHolder>(NotificationItemDiffCallback){
+) : ListAdapter<Alarm, NotificationViewHolder>(NotificationItemDiffCallback){
 
     init { setHasStableIds(true) }
 
@@ -54,44 +55,45 @@ class NotificationAdapter(
 
     override fun getItemViewType(position: Int): Int =
         when(getItem(position).type) {
-            NotificationType.INVITEROOM -> R.layout.holder_invite_room
-            NotificationType.INVITEFRIEND -> R.layout.holder_invite_friend
-            else -> R.layout.holder_notification_alarm
+            NotificationType.INVITEROOM.toString() -> R.layout.holder_invite_room
+            NotificationType.INVITEFRIEND.toString() -> R.layout.holder_invite_friend
+            NotificationType.NOTIFICATIONALARM.toString() -> R.layout.holder_notification_alarm
+            else -> 0
         }
 
-    internal object NotificationItemDiffCallback : DiffUtil.ItemCallback<Notification>() {
-        override fun areItemsTheSame(oldItem: Notification, newItem: Notification) =
+    internal object NotificationItemDiffCallback : DiffUtil.ItemCallback<Alarm>() {
+        override fun areItemsTheSame(oldItem: Alarm, newItem: Alarm) =
             oldItem.type == newItem.type
 
-        override fun areContentsTheSame(oldItem: Notification, newItem: Notification) =
+        override fun areContentsTheSame(oldItem: Alarm, newItem: Alarm) =
             oldItem == newItem
     }
 }
 
 sealed class NotificationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    open fun bind(notification: Notification) = Unit
+    open fun bind(notification: Alarm) = Unit
 
     class NotificationAlarmViewHolder(private val binding: HolderNotificationAlarmBinding): NotificationViewHolder(binding.root) {
 
-        override fun bind(notification: Notification) {
-            binding.holder = notification
+        override fun bind(alarm: Alarm) {
+            binding.holder = alarm
             binding.executePendingBindings()
         }
     }
 
     class InviteRoomViewHolder(private val binding: HolderInviteRoomBinding): NotificationViewHolder(binding.root) {
 
-        override fun bind(notification: Notification) {
-            binding.holder = notification
+        override fun bind(alarm: Alarm) {
+            binding.holder = alarm
             binding.executePendingBindings()
         }
     }
 
     class InviteFriendViewHolder(private val binding: HolderInviteFriendBinding): NotificationViewHolder(binding.root) {
 
-        override fun bind(notification: Notification) {
-            binding.holder = notification
+        override fun bind(alarm: Alarm) {
+            binding.holder = alarm
             binding.executePendingBindings()
         }
     }
