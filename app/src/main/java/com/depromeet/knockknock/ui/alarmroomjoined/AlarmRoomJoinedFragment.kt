@@ -1,33 +1,18 @@
 package com.depromeet.knockknock.ui.alarmroomjoined
 
-import android.annotation.SuppressLint
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import androidx.paging.filter
-import com.depromeet.domain.model.Group
-import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.domain.model.GroupContent
-import com.depromeet.domain.model.Member
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomJoinedBinding
 import com.depromeet.knockknock.ui.alarmroomjoined.adapter.AlarmRoomJoinedAdapter
-import com.depromeet.knockknock.ui.alarmroomsearch.adapter.PopularCategoryAdapter
-import com.depromeet.knockknock.ui.alarmroomsearch.model.AlarmRoom
-import com.depromeet.knockknock.ui.bookmark.BookmarkFragmentDirections
-import com.depromeet.knockknock.ui.category.model.Category
-import com.depromeet.knockknock.util.customOnFocusChangeListener
-import com.depromeet.knockknock.util.hideKeyboard
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filter
 
 
 @AndroidEntryPoint
