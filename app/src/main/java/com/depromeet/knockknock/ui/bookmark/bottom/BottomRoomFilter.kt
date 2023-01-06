@@ -7,28 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
-import com.depromeet.knockknock.R
-import com.depromeet.knockknock.databinding.DialogBottomDefaultImageBinding
 import com.depromeet.knockknock.databinding.DialogBottomRoomFilterBinding
 import com.depromeet.knockknock.ui.bookmark.adapter.FilterRoomAdapter
-import com.depromeet.knockknock.ui.bookmark.model.Room
-import com.depromeet.knockknock.util.defaultimage.DefaultImageAdapter
-import com.depromeet.knockknock.util.defaultimage.DefaultImageViewModel
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class BottomRoomFilter(

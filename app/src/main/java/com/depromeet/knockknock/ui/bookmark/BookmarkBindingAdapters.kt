@@ -6,13 +6,6 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.ui.bookmark.model.Bookmark
-
-@SuppressLint("SetTextI18n")
-@BindingAdapter("reactionCount")
-fun TextView.bindReactionCount(bookmark: Bookmark) {
-    this.text = bookmark.reactionContents+" "+bookmark.reactionCount.toString()
-}
 
 @BindingAdapter("resetVisible")
 fun ConstraintLayout.bindResetVisible(filterChecked: Boolean) {

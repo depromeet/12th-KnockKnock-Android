@@ -1,14 +1,11 @@
 package com.depromeet.knockknock.ui.home
 
 import com.depromeet.domain.model.Notification
-import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.bookmark.model.Room
-import com.depromeet.knockknock.ui.notification.NotificationNavigationAction
 import com.depromeet.knockknock.util.randomNum
-//import com.dida.android.presentation.views.nav.home.HomeNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
