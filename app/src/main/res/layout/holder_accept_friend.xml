@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="holder"
+            type="com.depromeet.domain.model.Alarm" />
+
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.notification.NotificationActionHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@drawable/custom_white_radius08"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:id="@+id/invite_room_title"
+            style="@style/Theme.AppCompat.TextView.Notification.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/accept_friend_title">
+        </TextView>
+
+        <TextView
+            style="@style/Theme.AppCompat.TextView.Notification.Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/invite_room_title"
+            app:layout_constraintBottom_toBottomOf="@id/invite_room_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:dateToDay="@{holder.created_at}">
+        </TextView>
+
+        <ImageView
+            android:id="@+id/user_img"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/invite_room_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:userProfile="@{holder.user_profile}">
+        </ImageView>
+
+        <TextView
+            style="@style/Theme.AppCompat.TextView.Notification.UserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/user_img"
+            app:layout_constraintBottom_toBottomOf="@id/user_img"
+            app:layout_constraintStart_toEndOf="@id/user_img"
+            android:text="@{holder.title}">
+        </TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

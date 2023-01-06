@@ -25,7 +25,7 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
     override val viewModel : BookmarkViewModel by viewModels()
     private val navController: NavController by lazy { findNavController() }
 
-    private val adapter by lazy { BookmarkAdapter(viewModel) }
+    private val bookmarkAdapter by lazy { BookmarkAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -56,13 +56,13 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
 
         lifecycleScope.launchWhenStarted {
             viewModel.bookmarkList.collectLatest {
-                adapter.submitData(it)
+                bookmarkAdapter.submitData(it)
             }
         }
     }
 
     override fun initAfterBinding() {
-        binding.bookmarkRecycler.adapter = adapter
+        binding.bookmarkRecycler.adapter = bookmarkAdapter
     }
 
     private fun initToolbar() {
