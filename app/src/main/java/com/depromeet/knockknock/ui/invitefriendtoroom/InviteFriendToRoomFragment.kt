@@ -8,7 +8,6 @@ import androidx.navigation.fragment.navArgs
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentInviteFriendToRoomBinding
-import com.depromeet.knockknock.ui.friendlist.model.User
 import com.depromeet.knockknock.ui.invitefriendtoroom.adapter.InviteFriendToRoomAdapter
 import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.hideKeyboard

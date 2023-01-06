@@ -14,8 +14,6 @@ import com.depromeet.knockknock.ui.alarmroomjoined.AlarmRoomJoinedFragment
 import com.depromeet.knockknock.ui.alarmroomtab.adapter.AlarmRoomTabAdapter
 import com.depromeet.knockknock.ui.alarmroomtab.bottom.BottomMakeRoom
 import com.depromeet.knockknock.ui.alarmroomtab.bottom.MakeRoomType
-import com.depromeet.knockknock.ui.friendlist.FriendListNavigationAction
-import com.depromeet.knockknock.ui.home.model.Alarm
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

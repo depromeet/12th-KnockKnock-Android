@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.domain.model.Member
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderMemberListBinding
-import com.depromeet.knockknock.ui.friendlist.model.User
 import com.depromeet.knockknock.ui.settingroomforuser.SettingRoomForUserActionHandler
 
 class RoomMemberAdapter(
