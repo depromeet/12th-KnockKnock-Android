@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.net.Uri
 import java.io.File
 
-@SuppressLint("Range")
+@SuppressLint("Range", "SuspiciousIndentation")
 fun uriToFile(uri : Uri, context : Context): File {
 
     @SuppressLint("Range")
