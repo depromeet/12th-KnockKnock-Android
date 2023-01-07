@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/accept_friend_title">
+            android:text="@{holder.title}">
         </TextView>
 
         <TextView
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toTopOf="@id/user_img"
             app:layout_constraintBottom_toBottomOf="@id/user_img"
             app:layout_constraintStart_toEndOf="@id/user_img"
-            android:text="@{holder.title}">
+            android:text="@{holder.content}">
         </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
