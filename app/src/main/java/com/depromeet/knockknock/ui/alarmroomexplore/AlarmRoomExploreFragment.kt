@@ -99,7 +99,13 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
 
     override fun onResume() {
         super.onResume()
-        viewModel.getGroups()
+        lifecycleScope.launchWhenStarted {
+            viewModel.roomList.collectLatest {
+                val alarmRoomAdapter = AlarmRoomAdapter(viewModel,viewModel)
+                binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+                alarmRoomAdapter.submitData(it)
+            }
+        }
         viewModel.getCategory()
         viewModel.getFamousGroups()
     }
