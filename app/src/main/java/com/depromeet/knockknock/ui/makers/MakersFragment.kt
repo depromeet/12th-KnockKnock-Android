@@ -1,25 +1,25 @@
-package com.depromeet.knockknock.ui.information
+package com.depromeet.knockknock.ui.makers
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
-import com.depromeet.knockknock.databinding.FragmentInformationBinding
+import com.depromeet.knockknock.databinding.FragmentMakersBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
-
 @AndroidEntryPoint
-class InformationFragment : BaseFragment<FragmentInformationBinding, InformationViewModel>(R.layout.fragment_information) {
+class MakersFragment :
+    BaseFragment<FragmentMakersBinding, MakersViewModel>(R.layout.fragment_makers) {
 
-    private val TAG = "InformationFragment"
+    private val TAG = "MakersFragment"
 
     override val layoutResourceId: Int
-        get() = R.layout.fragment_information
-
-    override val viewModel : InformationViewModel by viewModels()
+        get() = R.layout.fragment_makers
     private val navController by lazy { findNavController() }
+
+    override val viewModel: MakersViewModel by viewModels()
 
     override fun initStartView() {
         binding.apply {
@@ -33,25 +33,22 @@ class InformationFragment : BaseFragment<FragmentInformationBinding, Information
     override fun initDataBinding() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
-                when(it) {
-                    is InformationNavigationAction.NavigateToUserConsents -> {}
-                    is InformationNavigationAction.NavigateToUserPrivacy -> {}
-                    is InformationNavigationAction.NavigateToAppMakers -> navigate(InformationFragmentDirections.actionInformationFragmentToMakersFragment())
+                when (it) {
                 }
             }
         }
     }
 
-    override fun initAfterBinding() {
-    }
-
     private fun initToolbar() {
-        with(binding.toolbar) {
-            this.title = getString(R.string.information_title)
+        with(binding.toolbarMakers) {
+            this.title = "만든 사람들"
 
             // 뒤로가기 버튼
-            this.setNavigationIcon(R.drawable.ic_allow_back)
+            this.setNavigationIcon(com.depromeet.knockknock.R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
+    }
+
+    override fun initAfterBinding() {
     }
 }

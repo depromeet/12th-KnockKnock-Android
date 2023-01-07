@@ -201,7 +201,11 @@
     <fragment
         android:id="@+id/informationFragment"
         android:name="com.depromeet.knockknock.ui.information.InformationFragment"
-        android:label="InformationFragment" />
+        android:label="InformationFragment" >
+        <action
+            android:id="@+id/action_informationFragment_to_makersFragment"
+            app:destination="@id/makersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/onboardFragment"
         android:name="com.depromeet.knockknock.ui.onboard.OnboardFragment"
@@ -382,4 +386,8 @@
     <action
         android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomSearchFragment"
         app:destination="@id/alarmRoomSearchFragment" />
+    <fragment
+        android:id="@+id/makersFragment"
+        android:name="com.depromeet.knockknock.ui.makers.MakersFragment"
+        android:label="MakersFragment" />
 </navigation>
