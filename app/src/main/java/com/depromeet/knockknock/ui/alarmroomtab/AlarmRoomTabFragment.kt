@@ -88,7 +88,7 @@ class AlarmRoomTabFragment :
         val dialog: BottomMakeRoom = BottomMakeRoom {
             when(it) {
                 is MakeRoomType.RoomWithFriend -> {}
-                is MakeRoomType.RoomAlone -> {}
+                is MakeRoomType.RoomAlone -> {navigate(AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToAloneRoomMakeCategoryFragment())}
             }
         }
         dialog.show(requireActivity().supportFragmentManager, TAG)
