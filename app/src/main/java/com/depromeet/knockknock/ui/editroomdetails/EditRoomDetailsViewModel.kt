@@ -165,10 +165,6 @@ class EditRoomDetailsViewModel @Inject constructor(
                     Log.d(TAG,"putGroup error")
                     _onSaveSuccess.emit(true)
                 }
-
-
-
-
         }
     }
 
@@ -231,8 +227,9 @@ class EditRoomDetailsViewModel @Inject constructor(
         baseViewModelScope.launch {
             mainRepository.postFileToUrl(file = file)
                 .onSuccess {
-                    if(isBackground)
+                    if(isBackground) {
                         backgroundImg.value = it.image_url
+                    }
                     else
                         thumbnailImg.value = it.image_url
                 }
