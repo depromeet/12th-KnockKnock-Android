@@ -53,10 +53,7 @@ class AloneRoomMakeCategoryViewModel @Inject constructor(
 
     override fun onSkipClicked() {
         baseViewModelScope.launch {
-            _navigationHandler.emit(AloneRoomMakeCategoryNavigationAction.NavigateToAloneRoomDetails(categoryId = 0))
+            _navigationHandler.emit(AloneRoomMakeCategoryNavigationAction.NavigateToAloneRoomDetails(categoryId = 13))
         }
     }
-
-
-
 }

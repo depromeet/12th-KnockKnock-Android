@@ -24,7 +24,7 @@ class SettingRoomViewModel @Inject constructor(
     val navigationHandler: SharedFlow<SettingRoomNavigationAction> =
         _navigationHandler.asSharedFlow()
 
-    private val _receivedRoomId: MutableStateFlow<Int> = MutableStateFlow<Int>(1)
+    private val _receivedRoomId: MutableStateFlow<Int> = MutableStateFlow<Int>(73)
     val receivedRoomId: StateFlow<Int> = _receivedRoomId.asStateFlow()
 
     private val _roomInfo: MutableStateFlow<Group> = MutableStateFlow(
