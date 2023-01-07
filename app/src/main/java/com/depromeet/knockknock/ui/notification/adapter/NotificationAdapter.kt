@@ -71,7 +71,7 @@ class NotificationAdapter(
     override fun getItemViewType(position: Int): Int =
         when(getItem(position).type) {
             "FRIEND_REQUEST" -> R.layout.holder_invite_friend
-            "GROUP_INVITE" -> R.layout.holder_accept_room
+            "GROUP_INVITE" -> R.layout.holder_invite_room
             "GROUP_REQUEST" -> R.layout.holder_invite_room
             "FRIEND_ACCEPT" -> R.layout.holder_accept_friend
             "GROUP_ACCEPT" -> R.layout.holder_accept_room
