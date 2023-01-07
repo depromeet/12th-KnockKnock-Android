@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.editroomdetails
+package com.depromeet.knockknock.ui.aloneroomdetails
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -15,15 +15,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.depromeet.knockknock.base.BaseFragment
-import com.depromeet.knockknock.databinding.FragmentEditRoomDetailsBinding
+import com.depromeet.knockknock.databinding.FragmentAloneRoomDetailsBinding
+import com.depromeet.knockknock.ui.aloneroomdetails.adapter.AloneRoomBackgroundAdapter
+import com.depromeet.knockknock.ui.aloneroomdetails.adapter.AloneRoomThumbnailAdapter
 import com.depromeet.knockknock.ui.editprofile.bottom.EditProfileImageBottomSheet
-import com.depromeet.knockknock.ui.editroomdetails.adapter.BackgroundAdapter
-import com.depromeet.knockknock.ui.editroomdetails.adapter.ThumbnailAdapter
 import com.depromeet.knockknock.ui.register.textChangeColor
 import com.depromeet.knockknock.util.hideKeyboard
 import com.depromeet.knockknock.util.uriToFile
@@ -37,20 +36,20 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class EditRoomDetailsFragment :
-    BaseFragment<FragmentEditRoomDetailsBinding, EditRoomDetailsViewModel>(R.layout.fragment_edit_room_details) {
+class AloneRoomDetailsFragment :
+    BaseFragment<FragmentAloneRoomDetailsBinding, AloneRoomDetailsViewModel>(R.layout.fragment_alone_room_details) {
 
     private val TAG = "EditRoomDetailsFragment"
 
     override val layoutResourceId: Int
-        get() = R.layout.fragment_edit_room_details
+        get() = R.layout.fragment_alone_room_details
 
-    private val args: EditRoomDetailsFragmentArgs by navArgs()
+    private val args: AloneRoomDetailsFragmentArgs by navArgs()
 
-    override val viewModel: EditRoomDetailsViewModel by viewModels()
+    override val viewModel: AloneRoomDetailsViewModel by viewModels()
     private val navController by lazy { findNavController() }
-    private val thumbnailAdapter by lazy { ThumbnailAdapter(viewModel) }
-    private val backgroundAdapter by lazy { BackgroundAdapter(viewModel) }
+    private val thumbnailAdapter by lazy { AloneRoomThumbnailAdapter(viewModel) }
+    private val backgroundAdapter by lazy { AloneRoomBackgroundAdapter(viewModel) }
 
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
     private lateinit var cameraLauncher: ActivityResultLauncher<Uri>
@@ -71,13 +70,8 @@ class EditRoomDetailsFragment :
     }
 
     override fun initStartView() {
-        viewModel.group_id.value= args.groupId
-        viewModel.group_category_id.value = args.groupCategoryId
-        viewModel.inputRoomDescription.value = args.groupDescription
-        viewModel.inputRoomName.value = args.groupTitle
-        viewModel.isRoomUnpublic.value = !args.groupPublicAccess
-        viewModel.backgroundImg.value = args.groupBackgroundPath
-        viewModel.thumbnailImg.value = args.groupThumbnailPath
+
+        viewModel.group_category_id.value = args.categoryId
 
         binding.apply {
             this.viewmodel = viewModel
@@ -103,14 +97,23 @@ class EditRoomDetailsFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when (it) {
-                    is EditRoomDetailsNavigationAction.NavigateToEditBackground -> {isBackground=true
+                    is AloneRoomDetailsNavigationAction.NavigateToEditBackground -> {isBackground=true
                         editProfileImageBottomSheet()
                     viewModel._backgroundStored.value=true}
-                    is EditRoomDetailsNavigationAction.NavigateToEditThumbnail -> {isBackground=false
+                    is AloneRoomDetailsNavigationAction.NavigateToEditThumbnail -> {isBackground=false
                         editProfileImageBottomSheet()
                         viewModel._thumbnailStored.value=true}
-                    is EditRoomDetailsNavigationAction.NavigateToSetBackgroundFromList -> {setBackgroundFromList(it.backgroundUrl)}
-                    is EditRoomDetailsNavigationAction.NavigateToSetThumbnailFromList -> {setThumbnailFromList(it.thumbnailUrl)}}
+                    is AloneRoomDetailsNavigationAction.NavigateToSetBackgroundFromList -> {setBackgroundFromList(it.backgroundUrl)}
+                    is AloneRoomDetailsNavigationAction.NavigateToSetThumbnailFromList -> {setThumbnailFromList(it.thumbnailUrl)}
+                    is AloneRoomDetailsNavigationAction.NavigateToAloneRoomInviteFriend -> navigate(AloneRoomDetailsFragmentDirections.actionAloneRoomDetailsFragmentToAloneRoomInviteFriendFragment(
+                        viewModel.inputRoomName.value,
+                        viewModel.inputRoomDescription.value,
+                        viewModel.thumbnailImg.value,
+                        viewModel.backgroundImg.value,
+                        !viewModel.isRoomUnpublic.value,
+                        viewModel.group_category_id.value
+                    ))
+                }
             }
         }
 

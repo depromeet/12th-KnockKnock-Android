@@ -34,31 +34,6 @@ class CategoryViewModel @Inject constructor(
     var group_category_id = MutableStateFlow<Int>(0)
     var group_public_access = MutableStateFlow<Boolean>(false)
 
-//    var group = MutableStateFlow<Group>(
-//        Group(
-//            background_image_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-//            category = Category(
-//                id = 2,
-//                content = "스터디",
-//                emoji = "1"
-//            ),
-//            description = "무슨무슨 방입니다",
-//            group_id = 17,
-//            group_type = "OPEN",
-//            ihost = true,
-//            members = listOf(
-//                Member(
-//                    nick_name = "이영준",
-//                    profile_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-//                    user_id = 1
-//                )
-//            ),
-//            public_access = true,
-//            thumbnail_path = "https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23",
-//            title = "방 이름"
-//        )
-//    )
-
     private val _categoryList: MutableStateFlow<List<Category>> = MutableStateFlow(emptyList())
     val categoryList: StateFlow<List<Category>> = _categoryList.asStateFlow()
 
@@ -70,8 +45,6 @@ class CategoryViewModel @Inject constructor(
                 }
         }
     }
-
-
 
     override fun onCategoryClicked(categoryId: Int) {
         baseViewModelScope.launch {

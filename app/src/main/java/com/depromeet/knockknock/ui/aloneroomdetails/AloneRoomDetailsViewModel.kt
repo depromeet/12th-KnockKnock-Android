@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.editroomdetails
+package com.depromeet.knockknock.ui.aloneroomdetails
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
@@ -16,23 +16,16 @@ import okhttp3.MultipartBody
 import javax.inject.Inject
 
 @HiltViewModel
-class EditRoomDetailsViewModel @Inject constructor(
+class AloneRoomDetailsViewModel @Inject constructor(
     private val mainRepository : MainRepository
-) : BaseViewModel(), EditRoomDetailsActionHandler {
+) : BaseViewModel(), AloneRoomDetailsActionHandler {
 
     private val TAG = "EditRoomDetailViewModel"
 
-    private val _navigationHandler: MutableSharedFlow<EditRoomDetailsNavigationAction> =
-        MutableSharedFlow<EditRoomDetailsNavigationAction>()
-    val navigationHandler: SharedFlow<EditRoomDetailsNavigationAction> =
+    private val _navigationHandler: MutableSharedFlow<AloneRoomDetailsNavigationAction> =
+        MutableSharedFlow<AloneRoomDetailsNavigationAction>()
+    val navigationHandler: SharedFlow<AloneRoomDetailsNavigationAction> =
         _navigationHandler.asSharedFlow()
-
-    //이미지 id를 사용할 경우 주석해제
-//    private val _backgroundImgUrl : MutableSharedFlow<String> = MutableSharedFlow<String>()
-//    val backgroundImgUrl: SharedFlow<String> = _backgroundImgUrl.asSharedFlow()
-//
-//    private val _thumbnailImgUrl : MutableSharedFlow<String> = MutableSharedFlow<String>()
-//    val thumbnailImgUrl: SharedFlow<String> = _thumbnailImgUrl.asSharedFlow()
 
     var groupId = MutableStateFlow<Int>(0)
 
@@ -58,7 +51,6 @@ class EditRoomDetailsViewModel @Inject constructor(
     var inputRoomNameCountEvent = MutableStateFlow<Int>(0)
     var inputRoomDescriptionCountEvent = MutableStateFlow<Int>(0)
 
-    var group_id = MutableStateFlow<Int>(1)
     var inputRoomName = MutableStateFlow<String>("")
     var inputRoomDescription = MutableStateFlow<String>("")
     var thumbnailImg = MutableStateFlow<String>("https://t1.daumcdn.net/cfile/tistory/996333405A8280FC23")
@@ -120,7 +112,7 @@ class EditRoomDetailsViewModel @Inject constructor(
 
         baseViewModelScope.launch {
             backgroundImg.emit(backgroundUrl)
-            _navigationHandler.emit(EditRoomDetailsNavigationAction.NavigateToSetBackgroundFromList(backgroundUrl = backgroundUrl))
+            _navigationHandler.emit(AloneRoomDetailsNavigationAction.NavigateToSetBackgroundFromList(backgroundUrl = backgroundUrl))
         }
 
     }
@@ -130,41 +122,26 @@ class EditRoomDetailsViewModel @Inject constructor(
 
         baseViewModelScope.launch {
             thumbnailImg.emit(thumbnailUrl)
-            _navigationHandler.emit(EditRoomDetailsNavigationAction.NavigateToSetThumbnailFromList(thumbnailUrl = thumbnailUrl))
+            _navigationHandler.emit(AloneRoomDetailsNavigationAction.NavigateToSetThumbnailFromList(thumbnailUrl = thumbnailUrl))
         }
 
     }
 
     override fun onBackgroundEditClicked() {
         baseViewModelScope.launch {
-            _navigationHandler.emit(EditRoomDetailsNavigationAction.NavigateToEditBackground)
+            _navigationHandler.emit(AloneRoomDetailsNavigationAction.NavigateToEditBackground)
         }
     }
 
     override fun onThumbnailEditClicked() {
         baseViewModelScope.launch {
-            _navigationHandler.emit(EditRoomDetailsNavigationAction.NavigateToEditThumbnail)
+            _navigationHandler.emit(AloneRoomDetailsNavigationAction.NavigateToEditThumbnail)
         }
     }
 
-    override fun onSaveClicked() {
+    override fun onNextClicked() {
         baseViewModelScope.launch {
-            mainRepository.putGroup(
-                id = group_id.value,
-                title = inputRoomName.value,
-                description = inputRoomDescription.value,
-                public_access = !isRoomUnpublic.value,
-                thumbnail_path = thumbnailImg.value,
-                background_image_path = backgroundImg.value,
-                category_id = group_category_id.value
-                ,)
-                .onSuccess {
-                    _onSaveSuccess.emit(true)
-                }
-                .onError {
-                    Log.d(TAG,"putGroup error")
-                    _onSaveSuccess.emit(true)
-                }
+            _navigationHandler.emit(AloneRoomDetailsNavigationAction.NavigateToAloneRoomInviteFriend)
         }
     }
 
