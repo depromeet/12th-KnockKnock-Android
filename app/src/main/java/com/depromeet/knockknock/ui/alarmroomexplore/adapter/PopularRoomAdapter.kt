@@ -7,14 +7,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.depromeet.domain.model.Group
 import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.databinding.HolderCategoryBinding
 import com.depromeet.knockknock.databinding.HolderPopularRoomBinding
 import com.depromeet.knockknock.ui.alarmroomexplore.AlarmRoomExploreActionHandler
-import com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchActionHandler
-import com.depromeet.knockknock.ui.category.model.Category
 
 
 class PopularRoomAdapter(
