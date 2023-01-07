@@ -37,7 +37,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     override val viewModel : RegisterViewModel by viewModels()
     private val navController by lazy { findNavController() }
-    private var isNotificationAllow: Boolean = false
 
     private var googleLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == 1) {
@@ -64,7 +63,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             viewModel.navigationHandler.collectLatest {
                 when(it) {
                     is RegisterNavigationAction.NavigateToPushSetting -> {
-                        if(!isNotificationAllow) {
+                        if(!viewModel.notificationAgreed.value) {
                             pushSettingDialog()
                         } else {
                             viewModel.sendNotification()
@@ -96,7 +95,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             clickToPositive = {
                 toastMessage("푸쉬 알림 적용 완료")
                 viewModel.sendNotification()
-                isNotificationAllow = true
             },
             clickToNegative = {
                 toastMessage("푸쉬 알림 적용 해제")

@@ -30,6 +30,7 @@ class RegisterViewModel @Inject constructor(
     fun sendNotification() {
         baseViewModelScope.launch {
             showLoading()
+            notificationAgreed.value = true
             mainRepository.postNotificationExperience(token = firebaseToken.value, content = messageText.value)
             dismissLoading()
         }
