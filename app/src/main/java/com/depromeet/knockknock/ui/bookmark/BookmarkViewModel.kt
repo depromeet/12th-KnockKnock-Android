@@ -1,13 +1,11 @@
 package com.depromeet.knockknock.ui.bookmark
 
-import android.util.Log
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.Notification
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.bookmark.adapter.createNotificationPager
-import com.depromeet.knockknock.ui.bookmark.model.Room
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

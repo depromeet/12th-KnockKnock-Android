@@ -46,7 +46,7 @@ class NotificationPagingSource(
                 LoadResult.Page(
                     data = contents.content,
                     prevKey = null,
-                    nextKey = if (contents.last) pageIndex + 1 else null
+                    nextKey = if (!contents.last) pageIndex + 1 else null
                 )
             },
             onError = { e -> LoadResult.Error(e) }

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.notification.model.Notification" />
+            type="com.depromeet.domain.model.Alarm" />
 
         <variable
             name="eventListener"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/invite_room_title">
+            android:text="@{holder.title}">
         </TextView>
 
         <TextView
@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="@id/invite_room_title"
             app:layout_constraintBottom_toBottomOf="@id/invite_room_title"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{holder.dateTime}">
+            app:dateToDay="@{holder.created_at}">
         </TextView>
 
         <ImageView
@@ -48,7 +48,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@id/invite_room_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:userProfile="@{holder.userImg}">
+            app:userProfile="@{holder.user_profile}">
         </ImageView>
 
         <TextView
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toTopOf="@id/user_img"
             app:layout_constraintBottom_toBottomOf="@id/user_img"
             app:layout_constraintStart_toEndOf="@id/user_img"
-            android:text="@{holder.userName}">
+            android:text="@{holder.content}">
         </TextView>
 
         <LinearLayout

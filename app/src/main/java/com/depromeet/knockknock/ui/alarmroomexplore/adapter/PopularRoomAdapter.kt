@@ -12,7 +12,6 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderPopularRoomBinding
 import com.depromeet.knockknock.ui.alarmroomexplore.AlarmRoomExploreActionHandler
 
-
 class PopularRoomAdapter(
     private val eventListener: AlarmRoomExploreActionHandler
 ) : ListAdapter<GroupBriefInfo, PopularRoomAdapter.ViewHolder>(RoomListItemDiffCallback){

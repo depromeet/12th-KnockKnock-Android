@@ -25,7 +25,6 @@ import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -63,7 +62,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is RegisterNavigationAction.NavigateToPushSetting -> pushSettingDialog()
+                    is RegisterNavigationAction.NavigateToPushSetting -> {
+                        if(!viewModel.notificationAgreed.value) {
+                            pushSettingDialog()
+                        } else {
+                            viewModel.sendNotification()
+                            toastMessage("푸쉬 알림 전송 완료")
+                        } }
                     is RegisterNavigationAction.NavigateToNotificationAlarm -> createNotification()
                     is RegisterNavigationAction.NavigateToKakaoLogin -> kakaoLogin()
                     is RegisterNavigationAction.NavigateToGoogleLogin -> googleLogin()
@@ -88,11 +93,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         val dialog = RegisterDefaultYellowAlertDialog(
             alertDialogModel = res,
             clickToPositive = {
-                toastMessage("푸쉬 알림 적용 완료")
-                viewModel.setNotification(true)
+                toastMessage("푸쉬 알림 전송 완료")
+                viewModel.sendNotification()
             },
             clickToNegative = {
-                toastMessage("푸쉬 알림 적용 해제")
+                toastMessage("푸쉬 알림 권한 거부")
                 pushSettingNoDialog()
             }
         )

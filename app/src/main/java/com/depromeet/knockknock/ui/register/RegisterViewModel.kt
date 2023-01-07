@@ -1,8 +1,5 @@
 package com.depromeet.knockknock.ui.register
 
-import android.util.Log
-import com.depromeet.domain.flatMap
-import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
@@ -30,14 +27,12 @@ class RegisterViewModel @Inject constructor(
     val firebaseToken: MutableStateFlow<String> = MutableStateFlow("")
     val deviceId: MutableStateFlow<String> = MutableStateFlow("")
 
-    fun setNotification(enable: Boolean) {
+    fun sendNotification() {
         baseViewModelScope.launch {
+            showLoading()
+            notificationAgreed.value = true
             mainRepository.postNotificationExperience(token = firebaseToken.value, content = messageText.value)
-                .onSuccess {
-                    Log.d("response!!", "Success")
-                }.onError {
-                    Log.d("response!!", it.toString())
-                }
+            dismissLoading()
         }
     }
 

@@ -1,6 +1,5 @@
 package com.depromeet.data.di
 
-import android.content.Context
 import com.depromeet.data.BuildConfig
 import com.depromeet.data.api.ApiClient.BASE_URL
 import com.depromeet.data.api.MainAPIService
@@ -8,16 +7,12 @@ import com.depromeet.data.interceptor.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Authenticator
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -33,8 +28,8 @@ object NetworkModule {
             .addInterceptor(loggingInterceptor)
             .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
             .addInterceptor(EmptyBodyInterceptor())
-//            .addInterceptor(ErrorResponseInterceptor()) // Error Response
-            .addInterceptor(BearerInterceptor()) // Refresh Token
+//            .addInterceptor(BearerInterceptor()) // Refresh Token
+            .addInterceptor(ErrorResponseInterceptor()) // Error Response
             .build()
     } else {
         OkHttpClient.Builder()
@@ -42,8 +37,8 @@ object NetworkModule {
             .connectTimeout(5000, TimeUnit.MILLISECONDS)
             .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
             .addInterceptor(EmptyBodyInterceptor())
-//            .addInterceptor(ErrorResponseInterceptor()) // Error Response
-            .addInterceptor(BearerInterceptor()) // Refresh Token
+//            .addInterceptor(BearerInterceptor()) // Refresh Token
+            .addInterceptor(ErrorResponseInterceptor()) // Error Response
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }

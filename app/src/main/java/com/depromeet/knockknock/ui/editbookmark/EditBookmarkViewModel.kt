@@ -7,7 +7,6 @@ import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.bookmark.adapter.createNotificationPager
-import com.depromeet.knockknock.ui.editbookmark.model.EditBookmark
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -46,9 +45,11 @@ class EditBookmarkViewModel @Inject constructor(
 
     fun deleteStroage() {
         baseViewModelScope.launch {
+            showLoading()
             mainRepository.deleteStroages(deleteBookmarkList)
                 .onSuccess {
                     _navigationHandler.emit(EditBookmarkNavigationAction.NavigateToDeleteComplete) }
+            dismissLoading()
         }
     }
 
