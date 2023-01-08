@@ -48,37 +48,175 @@
 
                 <TextView
                     android:id="@+id/tv_makers_server"
-                    android:textSize="18sp"
-                    android:textColor="#535353"
-                    android:fontFamily="@font/pretendard_semi_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    android:fontFamily="@font/pretendard_semi_bold"
                     android:text="Server"
+                    android:textColor="#535353"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/img_makers" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_makers_server_01"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_gray_radius10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_makers_server">
+
+                    <ImageView
+                        android:id="@+id/iv_makers_server_01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="18dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/emoji_server"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/pretendard_semi_bold"
+                        android:text="배정은"
+                        android:textColor="#535353"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_makers_server_01"
+                        app:layout_constraintStart_toEndOf="@+id/iv_makers_server_01"
+                        app:layout_constraintTop_toTopOf="@+id/iv_makers_server_01" />
+
+                    <ImageView
+                        android:id="@+id/iv_makers_server_01_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_who_i_am"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_makers_server_01"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_makers_server_01" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_makers_server_02"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_gray_radius10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraint_makers_server_01">
+
+                    <ImageView
+                        android:id="@+id/iv_makers_server_02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="18dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/emoji_server"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/pretendard_semi_bold"
+                        android:text="이서준"
+                        android:textColor="#535353"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_makers_server_02"
+                        app:layout_constraintStart_toEndOf="@+id/iv_makers_server_02"
+                        app:layout_constraintTop_toTopOf="@+id/iv_makers_server_02" />
+
+                    <ImageView
+                        android:id="@+id/iv_makers_server_02_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_who_i_am"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_makers_server_02"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_makers_server_02" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_makers_server_03"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_gray_radius10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraint_makers_server_02">
+
+                    <ImageView
+                        android:id="@+id/iv_makers_server_03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="18dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/emoji_server"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/pretendard_semi_bold"
+                        android:text="이찬진"
+                        android:textColor="#535353"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_makers_server_03"
+                        app:layout_constraintStart_toEndOf="@+id/iv_makers_server_03"
+                        app:layout_constraintTop_toTopOf="@+id/iv_makers_server_03" />
+
+                    <ImageView
+                        android:id="@+id/iv_makers_server_03_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_who_i_am"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_makers_server_03"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_makers_server_03" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <TextView
                     android:id="@+id/tv_makers_aos"
-                    android:textSize="18sp"
-                    android:textColor="#535353"
-                    android:fontFamily="@font/pretendard_semi_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    android:fontFamily="@font/pretendard_semi_bold"
                     android:text="AOS"
+                    android:textColor="#535353"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_makers_server" />
+                    app:layout_constraintTop_toBottomOf="@id/constraint_makers_server_03" />
 
                 <TextView
                     android:id="@+id/tv_makers_design"
-                    android:textSize="18sp"
-                    android:textColor="#535353"
-                    android:fontFamily="@font/pretendard_semi_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    android:fontFamily="@font/pretendard_semi_bold"
                     android:text="Design"
+                    android:textColor="#535353"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_makers_aos" />
 
