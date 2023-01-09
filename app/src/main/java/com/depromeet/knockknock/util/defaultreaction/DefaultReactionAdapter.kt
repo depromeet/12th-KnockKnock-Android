@@ -16,7 +16,7 @@ import com.depromeet.knockknock.databinding.HolderDefaultReactionBinding
 var checkedId = 0
 
 class DefaultReactionAdapter(
-    val isCheckedImage: MyReactionInfo,
+    val isCheckedImage: Int,
     private val eventListener: DefaultReactionActionHandler
 ) : ListAdapter<Reaction, DefaultReactionAdapter.ViewHolder>(DefaultReactionItemDiffCallback){
 
@@ -29,7 +29,7 @@ class DefaultReactionAdapter(
             parent,
             false
         )
-        checkedId = isCheckedImage.reaction_id
+        checkedId = isCheckedImage
 
         viewDataBinding.eventListener = eventListener
         return ViewHolder(viewDataBinding)

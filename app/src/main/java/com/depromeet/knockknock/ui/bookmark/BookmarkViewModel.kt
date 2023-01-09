@@ -3,6 +3,7 @@ package com.depromeet.knockknock.ui.bookmark
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.Notification
+import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.bookmark.adapter.createNotificationPager
@@ -59,6 +60,15 @@ class BookmarkViewModel @Inject constructor(
         }
     }
 
+    fun stroageReaction(reaction_id: Int, notification_id: Int) {
+        baseViewModelScope.launch {
+            showLoading()
+            mainRepository.postReactions(notification_id = notification_id, reaction_id = reaction_id)
+                .onSuccess { _navigationHandler.emit(BookmarkNavigationAction.NavigateToBookmarkFilterReset) }
+            dismissLoading()
+        }
+    }
+
     fun setRoomFilter(roomFilter: List<Int>) = baseViewModelScope.launch {
         _roomClicked.emit(roomFilter)
         _filterChecked.value = !(roomClicked.value.isEmpty() && periodClicked.value == 0)
@@ -75,9 +85,9 @@ class BookmarkViewModel @Inject constructor(
         _filterChecked.value = !(roomClicked.value.isEmpty() && periodClicked.value == 0)
     }
 
-    override fun onReactionClicked(bookmarkIdx: Int) {
+    override fun onReactionClicked(notification_id: Int, reaction_id: Int) {
         baseViewModelScope.launch {
-            _navigationHandler.emit(BookmarkNavigationAction.NavigateToReaction(bookmarkIdx))
+            _navigationHandler.emit(BookmarkNavigationAction.NavigateToReaction(notification_id = notification_id, reaction_id = reaction_id))
         }
     }
 

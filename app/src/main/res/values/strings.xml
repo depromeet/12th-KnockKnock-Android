@@ -3,7 +3,8 @@
     <string name="app_version">0.0.1</string>
 
     <string name="default_image_title">프로필 이미지</string>
-    <string name="default_reaction_title">리액션 이미지</string>
+    <string name="default_reaction_title">푸시알림에 공감하셨나요?</string>
+    <string name="default_reaction_description">메세지에 대한 리액션을 남겨보세요.</string>
 
     <!--홈화면-->
     <string name="onBackPressed_Message">뒤로가기 버튼을\n한번 더 누르면 종료됩니다.</string>

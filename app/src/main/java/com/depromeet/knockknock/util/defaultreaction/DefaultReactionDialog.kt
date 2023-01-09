@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DefaultReactionDialog(
-    val isCheckedImage: MyReactionInfo,
+    val isCheckedImage: Int,
     val callback: (clickId: Int) -> Unit
 ) : BottomSheetDialogFragment() {
 

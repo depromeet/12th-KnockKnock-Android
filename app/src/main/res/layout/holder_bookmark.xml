@@ -157,7 +157,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="6dp"
                 android:paddingBottom="6dp"
-                android:onClick="@{() -> eventListener.onReactionClicked(holder.notification_id)}">
+                android:onClick="@{() -> eventListener.onReactionClicked(holder.notification_id, holder.reactions.my_reaction_info.reaction_id)}">
                 <TextView
                     android:id="@+id/reaction_text"
                     style="@style/Theme.AppCompat.TextView.Item.Reaction"
