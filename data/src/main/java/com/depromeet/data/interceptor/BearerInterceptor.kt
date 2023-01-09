@@ -5,11 +5,14 @@ import com.depromeet.data.DataApplication.Companion.sSharedPreferences
 import com.depromeet.data.api.ApiClient.BASE_URL
 import com.depromeet.data.api.MainAPIService
 import com.depromeet.data.api.handleApi
+import com.depromeet.data.model.error.ErrorResponse
+import com.depromeet.data.model.error.ErrorResponseImpl
 import com.depromeet.data.model.request.PostRefreshTokenRequest
 import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,42 +31,41 @@ class BearerInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val response = chain.proceed(request)
-        val errorResponse = response.body?.string()?.let { createErrorResponse(it) }
+        val baseResponse = response.toBaseResponse()
 
         var accessToken = ""
         var isRefreshable = false
-        if(errorResponse?.status == 401) {
+        if(baseResponse?.status == 401) {
             runBlocking {
                 //토큰 갱신 api 호출
                 sSharedPreferences.getString("refresh_token", null)?.let {
-                    val request = PostRefreshTokenRequest(it)
-                    val result = handleApi {
-                        Retrofit.Builder()
-                            .baseUrl(BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build()
-                            .create(MainAPIService::class.java).postRefreshToken(request)
-                    }
+                    val result = Retrofit.Builder()
+                        .baseUrl(BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                        .create(MainAPIService::class.java).postRefreshToken(PostRefreshTokenRequest(it))
 
-                    result.onSuccess { response ->
-                        editor.putString("access_token", response.data.access_token)
-                        editor.putString("refresh_token", response.data.refresh_token)
+                    if(result.success) {
+                        editor.putString("access_token", result.data.access_token)
+                        editor.putString("refresh_token", result.data.refresh_token)
                         editor.commit()
-                        accessToken = response.data.access_token
+                        accessToken = result.data.access_token
                         isRefreshable = true
-                    }.onError { exception ->
-                        exception.toString()
-                        accessToken = ""
                     }
                 }
             }
         }
+
         if(isRefreshable) {
-            val newRequest = chain.request().newBuilder().addHeader("Authorization", accessToken)
-                .build()
+            val newRequest = chain.request().newBuilder().addHeader("Authorization", "Bearer $accessToken").build()
             return chain.proceed(newRequest)
         }
 
         return response
     }
+}
+
+
+fun Response.toBaseResponse(): ErrorResponseImpl? {
+    return this.body?.string()?.let { createErrorResponse(it) }
 }
