@@ -298,13 +298,12 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_invite_list"
-                    alarmInviteRoomBundleAdapter="@{vm.alarmInviteRoomEvent}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_recycler_invite_room" />
+                    tools:listitem="@layout/item_recycler_history_message" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_list"

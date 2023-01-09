@@ -7,7 +7,7 @@
     <data>
         <variable
             name="model"
-            type="com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage" />
+            type="com.depromeet.domain.model.Notification" />
 
         <variable
             name="eventListener"
@@ -29,20 +29,19 @@
             android:background="@drawable/bg_gray_radius10"
             android:paddingEnd="4dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{() -> eventListener.onRecentAlarmClicked(model.alarmId)}">
+            android:onClick="@{() -> eventListener.onRecentAlarmClicked(model.notification_id)}">
 
             <ImageView
                 android:id="@+id/user_img"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                app:userProfile="@{model.userImg}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
             </ImageView>
 
             <TextView
                 android:id="@+id/user_name_text"
-                android:text="@{model.userName}"
+                android:text="@{model.title}"
                 style="@style/Theme.AppCompat.TextView.Home.Recent.UserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +53,7 @@
 
             <TextView
                 android:id="@+id/date_time_text"
-                android:text="@{model.datetime}"
+                android:text="@{model.created_date}"
                 style="@style/Theme.AppCompat.TextView.Home.Recent.DateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +72,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/user_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_more_black"
-                android:onClick="@{() -> eventListener.onRecentAlarmMoreClicked(model.alarmId, model.contents)}">
+                android:onClick="@{() -> eventListener.onRecentAlarmMoreClicked(model.notification_id, model.content)}">
 
             </ImageView>
 
@@ -87,7 +86,7 @@
                 android:gravity="start"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:text="@{model.contents}"
+                android:text="@{model.content}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/user_img">
@@ -109,7 +108,7 @@
 
             <ImageView
                 android:id="@+id/contents_img"
-                app:bookmarkContentsImage="@{model.contentsImg}"
+                app:bookmarkContentsImage="@{model.image_url}"
                 android:layout_width="match_parent"
                 android:layout_height="296dp"
                 android:layout_marginEnd="12dp"
@@ -144,7 +143,7 @@
             android:paddingStart="8dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
-            android:onClick="@{() -> eventListener.onReactionClicked(model.alarmId)}">
+            android:onClick="@{() -> eventListener.onReactionClicked(model.notification_id)}">
             <TextView
                 style="@style/Theme.AppCompat.TextView.Item.Reaction"
                 android:layout_width="wrap_content"

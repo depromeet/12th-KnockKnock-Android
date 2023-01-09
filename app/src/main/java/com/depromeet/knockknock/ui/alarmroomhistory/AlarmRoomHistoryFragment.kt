@@ -13,7 +13,7 @@ import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.base.DefaultRedAlertDialog
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomHistoryBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmInviteRoomAdapter
-import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmRoomHistoryBundleAdapter
+import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmRoomHistoryMessageAdapter
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmCopyRoom
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmReport
 import com.depromeet.knockknock.ui.bookmark.model.Room
@@ -35,7 +35,7 @@ class AlarmRoomHistoryFragment :
 
     override val viewModel: AlarmRoomHistoryViewModel by viewModels()
     private val alarmRoomHistoryBundleAdapter by lazy {
-        AlarmRoomHistoryBundleAdapter(
+        AlarmRoomHistoryMessageAdapter(
             viewModel,
             viewModel
         )
@@ -223,7 +223,7 @@ class AlarmRoomHistoryFragment :
 
         lifecycleScope.launchWhenStarted {
             viewModel.pushAlarmList.collectLatest {
-                Log.d("ttt 알림방 히스토리", it.toString())
+                Log.d("ttt 알림방 히스토리0", it.toString())
                 alarmRoomHistoryBundleAdapter.submitData(it)
 
             }
@@ -244,7 +244,8 @@ class AlarmRoomHistoryFragment :
     }
 
     override fun initAfterBinding() {
-        binding.rvList.adapter = alarmRoomHistoryBundleAdapter
         binding.rvInviteList.adapter = alarmInviteRoomAdapter
+        binding.rvList.adapter = alarmRoomHistoryBundleAdapter
+
     }
 }
