@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.domain.model.Notification
 import com.depromeet.domain.model.ReactionCountInfo
@@ -16,8 +17,7 @@ import com.depromeet.knockknock.databinding.HolderReactionBinding
 import com.depromeet.knockknock.ui.bookmark.BookmarkActionHandler
 
 class ReactionAdapter(
-    private val eventListener: BookmarkActionHandler
-) : PagingDataAdapter<ReactionCountInfo, ReactionAdapter.ViewHolder>(ReactionItemDiffCallback){
+) : ListAdapter<ReactionCountInfo, ReactionAdapter.ViewHolder>(ReactionItemDiffCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewDataBinding: HolderReactionBinding = DataBindingUtil.inflate(

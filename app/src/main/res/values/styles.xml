@@ -102,6 +102,12 @@
         <item name="fontFamily">@font/pretendard_medium</item>
     </style>
 
+    <style name="Theme.AppCompat.TextView.Medium.Black.Size14" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14dp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+
     <style name="Theme.AppCompat.TextView.Medium.Black.Size16" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16dp</item>
