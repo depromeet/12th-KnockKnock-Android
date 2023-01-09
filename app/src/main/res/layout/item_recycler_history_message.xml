@@ -5,6 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="vm"
+            type="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel" />
+
         <variable
             name="model"
             type="com.depromeet.domain.model.Notification" />
@@ -53,7 +58,7 @@
 
             <TextView
                 android:id="@+id/date_time_text"
-                android:text="@{model.created_date}"
+                android:text="@{vm.alarmDateEvent}"
                 style="@style/Theme.AppCompat.TextView.Home.Recent.DateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

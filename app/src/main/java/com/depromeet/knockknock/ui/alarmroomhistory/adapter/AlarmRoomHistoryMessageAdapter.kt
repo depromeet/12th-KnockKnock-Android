@@ -16,6 +16,7 @@ import com.depromeet.knockknock.databinding.ItemRecyclerHistoryMessageBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -46,20 +47,28 @@ class AlarmRoomHistoryMessageAdapter(
         getItem(position)?.let {
             val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")
             val currentDate = LocalDate.now().format(formatter)
-            val yesterdayDate = LocalDate.now().minusDays(1).format(formatter)
             val createdDate =
                 LocalDate.parse(it.created_date.substring(0, 10), DateTimeFormatter.ISO_DATE)
                     .format(formatter)
             Log.d("ttt currentDate", currentDate)
-            Log.d("ttt yesterdayDate", yesterdayDate)
             Log.d("ttt createdDate", createdDate)
 
             if (currentDate == createdDate) {
-                holder.bind(it, viewModel, true, createdDate)
-            } else if (yesterdayDate == createdDate) {
-                holder.bind(it, viewModel, true, createdDate)
+                holder.bind(
+                    it,
+                    viewModel,
+                    true,
+                    LocalDateTime.parse(it.created_date, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+                        .format(DateTimeFormatter.ofPattern("오늘 a hh:mm"))
+                )
             } else {
-                holder.bind(it, viewModel, false, createdDate)
+                holder.bind(
+                    it,
+                    viewModel,
+                    false,
+                    LocalDateTime.parse(it.created_date, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+                        .format(DateTimeFormatter.ofPattern("MM월 dd일 a hh:mm"))
+                )
             }
         }
     }
@@ -68,11 +77,20 @@ class AlarmRoomHistoryMessageAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(item: Notification, viewModel: AlarmRoomHistoryViewModel, b: Boolean, date: String) {
+        fun bind(
+            item: Notification,
+            viewModel: AlarmRoomHistoryViewModel,
+            b: Boolean,
+            date: String
+        ) {
             Log.d("ttt 알림방 히스토리2", item.toString())
 
             binding.apply {
                 model = item
+                vm = viewModel
+                viewModel.alarmDateEvent.value = date
+                viewModel.alarmRoomTitleEvent.value = item.groups.title
+                viewModel.alarmRoomDescriptionEvent.value = item.groups.description
                 executePendingBindings()
                 expandBtn.setOnClickListener {
                     model!!.isExpanded = !(model!!.isExpanded)

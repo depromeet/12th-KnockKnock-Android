@@ -37,6 +37,7 @@
 
         <TextView
             android:id="@+id/textView4"
+            android:text="@={vm.alarmRoomTitleEvent}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
@@ -44,7 +45,6 @@
             android:paddingTop="16dp"
             android:paddingEnd="4dp"
             android:paddingBottom="16dp"
-            android:text="audi A6"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,7 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="이 방은 어떤 방인가요?이 방은 어떤 방인가?이 방은 어떤 방인가"
+                android:text="@={vm.alarmRoomDescriptionEvent}"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:visibility="visible"
