@@ -10,10 +10,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.ui.bookmark.adapter.FilterRoomAdapter
-import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

@@ -1,25 +1,15 @@
 package com.depromeet.knockknock.ui.editbookmark.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.domain.model.Notification
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.databinding.HolderBookmarkBinding
 import com.depromeet.knockknock.databinding.HolderEditBookmarkBinding
-import com.depromeet.knockknock.ui.bookmark.BookmarkActionHandler
-import com.depromeet.knockknock.ui.bookmark.adapter.BookmarkAdapter
-import com.depromeet.knockknock.ui.bookmark.model.Bookmark
 import com.depromeet.knockknock.ui.editbookmark.EditBookmarkActionHandler
-import com.depromeet.knockknock.ui.editbookmark.model.EditBookmark
-import com.depromeet.knockknock.util.ToggleAnimation
-import com.depromeet.knockknock.util.toggleLayout
 
 class EditBookmarkAdapter(
     private val eventListener: EditBookmarkActionHandler

@@ -6,7 +6,6 @@ import com.depromeet.domain.model.Member
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.bookmark.model.Room
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,7 +23,7 @@ class SettingRoomViewModel @Inject constructor(
     val navigationHandler: SharedFlow<SettingRoomNavigationAction> =
         _navigationHandler.asSharedFlow()
 
-    private val _receivedRoomId: MutableStateFlow<Int> = MutableStateFlow<Int>(1)
+    private val _receivedRoomId: MutableStateFlow<Int> = MutableStateFlow<Int>(73)
     val receivedRoomId: StateFlow<Int> = _receivedRoomId.asStateFlow()
 
     private val _roomInfo: MutableStateFlow<Group> = MutableStateFlow(

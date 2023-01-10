@@ -1,7 +1,9 @@
 package com.depromeet.knockknock.ui.editroomdetails
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.depromeet.domain.model.*
+import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 
@@ -18,7 +20,7 @@ class EditRoomDetailsViewModel @Inject constructor(
     private val mainRepository : MainRepository
 ) : BaseViewModel(), EditRoomDetailsActionHandler {
 
-    private val TAG = "EditRoomDetailsViewModel"
+    private val TAG = "EditRoomDetailViewModel"
 
     private val _navigationHandler: MutableSharedFlow<EditRoomDetailsNavigationAction> =
         MutableSharedFlow<EditRoomDetailsNavigationAction>()
@@ -157,11 +159,12 @@ class EditRoomDetailsViewModel @Inject constructor(
                 category_id = group_category_id.value
                 ,)
                 .onSuccess {
-                    //_onSaveSuccess.emit(true)
+                    _onSaveSuccess.emit(true)
                 }
-            _onSaveSuccess.emit(true)
-
-
+                .onError {
+                    Log.d(TAG,"putGroup error")
+                    _onSaveSuccess.emit(true)
+                }
         }
     }
 
@@ -224,8 +227,9 @@ class EditRoomDetailsViewModel @Inject constructor(
         baseViewModelScope.launch {
             mainRepository.postFileToUrl(file = file)
                 .onSuccess {
-                    if(isBackground)
+                    if(isBackground) {
                         backgroundImg.value = it.image_url
+                    }
                     else
                         thumbnailImg.value = it.image_url
                 }

@@ -1,22 +1,11 @@
 package com.depromeet.knockknock.ui.bookmark
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.BindingAdapter
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.ui.bookmark.bottom.PeriodType
-import com.depromeet.knockknock.ui.bookmark.model.Bookmark
-import com.depromeet.knockknock.ui.bookmark.model.FilterType
-
-@SuppressLint("SetTextI18n")
-@BindingAdapter("reactionCount")
-fun TextView.bindReactionCount(bookmark: Bookmark) {
-    this.text = bookmark.reactionContents+" "+bookmark.reactionCount.toString()
-}
 
 @BindingAdapter("resetVisible")
 fun ConstraintLayout.bindResetVisible(filterChecked: Boolean) {

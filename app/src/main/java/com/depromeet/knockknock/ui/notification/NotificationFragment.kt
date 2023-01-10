@@ -21,6 +21,7 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
 
     override val viewModel : NotificationViewModel by viewModels()
     private val navController by lazy { findNavController() }
+    private val notificationAdapter by lazy { NotificationAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -45,6 +46,12 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.notificationList.collectLatest {
+                notificationAdapter.submitList(it)
+            }
+        }
     }
 
     override fun initAfterBinding() {
@@ -60,6 +67,6 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
     }
 
     private fun initAdapter() {
-        binding.friendRecycler.adapter = NotificationAdapter(viewModel)
+        binding.friendRecycler.adapter = notificationAdapter
     }
 }

@@ -29,7 +29,8 @@ class ErrorResponseInterceptor: Interceptor {
              * Non-IOException subtypes thrown from interceptor never notify Callback
              * See https://github.com/square/okhttp/issues/5151
              */
-            when(e) {
+
+            when (e) {
                 is IOException,
                 is SSLHandshakeException -> throw e
                 else -> throw IOException(e)

@@ -3,23 +3,20 @@ package com.depromeet.knockknock.ui.bookmark.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.domain.model.Notification
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderBookmarkBinding
 import com.depromeet.knockknock.ui.bookmark.BookmarkActionHandler
-import com.depromeet.knockknock.ui.bookmark.model.Bookmark
-import com.depromeet.knockknock.util.ToggleAnimation
-import com.depromeet.knockknock.util.toggleLayout
 
 class BookmarkAdapter(
     private val eventListener: BookmarkActionHandler
 ) : PagingDataAdapter<Notification, BookmarkAdapter.ViewHolder>(BookmarkItemDiffCallback){
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewDataBinding: HolderBookmarkBinding = DataBindingUtil.inflate(
@@ -38,12 +35,16 @@ class BookmarkAdapter(
 
     class ViewHolder(private val binding: HolderBookmarkBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        private val reactionAdapter = ReactionAdapter()
 
         fun bind(item: Notification) {
             binding.holder = item
             binding.executePendingBindings()
             binding.expandBtn.setOnClickListener {
                 binding.holder!!.isExpanded = !(binding.holder!!.isExpanded)
+
+                binding.reactionRecycler.adapter = reactionAdapter
+                reactionAdapter.submitList(item.reactions.reaction_count_infos)
 
                 if(binding.holder!!.isExpanded) {
                     binding.expandBtn.apply {

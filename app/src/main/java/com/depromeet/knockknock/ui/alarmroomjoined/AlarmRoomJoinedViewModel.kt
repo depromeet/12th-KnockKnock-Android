@@ -1,11 +1,11 @@
 package com.depromeet.knockknock.ui.alarmroomjoined
 
-import com.depromeet.domain.model.Friend
-import com.depromeet.domain.model.Group
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.depromeet.domain.model.GroupContent
-import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.alarmroomjoined.adapter.createAlarmRoomJoinedPager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -37,17 +37,18 @@ class AlarmRoomJoinedViewModel @Inject constructor(
 
     private val _currentRoomCount : MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val currentRoomCount : StateFlow<Int> = _currentRoomCount.asStateFlow()
-
-    private val _roomList: MutableStateFlow<List<GroupContent>> = MutableStateFlow(emptyList())
-    val roomList: StateFlow<List<GroupContent>> = _roomList.asStateFlow()
+    var joinedRoomList: Flow<PagingData<GroupContent>> = emptyFlow()
+    var initJoinedRoomType : MutableStateFlow<String> = MutableStateFlow("ALL")
 
     init{
-        baseViewModelScope.launch {
-            mainRepository.getJoinedGroups("ALL",0,10)
-                .onSuccess { response ->
-                    _roomList.emit(response.groupContent)
-                }
-        }
+        getJoinedGroups()
+    }
+
+    fun getJoinedGroups(){
+        joinedRoomList = createAlarmRoomJoinedPager(
+            mainRepository = mainRepository,
+            roomType = initJoinedRoomType
+        ).flow.cachedIn(baseViewModelScope)
     }
 
     override fun onRoomTypeAllClicked() {

@@ -21,7 +21,7 @@ class FriendAddAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewDataBinding: HolderFriendAddBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.holder_bookmark,
+            R.layout.holder_friend_add,
             parent,
             false
         )

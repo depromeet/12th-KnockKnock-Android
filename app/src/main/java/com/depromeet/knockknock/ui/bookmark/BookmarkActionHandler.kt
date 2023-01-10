@@ -5,6 +5,6 @@ interface BookmarkActionHandler {
     fun onFilterResetClicked()
     fun onFilterRoomClicked()
     fun onFilterPeriodClicked()
-    fun onReactionClicked(bookmarkIdx: Int)
+    fun onReactionClicked(notification_id: Int, reaction_id: Int)
     fun onNotificationClicked(bookmarkIdx: Int)
 }

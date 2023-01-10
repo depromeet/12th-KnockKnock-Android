@@ -19,3 +19,14 @@ fun ConstraintLayout.bindroomUnpublicIconEnable(enable: Boolean) {
 }
 
 
+@SuppressLint("UseCompatLoadingForDrawables")
+@BindingAdapter("roomCategoryIsNull")
+fun ConstraintLayout.bindroomCategoryIsNull(categoryLength: Int) {
+    if(categoryLength==0) {
+        this.background = context.getDrawable(custom_transparents_radius08_line_transparent)
+    } else {
+        this.background = context.getDrawable(custom_yellow_radius16)
+    }
+}
+
+

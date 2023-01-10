@@ -3,6 +3,8 @@
     <string name="app_version">0.0.1</string>
 
     <string name="default_image_title">프로필 이미지</string>
+    <string name="default_reaction_title">푸시알림에 공감하셨나요?</string>
+    <string name="default_reaction_description">메세지에 대한 리액션을 남겨보세요.</string>
 
     <!--홈화면-->
     <string name="onBackPressed_Message">뒤로가기 버튼을\n한번 더 누르면 종료됩니다.</string>
@@ -126,13 +128,15 @@
     <string name="setprofile_nickname">닉네임</string>
     <string name="setprofile_profile_pic">프로필 사진</string>
 
-    <!--온보딩-->
+    <!--알림방-->
     <string name="notification_title">알림</string>
     <string name="allow">수락하기</string>
     <string name="declare">거절하기</string>
     <string name="invite_room_declare_toast">%s님의 알림방 초대를 거절했어요</string>
     <string name="invite_room_allow_toast">%s에 입장하신걸 환영해요!</string>
     <string name="invite_room_title">알림방 참여 요청이 도착했어요!</string>
+    <string name="accept_room_title">알림방에 입장했어요!</string>
+    <string name="accept_friend_title">님이 친구를 수락했습니다.</string>
     <string name="invite_friend_title">친구 추가 요청이 도착했어요!</string>
     <string name="invite_friend_declare_toast">%s님의 친구추가를 거절했어요</string>
     <string name="invite_friend_allow_toast">%s님과 친구가 되었어요!</string>
@@ -182,5 +186,8 @@
     <string name="okay">완료</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--알림방 생성하기-->
+    <string name="skip"><u>건너뛰기</u></string>
 
 </resources>

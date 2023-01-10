@@ -38,10 +38,8 @@ class SettingRoomForUserFragment : BaseFragment<FragmentSettingRoomForUserBindin
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    //is SettingRoomForUserNavigationAction.NavigateToCategory -> navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToCategoryFragment())
                     is SettingRoomForUserNavigationAction.NavigateToLink -> {}
                     is SettingRoomForUserNavigationAction.NavigateToAddMember -> {navigate(SettingRoomForUserFragmentDirections.actionSettingRoomForUserFragmentToInviteFriendToRoomFragment(it.roomId))}
-                    //is SettingRoomForUserNavigationAction.NavigateToEditDetail -> {navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToEditRoomDetailsFragment())}
                 }
             }
         }

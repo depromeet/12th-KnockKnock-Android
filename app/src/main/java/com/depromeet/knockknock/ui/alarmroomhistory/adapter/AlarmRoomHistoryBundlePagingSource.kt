@@ -43,7 +43,7 @@ class AlarmRoomHistoryBundlePagingSource(
                 LoadResult.Page(
                     data = contents.notifications.content,
                     prevKey = null,
-                    nextKey = if (contents.notifications.last) pageIndex + 1 else null
+                    nextKey = if (!contents.last) pageIndex + 1 else null
                 )
             },
             onError = { e -> LoadResult.Error(e) }

@@ -10,8 +10,7 @@ import com.depromeet.knockknock.databinding.FragmentBookmarkBinding
 import com.depromeet.knockknock.ui.bookmark.adapter.BookmarkAdapter
 import com.depromeet.knockknock.ui.bookmark.bottom.BottomPeriodFilter
 import com.depromeet.knockknock.ui.bookmark.bottom.BottomRoomFilter
-import com.depromeet.knockknock.ui.bookmark.model.Bookmark
-import com.depromeet.knockknock.ui.bookmark.model.Room
+import com.depromeet.knockknock.util.defaultreaction.DefaultReactionDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -27,7 +26,7 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
     override val viewModel : BookmarkViewModel by viewModels()
     private val navController: NavController by lazy { findNavController() }
 
-    private val adapter by lazy { BookmarkAdapter(viewModel) }
+    private val bookmarkAdapter by lazy { BookmarkAdapter(viewModel) }
 
     override fun initStartView() {
         binding.apply {
@@ -50,7 +49,7 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
                     is BookmarkNavigationAction.NavigateToBookmarkFilterReset -> {}
                     is BookmarkNavigationAction.NavigateToBookmarkFilterRoom -> roomFilter()
                     is BookmarkNavigationAction.NavigateToBookmarkFilterPeriod -> periodFilter()
-                    is BookmarkNavigationAction.NavigateToReaction -> {}
+                    is BookmarkNavigationAction.NavigateToReaction -> reactionBottonSheet(notification_id = it.notification_id, reaction_id = it.reaction_id)
                     is BookmarkNavigationAction.NavigateToNotificationDetail -> {}
                 }
             }
@@ -58,13 +57,13 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
 
         lifecycleScope.launchWhenStarted {
             viewModel.bookmarkList.collectLatest {
-                adapter.submitData(it)
+                bookmarkAdapter.submitData(it)
             }
         }
     }
 
     override fun initAfterBinding() {
-        binding.bookmarkRecycler.adapter = adapter
+        binding.bookmarkRecycler.adapter = bookmarkAdapter
     }
 
     private fun initToolbar() {
@@ -74,6 +73,13 @@ class BookmarkFragment : BaseFragment<FragmentBookmarkBinding, BookmarkViewModel
             this.setNavigationIcon(R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
+    }
+
+    private fun reactionBottonSheet(notification_id: Int, reaction_id: Int) {
+        val bottomSheet = DefaultReactionDialog(reaction_id) {
+            viewModel.stroageReaction(reaction_id = it, notification_id = notification_id)
+        }
+        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 
     private fun roomFilter() {

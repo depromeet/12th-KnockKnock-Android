@@ -1,26 +1,22 @@
 package com.depromeet.data.interceptor
 
-import android.util.Log
 import com.depromeet.data.DataApplication.Companion.editor
 import com.depromeet.data.DataApplication.Companion.sSharedPreferences
 import com.depromeet.data.api.ApiClient.BASE_URL
 import com.depromeet.data.api.MainAPIService
 import com.depromeet.data.api.handleApi
-import com.depromeet.data.model.error.InvalidAccessTokenException
-import com.depromeet.data.model.error.InvalidAccessTokenExpire
+import com.depromeet.data.model.error.ErrorResponse
+import com.depromeet.data.model.error.ErrorResponseImpl
 import com.depromeet.data.model.request.PostRefreshTokenRequest
-import com.depromeet.data.model.response.BaseResponse
+import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
-import okhttp3.Request
+import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
-import javax.net.ssl.SSLHandshakeException
 
 /*
    * bearer 토큰 필요한 api 사용시 accessToken유효한지 검사
@@ -33,54 +29,43 @@ class BearerInterceptor : Interceptor {
     //todo 조건 분기로 인터셉터 구조 변경
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request: Request = chain.request()
+        val request = chain.request()
         val response = chain.proceed(request)
-        val responseBody = response.body
-
-        if (response.isSuccessful) return response
-
-        val requestUrl = request.url.toString()
-        val errorResponse = responseBody?.string()?.let { createErrorResponse(it) }
-        val errorException = createErrorException(requestUrl, response.code, errorResponse)
+        val baseResponse = response.toBaseResponse()
 
         var accessToken = ""
-        try {
-            if(errorException is InvalidAccessTokenExpire) {
-                CoroutineScope(Dispatchers.Default).launch {
-                    val refreshToken = sSharedPreferences.getString("refresh_token", null)
-                    refreshToken?.let {
-                        val result = handleApi {
-                            Retrofit.Builder()
-                                .baseUrl(BASE_URL)
-                                .addConverterFactory(GsonConverterFactory.create())
-                                .build()
-                                .create(MainAPIService::class.java).postRefreshToken(PostRefreshTokenRequest((it)))
-                        }
-                        result.onSuccess { response ->
-                            editor.putString("access_token", response.data.access_token)
-                            editor.putString("refresh_token", response.data.refresh_token)
-                            editor.commit()
-                            accessToken = response.data.access_token
-                        }
+        var isRefreshable = false
+        if(baseResponse?.status == 401) {
+            runBlocking {
+                //토큰 갱신 api 호출
+                sSharedPreferences.getString("refresh_token", null)?.let {
+                    val result = Retrofit.Builder()
+                        .baseUrl(BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                        .create(MainAPIService::class.java).postRefreshToken(PostRefreshTokenRequest(it))
+
+                    if(result.success) {
+                        editor.putString("access_token", result.data.access_token)
+                        editor.putString("refresh_token", result.data.refresh_token)
+                        editor.commit()
+                        accessToken = result.data.access_token
+                        isRefreshable = true
                     }
                 }
-
-                val newRequest = chain.request().newBuilder().addHeader("Bearer ", accessToken)
-                    .build()
-                return chain.proceed(newRequest)
-            } else {
-                errorException?.let { throw it }
-            }
-
-            return response
-
-        } catch (e: Throwable) {
-            when(e) {
-                is IOException,
-                is SSLHandshakeException -> throw e
-                else -> throw IOException(e)
             }
         }
 
+        if(isRefreshable) {
+            val newRequest = chain.request().newBuilder().addHeader("Authorization", "Bearer $accessToken").build()
+            return chain.proceed(newRequest)
+        }
+
+        return response
     }
+}
+
+
+fun Response.toBaseResponse(): ErrorResponseImpl? {
+    return this.body?.string()?.let { createErrorResponse(it) }
 }
