@@ -56,45 +56,55 @@ class MakersFragment :
     }
 
     private fun clickWhoIAm() {
-        // 정은님 Github
+        // 정은님
         binding.ivMakersServer01Link.setOnClickListener {
             showGithub("mybloom")
         }
-        // 서준님 Github
+        // 서준님
         binding.ivMakersServer02Link.setOnClickListener {
             showGithub("leeseojune53")
         }
-        // 찬진님 Github
+        // 찬진님
         binding.ivMakersServer03Link.setOnClickListener {
             showGithub("ImNM")
         }
-        // 영준님 Github
+        // 영준님
         binding.ivMakersAos01Link.setOnClickListener {
-            showGithub("leeyjwinter")
+            val url = "https://velog.io/@leeyjwinter"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
-        // 준장님 Github
+        // 준장님
         binding.ivMakersAos02Link.setOnClickListener {
             showGithub("junjange")
         }
-        // 현정님 Github
+        // 현정님
         binding.ivMakersAos03Link.setOnClickListener {
             showGithub("hyunjung-choi")
         }
-        // 규일님 Github
+        // 규일님
         binding.ivMakersAos04Link.setOnClickListener {
-            showGithub("Gyuil-Hwnag")
+            val url = "https://juicy-capacity-601.notion.site/832119efdd1e49d2a4778ff8d4878b3d?v=3ac3fc832e8b4b82bb782e904efd6cd6"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
         // 나영님
         binding.ivMakersDesign01Link.setOnClickListener {
-
+            val url = "https://www.behance.net/402zzang"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
         // 수연님
         binding.ivMakersDesign02Link.setOnClickListener {
-
+            val url = "https://www.behance.net/sypak120c57e"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
         // 승희님
         binding.ivMakersDesign03Link.setOnClickListener {
-
+            val url = "https://www.behance.net/kb1658280b"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
     }
 
