@@ -4,9 +4,11 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentSettingRoomBinding
+import com.depromeet.knockknock.ui.category.CategoryFragmentArgs
 import com.depromeet.knockknock.ui.settingroom.adapter.ExportMemberAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -25,7 +27,12 @@ class SettingRoomFragment :
     private val navController by lazy { findNavController() }
     private val memberAdapter by lazy { ExportMemberAdapter(viewModel) }
 
+
+    private val args: SettingRoomFragmentArgs by navArgs()
+
     override fun initStartView() {
+        viewModel.receivedRoomId.value = args.groupId
+
         binding.apply {
             this.settingroomviewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner

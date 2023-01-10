@@ -23,8 +23,7 @@ class SettingRoomViewModel @Inject constructor(
     val navigationHandler: SharedFlow<SettingRoomNavigationAction> =
         _navigationHandler.asSharedFlow()
 
-    private val _receivedRoomId: MutableStateFlow<Int> = MutableStateFlow<Int>(73)
-    val receivedRoomId: StateFlow<Int> = _receivedRoomId.asStateFlow()
+    var receivedRoomId: MutableStateFlow<Int> = MutableStateFlow<Int>(73)
 
     private val _roomInfo: MutableStateFlow<Group> = MutableStateFlow(
         Group(
@@ -57,7 +56,7 @@ class SettingRoomViewModel @Inject constructor(
 
     init {
         baseViewModelScope.launch {
-            mainRepository.getGroup(id = _receivedRoomId.value)
+            mainRepository.getGroup(id = receivedRoomId.value)
                 .onSuccess {
                     _roomInfo.emit(it)
                     _roomMemberList.emit(it.members)
@@ -68,7 +67,7 @@ class SettingRoomViewModel @Inject constructor(
 
     fun getGroupInfo() {
         baseViewModelScope.launch {
-            mainRepository.getGroup(id = _receivedRoomId.value)
+            mainRepository.getGroup(id = receivedRoomId.value)
                 .onSuccess {
                     _roomInfo.emit(it)
                     _roomMemberList.emit(it.members)
