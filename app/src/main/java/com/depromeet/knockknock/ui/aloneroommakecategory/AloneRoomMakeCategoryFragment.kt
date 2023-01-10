@@ -8,6 +8,7 @@ import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAloneRoomMakeCategoryBinding
 import com.depromeet.knockknock.ui.aloneroommakecategory.AloneRoomMakeCategoryFragmentDirections.ActionAloneRoomMakeCategoryFragmentToAloneRoomDetailsFragment
 import com.depromeet.knockknock.ui.aloneroommakecategory.adapter.AloneRoomMakeCategoryAdapter
+import com.depromeet.knockknock.ui.aloneroommakecategory.adapter.beforeClicked
 import com.depromeet.knockknock.ui.category.adapter.CategoryAdapter
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
@@ -59,6 +60,20 @@ class AloneRoomMakeCategoryFragment : BaseFragment<FragmentAloneRoomMakeCategory
     }
 
     override fun initAfterBinding() {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        beforeClicked = 0
+        val flexLayoutManager = FlexboxLayoutManager(requireContext()).apply {
+            this.flexDirection = FlexDirection.ROW
+            this.justifyContent = JustifyContent.FLEX_START
+            this.alignItems = AlignItems.FLEX_START
+        }
+        binding.categoryRecycler.apply {
+            this.adapter = categoryAdapter
+            this.layoutManager = flexLayoutManager
+        }
     }
 
     private fun initToolbar() {

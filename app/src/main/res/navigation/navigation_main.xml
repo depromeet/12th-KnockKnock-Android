@@ -360,6 +360,9 @@
         <action
             android:id="@+id/action_alarmRoomSearchFragment_to_alarmRoomHistoryFragment"
             app:destination="@id/alarmRoomHistoryFragment" />
+        <action
+            android:id="@+id/action_alarmRoomSearchFragment_to_aloneRoomMakeCategoryFragment"
+            app:destination="@id/aloneRoomMakeCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/inviteFriendToRoomFragment"
@@ -404,9 +407,7 @@
         android:label="AlarmRoomTabFragment" >
         <action
             android:id="@+id/action_alarmRoomTabFragment_to_aloneRoomMakeCategoryFragment"
-            app:destination="@id/aloneRoomMakeCategoryFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:popExitAnim="@anim/exit_to_right"/>
+            app:destination="@id/aloneRoomMakeCategoryFragment" />
         <action
             android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomHistoryFragment"
             app:destination="@id/alarmRoomHistoryFragment" />

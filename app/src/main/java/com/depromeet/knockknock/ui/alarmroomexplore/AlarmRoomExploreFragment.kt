@@ -11,6 +11,7 @@ import com.depromeet.knockknock.databinding.FragmentAlarmRoomExploreBinding
 import com.depromeet.knockknock.ui.alarmroomexplore.adapter.AlarmRoomAdapter
 import com.depromeet.knockknock.ui.alarmroomexplore.adapter.CategoryAdapter
 import com.depromeet.knockknock.ui.alarmroomexplore.adapter.PopularRoomAdapter
+import com.depromeet.knockknock.ui.alarmroomexplore.adapter.beforeClicked
 import com.depromeet.knockknock.ui.alarmroomtab.AlarmRoomTabFragmentDirections
 import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.hideKeyboard
@@ -88,13 +89,18 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
 
     override fun onResume() {
         super.onResume()
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.roomList.collectLatest {
-//                val alarmRoomAdapter = AlarmRoomAdapter(viewModel,viewModel)
-//                binding.alarmRoomRecycler.adapter = alarmRoomAdapter
-//                alarmRoomAdapter.submitData(it)
-//            }
-//        }
+        viewModel.getGroups()
+        lifecycleScope.launchWhenStarted {
+            viewModel.roomList.collectLatest {
+                val alarmRoomAdapter = AlarmRoomAdapter(viewModel,viewModel)
+
+                //카테고리를 전체 카테고리로 초기화
+                beforeClicked = 1
+
+                binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+                alarmRoomAdapter.submitData(it)
+            }
+        }
         viewModel.getCategory()
         viewModel.getFamousGroups()
     }

@@ -40,7 +40,8 @@ class AlarmRoomPagingSource(
             type = roomType.value,
         )
         return result.fold(
-            onSuccess = { contents ->
+            onSuccess = {
+                    contents ->
                 LoadResult.Page(
                     data = contents.groupContent,
                     prevKey = null,

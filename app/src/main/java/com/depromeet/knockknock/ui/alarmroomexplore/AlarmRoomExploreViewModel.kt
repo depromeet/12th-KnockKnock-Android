@@ -93,12 +93,20 @@ class AlarmRoomExploreViewModel @Inject constructor(
         }
     }
 
+    fun resetClickedCategoryWhenResume(){
+        baseViewModelScope.launch {
+            _clickedCategoryId.emit(1)
+        }
+    }
+
 
     override fun onAlarmRoomEditTextClicked() {
         baseViewModelScope.launch {
             _navigationHandler.emit(AlarmRoomExploreNavigationAction.NavigateToAlarmRoomSearch)
         }
     }
+
+
 
     override fun onCategoryClicked(categoryId: Int) {
         baseViewModelScope.launch {
