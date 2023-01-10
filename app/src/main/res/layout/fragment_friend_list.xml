@@ -50,6 +50,7 @@
             android:paddingEnd="35dp"
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="12dp"
+            android:hint="내 친구 검색"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             android:text="@={viewmodel.userInputState}">
         </EditText>
