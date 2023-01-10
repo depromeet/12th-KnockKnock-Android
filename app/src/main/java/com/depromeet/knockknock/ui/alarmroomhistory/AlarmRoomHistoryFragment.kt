@@ -34,7 +34,7 @@ class AlarmRoomHistoryFragment :
     private val navController by lazy { findNavController() }
 
     override val viewModel: AlarmRoomHistoryViewModel by viewModels()
-    private val alarmRoomHistoryBundleAdapter by lazy {
+    private val alarmRoomHistoryMessageAdapter by lazy {
         AlarmRoomHistoryMessageAdapter(
             viewModel,
             viewModel
@@ -222,7 +222,7 @@ class AlarmRoomHistoryFragment :
     private fun initAdapter() {
         lifecycleScope.launchWhenStarted {
             viewModel.pushAlarmList.collectLatest {
-                alarmRoomHistoryBundleAdapter.submitData(it)
+                alarmRoomHistoryMessageAdapter.submitData(it)
             }
         }
     }
@@ -238,7 +238,7 @@ class AlarmRoomHistoryFragment :
 
     override fun initAfterBinding() {
         binding.rvInviteList.adapter = alarmInviteRoomAdapter
-        binding.rvList.adapter = alarmRoomHistoryBundleAdapter
+        binding.rvList.adapter = alarmRoomHistoryMessageAdapter
 
     }
 
