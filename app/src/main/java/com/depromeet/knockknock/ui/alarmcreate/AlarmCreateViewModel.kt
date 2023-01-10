@@ -6,6 +6,7 @@ import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.preview.PreviewNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -24,6 +25,8 @@ class AlarmCreateViewModel @Inject constructor(
     var editTextTitleEvent = MutableStateFlow<String>("")
     var editTextMessageEvent = MutableStateFlow<String>("")
     var editTextMessageCountEvent = MutableStateFlow<Int>(0)
+    var groupTitle = MutableStateFlow<String>("")
+    var groupId = MutableStateFlow<Int>(30)
     val messageImgUri: MutableStateFlow<String> = MutableStateFlow<String>("")
     private val _recommendationMessageEvent: MutableStateFlow<RecommendMessageList> =
         MutableStateFlow(RecommendMessageList(emptyList()))
@@ -36,9 +39,22 @@ class AlarmCreateViewModel @Inject constructor(
             }
         }
 
-        baseViewModelScope.launch {
-            editTextTitleEvent.emit("주호민")
+        if (editTextTitleEvent.value == ""){
+            baseViewModelScope.launch {
+                mainRepository.getUserProfile().onSuccess {
+                    editTextTitleEvent.emit(it.nickname)
+                }
+
+            }
         }
+
+        baseViewModelScope.launch {
+            mainRepository.getGroup(groupId.value).onSuccess {
+                groupTitle.emit(it.title)
+            }
+
+        }
+
         getRecommendMessage()
     }
 
@@ -78,6 +94,12 @@ class AlarmCreateViewModel @Inject constructor(
                     message
                 )
             )
+        }
+    }
+
+    override fun onCloseClicked() {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToBackStack)
         }
     }
 

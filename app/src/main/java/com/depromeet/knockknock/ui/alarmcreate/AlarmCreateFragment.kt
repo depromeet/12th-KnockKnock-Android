@@ -58,6 +58,8 @@ class AlarmCreateFragment :
         }
         exception = viewModel.errorEvent
         val args: AlarmCreateFragmentArgs by navArgs()
+        viewModel.editTextTitleEvent.value = args.title
+        viewModel.groupId.value = args.alarmId
         viewModel.editTextMessageEvent.value = args.message
 
         if (args.reservation) updateReservationAlarmSend(0)
@@ -90,6 +92,7 @@ class AlarmCreateFragment :
                     )
                     is AlarmCreateNavigationAction.NavigateToPushAlarm -> navController.popBackStack()
                     is AlarmCreateNavigationAction.NavigateToNoReservationAlarm -> alarmNoReservationDialog()
+                    is AlarmCreateNavigationAction.NavigateToBackStack -> navController.popBackStack()
                 }
             }
         }
@@ -287,9 +290,6 @@ class AlarmCreateFragment :
 
     private fun initToolbar() {
         with(binding.toolbar) {
-            this.setNavigationIcon(R.drawable.ic_baseline_close_24)
-            this.setNavigationOnClickListener { navController.popBackStack() }
-            this.title = "취준생을 위한 방"
         }
     }
 }
