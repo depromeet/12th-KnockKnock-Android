@@ -10,10 +10,6 @@
             type="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel" />
 
         <variable
-            name="model"
-            type="com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle" />
-
-        <variable
             name="holder"
             type="com.depromeet.domain.model.Notification" />
 

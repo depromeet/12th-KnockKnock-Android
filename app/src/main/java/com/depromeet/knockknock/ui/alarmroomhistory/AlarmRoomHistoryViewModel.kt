@@ -10,8 +10,6 @@ import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryMessagePager
-import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
-import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -30,13 +28,6 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     private val _alarmInviteRoomEvent: MutableStateFlow<List<Admission>> =
         MutableStateFlow(emptyList())
     val alarmInviteRoomEvent: StateFlow<List<Admission>> = _alarmInviteRoomEvent
-    private val _alarmRoomHistoryBundleEvent: MutableStateFlow<List<HistoryBundle>> =
-        MutableStateFlow(emptyList())
-    val alarmRoomHistoryBundleEvent: StateFlow<List<HistoryBundle>> = _alarmRoomHistoryBundleEvent
-    private val _alarmRoomHistoryMessageEvent: MutableStateFlow<List<HistoryMessage>> =
-        MutableStateFlow(emptyList())
-    val alarmRoomHistoryMessageEvent: StateFlow<List<HistoryMessage>> =
-        _alarmRoomHistoryMessageEvent
     private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val periodClicked: StateFlow<Int> = _periodClicked
     var alarmRoomTitleEvent = MutableStateFlow<String>("")
