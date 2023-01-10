@@ -284,8 +284,8 @@ class MainRepositoryImpl @Inject constructor(
         size: Int,
         sort: String,
         group_id: Int
-    ): NetworkResult<NotificationContent> {
-        return handleApi { mainAPIService.getNotification(page = page, size = size, sort = sort, group_id = group_id).data.notifications }
+    ): NetworkResult<NotificationListContent> {
+        return handleApi { mainAPIService.getNotification(page = page, size = size, sort = sort, group_id = group_id).data.toDomain() }
     }
 
     override suspend fun deleteNotification(notification_id: Int): NetworkResult<Unit> {

@@ -9,9 +9,7 @@ import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryBundlePager
-import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
-import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
+import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryMessagePager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -30,15 +28,11 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     private val _alarmInviteRoomEvent: MutableStateFlow<List<Admission>> =
         MutableStateFlow(emptyList())
     val alarmInviteRoomEvent: StateFlow<List<Admission>> = _alarmInviteRoomEvent
-    private val _alarmRoomHistoryBundleEvent: MutableStateFlow<List<HistoryBundle>> =
-        MutableStateFlow(emptyList())
-    val alarmRoomHistoryBundleEvent: StateFlow<List<HistoryBundle>> = _alarmRoomHistoryBundleEvent
-    private val _alarmRoomHistoryMessageEvent: MutableStateFlow<List<HistoryMessage>> =
-        MutableStateFlow(emptyList())
-    val alarmRoomHistoryMessageEvent: StateFlow<List<HistoryMessage>> =
-        _alarmRoomHistoryMessageEvent
     private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val periodClicked: StateFlow<Int> = _periodClicked
+    var alarmRoomTitleEvent = MutableStateFlow<String>("")
+    var alarmRoomDescriptionEvent = MutableStateFlow<String>("")
+    var alarmDateEvent = MutableStateFlow<String>("")
     val emptyMessage: String = ""
     var groupId = MutableStateFlow<Int>(30)
     var reservationId = MutableStateFlow<Int>(0)
@@ -50,92 +44,17 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var pushAlarmList: Flow<PagingData<Notification>> = emptyFlow()
 
     init {
-        getTempList()
-        getTempList2()
         getGroupAdmissions()
-        reservationTimeEvent.value = "오늘 19:00 발송 예정"
-        reservationTitleEvent.value = ""
-        reservationMessageEvent.value =
-            "푸시알림 텍스트는 2줄까지만 보여주세요. 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는"
-
         getPushAlarm()
     }
 
     fun getPushAlarm() {
-        pushAlarmList = createAlarmRoomHistoryBundlePager(
+        pushAlarmList = createAlarmRoomHistoryMessagePager(
             mainRepository = mainRepository,
             groupId = groupId,
-            sort = sort
+            sort = sort,
+            viewModel= this
         ).flow.cachedIn(baseViewModelScope)
-
-
-    }
-
-    private fun getTempList() {
-
-//        baseViewModelScope.launch {
-//            mainRepository.getNotification().onSuccess {
-//
-//            }.onError {
-//
-//            }
-//        }
-        val test1 = HistoryBundle("오늘")
-        val test2 = HistoryBundle("어제")
-        val test3 = HistoryBundle("2022년 12월 21일")
-        val test4 = HistoryBundle("2022년 12월 20일")
-        val test5 = HistoryBundle("2022년 12월 19일")
-        val test6 = HistoryBundle("2022년 12월 18일")
-        val test7 = HistoryBundle("2022년 12월 17일")
-
-        val testList = listOf(test1, test2, test3, test4, test5, test6, test7)
-
-
-        baseViewModelScope.launch {
-            _alarmRoomHistoryBundleEvent.value = testList
-        }
-    }
-
-    private fun getTempList2() {
-        val test1 = HistoryMessage(
-            alarmId = 1,
-            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            userName = "라이언",
-            datetime = "오후 09:10",
-            contents = "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트",
-            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            roomName = "테스트1호점",
-            reactionContents = "",
-            reactionCount = 0,
-        )
-        val test2 = HistoryMessage(
-            alarmId = 1,
-            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            userName = "라이언",
-            datetime = "오후 09:10",
-            contents = "테스트테스트테스트",
-            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            roomName = "테스트1호점",
-            reactionContents = "",
-            reactionCount = 0,
-        )
-        val test3 = HistoryMessage(
-            alarmId = 1,
-            userImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            userName = "라이언",
-            datetime = "오후 09:10",
-            contents = "테스트테스트테스트",
-            contentsImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            roomName = "테스트1호점",
-            reactionContents = "",
-            reactionCount = 0,
-        )
-
-        val testList = listOf(test1, test2, test3)
-
-        baseViewModelScope.launch {
-            _alarmRoomHistoryMessageEvent.value = testList
-        }
     }
 
     // 방장 권한이 있어야 함

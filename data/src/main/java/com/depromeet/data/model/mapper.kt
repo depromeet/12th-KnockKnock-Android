@@ -23,7 +23,7 @@ fun PagingNotifications.toDomain() : NotificationContent {
 
 fun PagingNotificationList.toDomain() : NotificationListContent {
     return NotificationListContent(
-        groups = groups,
+//        groups = groups,
         reservations = reservations,
         notifications = notifications,
     )
