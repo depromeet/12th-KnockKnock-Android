@@ -5,12 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.depromeet.domain.model.Admission
-import com.depromeet.knockknock.databinding.ItemRecyclerHistoryBundleBinding
 import com.depromeet.knockknock.databinding.ItemRecyclerInviteRoomBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
-import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel
-import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
-import com.depromeet.knockknock.ui.alarmroomhistory.model.InviteRoom
 
 class AlarmInviteRoomAdapter(
     private val eventListener: AlarmRoomHistoryActionHandler

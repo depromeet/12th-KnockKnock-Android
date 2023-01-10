@@ -13,7 +13,7 @@ import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.base.DefaultRedAlertDialog
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomHistoryBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmInviteRoomAdapter
-import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmRoomHistoryBundleAdapter
+import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmRoomHistoryMessageAdapter
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmCopyRoom
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmReport
 import com.depromeet.knockknock.ui.bookmark.model.Room
@@ -34,8 +34,8 @@ class AlarmRoomHistoryFragment :
     private val navController by lazy { findNavController() }
 
     override val viewModel: AlarmRoomHistoryViewModel by viewModels()
-    private val alarmRoomHistoryBundleAdapter by lazy {
-        AlarmRoomHistoryBundleAdapter(
+    private val alarmRoomHistoryMessageAdapter by lazy {
+        AlarmRoomHistoryMessageAdapter(
             viewModel,
             viewModel
         )
@@ -220,17 +220,11 @@ class AlarmRoomHistoryFragment :
     }
 
     private fun initAdapter() {
-
         lifecycleScope.launchWhenStarted {
             viewModel.pushAlarmList.collectLatest {
-                Log.d("ttt 알림방 히스토리", it.toString())
-                alarmRoomHistoryBundleAdapter.submitData(it)
-
+                alarmRoomHistoryMessageAdapter.submitData(it)
             }
         }
-
-        if (viewModel.alarmInviteRoomEvent.value.isEmpty()) binding.inviteConstraintLayout.visibility = View.GONE
-        else binding.inviteConstraintLayout.visibility = View.VISIBLE
     }
 
     private fun initToolbar() {
@@ -240,11 +234,16 @@ class AlarmRoomHistoryFragment :
         }
     }
 
-    override fun initDataBinding() {
-    }
+    override fun initDataBinding() {}
 
     override fun initAfterBinding() {
-        binding.rvList.adapter = alarmRoomHistoryBundleAdapter
         binding.rvInviteList.adapter = alarmInviteRoomAdapter
+        binding.rvList.adapter = alarmRoomHistoryMessageAdapter
+
+    }
+
+    override fun onResume() {
+        viewModel.getPushAlarm()
+        super.onResume()
     }
 }
