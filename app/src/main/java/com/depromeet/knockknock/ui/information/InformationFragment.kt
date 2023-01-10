@@ -36,7 +36,7 @@ class InformationFragment : BaseFragment<FragmentInformationBinding, Information
                 when(it) {
                     is InformationNavigationAction.NavigateToUserConsents -> {}
                     is InformationNavigationAction.NavigateToUserPrivacy -> {}
-                    is InformationNavigationAction.NavigateToAppMakers -> {}
+                    is InformationNavigationAction.NavigateToAppMakers -> navigate(InformationFragmentDirections.actionInformationFragmentToMakersFragment())
                 }
             }
         }
