@@ -237,11 +237,6 @@ class EditRoomDetailsFragment :
     }
 
     private fun getCaptureImage() {
-//        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE)
-//        } else {
-//            Intent(ACTION_IMAGE_CAPTURE)
-//        }
         viewModel.isGalleryImage.value = false
         cameraUri = createImageFile()
         cameraLauncher.launch(cameraUri)

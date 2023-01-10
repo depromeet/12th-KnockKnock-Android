@@ -44,7 +44,7 @@ class AlarmRoomPagingSource(
                 LoadResult.Page(
                     data = contents.groupContent,
                     prevKey = null,
-                    nextKey = if (contents.last) pageIndex + 1 else null
+                    nextKey = if (!contents.last) pageIndex + 1 else null
                 )
             },
             onError = { e -> LoadResult.Error(e) }

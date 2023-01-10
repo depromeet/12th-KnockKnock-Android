@@ -113,8 +113,8 @@
         android:layout_marginTop="8dp"
         android:orientation="vertical"
         android:overScrollMode="never"
+        android:nestedScrollingEnabled="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
         tools:listitem="@layout/holder_alarm_room" />
 </RelativeLayout>
 

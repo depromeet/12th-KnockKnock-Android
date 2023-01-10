@@ -42,6 +42,3 @@ fun String.toDayAndTime(): String {
 fun TextView.bindDateToDayAndTime(str: String) {
     this.text = str.toDayAndTime()
 }
-
-
-

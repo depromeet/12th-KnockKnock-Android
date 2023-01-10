@@ -11,6 +11,9 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomJoinedBinding
 import com.depromeet.knockknock.ui.alarmroomjoined.adapter.AlarmRoomJoinedAdapter
+import com.depromeet.knockknock.ui.alarmroomtab.AlarmRoomTabFragmentDirections
+import com.depromeet.knockknock.ui.alarmroomtab.bottom.BottomMakeRoom
+import com.depromeet.knockknock.ui.alarmroomtab.bottom.MakeRoomType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -26,10 +29,10 @@ class AlarmRoomJoinedFragment :
 
     override val viewModel: AlarmRoomJoinedViewModel by viewModels()
     private val navController by lazy { findNavController() }
-    private val roomAdapter by lazy { AlarmRoomJoinedAdapter(viewModel,viewModel) }
-    private lateinit var alarmRoomList : PagingData<GroupContent>
-    private lateinit var friendAlarmRoomList : PagingData<GroupContent>
-    private lateinit var aloneAlarmRoomList : PagingData<GroupContent>
+    private val roomAdapter by lazy { AlarmRoomJoinedAdapter(viewModel, viewModel) }
+    private lateinit var alarmRoomList: PagingData<GroupContent>
+    private lateinit var friendAlarmRoomList: PagingData<GroupContent>
+    private lateinit var aloneAlarmRoomList: PagingData<GroupContent>
 
     override fun initStartView() {
         binding.apply {
@@ -48,7 +51,8 @@ class AlarmRoomJoinedFragment :
                         moveToRoom(roomId = it.roomId)
                     }
                     is AlarmRoomJoinedNavigationAction.NavigateToMakeRoom -> {
-                        println("moving to making room")}
+                        makeRoomPopUp()
+                    }
                 }
             }
         }
@@ -72,7 +76,7 @@ class AlarmRoomJoinedFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomAllClicked.collectLatest {
                 if (it) {
-                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel,viewModel)
+                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel, viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
                     alarmRoomJoinedAdapter.submitData(alarmRoomList)
                 }
@@ -82,7 +86,7 @@ class AlarmRoomJoinedFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomFriendClicked.collectLatest {
                 if (it) {
-                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel,viewModel)
+                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel, viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
                     alarmRoomJoinedAdapter.submitData(friendAlarmRoomList)
                 }
@@ -92,7 +96,7 @@ class AlarmRoomJoinedFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomAloneClicked.collectLatest {
                 if (it) {
-                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel,viewModel)
+                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel, viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
                     alarmRoomJoinedAdapter.submitData(aloneAlarmRoomList)
                 }
@@ -101,11 +105,10 @@ class AlarmRoomJoinedFragment :
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.currentRoomCount.collectLatest {
-                if(it>0){
+                if (it > 0) {
                     binding.layoutWhenNoRoom.visibility = View.GONE
                     binding.alarmRoomRecycler.visibility = View.VISIBLE
-                }
-                else{
+                } else {
                     binding.layoutWhenNoRoom.visibility = View.VISIBLE
                     binding.alarmRoomRecycler.visibility = View.GONE
                 }
@@ -120,6 +123,18 @@ class AlarmRoomJoinedFragment :
 
     //  해당하는 방으로 이동하는 로직
     private fun moveToRoom(roomId: Int) {
+    }
+
+    private fun makeRoomPopUp() {
+        val dialog: BottomMakeRoom = BottomMakeRoom {
+            when (it) {
+                is MakeRoomType.RoomWithFriend -> {}
+                is MakeRoomType.RoomAlone -> {
+                    navController.navigate(R.id.action_alarmRoomTabFragment_to_aloneRoomMakeCategoryFragment)
+                }
+            }
+        }
+        dialog.show(requireActivity().supportFragmentManager, TAG)
     }
 
 }

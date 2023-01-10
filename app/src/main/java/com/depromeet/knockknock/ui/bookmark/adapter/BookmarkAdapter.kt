@@ -16,6 +16,8 @@ class BookmarkAdapter(
     private val eventListener: BookmarkActionHandler
 ) : PagingDataAdapter<Notification, BookmarkAdapter.ViewHolder>(BookmarkItemDiffCallback){
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewDataBinding: HolderBookmarkBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -33,12 +35,16 @@ class BookmarkAdapter(
 
     class ViewHolder(private val binding: HolderBookmarkBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        private val reactionAdapter = ReactionAdapter()
 
         fun bind(item: Notification) {
             binding.holder = item
             binding.executePendingBindings()
             binding.expandBtn.setOnClickListener {
                 binding.holder!!.isExpanded = !(binding.holder!!.isExpanded)
+
+                binding.reactionRecycler.adapter = reactionAdapter
+                reactionAdapter.submitList(item.reactions.reaction_count_infos)
 
                 if(binding.holder!!.isExpanded) {
                     binding.expandBtn.apply {

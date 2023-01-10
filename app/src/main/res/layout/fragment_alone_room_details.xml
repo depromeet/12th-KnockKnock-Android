@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.depromeet.knockknock.ui.aloneroomdetails.AloneRoomDetailsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/edit_room_details_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/ToolBarStyle" />
+
+        <LinearLayout
+            android:id="@+id/room_name_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="76dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/room_name_title"
+                    style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@string/edit_details_room_name" />
+
+                <TextView
+                    android:id="@+id/room_name_title_star"
+                    android:textSize="18dp"
+                    android:textColor="@color/main_yellow2_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="*" />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:id="@+id/room_name_edit_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_backgroundwhite_radius16"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/room_name_contents"
+                    style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:hint="@string/edit_details_room_name_hint"
+                    android:maxLength="18"
+                    android:text="@={viewmodel.inputRoomName}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_name_title" />
+
+
+                <TextView
+                    android:id="@+id/room_name_count"
+                    style="@style/Theme.AppCompat.TextView.Regular.Black.Size14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="0/18"
+                    android:textColor="@color/gray05"></TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/room_description_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_name_frame"
+            app:layout_constraintVertical_bias="0.4">
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/room_description_title"
+                    style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@string/edit_details_room_description" />
+
+                <TextView
+                    android:id="@+id/room_description_title_star"
+                    android:textSize="18dp"
+                    android:textColor="@color/main_yellow2_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="*" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/room_description_edit_layout"
+                android:layout_width="match_parent"
+                android:layout_height="106dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_backgroundwhite_radius16"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/room_description_content"
+                    style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:gravity="top"
+                    android:hint="@string/edit_details_room_description_hint"
+                    android:maxLength="80"
+                    android:text="@={viewmodel.inputRoomDescription}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_name_title" />
+
+                <TextView
+                    android:id="@+id/room_description_count"
+                    style="@style/Theme.AppCompat.TextView.Regular.Black.Size14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="top"
+                    android:paddingTop="79dp"
+                    android:text="0/80"
+                    android:textColor="@color/gray05"></TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/room_public_title"
+            style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/edit_details_public_scope"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_description_frame" />
+
+        <TextView
+            android:id="@+id/room_public_description"
+            style="@style/Theme.AppCompat.TextView.Medium.Black.Size16"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="3dp"
+            android:drawableStart="@drawable/ic_lock"
+            android:gravity="center"
+            android:text="@string/edit_details_protected"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_public_title" />
+
+
+        <Switch
+            android:id="@+id/alarm_settings_new_push_switch"
+            style="@style/Theme.AppCompat.Alarm.Settings.MarginEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:checked="@{viewmodel.isRoomUnpublic}"
+            android:onCheckedChanged="@{(view, checked) -> viewmodel.onRoomUnpublicToggled(checked)}"
+            android:thumb="@drawable/switch_thumb_selector"
+            android:track="@drawable/switch_track_selector"
+            app:layout_constraintBottom_toBottomOf="@id/room_public_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/room_public_description" />
+
+
+        <TextView
+            android:id="@+id/room_background_title"
+            style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/edit_details_room_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_public_description" />
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/background_recycler_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="3dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/room_background_title">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/room_background_add"
+        android:layout_width="110dp"
+        android:layout_height="189dp"
+        android:background="@drawable/custom_backgroundwhite_radius08_line_gray05"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/room_background_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="@{() -> viewmodel.onBackgroundEditClicked()}" />
+
+        <LinearLayout
+            android:id="@+id/room_background_add_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_image" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/edit_details_room_add_photo"
+                android:textColor="#9E9E9E"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/background_recycler"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/room_background_add"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/holder_edit_room_background" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/room_thumbnail_title"
+            style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/edit_details_room_thumbnail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/background_recycler_layout" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/thumbnail_recycler_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_thumbnail_title">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/room_thumbnail_add"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/custom_backgroundwhite_radius08_line_gray05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:id="@+id/room_thumbnail_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="@{() -> viewmodel.onThumbnailEditClicked()}"/>
+
+                <LinearLayout
+                    android:id="@+id/room_thumbnail_add_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="16.74dp"
+                        android:layout_height="16.74dp"
+                        android:src="@drawable/ic_image"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#9E9E9E"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:textSize="10.05dp"
+                        android:text="@string/edit_details_room_add_photo"
+                        />
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/thumbnail_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/room_thumbnail_add"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/holder_edit_room_thumbnail"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+        <TextView
+            android:id="@+id/save_btn"
+            style="@style/Theme.AppCompat.TextView.Category.Save.Btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thumbnail_recycler_layout"
+            android:text="@string/next"
+            android:gravity="center"
+            android:padding="16dp"
+            android:onClick="@{() -> viewmodel.onNextClicked()}"
+            app:detailSaveBtnEnable="@{viewmodel.saveBtnEnable}"
+            android:clickable="@{viewmodel.saveBtnEnable}">
+        </TextView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
