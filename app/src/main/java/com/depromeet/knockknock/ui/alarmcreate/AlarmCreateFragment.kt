@@ -18,7 +18,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.depromeet.knockknock.R
+import com.depromeet.knockknock.base.AlertDialogModel
 import com.depromeet.knockknock.base.BaseFragment
+import com.depromeet.knockknock.base.DefaultGrayAlertDialog
+import com.depromeet.knockknock.base.DefaultRedAlertDialog
 import com.depromeet.knockknock.databinding.FragmentAlarmCreateBinding
 import com.depromeet.knockknock.ui.alarmcreate.adapter.RecommendationAdapter
 import com.depromeet.knockknock.ui.alarmcreate.bottom.BottomAlarmReservationPicker
@@ -86,6 +89,7 @@ class AlarmCreateFragment :
                         )
                     )
                     is AlarmCreateNavigationAction.NavigateToPushAlarm -> navController.popBackStack()
+                    is AlarmCreateNavigationAction.NavigateToNoReservationAlarm -> alarmNoReservationDialog()
                 }
             }
         }
@@ -159,6 +163,20 @@ class AlarmCreateFragment :
             viewModel.onUpdateReservationAlarmPushClicked(reservationId, it.toString())
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
+    }
+
+    private fun alarmNoReservationDialog() {
+        val res = AlertDialogModel(
+            title = "푸시알림을 예약할 수 없어요.",
+            description = "현재 예약된 푸시알림 발송\n 혹은 삭제 후에 예약해주세요.",
+            positiveContents = "닫기",
+            negativeContents = "닫기"
+        )
+        val dialog: DefaultGrayAlertDialog = DefaultGrayAlertDialog(
+            alertDialogModel = res,
+            clickToNegative = {}
+        )
+        dialog.show(childFragmentManager, TAG)
     }
 
     private fun addImageBottomSheet() {

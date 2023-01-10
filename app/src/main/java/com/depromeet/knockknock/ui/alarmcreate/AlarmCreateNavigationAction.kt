@@ -8,5 +8,7 @@ sealed class AlarmCreateNavigationAction {
     class NavigateToRecommendationMessageText(val message: String) : AlarmCreateNavigationAction()
     class NavigateToPreview(val title: String, val message: String, val uri: String) : AlarmCreateNavigationAction()
     object NavigateToPushAlarm : AlarmCreateNavigationAction()
+    object NavigateToNoReservationAlarm : AlarmCreateNavigationAction()
+
 
 }

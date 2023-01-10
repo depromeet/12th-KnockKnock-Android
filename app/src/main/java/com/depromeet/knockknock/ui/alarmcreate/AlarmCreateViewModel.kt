@@ -113,7 +113,9 @@ class AlarmCreateViewModel @Inject constructor(
                     send_at = sendAt,
                 ).onSuccess {
                     _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
-                }.onError {}
+                }.onError {
+                    _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToNoReservationAlarm)
+                }
             }
         }
     }

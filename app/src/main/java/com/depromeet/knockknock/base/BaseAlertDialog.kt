@@ -2,6 +2,7 @@ package com.depromeet.knockknock.base
 
 import android.view.View
 import com.depromeet.knockknock.R
+import com.depromeet.knockknock.databinding.DialogGrayDefaultAlertBinding
 import com.depromeet.knockknock.databinding.DialogRedDefaultAlertBinding
 import com.depromeet.knockknock.databinding.DialogYellowDefaultAlertBinding
 
@@ -69,6 +70,29 @@ class DefaultRedAlertDialog(
         }
         binding.positiveBtn.setOnClickListener {
             clickToPositive.invoke()
+            dismiss()
+        }
+    }
+}
+
+
+class DefaultGrayAlertDialog(
+    private val alertDialogModel: AlertDialogModel,
+    private val clickToNegative: () -> Unit,
+) : BaseDialog<DialogGrayDefaultAlertBinding>(layoutId = R.layout.dialog_gray_default_alert) {
+
+    override val layoutResourceId: Int
+        get() = R.layout.dialog_gray_default_alert
+
+    override fun initStartView() {
+        binding.model = alertDialogModel
+    }
+
+    override fun initDataBinding() = Unit
+
+    override fun initAfterBinding() {
+        binding.negativeBtn.setOnClickListener {
+            clickToNegative.invoke()
             dismiss()
         }
     }
