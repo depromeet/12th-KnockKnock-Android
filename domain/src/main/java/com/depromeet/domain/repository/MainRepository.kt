@@ -187,7 +187,7 @@ interface  MainRepository {
         size: Int,
         sort: String,
         group_id: Int
-    ): NetworkResult<NotificationContent>
+    ): NetworkResult<NotificationListContent>
 
     // 푸쉬 알림 삭제
     suspend fun deleteNotification(notification_id: Int): NetworkResult<Unit>

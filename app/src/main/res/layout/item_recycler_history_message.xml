@@ -38,6 +38,7 @@
 
             <ImageView
                 android:id="@+id/user_img"
+                android:src="@drawable/img_user_profile_happy"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 app:layout_constraintTop_toTopOf="parent"

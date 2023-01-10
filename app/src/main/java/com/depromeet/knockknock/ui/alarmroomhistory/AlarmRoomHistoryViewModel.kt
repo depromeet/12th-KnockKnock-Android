@@ -5,6 +5,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.Admission
 import com.depromeet.domain.model.Notification
+import com.depromeet.domain.model.NotificationListContent
 import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
@@ -54,11 +55,6 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
     init {
         getGroupAdmissions()
-        reservationTimeEvent.value = "오늘 19:00 발송 예정"
-        reservationTitleEvent.value = ""
-        reservationMessageEvent.value =
-            "푸시알림 텍스트는 2줄까지만 보여주세요. 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는 2줄 이상 넘어갈 시에는"
-
         getPushAlarm()
     }
 
@@ -66,7 +62,8 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         pushAlarmList = createAlarmRoomHistoryBundlePager(
             mainRepository = mainRepository,
             groupId = groupId,
-            sort = sort
+            sort = sort,
+            viewModel= this
         ).flow.cachedIn(baseViewModelScope)
     }
 

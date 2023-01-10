@@ -220,17 +220,11 @@ class AlarmRoomHistoryFragment :
     }
 
     private fun initAdapter() {
-
         lifecycleScope.launchWhenStarted {
             viewModel.pushAlarmList.collectLatest {
-                Log.d("ttt 알림방 히스토리0", it.toString())
                 alarmRoomHistoryBundleAdapter.submitData(it)
-
             }
         }
-
-        if (viewModel.alarmInviteRoomEvent.value.isEmpty()) binding.inviteConstraintLayout.visibility = View.GONE
-        else binding.inviteConstraintLayout.visibility = View.VISIBLE
     }
 
     private fun initToolbar() {
@@ -240,12 +234,16 @@ class AlarmRoomHistoryFragment :
         }
     }
 
-    override fun initDataBinding() {
-    }
+    override fun initDataBinding() {}
 
     override fun initAfterBinding() {
         binding.rvInviteList.adapter = alarmInviteRoomAdapter
         binding.rvList.adapter = alarmRoomHistoryBundleAdapter
 
+    }
+
+    override fun onResume() {
+        viewModel.getPushAlarm()
+        super.onResume()
     }
 }

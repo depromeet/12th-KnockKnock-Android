@@ -28,8 +28,6 @@ class AlarmRoomHistoryMessageAdapter(
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.d("ttt 알림방 히스토리", "들어와라")
-
         val viewDataBinding: ItemRecyclerHistoryMessageBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.item_recycler_history_message,
@@ -42,22 +40,17 @@ class AlarmRoomHistoryMessageAdapter(
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("ttt 알림방 히스토리1", holder.toString())
-
         getItem(position)?.let {
             val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")
             val currentDate = LocalDate.now().format(formatter)
             val createdDate =
                 LocalDate.parse(it.created_date.substring(0, 10), DateTimeFormatter.ISO_DATE)
                     .format(formatter)
-            Log.d("ttt currentDate", currentDate)
-            Log.d("ttt createdDate", createdDate)
 
             if (currentDate == createdDate) {
                 holder.bind(
                     it,
                     viewModel,
-                    true,
                     LocalDateTime.parse(it.created_date, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
                         .format(DateTimeFormatter.ofPattern("오늘 a hh:mm"))
                 )
@@ -65,7 +58,6 @@ class AlarmRoomHistoryMessageAdapter(
                 holder.bind(
                     it,
                     viewModel,
-                    false,
                     LocalDateTime.parse(it.created_date, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
                         .format(DateTimeFormatter.ofPattern("MM월 dd일 a hh:mm"))
                 )
@@ -80,10 +72,8 @@ class AlarmRoomHistoryMessageAdapter(
         fun bind(
             item: Notification,
             viewModel: AlarmRoomHistoryViewModel,
-            b: Boolean,
             date: String
         ) {
-            Log.d("ttt 알림방 히스토리2", item.toString())
 
             binding.apply {
                 model = item
