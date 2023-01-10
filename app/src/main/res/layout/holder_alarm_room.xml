@@ -14,22 +14,28 @@
             type="com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchActionHandler" />
 
         <variable
+            name="alarmroomexploreeventListener"
+            type="com.depromeet.knockknock.ui.alarmroomexplore.AlarmRoomExploreActionHandler" />
+
+        <variable
             name="alarmroomjoinedeventListener"
             type="com.depromeet.knockknock.ui.alarmroomjoined.AlarmRoomJoinedActionHandler" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/room_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> eventListener.onRoomClicked(holder.group_id)}"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+            <!--            android:onClick="@{() -> eventListener.onRoomClicked(holder.group_id)}"-->
 
 
             <ImageView
@@ -73,27 +79,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginTop="3dp"
-                android:fontFamily="@font/pretendard_medium"
+                android:layout_marginEnd="16dp"
                 android:ellipsize="end"
+                android:fontFamily="@font/pretendard_medium"
+                android:singleLine="true"
                 android:text="@{holder.description}"
                 android:textColor="@color/gray06"
                 android:textSize="16dp"
-                app:layout_constraintStart_toEndOf="@id/room_img"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/room_title_frame"
-                android:singleLine="true" />
+                app:layout_constraintStart_toEndOf="@id/room_img"
+                app:layout_constraintTop_toBottomOf="@id/room_title_frame" />
 
             <LinearLayout
                 android:id="@+id/member_count_category_frame"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/room_img"
-                android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@id/room_description">
 
                 <TextView
@@ -126,16 +132,16 @@
                 </TextView>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_main"
+                    android:id="@+id/category_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    app:roomCategoryIsNull="@{holder.category.content.length()}"
                     android:background="@drawable/custom_yellow_radius16"
                     android:paddingStart="10dp"
                     android:paddingTop="1dp"
                     android:paddingEnd="10dp"
-                    android:paddingBottom="1dp">
+                    android:paddingBottom="1dp"
+                    app:roomCategoryIsNull="@{holder.category.content.length()}">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -149,7 +155,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
+        <View
         app:layout_constraintBottom_toBottomOf="@id/room_layout"
         android:layout_width="match_parent"
         android:layout_height="1dp"
