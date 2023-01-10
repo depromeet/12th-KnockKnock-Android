@@ -51,7 +51,7 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is AlarmRoomSearchNavigationAction.NavigateToRoom -> { moveToRoom(roomId = it.roomId) }
+                    is AlarmRoomSearchNavigationAction.NavigateToRoom -> { navigate(AlarmRoomSearchFragmentDirections.actionAlarmRoomSearchFragmentToAlarmRoomHistoryFragment(it.roomId)) }
                     is AlarmRoomSearchNavigationAction.NavigateToHidePopularCategory -> {}
                     is AlarmRoomSearchNavigationAction.NavigateToMakeRoom -> {}
                 }
