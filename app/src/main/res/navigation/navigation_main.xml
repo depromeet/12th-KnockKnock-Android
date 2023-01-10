@@ -204,7 +204,9 @@
         android:label="InformationFragment" >
         <action
             android:id="@+id/action_informationFragment_to_makersFragment"
-            app:destination="@id/makersFragment" />
+            app:destination="@id/makersFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <fragment
         android:id="@+id/onboardFragment"
