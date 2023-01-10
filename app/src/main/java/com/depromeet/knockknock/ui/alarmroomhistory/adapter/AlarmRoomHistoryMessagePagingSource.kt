@@ -16,7 +16,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-fun createAlarmRoomHistoryBundlePager(
+fun createAlarmRoomHistoryMessagePager(
     mainRepository: MainRepository,
     groupId: StateFlow<Int>,
     sort: StateFlow<String>,
@@ -25,7 +25,7 @@ fun createAlarmRoomHistoryBundlePager(
     config = PagingConfig(pageSize = 10, initialLoadSize = 10, enablePlaceholders = true),
     initialKey = 0,
     pagingSourceFactory = {
-        AlarmRoomHistoryBundlePagingSource(
+        AlarmRoomHistoryMessagePagingSource(
             mainRepository = mainRepository,
             groupId = groupId,
             sort = sort,
@@ -34,7 +34,7 @@ fun createAlarmRoomHistoryBundlePager(
     }
 )
 
-class AlarmRoomHistoryBundlePagingSource(
+class AlarmRoomHistoryMessagePagingSource(
     private val mainRepository: MainRepository,
     private val groupId: StateFlow<Int>,
     private val sort: StateFlow<String>,

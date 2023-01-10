@@ -5,12 +5,11 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.Admission
 import com.depromeet.domain.model.Notification
-import com.depromeet.domain.model.NotificationListContent
 import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
-import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryBundlePager
+import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryMessagePager
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryBundle
 import com.depromeet.knockknock.ui.alarmroomhistory.model.HistoryMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -59,7 +58,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     fun getPushAlarm() {
-        pushAlarmList = createAlarmRoomHistoryBundlePager(
+        pushAlarmList = createAlarmRoomHistoryMessagePager(
             mainRepository = mainRepository,
             groupId = groupId,
             sort = sort,
