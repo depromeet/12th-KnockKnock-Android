@@ -1,7 +1,6 @@
 package com.depromeet.knockknock.ui.alarmroomhistory.adapter
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
