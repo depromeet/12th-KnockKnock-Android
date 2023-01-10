@@ -100,6 +100,11 @@
         android:name="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryFragment"
         android:label="AlarmRoomHistoryFragment">
 
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
         <action
             android:id="@+id/action_alarmRoomHistoryFragment_to_alarmCreateFragment"
             app:destination="@id/alarmCreateFragment" />
@@ -451,5 +456,8 @@
         <argument
             android:name="group_category_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_aloneRoomInviteFriendFragment_to_alarmRoomHistoryFragment"
+            app:destination="@id/alarmRoomHistoryFragment" />
     </fragment>
 </navigation>

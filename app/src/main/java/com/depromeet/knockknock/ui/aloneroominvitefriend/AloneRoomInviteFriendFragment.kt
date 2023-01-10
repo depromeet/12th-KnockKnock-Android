@@ -9,6 +9,7 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAloneRoomInviteFriendBinding
 import com.depromeet.knockknock.databinding.FragmentInviteFriendToRoomBinding
+import com.depromeet.knockknock.ui.alarmroomtab.AlarmRoomTabFragmentDirections
 import com.depromeet.knockknock.ui.aloneroominvitefriend.adapter.AloneRoomInviteFriendAdapter
 import com.depromeet.knockknock.ui.invitefriendtoroom.adapter.InviteFriendToRoomAdapter
 import com.depromeet.knockknock.util.customOnFocusChangeListener
@@ -64,7 +65,8 @@ class AloneRoomInviteFriendFragment :
             viewModel.navigationHandler.collectLatest {
                 when (it) {
                     is AloneRoomInviteFriendNavigationAction.NavigateToGeneratedRoom ->
-                    {}                }
+                        navigate(AloneRoomInviteFriendFragmentDirections.actionAloneRoomInviteFriendFragmentToAlarmRoomHistoryFragment(it.groupId))
+                                    }
             }
         }
 
