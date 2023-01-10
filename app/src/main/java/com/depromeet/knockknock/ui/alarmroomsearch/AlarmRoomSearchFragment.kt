@@ -13,6 +13,9 @@ import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomSearchBinding
 import com.depromeet.knockknock.ui.alarmroomsearch.adapter.AlarmRoomSearchAdapter
 import com.depromeet.knockknock.ui.alarmroomsearch.adapter.PopularCategoryAdapter
+import com.depromeet.knockknock.ui.alarmroomtab.AlarmRoomTabFragmentDirections
+import com.depromeet.knockknock.ui.alarmroomtab.bottom.BottomMakeRoom
+import com.depromeet.knockknock.ui.alarmroomtab.bottom.MakeRoomType
 import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.hideKeyboard
 import com.google.android.flexbox.AlignItems
@@ -51,9 +54,9 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is AlarmRoomSearchNavigationAction.NavigateToRoom -> { moveToRoom(roomId = it.roomId) }
+                    is AlarmRoomSearchNavigationAction.NavigateToRoom -> { navigate(AlarmRoomSearchFragmentDirections.actionAlarmRoomSearchFragmentToAlarmRoomHistoryFragment(it.roomId)) }
                     is AlarmRoomSearchNavigationAction.NavigateToHidePopularCategory -> {}
-                    is AlarmRoomSearchNavigationAction.NavigateToMakeRoom -> {}
+                    is AlarmRoomSearchNavigationAction.NavigateToMakeRoom -> {makeRoomPopUp()}
                 }
             }
         }
@@ -74,13 +77,22 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
     override fun initAfterBinding() {
 
         //editText 자동 포커스 및 키보드 띄우기
-        binding.searchEditText.requestFocus()
-        val imm = requireActivity().getSystemService(
-            Context.INPUT_METHOD_SERVICE
-        ) as InputMethodManager
-        imm!!.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+//        binding.searchEditText.requestFocus()
+//        val imm = requireActivity().getSystemService(
+//            Context.INPUT_METHOD_SERVICE
+//        ) as InputMethodManager
+//        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        binding.searchEditText.requestFocus()
+//        val imm = requireActivity().getSystemService(
+//            Context.INPUT_METHOD_SERVICE
+//        ) as InputMethodManager
+//        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+//    }
 
     private fun initAdapter(){
         binding.alarmRoomRecycler.adapter = alarmRoomAdapter
@@ -99,11 +111,17 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
     }
 
 
-
-//  해당하는 방으로 이동하는 로직
-    private fun moveToRoom(roomId: Int) {
-
+    private fun makeRoomPopUp() {
+        val dialog: BottomMakeRoom = BottomMakeRoom {
+            when(it) {
+                is MakeRoomType.RoomWithFriend -> {}
+                is MakeRoomType.RoomAlone -> {navigate(AlarmRoomSearchFragmentDirections.actionAlarmRoomSearchFragmentToAloneRoomMakeCategoryFragment())}
+            }
+        }
+        dialog.show(requireActivity().supportFragmentManager, TAG)
     }
+
+
 
 
     @SuppressLint("ClickableViewAccessibility")

@@ -38,6 +38,15 @@ class AloneRoomMakeCategoryViewModel @Inject constructor(
         }
     }
 
+    fun getCategories(){
+        baseViewModelScope.launch {
+            mainRepository.getGroupCategories()
+                .onSuccess {
+                    _categoryList.emit(it.categories)
+                }
+        }
+    }
+
     override fun onCategoryClicked(categoryId: Int) {
         baseViewModelScope.launch {
             _clickCategory.value = categoryId

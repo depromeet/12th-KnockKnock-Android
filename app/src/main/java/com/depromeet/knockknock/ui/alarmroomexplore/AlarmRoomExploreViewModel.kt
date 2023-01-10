@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.alarmroomexplore
 
+import android.widget.Toast
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.Category
@@ -92,6 +93,12 @@ class AlarmRoomExploreViewModel @Inject constructor(
         }
     }
 
+    fun resetClickedCategoryWhenResume(){
+        baseViewModelScope.launch {
+            _clickedCategoryId.emit(1)
+        }
+    }
+
 
     override fun onAlarmRoomEditTextClicked() {
         baseViewModelScope.launch {
@@ -99,17 +106,16 @@ class AlarmRoomExploreViewModel @Inject constructor(
         }
     }
 
+
+
     override fun onCategoryClicked(categoryId: Int) {
         baseViewModelScope.launch {
             _clickedCategoryId.emit(categoryId)
         }
     }
 
-    override fun onPopularRoomClicked(roomId: Int) {
-    }
-
-
     override fun onRoomClicked(roomId: Int) {
+        //println("clicked ${roomId}")
         baseViewModelScope.launch {
             _navigationHandler.emit(AlarmRoomExploreNavigationAction.NavigateToRoom(roomId = roomId))
         }

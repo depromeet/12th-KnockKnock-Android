@@ -279,6 +279,11 @@
             app:destination="@id/inviteFriendToRoomFragment"
             app:enterAnim="@anim/enter_from_right"
             app:popExitAnim="@anim/exit_to_right" />
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
     </fragment>
 
     <fragment
@@ -353,7 +358,14 @@
     <fragment
         android:id="@+id/alarmRoomSearchFragment"
         android:name="com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchFragment"
-        android:label="AlarmRoomSearchFragment" />
+        android:label="AlarmRoomSearchFragment" >
+        <action
+            android:id="@+id/action_alarmRoomSearchFragment_to_alarmRoomHistoryFragment"
+            app:destination="@id/alarmRoomHistoryFragment" />
+        <action
+            android:id="@+id/action_alarmRoomSearchFragment_to_aloneRoomMakeCategoryFragment"
+            app:destination="@id/aloneRoomMakeCategoryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/inviteFriendToRoomFragment"
         android:name="com.depromeet.knockknock.ui.invitefriendtoroom.InviteFriendToRoomFragment"
@@ -373,6 +385,11 @@
             app:destination="@id/inviteFriendToRoomFragment"
             app:enterAnim="@anim/enter_from_right"
             app:popExitAnim="@anim/exit_to_right" />
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
     </fragment>
     <fragment
         android:id="@+id/alarmRoomJoinedFragment"
@@ -392,9 +409,10 @@
         android:label="AlarmRoomTabFragment" >
         <action
             android:id="@+id/action_alarmRoomTabFragment_to_aloneRoomMakeCategoryFragment"
-            app:destination="@id/aloneRoomMakeCategoryFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:popExitAnim="@anim/exit_to_right"/>
+            app:destination="@id/aloneRoomMakeCategoryFragment" />
+        <action
+            android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomHistoryFragment"
+            app:destination="@id/alarmRoomHistoryFragment" />
     </fragment>
     <action
         android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomSearchFragment"
@@ -458,6 +476,7 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_aloneRoomInviteFriendFragment_to_alarmRoomHistoryFragment"
-            app:destination="@id/alarmRoomHistoryFragment" />
+            app:destination="@id/alarmRoomHistoryFragment"
+            app:popUpTo="@id/alarmRoomTabFragment" />
     </fragment>
 </navigation>

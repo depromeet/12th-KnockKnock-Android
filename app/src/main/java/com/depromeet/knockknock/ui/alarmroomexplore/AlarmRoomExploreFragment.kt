@@ -1,33 +1,22 @@
 package com.depromeet.knockknock.ui.alarmroomexplore
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.filter
-import com.depromeet.domain.model.Category
-import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomExploreBinding
+import com.depromeet.knockknock.ui.alarmroomexplore.adapter.AlarmRoomAdapter
 import com.depromeet.knockknock.ui.alarmroomexplore.adapter.CategoryAdapter
 import com.depromeet.knockknock.ui.alarmroomexplore.adapter.PopularRoomAdapter
-import com.depromeet.knockknock.ui.alarmroomjoined.adapter.AlarmRoomJoinedAdapter
-import com.depromeet.knockknock.ui.alarmroomsearch.adapter.AlarmRoomAdapter
-import com.depromeet.knockknock.ui.alarmroomsearch.adapter.AlarmRoomSearchAdapter
+import com.depromeet.knockknock.ui.alarmroomexplore.adapter.beforeClicked
 import com.depromeet.knockknock.ui.alarmroomtab.AlarmRoomTabFragmentDirections
 import com.depromeet.knockknock.util.customOnFocusChangeListener
 import com.depromeet.knockknock.util.hideKeyboard
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 
 
@@ -60,7 +49,8 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is AlarmRoomExploreNavigationAction.NavigateToRoom -> { moveToRoom(roomId = it.roomId) }
+                    is AlarmRoomExploreNavigationAction.NavigateToRoom ->  {navController.navigate(AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToAlarmRoomHistoryFragment(it.roomId))}
+//                    navigate(AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToAlarmRoomHistoryFragment(it.roomId))
                     is AlarmRoomExploreNavigationAction.NavigateToAlarmRoomSearch -> {navController.navigate(R.id.action_alarmRoomTabFragment_to_alarmRoomSearchFragment)}
                     is AlarmRoomExploreNavigationAction.NavigateToMakeRoom -> {}
                 }
@@ -99,9 +89,14 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
 
     override fun onResume() {
         super.onResume()
+        viewModel.getGroups()
         lifecycleScope.launchWhenStarted {
             viewModel.roomList.collectLatest {
                 val alarmRoomAdapter = AlarmRoomAdapter(viewModel,viewModel)
+
+                //카테고리를 전체 카테고리로 초기화
+                beforeClicked = 1
+
                 binding.alarmRoomRecycler.adapter = alarmRoomAdapter
                 alarmRoomAdapter.submitData(it)
             }
@@ -114,13 +109,6 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
         binding.alarmRoomRecycler.adapter = alarmRoomAdapter
         binding.categorySelectRecycler.adapter = categoryAdapter
         binding.popularRoomRecycler.adapter = popularRoomAdapter
-    }
-
-
-
-//  해당하는 방으로 이동하는 로직
-    private fun moveToRoom(roomId: Int) {
-
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -1,4 +1,4 @@
-package com.depromeet.knockknock.ui.alarmroomsearch.adapter
+package com.depromeet.knockknock.ui.alarmroomexplore.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -30,9 +30,11 @@ class AlarmRoomAdapter(
             false
         )
         viewDataBinding.layoutMain.setOnClickListener {
+            //println("clicked!!!")
             eventListener.onRoomClicked(viewDataBinding.holder!!.group_id)
             this.notifyDataSetChanged()
         }
+//        viewDataBinding.alarmroomexploreeventListener = eventListener
         return ViewHolder(viewDataBinding)
     }
 
