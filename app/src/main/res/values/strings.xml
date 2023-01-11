@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">knockknock</string>
+    <string name="app_name">knocknock</string>
     <string name="app_version">0.0.1</string>
 
     <string name="default_image_title">프로필 이미지</string>
