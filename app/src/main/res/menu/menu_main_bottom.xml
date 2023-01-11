@@ -10,7 +10,7 @@
     <item
         android:id="@+id/alarmRoomTabFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_notification"
+        android:icon="@drawable/ic_room_bottom"
         android:title="@string/bottom_alarm_room"/>
 
     <item
