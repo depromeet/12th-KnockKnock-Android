@@ -1,6 +1,8 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
 import android.util.Log
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.Admission
@@ -35,7 +37,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var alarmRoomDescriptionEvent = MutableStateFlow<String>("")
     var alarmDateEvent = MutableStateFlow<String>("")
     val emptyMessage: String = ""
-    var groupId = MutableStateFlow<Int>(30)
+    var groupId = MutableStateFlow<Int>(0)
     var reservationId = MutableStateFlow<Int>(0)
     var sort = MutableStateFlow<String>("")
     var reservationTimeEvent = MutableStateFlow<String>("")
@@ -43,10 +45,34 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var reservationMessageEvent = MutableStateFlow<String>("")
     val reservationMessageImgUri: MutableStateFlow<String> = MutableStateFlow<String>("")
     var pushAlarmList: Flow<PagingData<Notification>> = emptyFlow()
+    var isPublicAccess = MutableStateFlow<Boolean>(true)
+    var membersEvent = MutableStateFlow<String>("")
+    var isHost = MutableStateFlow<Boolean>(true)
+    var isMessage = MutableStateFlow<Boolean>(true)
 
-    init {
-        getGroupAdmissions()
-        getPushAlarm()
+
+
+    init {}
+
+    fun getGroups() {
+        baseViewModelScope.launch {
+            mainRepository.getGroup(groupId.value).onSuccess {
+                alarmRoomTitleEvent.value = it.title
+                alarmRoomDescriptionEvent.value = it.description
+                isPublicAccess.value = it.public_access
+                membersEvent.value = it.members.size.toString()
+                isHost.value = it.ihost
+
+
+            }.onError {
+                Log.d("ttt", "그룹 확인 실패")
+            }
+        }
+    }
+
+    fun onSettingClicked() {
+        if (isHost.value) onSettingRoomClicked(groupId.value)
+        else onSettingRoomForUserClicked()
     }
 
     fun getPushAlarm() {
@@ -54,19 +80,46 @@ class AlarmRoomHistoryViewModel @Inject constructor(
             mainRepository = mainRepository,
             groupId = groupId,
             sort = sort,
-            viewModel= this
+            viewModel = this
         ).flow.cachedIn(baseViewModelScope)
     }
 
+    fun onSettingRoomClicked(alarmId: Int) {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(
+                AlarmRoomHistoryNavigationAction.NavigateToSettingRoom(alarmId)
+            )
+        }
+    }
+
+    fun onSettingRoomForUserClicked() {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(
+                AlarmRoomHistoryNavigationAction.NavigateToSettingRoomForUser
+            )
+        }
+    }
+
+    fun postGroupAdmissions(){
+        baseViewModelScope.launch {
+            mainRepository.postGroupAdmissions(groupId.value).onSuccess {
+                Log.d("ttt", "입장하기 성공")
+
+            }.onError {
+                Log.d("ttt", "입장하기 실패")
+            }
+        }
+
+    }
+
     // 방장 권한이 있어야 함
-    private fun getGroupAdmissions() {
+    fun getGroupAdmissions() {
 
         baseViewModelScope.launch {
             mainRepository.getGroupAdmissions(groupId.value).onSuccess {
                 _alarmInviteRoomEvent.value = it.admissions
-
-            }.onSuccess {
                 Log.d("ttt", "초대 확인 성공")
+
             }.onError {
                 Log.d("ttt", "초대 확인 실패")
             }
@@ -100,7 +153,10 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     fun stroageReaction(reaction_id: Int, notification_id: Int) {
         baseViewModelScope.launch {
             showLoading()
-            mainRepository.postReactions(notification_id = notification_id, reaction_id = reaction_id)
+            mainRepository.postReactions(
+                notification_id = notification_id,
+                reaction_id = reaction_id
+            )
                 .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
             dismissLoading()
         }
@@ -119,9 +175,13 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     override fun onReactionClicked(notification_id: Int, reaction_id: Int) {
-        Log.d("Ttt", "ㅁㄴㅇㅁㄴㅇㅁㄴㅇ")
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToReaction(notification_id = notification_id, reaction_id = reaction_id))
+            _navigationEvent.emit(
+                AlarmRoomHistoryNavigationAction.NavigateToReaction(
+                    notification_id = notification_id,
+                    reaction_id = reaction_id
+                )
+            )
         }
     }
 
@@ -147,11 +207,17 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onAlarmCreateClicked(roomId: Int, title: String, copyMessage: String, reservation: Boolean) {
+    fun onAlarmCreateClicked(
+        roomId: Int,
+        title: String,
+        copyMessage: String,
+        reservation: Int
+    ) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(
                     roomId,
+                    alarmRoomTitleEvent.value,
                     title,
                     copyMessage,
                     reservation
@@ -172,6 +238,20 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
+    override fun onAlarmSaveClicked(alarmId: Int) {
+        baseViewModelScope.launch {
+            mainRepository.postStorages(alarmId)
+                .onSuccess {
+
+                    Log.d("ttt", "보관함 저장 성공")
+
+
+                }.onError {
+                    Log.d("ttt", "보관함 저장 실패")
+                }
+        }
+    }
+
     override fun onRecentAlarmMoreClicked(alarmId: Int, message: String) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
@@ -181,5 +261,20 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 )
             )
         }
+    }
+
+    fun onReportClicked(alarmId: Int) {
+//        baseViewModelScope.launch {
+//            mainRepository.postre(alarmId)
+//                .onSuccess {
+//
+//                    Log.d("ttt", "보관함 저장 성공")
+//
+//
+//                }.onError {
+//                    Log.d("ttt", "보관함 저장 실패")
+//                }
+//        }
+
     }
 }

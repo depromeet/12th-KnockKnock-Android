@@ -26,7 +26,7 @@ class AlarmCreateViewModel @Inject constructor(
     var editTextMessageEvent = MutableStateFlow<String>("")
     var editTextMessageCountEvent = MutableStateFlow<Int>(0)
     var groupTitle = MutableStateFlow<String>("")
-    var groupId = MutableStateFlow<Int>(30)
+    var groupId = MutableStateFlow<Int>(0)
     val messageImgUri: MutableStateFlow<String> = MutableStateFlow<String>("")
     private val _recommendationMessageEvent: MutableStateFlow<RecommendMessageList> =
         MutableStateFlow(RecommendMessageList(emptyList()))
@@ -39,7 +39,7 @@ class AlarmCreateViewModel @Inject constructor(
             }
         }
 
-        if (editTextTitleEvent.value == ""){
+        if (editTextTitleEvent.value == "") {
             baseViewModelScope.launch {
                 mainRepository.getUserProfile().onSuccess {
                     editTextTitleEvent.emit(it.nickname)
@@ -47,24 +47,14 @@ class AlarmCreateViewModel @Inject constructor(
 
             }
         }
-
-        baseViewModelScope.launch {
-            mainRepository.getGroup(groupId.value).onSuccess {
-                groupTitle.emit(it.title)
-            }
-
-        }
-
         getRecommendMessage()
     }
 
     private fun getRecommendMessage() {
         baseViewModelScope.launch {
             mainRepository.getRecommendMessage().onSuccess {
-                Log.d("ttt success", it.toString())
                 _recommendationMessageEvent.value = it
             }.onError {
-                Log.d("ttt error", it.toString())
             }
         }
     }
@@ -111,9 +101,9 @@ class AlarmCreateViewModel @Inject constructor(
 
     override fun onAlarmPushClicked() {
         baseViewModelScope.launch {
-            if (editTextTitleEvent.value == "" && editTextMessageEvent.value == "" && messageImgUri.value == "") {
+            if (editTextTitleEvent.value != "" && editTextMessageEvent.value != "") {
                 mainRepository.postNotifications(
-                    group_id = 0,
+                    group_id = groupId.value,
                     title = editTextTitleEvent.value,
                     content = editTextMessageEvent.value,
                     image_url = messageImgUri.value
@@ -125,10 +115,10 @@ class AlarmCreateViewModel @Inject constructor(
     }
 
     override fun onReservationAlarmPushClicked(sendAt: String) {
-        if (editTextTitleEvent.value == "" && editTextMessageEvent.value == "" && messageImgUri.value == "") {
+        if (editTextTitleEvent.value != "" && editTextMessageEvent.value != "") {
             baseViewModelScope.launch {
                 mainRepository.postNotificationReservation(
-                    group_id = 0,
+                    group_id = groupId.value,
                     title = editTextTitleEvent.value,
                     content = editTextMessageEvent.value,
                     image_url = messageImgUri.value,
@@ -142,8 +132,8 @@ class AlarmCreateViewModel @Inject constructor(
         }
     }
 
-    override fun onUpdateReservationAlarmPushClicked(reservationId : Int, sendAt: String) {
-        if (editTextTitleEvent.value == "" && editTextMessageEvent.value == "" && messageImgUri.value == "") {
+    override fun onUpdateReservationAlarmPushClicked(reservationId: Int, sendAt: String) {
+        if (editTextTitleEvent.value != "" && editTextMessageEvent.value != "") {
             baseViewModelScope.launch {
                 mainRepository.patchNotificationReservation(
                     reservation_id = reservationId,

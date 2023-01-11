@@ -58,11 +58,12 @@ class AlarmCreateFragment :
         }
         exception = viewModel.errorEvent
         val args: AlarmCreateFragmentArgs by navArgs()
-        viewModel.editTextTitleEvent.value = args.title
         viewModel.groupId.value = args.alarmId
+        viewModel.groupTitle.value = args.roomTitle
+        viewModel.editTextTitleEvent.value = args.title
         viewModel.editTextMessageEvent.value = args.message
 
-        if (args.reservation) updateReservationAlarmSend(0)
+        if (args.reservation != 0) updateReservationAlarmSend(args.reservation)
 
         initEditText()
         initRegisterForActivityResult()
@@ -136,7 +137,8 @@ class AlarmCreateFragment :
                      * 푸쉬알림을 발송했습니다!
                      * fcm API!!
                      * */
-//                    viewModel.onAlarmPushClicked()
+                    toastMessage("푸시알림을 발송했습니다!")
+                    viewModel.onAlarmPushClicked()
                 }
             }
         })
@@ -149,8 +151,8 @@ class AlarmCreateFragment :
              * 예약 푸쉬알림을 발송했습니다!
              * fcm API!!
              * */
-            Log.d("ttt", it.toString())
-//            viewModel.onReservationAlarmPushClicked(it.toString())
+            toastMessage("푸시알림을 발송했습니다!")
+            viewModel.onReservationAlarmPushClicked(it.toString())
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

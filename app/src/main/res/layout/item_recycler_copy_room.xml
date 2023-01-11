@@ -7,7 +7,10 @@
     <data>
         <variable
             name="holder"
-            type="com.depromeet.knockknock.ui.bookmark.model.Room" />
+            type="com.depromeet.domain.model.GroupContent" />
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmCopyRoomViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +20,9 @@
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
         android:paddingStart="16dp"
-        android:paddingEnd="4dp">
+        android:paddingEnd="4dp"
+        android:onClick="@{() -> eventListener.onRoomClicked(holder.group_id)}"
+        >
 
         <ImageView
             android:id="@+id/room_img"
@@ -26,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:roomImageImage="@{holder.roomImg}">
+            app:roomImageImage="@{holder.thumbnail_path}">
         </ImageView>
 
         <TextView
@@ -38,7 +43,7 @@
             app:layout_constraintStart_toEndOf="@id/room_img"
             app:layout_constraintEnd_toStartOf="@id/room_check"
             android:layout_marginStart="16dp"
-            android:text="@{holder.roomName}">
+            android:text="@{holder.title}">
         </TextView>
 
         <ImageView

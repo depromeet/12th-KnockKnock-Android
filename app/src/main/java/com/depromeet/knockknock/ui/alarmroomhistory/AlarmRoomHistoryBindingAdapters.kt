@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
 import android.view.View
+import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -26,5 +27,25 @@ fun ConstraintLayout.bindViewVisible(data : String) {
 @BindingAdapter("bindViewVisible")
 fun ConstraintLayout.bindViewVisible(data : List<Admission>) {
     if (data.isEmpty()) this.visibility = View.GONE
+    else this.visibility = View.VISIBLE
+}
+
+@BindingAdapter("bindViewVisible")
+fun ImageView.bindViewVisible(isPublicAccess : Boolean) {
+    if (isPublicAccess) this.visibility = View.GONE
+    else this.visibility = View.VISIBLE
+}
+
+@BindingAdapter("isMessage", "isPublicAccess")
+fun ImageView.bindViewMessageVisible(isMessage : Boolean, isPublicAccess : Boolean) {
+    if (isPublicAccess){
+        if (isMessage) this.visibility = View.GONE
+        else this.visibility = View.VISIBLE
+    }
+}
+
+@BindingAdapter("bindViewVisible")
+fun ConstraintLayout.bindViewVisible(isPublicAccess : Boolean) {
+    if (isPublicAccess) this.visibility = View.GONE
     else this.visibility = View.VISIBLE
 }

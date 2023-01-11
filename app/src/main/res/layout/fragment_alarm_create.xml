@@ -269,6 +269,7 @@
                     android:layout_height="106dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
                     app:cardCornerRadius="8dp"
                     app:elevation="0dp"
                     app:imgLoadVisible="@{vm.messageImgUri}"
