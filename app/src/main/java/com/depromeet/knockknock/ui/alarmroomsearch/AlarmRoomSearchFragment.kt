@@ -8,9 +8,11 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.filter
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentAlarmRoomSearchBinding
+import com.depromeet.knockknock.ui.alarmroomexplore.adapter.AlarmRoomAdapter
 import com.depromeet.knockknock.ui.alarmroomsearch.adapter.AlarmRoomSearchAdapter
 import com.depromeet.knockknock.ui.alarmroomsearch.adapter.PopularCategoryAdapter
 import com.depromeet.knockknock.ui.alarmroomtab.AlarmRoomTabFragmentDirections
@@ -24,6 +26,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 
 
 @AndroidEntryPoint
@@ -62,8 +65,8 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
         }
 
         lifecycleScope.launchWhenStarted {
-            viewModel.roomList.collectLatest {
-                alarmRoomAdapter.submitList(it)
+            viewModel.roomInputState.collectLatest {
+                roomFilterByInput(it)
             }
         }
 
@@ -72,6 +75,22 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
                 popularCategoryAdapter.submitList(it)
             }
         }
+    }
+
+    private fun roomFilterByInput(inputState : String) {
+            val filteredAlarmRoomList = viewModel.roomList.map {
+                    pagingData ->
+                pagingData.filter{
+                    it.title.contains(inputState)
+                }
+            }
+            lifecycleScope.launchWhenStarted {
+                filteredAlarmRoomList.collectLatest {
+                    val alarmRoomSearchAdapter = AlarmRoomSearchAdapter(viewModel)
+                    binding.alarmRoomRecycler.adapter = alarmRoomSearchAdapter
+                    alarmRoomSearchAdapter.submitData(it)
+                }
+            }
     }
 
     override fun initAfterBinding() {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,14 +12,14 @@ import com.depromeet.domain.model.GroupBriefInfo
 import com.depromeet.domain.model.GroupContent
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.HolderAlarmRoomBinding
+import com.depromeet.knockknock.ui.alarmroomjoined.adapter.AlarmRoomJoinedAdapter
 import com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchActionHandler
 import com.depromeet.knockknock.ui.alarmroomsearch.model.AlarmRoom
 
 class AlarmRoomSearchAdapter(
     private val eventListener: AlarmRoomSearchActionHandler
-) : ListAdapter<GroupContent, AlarmRoomSearchAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
+) : PagingDataAdapter<GroupContent, AlarmRoomSearchAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
 
-    init { setHasStableIds(true) }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,9 +40,6 @@ class AlarmRoomSearchAdapter(
         getItem(position)?.let { holder.bind(it) }
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
 
     override fun getItemViewType(position: Int): Int {
         return position
@@ -65,4 +63,6 @@ class AlarmRoomSearchAdapter(
             oldItem == newItem
 
     }
+
+
 }
