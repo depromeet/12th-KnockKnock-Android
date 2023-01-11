@@ -123,33 +123,36 @@
                 app:layout_constraintTop_toBottomOf="@+id/expand_btn"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/reaction_text"
-            style="@style/Theme.AppCompat.TextView.Home.Recent.Reaction"
-            android:layout_width="wrap_content"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reaction_recycler"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/layout_main"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/reaction_btn"
-            android:background="@drawable/custom_gray08_radius100"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="6dp"
-            android:padding="6dp">
-        </TextView>
+            app:layout_constraintTop_toBottomOf="@id/layout_main"
+            tools:listitem="@layout/holder_reaction">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/reaction_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_white_radius20"
-            app:layout_constraintTop_toTopOf="@id/reaction_text"
-            app:layout_constraintBottom_toBottomOf="@id/reaction_text"
+            app:layout_constraintTop_toTopOf="@id/reaction_recycler"
+            app:layout_constraintBottom_toBottomOf="@id/reaction_recycler"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
-            android:onClick="@{() -> eventListener.onReactionClicked(model.notification_id)}">
+            android:onClick="@{() -> eventListener.onReactionClicked(model.notification_id, model.reactions.my_reaction_info.reaction_id)}">
             <TextView
                 style="@style/Theme.AppCompat.TextView.Item.Reaction"
                 android:layout_width="wrap_content"

@@ -19,6 +19,7 @@ import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmReport
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.home.bottom.AlarmMoreType
 import com.depromeet.knockknock.ui.home.bottom.BottomAlarmMore
+import com.depromeet.knockknock.util.defaultreaction.DefaultReactionDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -102,11 +103,21 @@ class AlarmRoomHistoryFragment :
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmMore -> initAlarmMoreBottomSheet(
                         alarmId = it.alarmId, message = it.message)
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate -> navigate(
-                        AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmCreateFragment(it.roomId, it.copyMessage, it.reservation)
+                        AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmCreateFragment(it.roomId, it.title, it.copyMessage, it.reservation)
                     )
+                    is AlarmRoomHistoryNavigationAction.NavigateToReaction -> reactionBottomSheet(notification_id = it.notification_id, reaction_id = it.reaction_id)
+                    is AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset -> {}
+
                 }
             }
         }
+    }
+
+    private fun reactionBottomSheet(notification_id: Int, reaction_id: Int) {
+        val bottomSheet = DefaultReactionDialog(reaction_id) {
+            viewModel.stroageReaction(reaction_id = it, notification_id = notification_id)
+        }
+        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 
     private fun initAlarmMoreBottomSheet(alarmId: Int, message: String) {
@@ -190,7 +201,7 @@ class AlarmRoomHistoryFragment :
         val bottomSheet = BottomAlarmCopyRoom(
             roomList = testList,
         ) { clickedRoom ->
-            viewModel.onAlarmCreateClicked(clickedRoom, copyMessage, false)
+            viewModel.onAlarmCreateClicked(clickedRoom, "", copyMessage, false)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

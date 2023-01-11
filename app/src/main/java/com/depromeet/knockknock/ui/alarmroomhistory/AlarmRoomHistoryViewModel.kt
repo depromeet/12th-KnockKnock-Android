@@ -10,6 +10,7 @@ import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryMessagePager
+import com.depromeet.knockknock.ui.bookmark.BookmarkNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -96,6 +97,15 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
+    fun stroageReaction(reaction_id: Int, notification_id: Int) {
+        baseViewModelScope.launch {
+            showLoading()
+            mainRepository.postReactions(notification_id = notification_id, reaction_id = reaction_id)
+                .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
+            dismissLoading()
+        }
+    }
+
     override fun onCreatePushClicked() {
         TODO("Not yet implemented")
     }
@@ -108,9 +118,10 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
     }
 
-    override fun onReactionClicked(bookmarkIdx: Int) {
+    override fun onReactionClicked(notification_id: Int, reaction_id: Int) {
+        Log.d("Ttt", "ㅁㄴㅇㅁㄴㅇㅁㄴㅇ")
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToReaction(bookmarkIdx))
+            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToReaction(notification_id = notification_id, reaction_id = reaction_id))
         }
     }
 
@@ -136,11 +147,12 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onAlarmCreateClicked(roomId: Int, copyMessage: String, reservation: Boolean) {
+    fun onAlarmCreateClicked(roomId: Int, title: String, copyMessage: String, reservation: Boolean) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(
                     roomId,
+                    title,
                     copyMessage,
                     reservation
                 )
