@@ -95,7 +95,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         val dialog = BottomHomeMakeRoom { isOpenRoom ->
             // 알림방 생성관련 로직
             if(isOpenRoom) {}
-            else {}
+            else navigate(HomeFragmentDirections.actionHomeFragmentToCreateRoomWithFriendFragment())
         }
         dialog.show(childFragmentManager, TAG)
     }

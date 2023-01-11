@@ -116,6 +116,7 @@
 
     <!--친구검색-->
     <string name="friend_search_title">친구 검색</string>
+    <string name="invite_friend">친구 초대하기</string>
 
     <!--온보딩-->
     <string name="onboard_description_one">"푸시알림으로\n많은 사람에게 내 생각을\n전해보세요"</string>

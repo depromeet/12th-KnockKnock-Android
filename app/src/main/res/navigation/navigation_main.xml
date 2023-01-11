@@ -48,6 +48,12 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_createRoomWithFriendFragment"
+            app:destination="@id/createRoomWithFriendFragment"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
@@ -376,6 +382,13 @@
             app:argType="integer" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/createRoomWithFriendFragment"
+        android:name="com.depromeet.knockknock.ui.createroomwithfriend.CreateRoomWithFriendFragment"
+        android:label="CreateRoomWithFriendFragment">
+    </fragment>
+
     <fragment
         android:id="@+id/settingRoomForUserFragment"
         android:name="com.depromeet.knockknock.ui.settingroomforuser.SettingRoomForUserFragment"
@@ -409,10 +422,15 @@
         android:label="AlarmRoomTabFragment" >
         <action
             android:id="@+id/action_alarmRoomTabFragment_to_aloneRoomMakeCategoryFragment"
-            app:destination="@id/aloneRoomMakeCategoryFragment" />
+            app:destination="@id/aloneRoomMakeCategoryFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right"/>
         <action
-            android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomHistoryFragment"
-            app:destination="@id/alarmRoomHistoryFragment" />
+            android:id="@+id/action_alarmRoomTabFragment_to_createRoomWithFriendFragment"
+            app:destination="@id/createRoomWithFriendFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+            app:destination="@id/aloneRoomMakeCategoryFragment" />
     </fragment>
     <action
         android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomSearchFragment"
