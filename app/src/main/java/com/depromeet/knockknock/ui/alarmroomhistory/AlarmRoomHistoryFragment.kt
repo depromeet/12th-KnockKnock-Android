@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.paging.map
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.AlertDialogModel
@@ -16,6 +17,7 @@ import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmInviteRoomAdapt
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmRoomHistoryMessageAdapter
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmCopyRoom
 import com.depromeet.knockknock.ui.alarmroomhistory.bottom.BottomAlarmReport
+import com.depromeet.knockknock.ui.aloneroominvitefriend.AloneRoomInviteFriendFragmentArgs
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.home.bottom.AlarmMoreType
 import com.depromeet.knockknock.ui.home.bottom.BottomAlarmMore
@@ -32,6 +34,7 @@ class AlarmRoomHistoryFragment :
     override val layoutResourceId: Int
         get() = R.layout.fragment_alarm_room_history
     private val navController by lazy { findNavController() }
+    private val args: AlarmRoomHistoryFragmentArgs by navArgs()
 
     override val viewModel: AlarmRoomHistoryViewModel by viewModels()
     private val alarmRoomHistoryMessageAdapter by lazy {
@@ -43,6 +46,8 @@ class AlarmRoomHistoryFragment :
     private val alarmInviteRoomAdapter by lazy { AlarmInviteRoomAdapter(viewModel) }
 
     override fun initStartView() {
+        viewModel.groupId.value = args.groupId
+
         binding.apply {
             this.vm = viewModel
             this.lifecycleOwner = viewLifecycleOwner

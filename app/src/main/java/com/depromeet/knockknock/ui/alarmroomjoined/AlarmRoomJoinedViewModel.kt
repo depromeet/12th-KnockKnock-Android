@@ -7,6 +7,7 @@ import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.alarmroomjoined.adapter.createAlarmRoomJoinedPager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,13 +36,16 @@ class AlarmRoomJoinedViewModel @Inject constructor(
     private val _roomAloneClicked : MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val roomAloneClicked : StateFlow<Boolean> = _roomAloneClicked.asStateFlow()
 
-    private val _currentRoomCount : MutableStateFlow<Int> = MutableStateFlow<Int>(0)
+    private val _currentRoomCount : MutableStateFlow<Int> = MutableStateFlow<Int>(1)
     val currentRoomCount : StateFlow<Int> = _currentRoomCount.asStateFlow()
     var joinedRoomList: Flow<PagingData<GroupContent>> = emptyFlow()
     var initJoinedRoomType : MutableStateFlow<String> = MutableStateFlow("ALL")
 
     init{
         getJoinedGroups()
+        GlobalScope.launch {
+            getJoinedGroupCount()
+        }
     }
 
     fun getJoinedGroups(){
@@ -49,6 +53,11 @@ class AlarmRoomJoinedViewModel @Inject constructor(
             mainRepository = mainRepository,
             roomType = initJoinedRoomType
         ).flow.cachedIn(baseViewModelScope)
+
+    }
+
+    suspend fun getJoinedGroupCount(){
+        _currentRoomCount.emit(joinedRoomList.count())
     }
 
     override fun onRoomTypeAllClicked() {

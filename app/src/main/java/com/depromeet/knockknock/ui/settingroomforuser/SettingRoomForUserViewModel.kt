@@ -26,9 +26,7 @@ class SettingRoomForUserViewModel @Inject constructor(
 
     private val _categoryInfo: MutableStateFlow<String> = MutableStateFlow<String>("없음")
     val categoryInfo: StateFlow<String> = _categoryInfo.asStateFlow()
-
-    private val _receivedRoomId : MutableStateFlow<Int> = MutableStateFlow<Int>(1)
-    val receivedRoomId : StateFlow<Int> = _receivedRoomId.asStateFlow()
+    var receivedRoomId : MutableStateFlow<Int> = MutableStateFlow<Int>(1)
 
     private val _roomInfo: MutableStateFlow<Group> = MutableStateFlow(
         Group(
@@ -62,7 +60,7 @@ class SettingRoomForUserViewModel @Inject constructor(
     init{
 
         baseViewModelScope.launch {
-            mainRepository.getGroup(id = _receivedRoomId.value)
+            mainRepository.getGroup(id = receivedRoomId.value)
                 .onSuccess {
                     _roomInfo.emit(it)
                     _roomMemberList.emit(it.members)
@@ -99,7 +97,7 @@ class SettingRoomForUserViewModel @Inject constructor(
 
     fun getGroupInfo(){
         baseViewModelScope.launch {
-            mainRepository.getGroup(id = _receivedRoomId.value)
+            mainRepository.getGroup(id = receivedRoomId.value)
                 .onSuccess {
                     _roomInfo.emit(it)
                     _roomMemberList.emit(it.members)

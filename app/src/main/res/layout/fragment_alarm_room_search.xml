@@ -78,7 +78,7 @@
             android:paddingTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/popular_category_frame"
-            android:onClick="@{()->viewmodel.onAlarmRoomGenerateClicked(viewmodel.roomInputState)}">
+            android:onClick="@{()->viewmodel.onAlarmRoomGenerateClicked()}">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
