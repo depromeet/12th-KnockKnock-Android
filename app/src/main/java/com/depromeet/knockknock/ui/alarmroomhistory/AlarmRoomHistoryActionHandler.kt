@@ -12,4 +12,5 @@ interface AlarmRoomHistoryActionHandler {
     fun onDeleteReservationAlarmClicked(reservationId: Int)
     fun postGroupAdmissionsAllow(admissionId: Int)
     fun onGroupAdmissionsRefuse(admissionId: Int)
+    fun onAlarmSaveClicked(alarmId: Int)
 }

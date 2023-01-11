@@ -54,7 +54,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
             mainRepository = mainRepository,
             groupId = groupId,
             sort = sort,
-            viewModel= this
+            viewModel = this
         ).flow.cachedIn(baseViewModelScope)
     }
 
@@ -100,7 +100,10 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     fun stroageReaction(reaction_id: Int, notification_id: Int) {
         baseViewModelScope.launch {
             showLoading()
-            mainRepository.postReactions(notification_id = notification_id, reaction_id = reaction_id)
+            mainRepository.postReactions(
+                notification_id = notification_id,
+                reaction_id = reaction_id
+            )
                 .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
             dismissLoading()
         }
@@ -119,9 +122,13 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     override fun onReactionClicked(notification_id: Int, reaction_id: Int) {
-        Log.d("Ttt", "ㅁㄴㅇㅁㄴㅇㅁㄴㅇ")
         baseViewModelScope.launch {
-            _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToReaction(notification_id = notification_id, reaction_id = reaction_id))
+            _navigationEvent.emit(
+                AlarmRoomHistoryNavigationAction.NavigateToReaction(
+                    notification_id = notification_id,
+                    reaction_id = reaction_id
+                )
+            )
         }
     }
 
@@ -147,7 +154,12 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onAlarmCreateClicked(roomId: Int, title: String, copyMessage: String, reservation: Boolean) {
+    fun onAlarmCreateClicked(
+        roomId: Int,
+        title: String,
+        copyMessage: String,
+        reservation: Boolean
+    ) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(
@@ -172,6 +184,20 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
+    override fun onAlarmSaveClicked(alarmId: Int) {
+        baseViewModelScope.launch {
+            mainRepository.postStorages(alarmId)
+                .onSuccess {
+
+                    Log.d("ttt", "보관함 저장 성공")
+
+
+                }.onError {
+                    Log.d("ttt", "보관함 저장 실패")
+            }
+        }
+    }
+
     override fun onRecentAlarmMoreClicked(alarmId: Int, message: String) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
@@ -181,5 +207,20 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 )
             )
         }
+    }
+
+    fun onReportClicked(alarmId: Int){
+//        baseViewModelScope.launch {
+//            mainRepository.postre(alarmId)
+//                .onSuccess {
+//
+//                    Log.d("ttt", "보관함 저장 성공")
+//
+//
+//                }.onError {
+//                    Log.d("ttt", "보관함 저장 실패")
+//                }
+//        }
+
     }
 }

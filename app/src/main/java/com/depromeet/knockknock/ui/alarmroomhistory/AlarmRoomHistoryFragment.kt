@@ -138,10 +138,12 @@ class AlarmRoomHistoryFragment :
         val dialog: BottomAlarmMore = BottomAlarmMore {
             when (it) {
                 is AlarmMoreType.Copy -> roomFilter(message)
-                is AlarmMoreType.Save -> {}
+                is AlarmMoreType.Save -> {
+                    viewModel.onAlarmSaveClicked(alarmId)
+                }
                 is AlarmMoreType.Delete -> alarmDeleteDialog(alarmId)
                 is AlarmMoreType.Declare -> usersBlockDialog()
-                is AlarmMoreType.Report -> periodFilter()
+                is AlarmMoreType.Report -> reportDialog()
             }
         }
         dialog.show(childFragmentManager, TAG)
@@ -193,12 +195,12 @@ class AlarmRoomHistoryFragment :
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 
-    private fun periodFilter() {
+    private fun reportDialog() {
         val bottomSheet = BottomAlarmReport(
             period = viewModel.periodClicked.value
-        ) { clickedPeriod ->
-            toastMessage("$clickedPeriod 선택함")
-//            viewModel.setPeriodFilter(clickedPeriod)
+        ) { notificationId ->
+            toastMessage("$notificationId 선택함")
+            viewModel.onReportClicked(notificationId)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
