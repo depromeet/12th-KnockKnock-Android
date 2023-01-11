@@ -430,7 +430,11 @@
             app:destination="@id/createRoomWithFriendFragment"
             app:enterAnim="@anim/enter_from_right"
             app:popExitAnim="@anim/exit_to_right" />
-            app:destination="@id/aloneRoomMakeCategoryFragment" />
+        <action
+            android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomHistoryFragment"
+            app:destination="@id/alarmRoomHistoryFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <action
         android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomSearchFragment"

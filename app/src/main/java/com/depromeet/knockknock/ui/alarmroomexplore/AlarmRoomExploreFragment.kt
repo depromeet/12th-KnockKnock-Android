@@ -49,9 +49,9 @@ class AlarmRoomExploreFragment : BaseFragment<FragmentAlarmRoomExploreBinding, A
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is AlarmRoomExploreNavigationAction.NavigateToRoom ->  {navController.navigate(AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToAlarmRoomHistoryFragment(it.roomId))}
+                    is AlarmRoomExploreNavigationAction.NavigateToRoom ->  navigate(AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToAlarmRoomHistoryFragment(it.roomId))
 //                    navigate(AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToAlarmRoomHistoryFragment(it.roomId))
-                    is AlarmRoomExploreNavigationAction.NavigateToAlarmRoomSearch -> {navController.navigate(R.id.action_alarmRoomTabFragment_to_alarmRoomSearchFragment)}
+                    is AlarmRoomExploreNavigationAction.NavigateToAlarmRoomSearch -> navigate(AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToAlarmRoomSearchFragment())
                     is AlarmRoomExploreNavigationAction.NavigateToMakeRoom -> {}
                 }
             }
