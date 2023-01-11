@@ -73,12 +73,12 @@
 
         <ImageView
             android:id="@+id/edit_btn"
+            onSingleClick="@{() -> vm.onSettingClicked()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
             android:padding="16dp"
             android:src="@drawable/setting"
-            onSingleClick="@{() -> vm.onSettingClicked()}"
             app:layout_constraintBottom_toBottomOf="@id/toolbar"
             app:layout_constraintEnd_toEndOf="@id/toolbar"
             app:layout_constraintTop_toTopOf="@id/toolbar">
@@ -371,8 +371,8 @@
                     android:id="@+id/rv_invite_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -395,13 +395,43 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/gradient_detail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:elevation="10dp"
+            android:background="@drawable/bg_gradient"
+            app:bindViewVisible="@{vm.isPublicAccess}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent=".5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_detail_request"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/bg_yellow_radius50"
+                android:text="입장 요청하기"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ImageView
+            isMessage="@{vm.isMessage}"
+            isPublicAccess="@{vm.isPublicAccess}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="49dp"
             android:src="@drawable/empty_room_message_img"
             android:visibility="gone"
-            bindViewMessageVisible = "@{vm.isMessage()}"
-            android:layout_marginEnd="49dp"
             app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -420,5 +450,6 @@
             app:tint="@color/black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
 
