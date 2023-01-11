@@ -38,6 +38,11 @@ class AlarmRoomJoinedAdapter(
         return ViewHolder(viewDataBinding)
     }
 
+    override fun getItemCount(): Int {
+        return super.getItemCount()
+    }
+
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }

@@ -42,23 +42,21 @@ class AlarmRoomJoinedViewModel @Inject constructor(
 
     init{
         getJoinedGroups()
-        getJoinedGroupCount()
-
     }
 
     fun getJoinedGroups(){
-        joinedRoomList = createAlarmRoomJoinedPager(
-            mainRepository = mainRepository,
-            roomType = initJoinedRoomType
-        ).flow.cachedIn(baseViewModelScope)
+            joinedRoomList = createAlarmRoomJoinedPager(
+                mainRepository = mainRepository,
+                roomType = initJoinedRoomType
+            ).flow.cachedIn(baseViewModelScope)
 
     }
 
     fun getJoinedGroupCount(){
         baseViewModelScope.launch {
+            println("roomlist num is ${joinedRoomList.count()}")
             currentRoomCount.emit(joinedRoomList.count())
         }
-
     }
 
     override fun onRoomTypeAllClicked() {

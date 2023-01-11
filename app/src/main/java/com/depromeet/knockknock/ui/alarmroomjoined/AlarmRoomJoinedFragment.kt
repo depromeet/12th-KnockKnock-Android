@@ -47,7 +47,12 @@ class AlarmRoomJoinedFragment :
             viewModel.navigationHandler.collectLatest {
                 when (it) {
                     is AlarmRoomJoinedNavigationAction.NavigateToRoom -> {
-                        moveToRoom(roomId = it.roomId)
+                        //toastMessage(it.roomId.toString())
+                        navController.navigate(
+                            AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToAlarmRoomHistoryFragment(
+                                it.roomId
+                            )
+                        )
                     }
                     is AlarmRoomJoinedNavigationAction.NavigateToMakeRoom -> {
                         makeRoomPopUp()
@@ -58,9 +63,14 @@ class AlarmRoomJoinedFragment :
 
         lifecycleScope.launchWhenStarted {
             viewModel.joinedRoomList.collectLatest {
-                val alarmRoomAdapter = AlarmRoomJoinedAdapter(viewModel,viewModel)
+//                toastMessage("collected")
+                val alarmRoomAdapter = AlarmRoomJoinedAdapter(viewModel, viewModel)
                 binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+//                toastMessage(alarmRoomAdapter.snapshot().toString())
+//                println("paging adpater size is ${alarmRoomAdapter.snapshot().size}")
                 alarmRoomAdapter.submitData(it)
+//                println("paging adpater size is ${alarmRoomAdapter.itemCount}")
+//                toastMessage(alarmRoomAdapter.itemCount.toString())
             }
         }
     }
@@ -69,13 +79,13 @@ class AlarmRoomJoinedFragment :
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomAllClicked.collectLatest {
-                if(it) roomFilterByType("ALL")
+                if (it) roomFilterByType("ALL")
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.roomFriendClicked.collectLatest {
-                if(it) roomFilterByType("FRIEND")
+                if (it) roomFilterByType("FRIEND")
             }
         }
 
@@ -102,31 +112,28 @@ class AlarmRoomJoinedFragment :
         binding.alarmRoomRecycler.adapter = roomAdapter
     }
 
-    private fun roomFilterByType(type : String) {
+    private fun roomFilterByType(type: String) {
         if (type != "ALL") {
 //            val filteredAlarmRoomList = viewModel.roomList.filter {
 //                it.category.id == categoryId
 //            }
 
-            val filteredAlarmRoomList = viewModel.joinedRoomList.map {
-                    pagingData ->
-                pagingData.filter{
-                    it.group_type==type
+            val filteredAlarmRoomList = viewModel.joinedRoomList.map { pagingData ->
+                pagingData.filter {
+                    it.group_type == type
                 }
             }
             lifecycleScope.launchWhenStarted {
                 filteredAlarmRoomList.collectLatest {
-                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel,viewModel)
+                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel, viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
                     alarmRoomJoinedAdapter.submitData(it)
                 }
             }
-        }
-
-        else{
+        } else {
             lifecycleScope.launchWhenStarted {
                 viewModel.joinedRoomList.collectLatest {
-                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel,viewModel)
+                    val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel, viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
                     alarmRoomJoinedAdapter.submitData(it)
                 }
@@ -142,7 +149,9 @@ class AlarmRoomJoinedFragment :
     private fun makeRoomPopUp() {
         val dialog: BottomMakeRoom = BottomMakeRoom {
             when (it) {
-                is MakeRoomType.RoomWithFriend -> {}
+                is MakeRoomType.RoomWithFriend -> {
+                    navController.navigate(R.id.action_alarmRoomTabFragment_to_createRoomWithFriendFragment)
+                }
                 is MakeRoomType.RoomAlone -> {
                     navController.navigate(R.id.action_alarmRoomTabFragment_to_aloneRoomMakeCategoryFragment)
                 }

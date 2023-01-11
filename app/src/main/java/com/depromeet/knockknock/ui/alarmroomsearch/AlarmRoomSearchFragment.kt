@@ -133,7 +133,7 @@ class AlarmRoomSearchFragment : BaseFragment<FragmentAlarmRoomSearchBinding, Ala
     private fun makeRoomPopUp() {
         val dialog: BottomMakeRoom = BottomMakeRoom {
             when(it) {
-                is MakeRoomType.RoomWithFriend -> {}
+                is MakeRoomType.RoomWithFriend -> {navigate(AlarmRoomSearchFragmentDirections.actionAlarmRoomSearchFragmentToCreateRoomWithFriendFragment())}
                 is MakeRoomType.RoomAlone -> {navigate(AlarmRoomSearchFragmentDirections.actionAlarmRoomSearchFragmentToAloneRoomMakeCategoryFragment())}
             }
         }
