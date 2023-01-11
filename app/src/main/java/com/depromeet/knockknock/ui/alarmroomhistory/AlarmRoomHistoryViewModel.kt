@@ -48,6 +48,8 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var isPublicAccess = MutableStateFlow<Boolean>(true)
     var membersEvent = MutableStateFlow<String>("")
     var isHost = MutableStateFlow<Boolean>(true)
+    var isMessage = MutableStateFlow<Boolean>(true)
+
 
 
     init {}

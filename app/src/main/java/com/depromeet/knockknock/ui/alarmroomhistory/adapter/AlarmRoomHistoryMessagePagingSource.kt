@@ -55,6 +55,7 @@ class AlarmRoomHistoryMessagePagingSource(
             group_id = groupId.value,
 
             ).onSuccess {
+            if (it.notifications.content.isEmpty()) viewModel.isMessage.value = false
             if (it.reservations != null) {
                 val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")
                 val currentDate = LocalDate.now().format(formatter)

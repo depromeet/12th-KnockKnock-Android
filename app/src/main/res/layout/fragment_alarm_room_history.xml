@@ -395,6 +395,16 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/empty_room_message_img"
+            android:visibility="gone"
+            bindViewMessageVisible = "@{vm.isMessage()}"
+            android:layout_marginEnd="49dp"
+            app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
             onSingleClick="@{() -> vm.onAlarmCreateClicked(1, vm.reservationTitleEvent, vm.emptyMessage, 0)}"

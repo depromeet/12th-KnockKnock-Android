@@ -35,3 +35,9 @@ fun ImageView.bindViewVisible(isPublicAccess : Boolean) {
     if (isPublicAccess) this.visibility = View.GONE
     else this.visibility = View.VISIBLE
 }
+
+@BindingAdapter("bindViewMessageVisible")
+fun ImageView.bindViewMessageVisible(isMessage : Boolean) {
+    if (isMessage) this.visibility = View.GONE
+    else this.visibility = View.VISIBLE
+}
