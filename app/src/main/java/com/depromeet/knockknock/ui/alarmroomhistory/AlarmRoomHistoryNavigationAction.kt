@@ -11,6 +11,7 @@ sealed class AlarmRoomHistoryNavigationAction {
         AlarmRoomHistoryNavigationAction()
     class NavigateToAlarmCreate(
         val roomId: Int,
+        val roomTitle: String,
         val title: String,
         val copyMessage: String,
         val reservation: Int

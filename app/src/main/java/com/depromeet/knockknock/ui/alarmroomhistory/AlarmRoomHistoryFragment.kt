@@ -111,6 +111,7 @@ class AlarmRoomHistoryFragment :
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate -> navigate(
                         AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmCreateFragment(
                             it.roomId,
+                            it.roomTitle,
                             it.title,
                             it.copyMessage,
                             it.reservation

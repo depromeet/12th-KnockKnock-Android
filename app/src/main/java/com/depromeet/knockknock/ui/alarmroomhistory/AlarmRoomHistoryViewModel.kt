@@ -209,6 +209,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(
                     roomId,
+                    alarmRoomTitleEvent.value,
                     title,
                     copyMessage,
                     reservation

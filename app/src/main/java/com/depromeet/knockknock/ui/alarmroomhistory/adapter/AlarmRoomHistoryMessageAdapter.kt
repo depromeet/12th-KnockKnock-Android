@@ -84,8 +84,6 @@ class AlarmRoomHistoryMessageAdapter(
 
                 vm = viewModel
                 viewModel.alarmDateEvent.value = date
-//                viewModel.alarmRoomTitleEvent.value = item.groups.title
-//                viewModel.alarmRoomDescriptionEvent.value = item.groups.description
 //                reactionRecycler.adapter = reactionAdapter
 //                reactionAdapter.submitList(item.reactions.reaction_count_infos)
                 expandBtn.setOnClickListener {

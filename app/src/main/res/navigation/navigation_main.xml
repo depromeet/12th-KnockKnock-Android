@@ -71,6 +71,11 @@
             app:argType="integer" />
 
         <argument
+            android:name="room_title"
+            app:argType="string"
+            />
+
+        <argument
             android:name="title"
             app:argType="string"
             />

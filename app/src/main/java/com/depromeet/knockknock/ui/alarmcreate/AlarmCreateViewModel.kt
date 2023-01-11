@@ -47,24 +47,14 @@ class AlarmCreateViewModel @Inject constructor(
 
             }
         }
-
-        baseViewModelScope.launch {
-            mainRepository.getGroup(groupId.value).onSuccess {
-                groupTitle.emit(it.title)
-            }
-
-        }
-
         getRecommendMessage()
     }
 
     private fun getRecommendMessage() {
         baseViewModelScope.launch {
             mainRepository.getRecommendMessage().onSuccess {
-                Log.d("ttt success", it.toString())
                 _recommendationMessageEvent.value = it
             }.onError {
-                Log.d("ttt error", it.toString())
             }
         }
     }

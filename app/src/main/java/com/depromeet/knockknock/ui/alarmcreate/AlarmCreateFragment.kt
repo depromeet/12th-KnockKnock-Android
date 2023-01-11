@@ -58,8 +58,9 @@ class AlarmCreateFragment :
         }
         exception = viewModel.errorEvent
         val args: AlarmCreateFragmentArgs by navArgs()
-        viewModel.editTextTitleEvent.value = args.title
         viewModel.groupId.value = args.alarmId
+        viewModel.groupTitle.value = args.roomTitle
+        viewModel.editTextTitleEvent.value = args.title
         viewModel.editTextMessageEvent.value = args.message
 
         if (args.reservation != 0) updateReservationAlarmSend(args.reservation)
