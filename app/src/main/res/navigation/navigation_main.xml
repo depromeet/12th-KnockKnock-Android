@@ -376,6 +376,9 @@
         <action
             android:id="@+id/action_alarmRoomSearchFragment_to_aloneRoomMakeCategoryFragment"
             app:destination="@id/aloneRoomMakeCategoryFragment" />
+        <action
+            android:id="@+id/action_alarmRoomSearchFragment_to_createRoomWithFriendFragment"
+            app:destination="@id/createRoomWithFriendFragment" />
     </fragment>
     <fragment
         android:id="@+id/inviteFriendToRoomFragment"
