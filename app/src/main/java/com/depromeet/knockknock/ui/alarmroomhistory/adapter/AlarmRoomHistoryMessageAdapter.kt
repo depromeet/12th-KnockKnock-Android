@@ -15,6 +15,7 @@ import com.depromeet.knockknock.databinding.ItemRecyclerHistoryBundleBinding
 import com.depromeet.knockknock.databinding.ItemRecyclerHistoryMessageBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel
+import com.depromeet.knockknock.ui.bookmark.adapter.ReactionAdapter
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -67,6 +68,7 @@ class AlarmRoomHistoryMessageAdapter(
 
     class ViewHolder(private val binding: ItemRecyclerHistoryMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        private val reactionAdapter = ReactionAdapter()
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(
@@ -75,13 +77,17 @@ class AlarmRoomHistoryMessageAdapter(
             date: String
         ) {
 
+
             binding.apply {
                 model = item
+                executePendingBindings()
+
                 vm = viewModel
                 viewModel.alarmDateEvent.value = date
                 viewModel.alarmRoomTitleEvent.value = item.groups.title
                 viewModel.alarmRoomDescriptionEvent.value = item.groups.description
-                executePendingBindings()
+//                reactionRecycler.adapter = reactionAdapter
+//                reactionAdapter.submitList(item.reactions.reaction_count_infos)
                 expandBtn.setOnClickListener {
                     model!!.isExpanded = !(model!!.isExpanded)
 

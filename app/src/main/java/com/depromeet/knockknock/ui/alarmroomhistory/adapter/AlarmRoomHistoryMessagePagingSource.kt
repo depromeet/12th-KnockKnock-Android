@@ -69,6 +69,7 @@ class AlarmRoomHistoryMessagePagingSource(
                     viewModel.reservationTimeEvent.value = LocalDateTime.parse(it.reservations!!.send_at, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
                         .format(DateTimeFormatter.ofPattern("MM월 dd일 HH:mm 발송 예정"))
                 }
+                viewModel.reservationTitleEvent.value = it.reservations!!.title
                 viewModel.reservationMessageImgUri.value = it.reservations!!.image_url
                 viewModel.reservationMessageEvent.value = it.reservations!!.content
             }

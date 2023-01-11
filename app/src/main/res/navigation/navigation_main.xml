@@ -69,6 +69,11 @@
         <argument
             android:name="alarm_id"
             app:argType="integer" />
+
+        <argument
+            android:name="title"
+            app:argType="string"
+            />
         <argument
             android:name="message"
             app:argType="string" />

@@ -238,7 +238,7 @@
                 <TextView
                     android:id="@+id/reservation_edit_btn"
                     style="@style/Theme.AppCompat.TextView.Notification.Button.Negative"
-                    onSingleClick="@{() -> vm.onAlarmCreateClicked(vm.reservationId, vm.reservationMessageEvent, true)}"
+                    onSingleClick="@{() -> vm.onAlarmCreateClicked(vm.reservationId,vm.reservationTitleEvent, vm.reservationMessageEvent, true)}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -271,8 +271,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:bindViewVisible = "@{vm.alarmInviteRoomEvent}"
-                    >
+                    app:bindViewVisible="@{vm.alarmInviteRoomEvent}">
 
                     <TextView
                         android:id="@+id/tv_invite_title"
@@ -328,7 +327,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
-            onSingleClick="@{() -> vm.onAlarmCreateClicked(1, vm.emptyMessage, false)}"
+            onSingleClick="@{() -> vm.onAlarmCreateClicked(1, vm.reservationTitleEvent, vm.emptyMessage, false)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
