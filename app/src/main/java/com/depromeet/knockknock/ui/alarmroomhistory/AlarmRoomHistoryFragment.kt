@@ -106,11 +106,20 @@ class AlarmRoomHistoryFragment :
             viewModel.navigationEvent.collectLatest {
                 when (it) {
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmMore -> initAlarmMoreBottomSheet(
-                        alarmId = it.alarmId, message = it.message)
-                    is AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate -> navigate(
-                        AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmCreateFragment(it.roomId, it.title, it.copyMessage, it.reservation)
+                        alarmId = it.alarmId, message = it.message
                     )
-                    is AlarmRoomHistoryNavigationAction.NavigateToReaction -> reactionBottomSheet(notification_id = it.notification_id, reaction_id = it.reaction_id)
+                    is AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate -> navigate(
+                        AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmCreateFragment(
+                            it.roomId,
+                            it.title,
+                            it.copyMessage,
+                            it.reservation
+                        )
+                    )
+                    is AlarmRoomHistoryNavigationAction.NavigateToReaction -> reactionBottomSheet(
+                        notification_id = it.notification_id,
+                        reaction_id = it.reaction_id
+                    )
                     is AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset -> {}
 
                 }
@@ -126,7 +135,7 @@ class AlarmRoomHistoryFragment :
     }
 
     private fun initAlarmMoreBottomSheet(alarmId: Int, message: String) {
-        val dialog : BottomAlarmMore = BottomAlarmMore {
+        val dialog: BottomAlarmMore = BottomAlarmMore {
             when (it) {
                 is AlarmMoreType.Copy -> roomFilter(message)
                 is AlarmMoreType.Save -> {}
@@ -137,7 +146,8 @@ class AlarmRoomHistoryFragment :
         }
         dialog.show(childFragmentManager, TAG)
     }
-    private fun alarmDeleteDialog(notificationId : Int) {
+
+    private fun alarmDeleteDialog(notificationId: Int) {
         val res = AlertDialogModel(
             title = "이 알림을 삭제할까요?",
             description = "내 알림방에서만 볼 수 없어요",
@@ -177,35 +187,7 @@ class AlarmRoomHistoryFragment :
     }
 
     private fun roomFilter(copyMessage: String) {
-        val test1 = Room(
-            roomId = 1,
-            roomName = "테스트 1호방",
-            roomImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            isChecked = false
-        )
-        val test2 = Room(
-            roomId = 2,
-            roomName = "테스트 2호방",
-            roomImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            isChecked = false
-        )
-        val test3 = Room(
-            roomId = 3,
-            roomName = "테스트 3호방",
-            roomImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            isChecked = false
-        )
-        val test4 = Room(
-            roomId = 4,
-            roomName = "테스트 4호방",
-            roomImg = "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
-            isChecked = false
-        )
-        val testList = listOf(test1, test2, test3, test4)
-
-        val bottomSheet = BottomAlarmCopyRoom(
-            roomList = testList,
-        ) { clickedRoom ->
+        val bottomSheet = BottomAlarmCopyRoom { clickedRoom ->
             viewModel.onAlarmCreateClicked(clickedRoom, "", copyMessage, false)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
@@ -220,7 +202,6 @@ class AlarmRoomHistoryFragment :
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
-
 
     // 1이 나온다는 것은 글씨가 줄여졌다는 것이다.
     private fun isEllipsis(textView: TextView) {
