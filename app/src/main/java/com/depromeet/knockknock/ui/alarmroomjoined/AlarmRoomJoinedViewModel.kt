@@ -36,16 +36,14 @@ class AlarmRoomJoinedViewModel @Inject constructor(
     private val _roomAloneClicked : MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val roomAloneClicked : StateFlow<Boolean> = _roomAloneClicked.asStateFlow()
 
-    private val _currentRoomCount : MutableStateFlow<Int> = MutableStateFlow<Int>(1)
-    val currentRoomCount : StateFlow<Int> = _currentRoomCount.asStateFlow()
+    var currentRoomCount : MutableStateFlow<Int> = MutableStateFlow<Int>(1)
     var joinedRoomList: Flow<PagingData<GroupContent>> = emptyFlow()
     var initJoinedRoomType : MutableStateFlow<String> = MutableStateFlow("ALL")
 
     init{
         getJoinedGroups()
-        GlobalScope.launch {
-            getJoinedGroupCount()
-        }
+        getJoinedGroupCount()
+
     }
 
     fun getJoinedGroups(){
@@ -56,8 +54,11 @@ class AlarmRoomJoinedViewModel @Inject constructor(
 
     }
 
-    suspend fun getJoinedGroupCount(){
-        _currentRoomCount.emit(joinedRoomList.count())
+    fun getJoinedGroupCount(){
+        baseViewModelScope.launch {
+            currentRoomCount.emit(joinedRoomList.count())
+        }
+
     }
 
     override fun onRoomTypeAllClicked() {
