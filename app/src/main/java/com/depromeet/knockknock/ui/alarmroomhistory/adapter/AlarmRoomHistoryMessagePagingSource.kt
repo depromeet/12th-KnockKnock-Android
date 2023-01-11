@@ -59,14 +59,23 @@ class AlarmRoomHistoryMessagePagingSource(
                 val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")
                 val currentDate = LocalDate.now().format(formatter)
                 val createdDate =
-                    LocalDate.parse(it.reservations!!.send_at.substring(0, 10), DateTimeFormatter.ISO_DATE)
+                    LocalDate.parse(
+                        it.reservations!!.send_at.substring(0, 10),
+                        DateTimeFormatter.ISO_DATE
+                    )
                         .format(formatter)
 
-                if (currentDate == createdDate){
-                    viewModel.reservationTimeEvent.value = LocalDateTime.parse(it.reservations!!.send_at, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+                if (currentDate == createdDate) {
+                    viewModel.reservationTimeEvent.value = LocalDateTime.parse(
+                        it.reservations!!.send_at,
+                        DateTimeFormatter.ISO_LOCAL_DATE_TIME
+                    )
                         .format(DateTimeFormatter.ofPattern("오늘 HH:mm 발송 예정"))
-                }else{
-                    viewModel.reservationTimeEvent.value = LocalDateTime.parse(it.reservations!!.send_at, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+                } else {
+                    viewModel.reservationTimeEvent.value = LocalDateTime.parse(
+                        it.reservations!!.send_at,
+                        DateTimeFormatter.ISO_LOCAL_DATE_TIME
+                    )
                         .format(DateTimeFormatter.ofPattern("MM월 dd일 HH:mm 발송 예정"))
                 }
                 viewModel.reservationTitleEvent.value = it.reservations!!.title

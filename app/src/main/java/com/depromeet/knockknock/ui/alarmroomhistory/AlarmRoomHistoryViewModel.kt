@@ -43,6 +43,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var reservationMessageEvent = MutableStateFlow<String>("")
     val reservationMessageImgUri: MutableStateFlow<String> = MutableStateFlow<String>("")
     var pushAlarmList: Flow<PagingData<Notification>> = emptyFlow()
+    var isPublicAccess = MutableStateFlow<Boolean>(true)
 
     init {
         getGroupAdmissions()
