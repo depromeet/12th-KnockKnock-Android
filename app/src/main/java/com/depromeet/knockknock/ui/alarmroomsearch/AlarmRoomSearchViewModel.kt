@@ -1,5 +1,8 @@
 package com.depromeet.knockknock.ui.alarmroomsearch
 
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.filter
 import com.depromeet.domain.model.Category
 import com.depromeet.domain.model.Friend
 import com.depromeet.domain.model.GroupBriefInfo
@@ -7,6 +10,7 @@ import com.depromeet.domain.model.GroupContent
 import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
+import com.depromeet.knockknock.ui.alarmroomexplore.adapter.createAlarmRoomPager
 import com.depromeet.knockknock.ui.alarmroomsearch.model.AlarmRoom
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -31,11 +35,13 @@ class AlarmRoomSearchViewModel @Inject constructor(
     private val _roomIsPublic: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(true)
     val roomIsPublic: StateFlow<Boolean> = _roomIsPublic.asStateFlow()
 
-    private val _roomList: MutableStateFlow<List<GroupContent>> = MutableStateFlow(emptyList())
-    val roomList: StateFlow<List<GroupContent>> = _roomList.asStateFlow()
+    var roomList: Flow<PagingData<GroupContent>> = emptyFlow()
+    var filteredRoomList: Flow<PagingData<GroupContent>> = emptyFlow()
+    var initCategory: MutableStateFlow<Int> = MutableStateFlow(1)
 
-    private val _popularCategoryList : MutableStateFlow<List<Category>> = MutableStateFlow(emptyList())
-    val popularCategoryList : StateFlow<List<Category>> = _popularCategoryList.asStateFlow()
+    private val _popularCategoryList: MutableStateFlow<List<Category>> =
+        MutableStateFlow(emptyList())
+    val popularCategoryList: StateFlow<List<Category>> = _popularCategoryList.asStateFlow()
 
 
     init {
@@ -45,15 +51,17 @@ class AlarmRoomSearchViewModel @Inject constructor(
             }
         }
 
+        roomList = createAlarmRoomPager(
+            mainRepository = mainRepository,
+            category = initCategory,
+        ).flow.cachedIn(baseViewModelScope)
+
         baseViewModelScope.launch {
             roomInputState.debounce(0).collect {
-                if(it.isNotEmpty()) {
-                    mainRepository.getOpenGroups(1,0,10)
-                        .onSuccess { response ->
-                            _roomList.emit(response.groupContent.filter { room -> room.title.contains(it) }) }
-                }
+                roomInputState.emit(it)
             }
         }
+
 
         baseViewModelScope.launch {
             mainRepository.getGroupCategoriesFamous()
@@ -75,19 +83,12 @@ class AlarmRoomSearchViewModel @Inject constructor(
         }
     }
 
-//    override fun onAlarmRoomGenerateClicked(roomName: String) {
-//        baseViewModelScope.launch {
-//           // _navigationHandler.emit(AlarmRoomSearchNavigationAction.NavigateToMakeRoom(roomName = roomName))
-//        }
-//    }
-
     override fun onAlarmRoomGenerateClicked() {
         baseViewModelScope.launch {
             _navigationHandler.emit(AlarmRoomSearchNavigationAction.NavigateToMakeRoom)
         }
 
     }
-
     override fun onRoomClicked(roomId: Int) {
         baseViewModelScope.launch {
             _navigationHandler.emit(AlarmRoomSearchNavigationAction.NavigateToRoom(roomId = roomId))
