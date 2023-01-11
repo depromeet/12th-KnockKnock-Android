@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
             android:src="@drawable/secret"
+            app:bindViewVisible="@{vm.isPublicAccess}"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent">
@@ -61,7 +62,7 @@
             android:layout_marginEnd="72dp"
             android:fontFamily="@font/pretendard_regular"
             android:gravity="center"
-            android:text="20"
+            android:text="@={vm.membersEvent}"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -77,6 +78,7 @@
             android:fontFamily="@font/pretendard_regular"
             android:padding="16dp"
             android:src="@drawable/setting"
+            onSingleClick="@{() -> vm.onSettingClicked()}"
             app:layout_constraintBottom_toBottomOf="@id/toolbar"
             app:layout_constraintEnd_toEndOf="@id/toolbar"
             app:layout_constraintTop_toTopOf="@id/toolbar">
@@ -270,7 +272,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/reservation_edit_btn"
                     style="@style/Theme.AppCompat.TextView.Notification.Button.Negative"
-                    onSingleClick="@{() -> vm.onAlarmCreateClicked(vm.reservationId,vm.reservationTitleEvent, vm.reservationMessageEvent, true)}"
+                    onSingleClick="@{() -> vm.onAlarmCreateClicked(vm.reservationId,vm.reservationTitleEvent, vm.reservationMessageEvent, vm.reservationId)}"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -370,6 +372,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_recycler_history_message" />
@@ -393,7 +397,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
-            onSingleClick="@{() -> vm.onAlarmCreateClicked(1, vm.reservationTitleEvent, vm.emptyMessage, false)}"
+            onSingleClick="@{() -> vm.onAlarmCreateClicked(1, vm.reservationTitleEvent, vm.emptyMessage, 0)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

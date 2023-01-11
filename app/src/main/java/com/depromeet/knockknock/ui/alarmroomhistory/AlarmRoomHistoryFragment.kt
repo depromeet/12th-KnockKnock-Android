@@ -121,7 +121,18 @@ class AlarmRoomHistoryFragment :
                         reaction_id = it.reaction_id
                     )
                     is AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset -> {}
-
+                    is AlarmRoomHistoryNavigationAction.NavigateToSettingRoomForUser -> {
+                        navigate(
+                            AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmSettingFragment2()
+                        )
+                    }
+                    is AlarmRoomHistoryNavigationAction.NavigateToSettingRoom -> {
+                        navigate(
+                            AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToSettingRoomFragment(
+                                it.alarmId
+                            )
+                        )
+                    }
                 }
             }
         }
@@ -190,7 +201,7 @@ class AlarmRoomHistoryFragment :
 
     private fun roomFilter(copyMessage: String) {
         val bottomSheet = BottomAlarmCopyRoom { clickedRoom ->
-            viewModel.onAlarmCreateClicked(clickedRoom, "", copyMessage, false)
+            viewModel.onAlarmCreateClicked(clickedRoom, "", copyMessage, 0)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

@@ -1,6 +1,8 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
 import android.util.Log
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.Admission
@@ -44,10 +46,36 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     val reservationMessageImgUri: MutableStateFlow<String> = MutableStateFlow<String>("")
     var pushAlarmList: Flow<PagingData<Notification>> = emptyFlow()
     var isPublicAccess = MutableStateFlow<Boolean>(true)
+    var membersEvent = MutableStateFlow<String>("")
+    var isHost = MutableStateFlow<Boolean>(true)
+
 
     init {
         getGroupAdmissions()
         getPushAlarm()
+        getGroups()
+    }
+
+    fun getGroups() {
+        baseViewModelScope.launch {
+            mainRepository.getGroup(groupId.value).onSuccess {
+                alarmRoomTitleEvent.value = it.title
+                alarmRoomDescriptionEvent.value = it.description
+                isPublicAccess.value = it.public_access
+                membersEvent.value = it.members.size.toString()
+                isHost.value = it.ihost
+
+
+            }.onError {
+                Log.d("ttt", "초대 확인 실패")
+            }
+        }
+
+    }
+
+    fun onSettingClicked() {
+        if (isHost.value) onSettingRoomClicked(groupId.value)
+        else onSettingRoomForUserClicked()
     }
 
     fun getPushAlarm() {
@@ -57,6 +85,22 @@ class AlarmRoomHistoryViewModel @Inject constructor(
             sort = sort,
             viewModel = this
         ).flow.cachedIn(baseViewModelScope)
+    }
+
+    fun onSettingRoomClicked(alarmId: Int) {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(
+                AlarmRoomHistoryNavigationAction.NavigateToSettingRoom(alarmId)
+            )
+        }
+    }
+
+    fun onSettingRoomForUserClicked() {
+        baseViewModelScope.launch {
+            _navigationEvent.emit(
+                AlarmRoomHistoryNavigationAction.NavigateToSettingRoomForUser
+            )
+        }
     }
 
     // 방장 권한이 있어야 함
@@ -159,7 +203,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         roomId: Int,
         title: String,
         copyMessage: String,
-        reservation: Boolean
+        reservation: Int
     ) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
@@ -195,7 +239,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
                 }.onError {
                     Log.d("ttt", "보관함 저장 실패")
-            }
+                }
         }
     }
 
@@ -210,7 +254,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onReportClicked(alarmId: Int){
+    fun onReportClicked(alarmId: Int) {
 //        baseViewModelScope.launch {
 //            mainRepository.postre(alarmId)
 //                .onSuccess {

@@ -13,7 +13,11 @@ sealed class AlarmRoomHistoryNavigationAction {
         val roomId: Int,
         val title: String,
         val copyMessage: String,
-        val reservation: Boolean
+        val reservation: Int
     ) : AlarmRoomHistoryNavigationAction()
+    class NavigateToSettingRoom(val alarmId: Int) : AlarmRoomHistoryNavigationAction()
+    object NavigateToSettingRoomForUser : AlarmRoomHistoryNavigationAction()
+
+
 
 }
