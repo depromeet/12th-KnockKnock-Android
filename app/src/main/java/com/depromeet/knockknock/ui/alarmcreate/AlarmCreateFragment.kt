@@ -136,7 +136,8 @@ class AlarmCreateFragment :
                      * 푸쉬알림을 발송했습니다!
                      * fcm API!!
                      * */
-//                    viewModel.onAlarmPushClicked()
+                    toastMessage("푸시알림을 발송했습니다!")
+                    viewModel.onAlarmPushClicked()
                 }
             }
         })
@@ -149,8 +150,8 @@ class AlarmCreateFragment :
              * 예약 푸쉬알림을 발송했습니다!
              * fcm API!!
              * */
-            Log.d("ttt", it.toString())
-//            viewModel.onReservationAlarmPushClicked(it.toString())
+            toastMessage("푸시알림을 발송했습니다!")
+            viewModel.onReservationAlarmPushClicked(it.toString())
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
