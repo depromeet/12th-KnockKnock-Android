@@ -62,7 +62,7 @@ class AlarmCreateFragment :
         viewModel.groupId.value = args.alarmId
         viewModel.editTextMessageEvent.value = args.message
 
-        if (args.reservation) updateReservationAlarmSend(0)
+        if (args.reservation != 0) updateReservationAlarmSend(args.reservation)
 
         initEditText()
         initRegisterForActivityResult()

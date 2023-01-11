@@ -78,6 +78,7 @@ class AlarmRoomHistoryMessagePagingSource(
                     )
                         .format(DateTimeFormatter.ofPattern("MM월 dd일 HH:mm 발송 예정"))
                 }
+                viewModel.reservationId.value = it.reservations!!.reservation_id
                 viewModel.reservationTitleEvent.value = it.reservations!!.title
                 viewModel.reservationMessageImgUri.value = it.reservations!!.image_url
                 viewModel.reservationMessageEvent.value = it.reservations!!.content
