@@ -100,15 +100,26 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
+    fun postGroupAdmissions(){
+        baseViewModelScope.launch {
+            mainRepository.postGroupAdmissions(groupId.value).onSuccess {
+                Log.d("ttt", "입장하기 성공")
+
+            }.onError {
+                Log.d("ttt", "입장하기 실패")
+            }
+        }
+
+    }
+
     // 방장 권한이 있어야 함
     fun getGroupAdmissions() {
 
         baseViewModelScope.launch {
             mainRepository.getGroupAdmissions(groupId.value).onSuccess {
                 _alarmInviteRoomEvent.value = it.admissions
-
-            }.onSuccess {
                 Log.d("ttt", "초대 확인 성공")
+
             }.onError {
                 Log.d("ttt", "초대 확인 실패")
             }

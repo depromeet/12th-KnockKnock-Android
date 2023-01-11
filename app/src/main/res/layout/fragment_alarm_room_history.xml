@@ -415,6 +415,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="40dp"
                 android:background="@drawable/bg_yellow_radius50"
+                onSingleClick="@{() -> vm.postGroupAdmissions()}"
                 android:text="입장 요청하기"
                 android:textSize="18sp"
                 android:textStyle="bold"
