@@ -37,7 +37,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var alarmRoomDescriptionEvent = MutableStateFlow<String>("")
     var alarmDateEvent = MutableStateFlow<String>("")
     val emptyMessage: String = ""
-    var groupId = MutableStateFlow<Int>(30)
+    var groupId = MutableStateFlow<Int>(0)
     var reservationId = MutableStateFlow<Int>(0)
     var sort = MutableStateFlow<String>("")
     var reservationTimeEvent = MutableStateFlow<String>("")
@@ -50,11 +50,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var isHost = MutableStateFlow<Boolean>(true)
 
 
-    init {
-        getGroupAdmissions()
-        getPushAlarm()
-        getGroups()
-    }
+    init {}
 
     fun getGroups() {
         baseViewModelScope.launch {
@@ -67,10 +63,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
 
             }.onError {
-                Log.d("ttt", "초대 확인 실패")
+                Log.d("ttt", "그룹 확인 실패")
             }
         }
-
     }
 
     fun onSettingClicked() {
@@ -104,7 +99,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     // 방장 권한이 있어야 함
-    private fun getGroupAdmissions() {
+    fun getGroupAdmissions() {
 
         baseViewModelScope.launch {
             mainRepository.getGroupAdmissions(groupId.value).onSuccess {

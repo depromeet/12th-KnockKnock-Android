@@ -48,6 +48,9 @@ class AlarmRoomHistoryFragment :
 
     override fun initStartView() {
         viewModel.groupId.value = args.groupId
+        viewModel.getGroupAdmissions()
+        viewModel.getPushAlarm()
+        viewModel.getGroups()
 
         binding.apply {
             this.vm = viewModel
