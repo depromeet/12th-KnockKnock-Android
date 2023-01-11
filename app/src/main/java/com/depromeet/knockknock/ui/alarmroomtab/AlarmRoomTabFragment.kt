@@ -48,7 +48,7 @@ class AlarmRoomTabFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is AlarmRoomTabNavigationAction.NavigateToMakeRoomBottomSheet -> {makeRoomPopUp()}
+                    is AlarmRoomTabNavigationAction.NavigateToMakeRoomBottomSheet -> { makeRoomPopUp() }
                 }
             }
         }
@@ -85,8 +85,8 @@ class AlarmRoomTabFragment :
     private fun makeRoomPopUp() {
         val dialog: BottomMakeRoom = BottomMakeRoom {
             when(it) {
-                is MakeRoomType.RoomWithFriend -> {}
-                is MakeRoomType.RoomAlone -> {navigate(AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToAloneRoomMakeCategoryFragment())}
+                is MakeRoomType.RoomWithFriend -> navigate(AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToCreateRoomWithFriendFragment())
+                is MakeRoomType.RoomAlone -> navigate(AlarmRoomTabFragmentDirections.actionAlarmRoomTabFragmentToAloneRoomMakeCategoryFragment())
             }
         }
         dialog.show(requireActivity().supportFragmentManager, TAG)
