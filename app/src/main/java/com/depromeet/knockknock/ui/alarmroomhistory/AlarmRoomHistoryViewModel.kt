@@ -198,7 +198,6 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     override fun onReactionClicked(notification_id: Int, reaction_id: Int) {
-        Log.d("Ttt", "눌렀니?")
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToReaction(
