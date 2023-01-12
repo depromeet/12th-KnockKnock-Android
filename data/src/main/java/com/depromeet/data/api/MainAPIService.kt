@@ -321,4 +321,8 @@ interface MainAPIService {
     @GET("/api/v1/alarms/count")
     suspend fun getAlarmsCount(): BaseResponse<AlarmCount>
 
+    // 알림 신고하기
+    @POST("/api/v1/reports/notifications/{notification_id}")
+    suspend fun postReportsNotifications(@Path("notification_id") notification_id: Int): BaseResponse<ReportNotification>
+
 }
