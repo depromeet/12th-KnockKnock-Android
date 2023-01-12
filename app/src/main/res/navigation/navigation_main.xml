@@ -128,8 +128,9 @@
             android:id="@+id/action_alarmRoomHistoryFragment_to_settingRoomFragment"
             app:destination="@id/settingRoomFragment" />
         <action
-            android:id="@+id/action_alarmRoomHistoryFragment_to_alarmSettingFragment2"
-            app:destination="@id/alarmSettingFragment" />
+            android:id="@+id/action_alarmRoomHistoryFragment_to_settingRoomForUserFragment"
+            app:destination="@id/settingRoomForUserFragment" />
+
 
     </fragment>
 

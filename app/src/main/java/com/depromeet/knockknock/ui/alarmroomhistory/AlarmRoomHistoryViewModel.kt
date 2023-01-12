@@ -95,7 +95,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
     fun onSettingClicked() {
         if (isHost.value) onSettingRoomClicked(groupId.value)
-        else onSettingRoomForUserClicked()
+        else onSettingRoomForUserClicked(groupId.value)
     }
 
     fun getPushAlarm() {
@@ -115,10 +115,10 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onSettingRoomForUserClicked() {
+    fun onSettingRoomForUserClicked(alarmId: Int) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
-                AlarmRoomHistoryNavigationAction.NavigateToSettingRoomForUser
+                AlarmRoomHistoryNavigationAction.NavigateToSettingRoomForUser(alarmId)
             )
         }
     }

@@ -127,7 +127,7 @@ class AlarmRoomHistoryFragment :
                     is AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset -> {}
                     is AlarmRoomHistoryNavigationAction.NavigateToSettingRoomForUser -> {
                         navigate(
-                            AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmSettingFragment2()
+                            AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToSettingRoomForUserFragment(it.alarmId)
                         )
                     }
                     is AlarmRoomHistoryNavigationAction.NavigateToSettingRoom -> {
