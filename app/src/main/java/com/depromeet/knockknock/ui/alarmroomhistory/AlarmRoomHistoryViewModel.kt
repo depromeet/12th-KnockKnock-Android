@@ -65,12 +65,11 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 isPublicAccess.value = it.public_access
                 membersEvent.value = it.members.size.toString()
                 isHost.value = it.ihost
-                for (i in 0.. it.members.size){
-                    if (userId.value == it.members[i].user_id){
+                for (i in 0..it.members.size) {
+                    if (userId.value == it.members[i].user_id) {
                         participation.value = true
                     }
                 }
-
 
 
             }.onError {
@@ -177,6 +176,29 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         baseViewModelScope.launch {
             showLoading()
             mainRepository.postReactions(
+                notification_id = notification_id,
+                reaction_id = reaction_id
+            )
+                .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
+            dismissLoading()
+        }
+    }
+
+    fun deleteReaction(notification_id: Int) {
+        baseViewModelScope.launch {
+            showLoading()
+            mainRepository.deleteReaction(
+                notification_reaction_id = notification_id
+            )
+                .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
+            dismissLoading()
+        }
+    }
+
+    fun patchReaction(reaction_id: Int, notification_id: Int) {
+        baseViewModelScope.launch {
+            showLoading()
+            mainRepository.patchReaction(
                 notification_id = notification_id,
                 reaction_id = reaction_id
             )

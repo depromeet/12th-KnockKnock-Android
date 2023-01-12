@@ -81,7 +81,10 @@ class AlarmRoomHistoryMessageAdapter(
                 model = item
                 executePendingBindings()
                 reactionBtn.setOnClickListener {
-                    viewModel.onReactionClicked(item.notification_id, item.reactions.my_reaction_info.reaction_id)
+                    Log.d("ttt",item.reactions.my_reaction_info.reaction_id.toString())
+//                    if (item.reactions.my_reaction_info.reaction_id == null) viewModel.onReactionClicked(item.notification_id, 0)
+                     viewModel.onReactionClicked(item.notification_id, item.reactions.my_reaction_info.reaction_id)
+
                 }
                 vm = viewModel
                 viewModel.alarmDateEvent.value = date

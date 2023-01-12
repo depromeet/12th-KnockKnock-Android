@@ -144,7 +144,17 @@ class AlarmRoomHistoryFragment :
 
     private fun reactionBottomSheet(notification_id: Int, reaction_id: Int) {
         val bottomSheet = DefaultReactionDialog(reaction_id) {
-            viewModel.postReaction(reaction_id = it, notification_id = notification_id)
+            when (reaction_id) {
+                0 -> {
+                    viewModel.postReaction(reaction_id = it, notification_id = notification_id)
+                }
+                it -> {
+                    viewModel.deleteReaction(notification_id = notification_id)
+                }
+                else -> {
+                    viewModel.patchReaction(reaction_id = it, notification_id = notification_id)
+                }
+            }
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
