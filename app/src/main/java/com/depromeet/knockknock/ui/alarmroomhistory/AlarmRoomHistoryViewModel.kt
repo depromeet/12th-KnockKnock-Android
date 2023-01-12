@@ -1,8 +1,6 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
 import android.util.Log
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.Admission
@@ -12,7 +10,6 @@ import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryMessagePager
-import com.depromeet.knockknock.ui.bookmark.BookmarkNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -51,11 +48,13 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var isHost = MutableStateFlow<Boolean>(true)
     var isMessage = MutableStateFlow<Boolean>(true)
     var editTextReportEvent = MutableStateFlow<String>("")
+    var userId = MutableStateFlow<Int>(0)
+    var participation = MutableStateFlow<Boolean>(false)
 
 
-
-
-    init {}
+    init {
+        getProfile()
+    }
 
     fun getGroups() {
         baseViewModelScope.launch {
@@ -65,10 +64,30 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 isPublicAccess.value = it.public_access
                 membersEvent.value = it.members.size.toString()
                 isHost.value = it.ihost
+                for (i in 0.. it.members.size){
+                    if (userId.value == it.members[i].user_id){
+                        participation.value = true
+                    }
+                }
+
 
 
             }.onError {
                 Log.d("ttt", "그룹 확인 실패")
+            }
+        }
+    }
+
+    fun getProfile() {
+        baseViewModelScope.launch {
+            mainRepository.getUserProfile().onSuccess {
+                userId.value = it.id
+
+
+                Log.d("ttt", "사용자 정보 가져오기 성공")
+
+            }.onError {
+                Log.d("ttt", "사용자 정보 가져오기 실패")
             }
         }
     }
@@ -103,7 +122,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun postGroupAdmissions(){
+    fun postGroupAdmissions() {
         baseViewModelScope.launch {
             mainRepository.postGroupAdmissions(groupId.value).onSuccess {
                 Log.d("ttt", "입장하기 성공")
@@ -117,7 +136,6 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
     // 방장 권한이 있어야 함
     fun getGroupAdmissions() {
-
         baseViewModelScope.launch {
             mainRepository.getGroupAdmissions(groupId.value).onSuccess {
                 _alarmInviteRoomEvent.value = it.admissions
@@ -267,9 +285,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onReportClicked(alarmId: Int, reportReason : String) {
+    fun onReportClicked(alarmId: Int, reportReason: String) {
         baseViewModelScope.launch {
-            mainRepository.postReportNotification(alarmId,editTextReportEvent.value,reportReason)
+            mainRepository.postReportNotification(alarmId, editTextReportEvent.value, reportReason)
                 .onSuccess {
 
                     Log.d("ttt", "알림 신고 성공")

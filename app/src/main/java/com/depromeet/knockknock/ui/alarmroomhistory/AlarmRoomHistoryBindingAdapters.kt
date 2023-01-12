@@ -44,8 +44,10 @@ fun ImageView.bindViewMessageVisible(isMessage : Boolean, isPublicAccess : Boole
     }
 }
 
-@BindingAdapter("bindViewVisible")
-fun ConstraintLayout.bindViewVisible(isPublicAccess : Boolean) {
-    if (isPublicAccess) this.visibility = View.GONE
-    else this.visibility = View.VISIBLE
+@BindingAdapter("isPublicAccess", "participation")
+fun ConstraintLayout.bindViewVisible(isPublicAccess : Boolean, participation : Boolean) {
+    if (!participation){
+        if (isPublicAccess) this.visibility = View.GONE
+        else this.visibility = View.VISIBLE
+    }
 }
