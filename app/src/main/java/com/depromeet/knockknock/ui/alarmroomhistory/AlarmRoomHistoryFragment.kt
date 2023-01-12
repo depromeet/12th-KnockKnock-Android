@@ -149,10 +149,10 @@ class AlarmRoomHistoryFragment :
                     viewModel.postReaction(reaction_id = it, notification_id = notification_id)
                 }
                 it -> {
-                    viewModel.deleteReaction(notification_id = notification_id)
+                    viewModel.deleteReaction(notification_reaction_id = it)
                 }
                 else -> {
-                    viewModel.patchReaction(reaction_id = it, notification_id = notification_id)
+                    viewModel.patchReaction(notification_reaction_id = it, reaction_id = reaction_id, notification_id = notification_id)
                 }
             }
         }

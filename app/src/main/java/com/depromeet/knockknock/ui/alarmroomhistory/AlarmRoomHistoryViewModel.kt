@@ -184,21 +184,22 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun deleteReaction(notification_id: Int) {
+    fun deleteReaction(notification_reaction_id: Int) {
         baseViewModelScope.launch {
             showLoading()
             mainRepository.deleteReaction(
-                notification_reaction_id = notification_id
+                notification_reaction_id = notification_reaction_id
             )
                 .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
             dismissLoading()
         }
     }
 
-    fun patchReaction(reaction_id: Int, notification_id: Int) {
+    fun patchReaction(notification_reaction_id : Int, reaction_id: Int, notification_id: Int) {
         baseViewModelScope.launch {
             showLoading()
             mainRepository.patchReaction(
+                notification_reaction_id = notification_reaction_id,
                 notification_id = notification_id,
                 reaction_id = reaction_id
             )

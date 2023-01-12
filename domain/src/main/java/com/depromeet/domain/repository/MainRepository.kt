@@ -121,6 +121,7 @@ interface  MainRepository {
 
     // 리액션 수정
     suspend fun patchReaction(
+        notification_reaction_id: Int,
         notification_id: Int,
         reaction_id: Int
     ): NetworkResult<Unit>
