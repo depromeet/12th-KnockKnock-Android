@@ -5,6 +5,9 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.depromeet.domain.model.Admission
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmInviteRoomAdapter
 
@@ -51,3 +54,13 @@ fun ConstraintLayout.bindViewVisible(isPublicAccess : Boolean, participation : B
         else this.visibility = View.VISIBLE
     }
 }
+
+//@BindingAdapter("bindBackgroundImage")
+//fun ConstraintLayout.bindBackgroundImage(backgroundImageUri: String?) {
+//    backgroundImageUri?.let {
+//        Glide.with(context)
+//            .load(it)
+//            .transform(CenterCrop(), RoundedCorners(50))
+//            .into(this)
+//    }
+//}
