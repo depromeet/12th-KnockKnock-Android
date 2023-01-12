@@ -210,8 +210,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="296dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/alarm_room_detail_bg1"
-                android:visibility="gone"
                 app:bookmarkContentsImage="@{vm.reservationMessageImgUri}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -377,7 +375,7 @@
                     android:layout_marginEnd="16dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_recycler_history_message" />
+                    tools:listitem="@layout/item_recycler_invite_room" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_list"
@@ -391,7 +389,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
                     app:layout_constraintVertical_bias="0.0"
-                    tools:listitem="@layout/item_recycler_history_bundle" />
+                    tools:listitem="@layout/item_recycler_history_message" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

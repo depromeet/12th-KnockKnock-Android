@@ -44,7 +44,7 @@ class AlarmRoomHistoryFragment :
             viewModel
         )
     }
-    private val alarmInviteRoomAdapter by lazy { AlarmInviteRoomAdapter(viewModel) }
+    private val alarmInviteRoomAdapter by lazy { AlarmInviteRoomAdapter(viewModel, viewModel) }
 
     override fun initStartView() {
         viewModel.groupId.value = args.groupId

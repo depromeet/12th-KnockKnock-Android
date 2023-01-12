@@ -34,6 +34,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var alarmRoomTitleEvent = MutableStateFlow<String>("")
     var alarmRoomDescriptionEvent = MutableStateFlow<String>("")
     var alarmDateEvent = MutableStateFlow<String>("")
+    var alarmInviteDateEvent = MutableStateFlow<String>("")
     val emptyMessage: String = ""
     var groupId = MutableStateFlow<Int>(0)
     var reservationId = MutableStateFlow<Int>(0)
