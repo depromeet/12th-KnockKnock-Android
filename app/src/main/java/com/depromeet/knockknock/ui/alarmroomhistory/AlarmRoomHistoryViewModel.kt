@@ -54,7 +54,6 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var roomImgUri = MutableStateFlow<String>("")
 
 
-
     init {
         getProfile()
     }
@@ -154,9 +153,6 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     override fun postGroupAdmissionsAllow(admissionId: Int) {
         baseViewModelScope.launch {
             mainRepository.postGroupAdmissionsAllow(groupId.value, admissionId).onSuccess {
-
-            }.onSuccess {
-                Log.d("ttt", "초대 승인 성공")
             }.onError {
                 Log.d("ttt", "초대 승인 실패")
             }
@@ -167,8 +163,6 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         baseViewModelScope.launch {
             mainRepository.postGroupAdmissionsRefuse(groupId.value, admissionId).onSuccess {
 
-            }.onSuccess {
-                Log.d("ttt", "초대 거절 성공")
             }.onError {
                 Log.d("ttt", "초대 거절 실패")
             }
@@ -198,7 +192,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun patchReaction(notification_reaction_id : Int, reaction_id: Int, notification_id: Int) {
+    fun patchReaction(notification_reaction_id: Int, reaction_id: Int, notification_id: Int) {
         baseViewModelScope.launch {
             showLoading()
             mainRepository.patchReaction(
@@ -301,10 +295,11 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    override fun onRecentAlarmMoreClicked(alarmId: Int, message: String) {
+    override fun onRecentAlarmMoreClicked(sendUserId: Int, alarmId: Int, message: String) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToAlarmMore(
+                    sendUserId,
                     alarmId,
                     message
                 )
@@ -322,6 +317,20 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
                 }.onError {
                     Log.d("ttt", "$it 알림 신고 실패")
+                }
+        }
+    }
+
+    fun onUserReportClicked(sendUserId: Int) {
+        baseViewModelScope.launch {
+            mainRepository.deleteRelations(sendUserId)
+                .onSuccess {
+
+                    Log.d("ttt", "친구 삭제 성공")
+
+
+                }.onError {
+                    Log.d("ttt", "$it 친구 삭제 실패")
                 }
         }
     }

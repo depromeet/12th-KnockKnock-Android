@@ -109,6 +109,7 @@ class AlarmRoomHistoryFragment :
             viewModel.navigationEvent.collectLatest {
                 when (it) {
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmMore -> initAlarmMoreBottomSheet(
+                        sendUserId = it.sendUserId,
                         alarmId = it.alarmId, message = it.message
                     )
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate -> navigate(
@@ -159,7 +160,7 @@ class AlarmRoomHistoryFragment :
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 
-    private fun initAlarmMoreBottomSheet(alarmId: Int, message: String) {
+    private fun initAlarmMoreBottomSheet(sendUserId:Int, alarmId: Int, message: String) {
         val dialog: BottomAlarmMore = BottomAlarmMore {
             when (it) {
                 is AlarmMoreType.Copy -> roomFilter(message)
@@ -167,7 +168,7 @@ class AlarmRoomHistoryFragment :
                     viewModel.onAlarmSaveClicked(alarmId)
                 }
                 is AlarmMoreType.Delete -> alarmDeleteDialog(alarmId)
-                is AlarmMoreType.Declare -> usersBlockDialog()
+                is AlarmMoreType.Declare -> usersBlockDialog(sendUserId)
                 is AlarmMoreType.Report -> reportDialog(alarmId)
             }
         }
@@ -184,7 +185,7 @@ class AlarmRoomHistoryFragment :
         val dialog: DefaultRedAlertDialog = DefaultRedAlertDialog(
             alertDialogModel = res,
             clickToPositive = {
-                toastMessage("알림 삭제")
+                toastMessage("알림을 삭제했습니다.")
                 viewModel.onDeleteAlarmClicked(notificationId)
             },
             clickToNegative = {
@@ -194,7 +195,7 @@ class AlarmRoomHistoryFragment :
         dialog.show(childFragmentManager, TAG)
     }
 
-    private fun usersBlockDialog() {
+    private fun usersBlockDialog(sendUserId: Int) {
         val res = AlertDialogModel(
             title = "이 유저를 차단할까요?",
             description = "앞으로 이 유저의 글을 볼 수 없어요",
@@ -204,7 +205,8 @@ class AlarmRoomHistoryFragment :
         val dialog: DefaultRedAlertDialog = DefaultRedAlertDialog(
             alertDialogModel = res,
             clickToPositive = {
-                toastMessage("유저 차단")
+                viewModel.onUserReportClicked(sendUserId)
+                toastMessage("유저를 차단했습니다.")
             },
             clickToNegative = {
                 toastMessage("아니요")
@@ -223,6 +225,7 @@ class AlarmRoomHistoryFragment :
     private fun reportDialog(alarmId : Int) {
         val bottomSheet = BottomAlarmReport(
         ) { reportReason ->
+            toastMessage("알림을 신고했습니다.")
             viewModel.onReportClicked(alarmId, reportReason)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
