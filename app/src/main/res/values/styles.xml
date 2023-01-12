@@ -10,9 +10,9 @@
         <item name="fontFamily">@font/pretendard_bold</item>
     </style>
 
-    <style name="Theme.AppCompat.TextView.Bold.Purple01.Size18" parent="@style/Widget.AppCompat.TextView">
+    <style name="Theme.AppCompat.TextView.Bold.Purple01.Size20" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textColor">@color/purple_01</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">20dp</item>
         <item name="fontFamily">@font/pretendard_bold</item>
     </style>
 
