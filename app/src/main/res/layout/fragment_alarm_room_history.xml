@@ -45,6 +45,7 @@
             android:paddingTop="16dp"
             android:paddingEnd="4dp"
             android:paddingBottom="16dp"
+            style="@style/Theme.AppCompat.Alert.Title"
             android:text="@={vm.alarmRoomTitleEvent}"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
