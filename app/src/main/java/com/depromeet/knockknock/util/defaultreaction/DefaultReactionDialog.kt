@@ -71,8 +71,10 @@ class DefaultReactionDialog(
 
             launch {
                 viewModel.clickImageUrl.collectLatest {
-                    callback.invoke(it!!)
-                    dismiss()
+                    it?.let {
+                        callback.invoke(it!!)
+                        dismiss()
+                    }
                 }
             }
         }

@@ -156,7 +156,6 @@
             android:paddingStart="8dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
-            android:clickable="true"
             android:onClick="@{() -> eventListener.onReactionClicked(model.notification_id, model.reactions.my_reaction_info.reaction_id)}">
             <TextView
                 style="@style/Theme.AppCompat.TextView.Item.Reaction"
