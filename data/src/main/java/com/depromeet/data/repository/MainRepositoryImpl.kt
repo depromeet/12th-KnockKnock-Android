@@ -408,4 +408,8 @@ class MainRepositoryImpl @Inject constructor(
     override suspend fun getAlarmsCount(): NetworkResult<AlarmCount> {
         return handleApi { mainAPIService.getAlarmsCount().data }
     }
+
+    override suspend fun postReportNotification(notification_id: Int): NetworkResult<ReportNotification> {
+        return handleApi { mainAPIService.postReportsNotifications(notification_id = notification_id).data }
+    }
 }

@@ -270,4 +270,7 @@ interface  MainRepository {
 
     // 알림 있는지 확인
     suspend fun getAlarmsCount(): NetworkResult<AlarmCount>
+
+    // 알림 신고하기
+    suspend fun postReportNotification(notification_id: Int): NetworkResult<ReportNotification>
 }
