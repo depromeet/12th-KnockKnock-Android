@@ -158,7 +158,7 @@ class AlarmRoomHistoryFragment :
                 }
                 is AlarmMoreType.Delete -> alarmDeleteDialog(alarmId)
                 is AlarmMoreType.Declare -> usersBlockDialog()
-                is AlarmMoreType.Report -> reportDialog()
+                is AlarmMoreType.Report -> reportDialog(alarmId)
             }
         }
         dialog.show(childFragmentManager, TAG)
@@ -210,12 +210,10 @@ class AlarmRoomHistoryFragment :
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 
-    private fun reportDialog() {
+    private fun reportDialog(alarmId : Int) {
         val bottomSheet = BottomAlarmReport(
-            period = viewModel.periodClicked.value
-        ) { notificationId ->
-            toastMessage("$notificationId 선택함")
-            viewModel.onReportClicked(notificationId)
+        ) { reportReason ->
+            viewModel.onReportClicked(alarmId, reportReason)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

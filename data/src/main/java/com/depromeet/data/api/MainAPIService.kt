@@ -323,6 +323,6 @@ interface MainAPIService {
 
     // 알림 신고하기
     @POST("/api/v1/reports/notifications/{notification_id}")
-    suspend fun postReportsNotifications(@Path("notification_id") notification_id: Int): BaseResponse<ReportNotification>
+    suspend fun postReportsNotifications(@Path("notification_id") notification_id: Int, @Body body: PostReportsNotificationRequest): BaseResponse<ReportNotification>
 
 }

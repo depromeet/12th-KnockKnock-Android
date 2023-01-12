@@ -22,12 +22,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomAlarmReport(
-    val period: Int,
-    val callback: (period: Int) -> Unit
+    val callback: (period: String) -> Unit
 ) : BottomSheetDialogFragment(){
     private lateinit var dlg : BottomSheetDialog
 
-    private var periodType: PeriodType = PeriodType.Init
+    private var spemType: PeriodType = PeriodType.Init
 
     private val all by lazy { requireView().findViewById<ConstraintLayout>(R.id.zero_btn) }
     private val allCheck by lazy { requireView().findViewById<CheckBox>(R.id.zero_check) }
@@ -78,22 +77,15 @@ class BottomAlarmReport(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        when(period) {
-            0 -> periodCheck(type = PeriodType.All)
-            1 -> periodCheck(type = PeriodType.One)
-            3 -> periodCheck(type = PeriodType.Three)
-            6 -> periodCheck(type = PeriodType.Six)
-            12 -> periodCheck(type = PeriodType.Year)
-        }
-
         val saveBtn = requireView().findViewById<TextView>(R.id.save_btn)
         saveBtn.setOnClickListener {
-            when(periodType) {
-                is PeriodType.All -> callback.invoke(0)
-                is PeriodType.One -> callback.invoke(1)
-                is PeriodType.Three -> callback.invoke(3)
-                is PeriodType.Six -> callback.invoke(6)
-                is PeriodType.Year -> callback.invoke(12)
+            when(spemType) {
+                is PeriodType.All -> callback.invoke("SPAM")
+                is PeriodType.One -> callback.invoke("SPAM")
+                is PeriodType.Three -> callback.invoke("SPAM")
+                is PeriodType.Six -> callback.invoke("SPAM")
+                is PeriodType.Year -> callback.invoke("SPAM")
+                else -> callback.invoke("SPAM")
             }
             dismiss()
         }
@@ -105,31 +97,31 @@ class BottomAlarmReport(
 
         all.setOnClickListener {
             periodCheck(type = PeriodType.All)
-            periodType = PeriodType.All
+            spemType = PeriodType.All
             requireActivity().hideKeyboard()
             editTextReport.clearFocus()
         }
         one.setOnClickListener {
             periodCheck(type = PeriodType.One)
-            periodType = PeriodType.One
+            spemType = PeriodType.One
             requireActivity().hideKeyboard()
             editTextReport.clearFocus()
         }
         three.setOnClickListener {
             periodCheck(type = PeriodType.Three)
-            periodType = PeriodType.Three
+            spemType = PeriodType.Three
             requireActivity().hideKeyboard()
             editTextReport.clearFocus()
         }
         six.setOnClickListener {
             periodCheck(type = PeriodType.Six)
-            periodType = PeriodType.Six
+            spemType = PeriodType.Six
             requireActivity().hideKeyboard()
             editTextReport.clearFocus()
         }
         year.setOnClickListener {
             periodCheck(type = PeriodType.Year)
-            periodType = PeriodType.Year
+            spemType = PeriodType.Year
             editTextReport.messageTextOnFocusChangeListener(requireContext(),linearLayoutEditTextReport )
             requireActivity().showKeyboard(editTextReport)
             editTextReport.requestFocus()

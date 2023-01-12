@@ -50,6 +50,8 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var membersEvent = MutableStateFlow<String>("")
     var isHost = MutableStateFlow<Boolean>(true)
     var isMessage = MutableStateFlow<Boolean>(true)
+    var editTextReportEvent = MutableStateFlow<String>("")
+
 
 
 
@@ -265,16 +267,16 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onReportClicked(alarmId: Int) {
+    fun onReportClicked(alarmId: Int, reportReason : String) {
         baseViewModelScope.launch {
-            mainRepository.postReportNotification(alarmId)
+            mainRepository.postReportNotification(alarmId,editTextReportEvent.value,reportReason)
                 .onSuccess {
 
                     Log.d("ttt", "알림 신고 성공")
 
 
                 }.onError {
-                    Log.d("ttt", "알림 신고 실패")
+                    Log.d("ttt", "$it 알림 신고 실패")
                 }
         }
     }
