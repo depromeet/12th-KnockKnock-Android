@@ -13,8 +13,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/alarm_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_purple">
+        android:layout_height="match_parent">
+
+        <ImageView
+            app:roomBackgroundImage="@{vm.roomImgUri}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -39,6 +43,7 @@
 
         <TextView
             android:id="@+id/textView4"
+            style="@style/Theme.AppCompat.Alert.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
@@ -46,7 +51,6 @@
             android:paddingTop="16dp"
             android:paddingEnd="4dp"
             android:paddingBottom="16dp"
-            style="@style/Theme.AppCompat.Alert.Title"
             android:text="@={vm.alarmRoomTitleEvent}"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
@@ -398,12 +402,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/gradient_detail"
+            isPublicAccess="@{vm.isPublicAccess}"
+            participation="@{vm.participation}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:elevation="10dp"
             android:background="@drawable/bg_gradient"
-            isPublicAccess="@{vm.isPublicAccess}"
-            participation ="@{vm.participation}"
+            android:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent=".5"
@@ -411,12 +415,12 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_detail_request"
+                onSingleClick="@{() -> vm.postGroupAdmissions()}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="40dp"
                 android:background="@drawable/bg_yellow_radius50"
-                onSingleClick="@{() -> vm.postGroupAdmissions()}"
                 android:text="입장 요청하기"
                 android:textSize="18sp"
                 android:textStyle="bold"

@@ -54,13 +54,3 @@ fun ConstraintLayout.bindViewVisible(isPublicAccess : Boolean, participation : B
         else this.visibility = View.VISIBLE
     }
 }
-
-//@BindingAdapter("bindBackgroundImage")
-//fun ConstraintLayout.bindBackgroundImage(backgroundImageUri: String?) {
-//    backgroundImageUri?.let {
-//        Glide.with(context)
-//            .load(it)
-//            .transform(CenterCrop(), RoundedCorners(50))
-//            .into(this)
-//    }
-//}

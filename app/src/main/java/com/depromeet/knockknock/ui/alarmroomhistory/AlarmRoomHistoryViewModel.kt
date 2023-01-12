@@ -51,6 +51,8 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var editTextReportEvent = MutableStateFlow<String>("")
     var userId = MutableStateFlow<Int>(0)
     var participation = MutableStateFlow<Boolean>(false)
+    var roomImgUri = MutableStateFlow<String>("")
+
 
 
     init {
@@ -65,6 +67,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 isPublicAccess.value = it.public_access
                 membersEvent.value = it.members.size.toString()
                 isHost.value = it.ihost
+                roomImgUri.value = it.background_image_path
                 for (i in 0..it.members.size) {
                     if (userId.value == it.members[i].user_id) {
                         participation.value = true
