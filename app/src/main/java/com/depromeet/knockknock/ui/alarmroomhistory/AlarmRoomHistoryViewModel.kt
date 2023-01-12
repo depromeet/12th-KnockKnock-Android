@@ -173,7 +173,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun stroageReaction(reaction_id: Int, notification_id: Int) {
+    fun postReaction(reaction_id: Int, notification_id: Int) {
         baseViewModelScope.launch {
             showLoading()
             mainRepository.postReactions(
