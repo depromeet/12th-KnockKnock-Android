@@ -348,7 +348,7 @@
                         android:layout_marginStart="16dp"
                         android:gravity="top"
                         android:lineSpacingExtra="5sp"
-                        android:text="입장 요청 8"
+                        android:text="@{vm.alarmInviteRoomSizeEvent}"
                         android:textColor="@color/gray01"
                         android:textSize="24dp"
                         app:layout_constraintStart_toStartOf="parent"
