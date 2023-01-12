@@ -31,6 +31,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     private val _alarmInviteRoomEvent: MutableStateFlow<List<Admission>> =
         MutableStateFlow(emptyList())
     val alarmInviteRoomEvent: StateFlow<List<Admission>> = _alarmInviteRoomEvent
+    var alarmInviteRoomSizeEvent = MutableStateFlow<String>("입장 요청")
     private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val periodClicked: StateFlow<Int> = _periodClicked
     var alarmRoomTitleEvent = MutableStateFlow<String>("")
@@ -118,6 +119,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         baseViewModelScope.launch {
             mainRepository.getGroupAdmissions(groupId.value).onSuccess {
                 _alarmInviteRoomEvent.value = it.admissions
+                alarmInviteRoomSizeEvent.value = "입장 요청 ${it.admissions.size}"
                 Log.d("ttt", "초대 확인 성공")
 
             }.onError {
@@ -264,17 +266,16 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     fun onReportClicked(alarmId: Int) {
-//        baseViewModelScope.launch {
-//            mainRepository.postre(alarmId)
-//                .onSuccess {
-//
-//                    Log.d("ttt", "보관함 저장 성공")
-//
-//
-//                }.onError {
-//                    Log.d("ttt", "보관함 저장 실패")
-//                }
-//        }
+        baseViewModelScope.launch {
+            mainRepository.postReportNotification(alarmId)
+                .onSuccess {
 
+                    Log.d("ttt", "알림 신고 성공")
+
+
+                }.onError {
+                    Log.d("ttt", "알림 신고 실패")
+                }
+        }
     }
 }
