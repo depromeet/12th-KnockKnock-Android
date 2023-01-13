@@ -1,5 +1,7 @@
 package com.depromeet.knockknock.ui.information
 
+import android.content.Intent
+import android.net.Uri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -34,8 +36,8 @@ class InformationFragment : BaseFragment<FragmentInformationBinding, Information
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is InformationNavigationAction.NavigateToUserConsents -> {}
-                    is InformationNavigationAction.NavigateToUserPrivacy -> {}
+                    is InformationNavigationAction.NavigateToUserConsents -> toActionView(requireContext().getString(R.string.user_consent))
+                    is InformationNavigationAction.NavigateToUserPrivacy -> toActionView(requireContext().getString(R.string.user_privacy))
                     is InformationNavigationAction.NavigateToAppMakers -> navigate(InformationFragmentDirections.actionInformationFragmentToMakersFragment())
                 }
             }
@@ -53,5 +55,10 @@ class InformationFragment : BaseFragment<FragmentInformationBinding, Information
             this.setNavigationIcon(R.drawable.ic_allow_back)
             this.setNavigationOnClickListener { navController.popBackStack() }
         }
+    }
+
+    private fun toActionView(uri: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+        startActivity(intent)
     }
 }
