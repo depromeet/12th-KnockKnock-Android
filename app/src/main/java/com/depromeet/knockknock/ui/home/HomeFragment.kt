@@ -84,7 +84,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             // 이동로작
             when(selectRoom) {
                 -2 -> initCreateRoomBottomSheet()
-                -1 -> {}
+                -1 -> navigate(HomeFragmentDirections.actionHomeFragmentToAlarmRoomFragment())
                 else -> {}
             }
         }
@@ -94,7 +94,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     private fun initCreateRoomBottomSheet() {
         val dialog = BottomHomeMakeRoom { isOpenRoom ->
             // 알림방 생성관련 로직
-            if(isOpenRoom) {}
+            if(isOpenRoom) navigate(HomeFragmentDirections.actionHomeFragmentToAloneRoomMakeCategoryFragment())
             else navigate(HomeFragmentDirections.actionHomeFragmentToCreateRoomWithFriendFragment())
         }
         dialog.show(childFragmentManager, TAG)

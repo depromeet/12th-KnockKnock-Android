@@ -30,7 +30,6 @@ class AloneRoomMakeCategoryFragment : BaseFragment<FragmentAloneRoomMakeCategory
     private val categoryAdapter by lazy { AloneRoomMakeCategoryAdapter(viewModel) }
 
     override fun initStartView() {
-
         binding.apply {
             this.viewmodel  = viewModel
             this.lifecycleOwner = viewLifecycleOwner
