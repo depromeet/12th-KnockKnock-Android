@@ -1,6 +1,5 @@
 package com.depromeet.knockknock.util
 
-import android.R
 import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
@@ -11,6 +10,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.depromeet.knockknock.R
 import com.depromeet.knockknock.ui.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -47,7 +47,7 @@ class KnockKnockFirebaseMessagingService : FirebaseMessagingService() {
         val body = remoteMessage.notification!!.body
         builder.setContentTitle(title)
             .setContentText(body)
-            .setSmallIcon(R.drawable.ic_delete)
+            .setSmallIcon(R.mipmap.img_app_logo_foreground)
         val notification: Notification = builder.build()
         notificationManager.notify(1, notification)
 
@@ -66,7 +66,7 @@ class KnockKnockFirebaseMessagingService : FirebaseMessagingService() {
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setSmallIcon(R.drawable.ic_delete)
+            .setSmallIcon(R.mipmap.img_app_logo_foreground)
             .setContentTitle(notification.title)
             .setContentText(notification.body)
             .setContentIntent(pIntent)
