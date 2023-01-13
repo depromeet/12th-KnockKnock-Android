@@ -520,4 +520,14 @@
             app:destination="@id/alarmRoomHistoryFragment"
             app:popUpTo="@id/alarmRoomTabFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/pushDetailFragment"
+        android:name="com.depromeet.knockknock.ui.pushdetail.PushDetailFragment"
+        android:label="PushDetailFragment">
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+    </fragment>
 </navigation>

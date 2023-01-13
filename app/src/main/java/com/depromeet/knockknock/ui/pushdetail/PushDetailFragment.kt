@@ -3,6 +3,7 @@ package com.depromeet.knockknock.ui.pushdetail
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentPushDetailBinding
@@ -15,6 +16,8 @@ class PushDetailFragment :
 
     private val TAG = "PushDetailFragment"
 
+    private val args: PushDetailFragmentArgs by navArgs()
+
     override val layoutResourceId: Int
         get() = R.layout.fragment_makers
     private val navController by lazy { findNavController() }
@@ -22,6 +25,7 @@ class PushDetailFragment :
     override val viewModel: PushDetailViewModel by viewModels()
 
     override fun initStartView() {
+        viewModel.groupId.value = args.groupId
         binding.apply {
             this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
