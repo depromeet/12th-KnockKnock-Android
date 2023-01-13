@@ -84,7 +84,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             // 이동로작
             when(selectRoom) {
                 -2 -> initCreateRoomBottomSheet()
-                -1 -> navigate(HomeFragmentDirections.actionHomeFragmentToAlarmRoomFragment())
+                -1 -> navigate(HomeFragmentDirections.actionHomeFragmentToAlarmRoomSearchFragment())
                 else -> {}
             }
         }

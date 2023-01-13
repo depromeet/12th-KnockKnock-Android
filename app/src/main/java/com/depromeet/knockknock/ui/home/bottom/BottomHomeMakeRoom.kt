@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.ui.bookmark.model.Room
 import com.depromeet.knockknock.ui.home.HomeActionHandler
@@ -43,16 +44,16 @@ class BottomHomeMakeRoom(
         savedInstanceState: Bundle?,
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.dialog_bottom_home_make_room, container, false)
+        return inflater.inflate(R.layout.dialog_bottom_make_room, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val makingFriendsRoom =
-            requireView().findViewById<TextView>(R.id.tv_home_dialog_make_friends_room)
+            requireView().findViewById<ConstraintLayout>(R.id.choose_make_friend_room)
         val makingAloneRoom =
-            requireView().findViewById<TextView>(R.id.tv_home_dialog_make_alone_room)
+            requireView().findViewById<ConstraintLayout>(R.id.choose_make_alone_room)
 
         makingFriendsRoom.setOnClickListener {
             callback.invoke(false)
