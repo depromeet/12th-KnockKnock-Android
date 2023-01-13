@@ -1,5 +1,6 @@
 package com.depromeet.knockknock.ui.pushdetail
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -25,6 +26,9 @@ class PushDetailFragment :
     override val viewModel: PushDetailViewModel by viewModels()
 
     override fun initStartView() {
+        viewModel.groupId.value = args.groupId
+        Log.d(TAG, "initStartView: ${viewModel.groupId.value}")
+
         binding.apply {
             this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
@@ -44,7 +48,7 @@ class PushDetailFragment :
 
     private fun initToolbar() {
         with(binding.toolbarMakers) {
-            this.title = "주호민의 푸시알림"
+            this.title = viewModel.title.value
 
             // 뒤로가기 버튼
             this.setNavigationIcon(com.depromeet.knockknock.R.drawable.ic_allow_back)

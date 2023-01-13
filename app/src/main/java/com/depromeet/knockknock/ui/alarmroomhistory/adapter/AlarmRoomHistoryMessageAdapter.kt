@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.alarmroomhistory.adapter
 
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +15,18 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.domain.model.Notification
+import com.depromeet.domain.onError
+import com.depromeet.domain.onSuccess
+import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.ItemRecyclerHistoryMessageBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryFragment
+import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryFragmentDirections
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel
 import com.depromeet.knockknock.ui.bookmark.adapter.ReactionAdapter
 import com.depromeet.knockknock.ui.pushdetail.PushDetailFragment
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -108,9 +114,12 @@ class AlarmRoomHistoryMessageAdapter(
                     }
                 }
 
+                // 상세 페이지로 이동
                 layoutMain.setOnClickListener {
                     val fragment = it.findFragment<AlarmRoomHistoryFragment>()
-                    findNavController(fragment).navigate(R.id.action_alarmRoomHistoryFragment_to_pushDetailFragment)
+                    val action = AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToPushDetailFragment(fragment.viewModel.groupId.value)
+                    // findNavController(fragment).navigate(R.id.action_alarmRoomHistoryFragment_to_pushDetailFragment)
+                    findNavController(fragment).navigate(action)
                 }
             }
         }

@@ -26,12 +26,21 @@ class PushDetailViewModel @Inject constructor(
 
     val userProfile: MutableStateFlow<UserProfile?> = MutableStateFlow(null)
 
+    var groupId = MutableStateFlow<Int>(0)
+    var title = MutableStateFlow<String>("")
+    var content = MutableStateFlow<String>("")
+    var img_url = MutableStateFlow<String>("")
+
     init {
         baseViewModelScope.launch {
             showLoading()
             mainRepository.getUserProfile()
                 .onSuccess { profile ->
                     userProfile.emit(profile)
+                }
+            val notifications = mainRepository.getNotifications()
+                .onSuccess {
+
                 }
             dismissLoading()
         }
