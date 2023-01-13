@@ -19,7 +19,8 @@
         android:paddingStart="16dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
-        android:paddingEnd="4dp">
+        android:paddingEnd="4dp"
+        android:onClick="@{() -> eventListener.onAddFriendClicked(holder.id, holder.nickname) }">
 
         <ImageView
             android:id="@+id/room_img"
@@ -51,8 +52,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_add_friend"
-            android:onClick="@{() -> eventListener.onAddFriendClicked(holder.id, holder.nickname) }">
+            android:src="@drawable/ic_add_friend">
         </ImageView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
