@@ -20,7 +20,7 @@ import com.depromeet.knockknock.ui.alarmroomsearch.model.AlarmRoom
 class AlarmRoomJoinedAdapter(
     private val eventListener: AlarmRoomJoinedActionHandler,
     private val viewModel : AlarmRoomJoinedViewModel
-) : PagingDataAdapter<GroupContent, AlarmRoomJoinedAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
+) : ListAdapter<GroupContent, AlarmRoomJoinedAdapter.ViewHolder>(AlarmRoomListItemDiffCallback){
 
 
     @SuppressLint("NotifyDataSetChanged")
