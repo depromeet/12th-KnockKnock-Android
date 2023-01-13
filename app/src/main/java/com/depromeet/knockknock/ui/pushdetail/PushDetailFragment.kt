@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentPushDetailBinding
@@ -30,15 +31,20 @@ class PushDetailFragment :
         viewModel.username.value = args.username
         viewModel.dateTime.value = args.dateTime
         viewModel.contents.value = args.contents
-        Log.d(TAG, "initStartView: ${viewModel.groupId.value} ${viewModel.username.value}")
+        viewModel.img_url.value = args.imgContent
 
         binding.apply {
             this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
 
+            Log.d(TAG, "initStartView: $viewModel.img_url.value")
+            
             tvDetailName.text = viewModel.username.value
             tvDetailTime.text = viewModel.dateTime.value
             tvDetailContent.text = viewModel.contents.value
+            Glide.with(this@PushDetailFragment)
+                .load(viewModel.img_url.value)
+                .into(ivDetailContent)
         }
         exception = viewModel.errorEvent
         initToolbar()

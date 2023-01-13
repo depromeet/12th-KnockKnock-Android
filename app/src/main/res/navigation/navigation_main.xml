@@ -545,5 +545,9 @@
             android:name="contents"
             app:argType="string" />
 
+        <argument
+            android:name="imgContent"
+            app:argType="string" />
+
     </fragment>
 </navigation>

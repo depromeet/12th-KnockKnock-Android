@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBindings
 import com.depromeet.domain.model.Notification
 import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
@@ -120,8 +121,9 @@ class AlarmRoomHistoryMessageAdapter(
                     val username = userNameText.text.toString()
                     val dateTime = dateTimeText.text.toString()
                     val contents = contents.text.toString()
+                    val imgContent = contentsImg.toString()
                     val action = AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToPushDetailFragment(fragment.viewModel.groupId.value,
-                    username, dateTime, contents)
+                    username, dateTime, contents, imgContent)
                     // findNavController(fragment).navigate(R.id.action_alarmRoomHistoryFragment_to_pushDetailFragment)
                     findNavController(fragment).navigate(action)
                 }
