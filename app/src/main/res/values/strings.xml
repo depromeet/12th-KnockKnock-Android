@@ -8,6 +8,7 @@
 
     <string name="user_consent">https://www.notion.so/64b5d7bd749b42d4aa50ba51be2e72f5</string>
     <string name="user_privacy">https://www.notion.so/423f7dcc31824ff98d40cf91659d78ab</string>
+    <string name="app_down_link">https://github.com/depromeet/12th-KnocKnock-apk/tree/main</string>
 
     <!--홈화면-->
     <string name="onBackPressed_Message">뒤로가기 버튼을\n한번 더 누르면 종료됩니다.</string>

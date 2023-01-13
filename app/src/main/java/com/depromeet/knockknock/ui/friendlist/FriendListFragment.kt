@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.friendlist
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -48,7 +49,7 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when(it) {
-                    is FriendListNavigationAction.NavigateToLink -> {}
+                    is FriendListNavigationAction.NavigateToLink -> toShare()
                     is FriendListNavigationAction.NavigateToFriendMore -> { moreFriendPopUp(userIdx = it.userIdx) }
                     is FriendListNavigationAction.NavigateToDeleteSuccess -> viewModel.getFriends()
                     is FriendListNavigationAction.NavigateToAddFriends -> navigate(FriendListFragmentDirections.actionFriendListFragmentToAddFriendFragment())
@@ -96,5 +97,14 @@ class FriendListFragment : BaseFragment<FragmentFriendListBinding, FriendListVie
             binding.searchEditText.clearFocus()
             false
         }
+    }
+
+    private fun toShare() {
+        val data = requireContext().getString(R.string.app_down_link)
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, data)
+        }
+        startActivity(Intent.createChooser(intent, data))
     }
 }
