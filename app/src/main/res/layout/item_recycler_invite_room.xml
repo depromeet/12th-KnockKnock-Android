@@ -10,6 +10,11 @@
             type="com.depromeet.domain.model.Admission" />
 
         <variable
+            name="vm"
+            type="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel" />
+
+
+        <variable
             name="eventListener"
             type="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler" />
     </data>
@@ -29,8 +34,7 @@
             style="@style/Theme.AppCompat.TextView.Notification.Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.created_at}"
-
+            android:text="@{vm.alarmInviteDateEvent}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 

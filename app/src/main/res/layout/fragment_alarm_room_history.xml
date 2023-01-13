@@ -11,9 +11,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/alarm_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_purple">
+        android:layout_height="match_parent">
+
+        <ImageView
+            app:roomBackgroundImage="@{vm.roomImgUri}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -38,6 +43,7 @@
 
         <TextView
             android:id="@+id/textView4"
+            style="@style/Theme.AppCompat.Alert.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
@@ -209,8 +215,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="296dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/alarm_room_detail_bg1"
-                android:visibility="gone"
                 app:bookmarkContentsImage="@{vm.reservationMessageImgUri}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -348,7 +352,7 @@
                         android:layout_marginStart="16dp"
                         android:gravity="top"
                         android:lineSpacingExtra="5sp"
-                        android:text="입장 요청 8"
+                        android:text="@{vm.alarmInviteRoomSizeEvent}"
                         android:textColor="@color/gray01"
                         android:textSize="24dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -376,7 +380,7 @@
                     android:layout_marginEnd="16dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_recycler_history_message" />
+                    tools:listitem="@layout/item_recycler_invite_room" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_list"
@@ -390,7 +394,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
                     app:layout_constraintVertical_bias="0.0"
-                    tools:listitem="@layout/item_recycler_history_bundle" />
+                    tools:listitem="@layout/item_recycler_history_message" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
@@ -398,11 +402,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/gradient_detail"
+            isPublicAccess="@{vm.isPublicAccess}"
+            participation="@{vm.participation}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:elevation="10dp"
             android:background="@drawable/bg_gradient"
-            app:bindViewVisible="@{vm.isPublicAccess}"
+            android:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent=".5"
@@ -410,12 +415,12 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_detail_request"
+                onSingleClick="@{() -> vm.postGroupAdmissions()}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="40dp"
                 android:background="@drawable/bg_yellow_radius50"
-                onSingleClick="@{() -> vm.postGroupAdmissions()}"
                 android:text="입장 요청하기"
                 android:textSize="18sp"
                 android:textStyle="bold"

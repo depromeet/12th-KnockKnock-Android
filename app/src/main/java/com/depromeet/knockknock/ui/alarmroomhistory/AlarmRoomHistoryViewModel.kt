@@ -1,8 +1,6 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
 import android.util.Log
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.Admission
@@ -12,7 +10,6 @@ import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.createAlarmRoomHistoryMessagePager
-import com.depromeet.knockknock.ui.bookmark.BookmarkNavigationAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -31,11 +28,13 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     private val _alarmInviteRoomEvent: MutableStateFlow<List<Admission>> =
         MutableStateFlow(emptyList())
     val alarmInviteRoomEvent: StateFlow<List<Admission>> = _alarmInviteRoomEvent
+    var alarmInviteRoomSizeEvent = MutableStateFlow<String>("입장 요청")
     private val _periodClicked: MutableStateFlow<Int> = MutableStateFlow<Int>(0)
     val periodClicked: StateFlow<Int> = _periodClicked
     var alarmRoomTitleEvent = MutableStateFlow<String>("")
     var alarmRoomDescriptionEvent = MutableStateFlow<String>("")
     var alarmDateEvent = MutableStateFlow<String>("")
+    var alarmInviteDateEvent = MutableStateFlow<String>("")
     val emptyMessage: String = ""
     var groupId = MutableStateFlow<Int>(0)
     var reservationId = MutableStateFlow<Int>(0)
@@ -49,10 +48,15 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var membersEvent = MutableStateFlow<String>("")
     var isHost = MutableStateFlow<Boolean>(true)
     var isMessage = MutableStateFlow<Boolean>(true)
+    var editTextReportEvent = MutableStateFlow<String>("")
+    var userId = MutableStateFlow<Int>(0)
+    var participation = MutableStateFlow<Boolean>(false)
+    var roomImgUri = MutableStateFlow<String>("")
 
 
-
-    init {}
+    init {
+        getProfile()
+    }
 
     fun getGroups() {
         baseViewModelScope.launch {
@@ -62,6 +66,12 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 isPublicAccess.value = it.public_access
                 membersEvent.value = it.members.size.toString()
                 isHost.value = it.ihost
+                roomImgUri.value = it.background_image_path
+                for (i in 0..it.members.size) {
+                    if (userId.value == it.members[i].user_id) {
+                        participation.value = true
+                    }
+                }
 
 
             }.onError {
@@ -70,9 +80,23 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
+    fun getProfile() {
+        baseViewModelScope.launch {
+            mainRepository.getUserProfile().onSuccess {
+                userId.value = it.id
+
+
+                Log.d("ttt", "사용자 정보 가져오기 성공")
+
+            }.onError {
+                Log.d("ttt", "사용자 정보 가져오기 실패")
+            }
+        }
+    }
+
     fun onSettingClicked() {
         if (isHost.value) onSettingRoomClicked(groupId.value)
-        else onSettingRoomForUserClicked()
+        else onSettingRoomForUserClicked(groupId.value)
     }
 
     fun getPushAlarm() {
@@ -92,15 +116,15 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onSettingRoomForUserClicked() {
+    fun onSettingRoomForUserClicked(alarmId: Int) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
-                AlarmRoomHistoryNavigationAction.NavigateToSettingRoomForUser
+                AlarmRoomHistoryNavigationAction.NavigateToSettingRoomForUser(alarmId)
             )
         }
     }
 
-    fun postGroupAdmissions(){
+    fun postGroupAdmissions() {
         baseViewModelScope.launch {
             mainRepository.postGroupAdmissions(groupId.value).onSuccess {
                 Log.d("ttt", "입장하기 성공")
@@ -114,10 +138,10 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
     // 방장 권한이 있어야 함
     fun getGroupAdmissions() {
-
         baseViewModelScope.launch {
             mainRepository.getGroupAdmissions(groupId.value).onSuccess {
                 _alarmInviteRoomEvent.value = it.admissions
+                alarmInviteRoomSizeEvent.value = "입장 요청 ${it.admissions.size}"
                 Log.d("ttt", "초대 확인 성공")
 
             }.onError {
@@ -129,9 +153,6 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     override fun postGroupAdmissionsAllow(admissionId: Int) {
         baseViewModelScope.launch {
             mainRepository.postGroupAdmissionsAllow(groupId.value, admissionId).onSuccess {
-
-            }.onSuccess {
-                Log.d("ttt", "초대 승인 성공")
             }.onError {
                 Log.d("ttt", "초대 승인 실패")
             }
@@ -142,18 +163,40 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         baseViewModelScope.launch {
             mainRepository.postGroupAdmissionsRefuse(groupId.value, admissionId).onSuccess {
 
-            }.onSuccess {
-                Log.d("ttt", "초대 거절 성공")
             }.onError {
                 Log.d("ttt", "초대 거절 실패")
             }
         }
     }
 
-    fun stroageReaction(reaction_id: Int, notification_id: Int) {
+    fun postReaction(reaction_id: Int, notification_id: Int) {
         baseViewModelScope.launch {
             showLoading()
             mainRepository.postReactions(
+                notification_id = notification_id,
+                reaction_id = reaction_id
+            )
+                .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
+            dismissLoading()
+        }
+    }
+
+    fun deleteReaction(notification_reaction_id: Int) {
+        baseViewModelScope.launch {
+            showLoading()
+            mainRepository.deleteReaction(
+                notification_reaction_id = notification_reaction_id
+            )
+                .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
+            dismissLoading()
+        }
+    }
+
+    fun patchReaction(notification_reaction_id: Int, reaction_id: Int, notification_id: Int) {
+        baseViewModelScope.launch {
+            showLoading()
+            mainRepository.patchReaction(
+                notification_reaction_id = notification_reaction_id,
                 notification_id = notification_id,
                 reaction_id = reaction_id
             )
@@ -252,10 +295,11 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    override fun onRecentAlarmMoreClicked(alarmId: Int, message: String) {
+    override fun onRecentAlarmMoreClicked(sendUserId: Int, alarmId: Int, message: String) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToAlarmMore(
+                    sendUserId,
                     alarmId,
                     message
                 )
@@ -263,18 +307,31 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    fun onReportClicked(alarmId: Int) {
-//        baseViewModelScope.launch {
-//            mainRepository.postre(alarmId)
-//                .onSuccess {
-//
-//                    Log.d("ttt", "보관함 저장 성공")
-//
-//
-//                }.onError {
-//                    Log.d("ttt", "보관함 저장 실패")
-//                }
-//        }
+    fun onReportClicked(alarmId: Int, reportReason: String) {
+        baseViewModelScope.launch {
+            mainRepository.postReportNotification(alarmId, editTextReportEvent.value, reportReason)
+                .onSuccess {
 
+                    Log.d("ttt", "알림 신고 성공")
+
+
+                }.onError {
+                    Log.d("ttt", "$it 알림 신고 실패")
+                }
+        }
+    }
+
+    fun onUserReportClicked(sendUserId: Int) {
+        baseViewModelScope.launch {
+            mainRepository.deleteRelations(sendUserId)
+                .onSuccess {
+
+                    Log.d("ttt", "친구 삭제 성공")
+
+
+                }.onError {
+                    Log.d("ttt", "$it 친구 삭제 실패")
+                }
+        }
     }
 }

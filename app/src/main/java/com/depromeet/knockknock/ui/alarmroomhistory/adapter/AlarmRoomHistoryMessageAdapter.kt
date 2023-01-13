@@ -13,7 +13,7 @@ import com.depromeet.domain.model.Notification
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.ItemRecyclerHistoryBundleBinding
 import com.depromeet.knockknock.databinding.ItemRecyclerHistoryMessageBinding
-import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
+import com.depromeet.knockknock.ui.alarmroomhistory.    AlarmRoomHistoryActionHandler
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel
 import com.depromeet.knockknock.ui.bookmark.adapter.ReactionAdapter
 import java.time.LocalDate
@@ -76,16 +76,20 @@ class AlarmRoomHistoryMessageAdapter(
             viewModel: AlarmRoomHistoryViewModel,
             date: String
         ) {
-
-
+            
             binding.apply {
                 model = item
                 executePendingBindings()
+                reactionBtn.setOnClickListener {
+                    Log.d("ttt",item.reactions.my_reaction_info.reaction_id.toString())
+//                    if (item.reactions.my_reaction_info.reaction_id == null) viewModel.onReactionClicked(item.notification_id, 0)
+                     viewModel.onReactionClicked(item.notification_id, item.reactions.my_reaction_info.reaction_id)
 
+                }
                 vm = viewModel
                 viewModel.alarmDateEvent.value = date
-//                reactionRecycler.adapter = reactionAdapter
-//                reactionAdapter.submitList(item.reactions.reaction_count_infos)
+                reactionRecycler.adapter = reactionAdapter
+                reactionAdapter.submitList(item.reactions.reaction_count_infos)
                 expandBtn.setOnClickListener {
                     model!!.isExpanded = !(model!!.isExpanded)
 

@@ -7,8 +7,9 @@ sealed class AlarmRoomHistoryNavigationAction {
     object NavigateToBookmarkFilterPeriod : AlarmRoomHistoryNavigationAction()
     class NavigateToReaction(val notification_id: Int, val reaction_id: Int) :
         AlarmRoomHistoryNavigationAction()
-    class NavigateToAlarmMore(val alarmId: Int, val message: String) :
+    class NavigateToAlarmMore(val sendUserId: Int, val alarmId: Int, val message: String) :
         AlarmRoomHistoryNavigationAction()
+
     class NavigateToAlarmCreate(
         val roomId: Int,
         val roomTitle: String,
@@ -16,9 +17,9 @@ sealed class AlarmRoomHistoryNavigationAction {
         val copyMessage: String,
         val reservation: Int
     ) : AlarmRoomHistoryNavigationAction()
-    class NavigateToSettingRoom(val alarmId: Int) : AlarmRoomHistoryNavigationAction()
-    object NavigateToSettingRoomForUser : AlarmRoomHistoryNavigationAction()
 
+    class NavigateToSettingRoom(val alarmId: Int) : AlarmRoomHistoryNavigationAction()
+    class NavigateToSettingRoomForUser(val alarmId: Int) : AlarmRoomHistoryNavigationAction()
 
 
 }

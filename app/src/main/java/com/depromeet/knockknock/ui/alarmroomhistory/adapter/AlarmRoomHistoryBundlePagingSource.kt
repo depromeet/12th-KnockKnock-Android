@@ -38,16 +38,6 @@ class AlarmRoomHistoryBundlePagingSource(
             sort = sort.value,
             group_id = groupId.value,
         )
-        Log.d("ttt 알림방 히스토리", result.fold(
-            onSuccess = { contents ->
-                LoadResult.Page(
-                    data = contents.notifications.content,
-                    prevKey = null,
-                    nextKey = if (!contents.notifications.last) pageIndex + 1 else null
-                )
-            },
-            onError = { e -> LoadResult.Error(e) }
-        ).toString())
         return result.fold(
             onSuccess = { contents ->
                 LoadResult.Page(
