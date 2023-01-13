@@ -6,6 +6,9 @@
     <string name="default_reaction_title">푸시알림에 공감하셨나요?</string>
     <string name="default_reaction_description">메세지에 대한 리액션을 남겨보세요.</string>
 
+    <string name="user_consent">https://www.notion.so/64b5d7bd749b42d4aa50ba51be2e72f5</string>
+    <string name="user_privacy">https://www.notion.so/423f7dcc31824ff98d40cf91659d78ab</string>
+
     <!--홈화면-->
     <string name="onBackPressed_Message">뒤로가기 버튼을\n한번 더 누르면 종료됩니다.</string>
 
