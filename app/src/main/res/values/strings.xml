@@ -1,3 +1,194 @@
 <resources>
-    <string name="app_name">knockknock</string>
+    <string name="app_name">knocknock</string>
+    <string name="app_version">0.0.1</string>
+
+    <string name="default_image_title">프로필 이미지</string>
+    <string name="default_reaction_title">푸시알림에 공감하셨나요?</string>
+    <string name="default_reaction_description">메세지에 대한 리액션을 남겨보세요.</string>
+
+    <!--홈화면-->
+    <string name="onBackPressed_Message">뒤로가기 버튼을\n한번 더 누르면 종료됩니다.</string>
+
+    <!--네비게이션 메뉴-->
+    <string name="bottom_home">홈</string>
+    <string name="bottom_alarm_room">알림방</string>
+    <string name="bottom_my">MY</string>
+
+    <!--팝업 모달-->
+    <string name="logout_title">로그아웃 하시겠어요?</string>
+    <string name="logout_description">언제든 다시 돌아올 수 있어요!</string>
+    <string name="no">아니요</string>
+
+    <string name="user_delete_title">정말 탈퇴하시겠어요?</string>
+    <string name="user_delete_description">탈퇴시 모든 알림방과\n푸시메세지가 사라져요.</string>
+    <string name="user_delete_yes">회원 탈퇴</string>
+
+    <string name="alarm_permission_title">똑똑! 푸쉬 알림을 켜주세요</string>
+    <string name="alarm_permission_description">문을 열고 알림을 받아보세요</string>
+    <string name="alarm_permission_yes">허용</string>
+    <string name="alarm_permission_no">허용 안함</string>
+
+    <string name="alarm_permission_no_title">기기 알림이 꺼졌어요</string>
+    <string name="alarm_permission_no_description">마이페이지 >알림 설정에서\n다시 푸시알림을 켤 수 있어요</string>
+    <string name="alarm_permission_no_confirm">확인</string>
+
+
+    <!--알림설정-->
+    <string name="alarm_settings_title">알림 설정</string>
+
+    <string name="alarm_settings_new_push">새로운 푸시알림 도착 알림</string>
+    <string name="alarm_settings_new_push_description">소속 그룹 내 신규 푸시알림</string>
+
+    <string name="alarm_settings_reaction_push">푸시알림 리액션 알림</string>
+    <string name="alarm_settings_reaction_push_description">내 푸시알림에 리액션이 남겨졌을 때 알림</string>
+
+    <string name="alarm_settings_not_receive_push_at_night">야간 푸시알림</string>
+    <string name="alarm_settings_not_receive_push_at_night_description">오후 9시부터 다음날 오전 8시까지의 알림</string>
+
+    <!--보관함-->
+    <string name="bookmark_title">보관함</string>
+    <string name="bookmark_edit_btn">편집</string>
+    <string name="all">전체</string>
+    <string name="room">모든방</string>
+    <string name="reaction">리액션</string>
+    <string name="reset">초기화</string>
+    <string name="more_contents">더보기</string>
+    <string name="shorts_contents">간단히보기</string>
+
+    <string name="room_select">알림방 선택</string>
+    <string name="period_select">기간 선택</string>
+
+    <string name="all_period">전체 기간</string>
+    <string name="one_month">1개월</string>
+    <string name="three_month">3개월</string>
+    <string name="six_month">6개월</string>
+    <string name="one_year">1년</string>
+
+    <!--보관함 편집-->
+    <string name="ok">완료</string>
+    <string name="all_click">전체선택</string>
+    <string name="delete_short">삭제</string>
+    <string name="delete_dialog_title">선택항목을 삭제할까요?</string>
+    <string name="delete_dialog_description">내 보관함에서만 삭제돼요</string>
+
+    <!--마이페이지-->
+    <string name="mypage_profile_btn">프로필</string>
+    <string name="mypage_alarm_setting_btn">알림설정</string>
+    <string name="mypage_bookmark_btn">보관함</string>
+    <string name="mypage_friend_list_btn">친구목록</string>
+    <string name="mypage_information_btn">정보</string>
+
+    <!--프로필-->
+    <string name="profile_title">프로필</string>
+    <string name="profile_name_title">닉네임</string>
+    <string name="profile_email_title">이메일</string>
+    <string name="update">수정</string>
+    <string name="save">저장</string>
+    <string name="accept">적용하기</string>
+
+    <string name="logout">로그아웃</string>
+    <string name="user_delete">탈퇴하기</string>
+
+    <string name="gallery">내 사진첩</string>
+    <string name="camera">카메라</string>
+
+    <!--정보-->
+    <string name="information_title">정보</string>
+    <string name="information_user_consent">이용약관</string>
+    <string name="information_user_privacy">개인정보 정책</string>
+    <string name="information_app_makers">만든 사람들</string>
+
+    <!--친구목록-->
+    <string name="friend_list_title">친구 목록</string>
+    <string name="friend_list_search_hint">닉네임 검색하기</string>
+    <string name="friend_list_my_title">내 친구 목록</string>
+    <string name="friend_list_link_description1">똑똑에 친구 초대하기</string>
+    <string name="link">링크</string>
+
+    <string name="delete">삭제하기</string>
+    <string name="black">신고</string>
+    <string name="close">닫기</string>
+
+    <string name="add_friend_popup_title">님께 친구추가를\n요청할까요?</string>
+    <string name="add_friend_popup_positive">요청하기</string>
+
+    <string name="friend_approve_invite">요청하기</string>
+
+    <!--친구검색-->
+    <string name="friend_search_title">친구 검색</string>
+    <string name="invite_friend">친구 초대하기</string>
+
+    <!--온보딩-->
+    <string name="onboard_description_one">"푸시알림으로\n많은 사람에게 내 생각을\n전해보세요"</string>
+    <string name="onboard_description_two">"친구를 초대하고\n같은 관심사를 가진\n그룹을 만들어요"</string>
+    <string name="onboard_description_three">"이모지를 남기고\n푸시알림에\n생각을 표현해보세요"</string>
+    <string name="onboard_start">시작하기</string>
+    <string name="register_message_hint">메시지를 작성해주세요</string>
+    <string name="register_send">보내기</string>
+    <string name="setprofile_nickname_hint">닉네임을 입력해주세요</string>
+    <string name="setprofile_nickname">닉네임</string>
+    <string name="setprofile_profile_pic">프로필 사진</string>
+
+    <!--알림방-->
+    <string name="notification_title">알림</string>
+    <string name="allow">수락하기</string>
+    <string name="declare">거절하기</string>
+    <string name="invite_room_declare_toast">%s님의 알림방 초대를 거절했어요</string>
+    <string name="invite_room_allow_toast">%s에 입장하신걸 환영해요!</string>
+    <string name="invite_room_title">알림방 참여 요청이 도착했어요!</string>
+    <string name="accept_room_title">알림방에 입장했어요!</string>
+    <string name="accept_friend_title">님이 친구를 수락했습니다.</string>
+    <string name="invite_friend_title">친구 추가 요청이 도착했어요!</string>
+    <string name="invite_friend_declare_toast">%s님의 친구추가를 거절했어요</string>
+    <string name="invite_friend_allow_toast">%s님과 친구가 되었어요!</string>
+    <string name="notification_empty_text">아직 받은 알림이 없어요</string>
+    <string name="notification_empty_description">내 친구들에게 먼저 알림을 보내보세요</string>
+    <string name="notification_empty_btn">푸시알림 작성하기</string>
+
+    <!--홈-->
+    <string name="home_create_push_text">푸시알림 작성하기</string>
+    <string name="home_recent_push_title">최신 푸시알림</string>
+    <string name="home_empty_tile">참여중인 알림방이 없어요</string>
+    <string name="home_search_room">알림방 탐색하기</string>
+    <string name="home_create_room">알림방 생성하기</string>
+
+    <string name="home_more_copy">이 알림 복사 붙이기</string>
+    <string name="bookmark_save">보관함 저장</string>
+    <string name="user_declare">유저 차단하기</string>
+    <string name="report">신고하기</string>
+
+    <!--알림방 설정-->
+    <string name="setting_alarm_title">알림방 설정</string>
+    <string name="category">카테고리</string>
+    <string name="detail_information">상세정보 편집</string>
+    <string name="member">멤버</string>
+    <string name="add_friend">친구 추가</string>
+    <string name="remove_room">알림방 없애기</string>
+    <string name="invite_room_link">이 알림방에 초대하기</string>
+    <string name="exit_member">내보내기</string>
+    <string name="edit">편집</string>
+
+    <!--알림방 상세정보 편집-->
+    <string name="edit_details_room_name">방 이름</string>
+    <string name="edit_details_room_name_hint">방 이름을 입력해주세요.</string>
+    <string name="edit_details_room_description">방 설명</string>
+    <string name="edit_details_room_description_hint">어떤 방인지 한 줄로 설명해주세요.</string>
+    <string name="edit_details_public_scope">공개 범위</string>
+    <string name="edit_details_protected">"  비공개 설정"</string>
+    <string name="edit_details_public">공개 설정</string>
+    <string name="edit_details_room_background">배경화면 지정</string>
+    <string name="edit_details_room_thumbnail">썸네일 지정</string>
+    <string name="edit_details_room_add_photo">사진 추가하기</string>
+    <string name="next">다음</string>
+
+    <!--카테고리 설정-->
+    <string name="category_title">카테고리 설정</string>
+    <string name="category_description">어떤 그룹인가요?</string>
+    <string name="okay">완료</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--알림방 생성하기-->
+    <string name="skip"><u>건너뛰기</u></string>
+
 </resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="holder"
+            type="com.depromeet.domain.model.Background"/>
+
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.editroomdetails.EditRoomDetailsActionHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:layout_marginEnd="12dp">
+
+
+        <ImageView
+            android:id="@+id/room_img"
+            android:layout_width="110dp"
+            android:layout_height="189dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:roomBackgroundImage="@{holder.url}">
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/check_circle_img"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:src="@drawable/ic_check_circle_yellow"
+            app:layout_constraintBottom_toBottomOf="@+id/room_img"
+            app:layout_constraintEnd_toEndOf="@+id/room_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/bottom_home"/>
+
+    <item
+        android:id="@+id/alarmRoomTabFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_room_bottom"
+        android:title="@string/bottom_alarm_room"/>
+
+    <item
+        android:id="@+id/myPageFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_my"
+        android:title="@string/bottom_my"/>
+
+</menu>

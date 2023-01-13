@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/splashFragment">
+
+    <action
+        android:id="@+id/action_main_fragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpTo="@id/navigation_graph"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_register_fragment"
+        app:destination="@id/registerFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpTo="@id/navigation_graph"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.depromeet.knockknock.ui.splash.SplashFragment"
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/action_splashFragment_to_onboardFragment"
+            app:destination="@id/onboardFragment"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.depromeet.knockknock.ui.home.HomeFragment"
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_createRoomWithFriendFragment"
+            app:destination="@id/createRoomWithFriendFragment"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_aloneRoomMakeCategoryFragment"
+            app:destination="@id/aloneRoomMakeCategoryFragment"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"  />
+        <action
+            android:id="@+id/action_homeFragment_to_alarmRoomFragment"
+            app:destination="@id/alarmRoomFragment"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.depromeet.knockknock.ui.notification.NotificationFragment"
+        android:label="NotificationFragment" />
+
+    <fragment
+        android:id="@+id/alarmCreateFragment"
+        android:name="com.depromeet.knockknock.ui.alarmcreate.AlarmCreateFragment"
+        android:label="AlarmCreateFragment">
+
+        <argument
+            android:name="alarm_id"
+            app:argType="integer" />
+
+        <argument
+            android:name="room_title"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="title"
+            app:argType="string"
+            />
+        <argument
+            android:name="message"
+            app:argType="string" />
+        <argument
+            android:name="reservation"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_alarmCreateFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.depromeet.knockknock.ui.preview.PreviewFragment"
+        android:label="PreviewFragment">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+        <argument
+            android:name="uri"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/alarmRoomFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroom.AlarmRoomFragment"
+        android:label="AlarmRoomFragment" />
+
+    <fragment
+        android:id="@+id/alarmRoomHistoryFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryFragment"
+        android:label="AlarmRoomHistoryFragment">
+
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_alarmRoomHistoryFragment_to_alarmCreateFragment"
+            app:destination="@id/alarmCreateFragment" />
+        <action
+            android:id="@+id/action_alarmRoomHistoryFragment_to_settingRoomFragment"
+            app:destination="@id/settingRoomFragment" />
+        <action
+            android:id="@+id/action_alarmRoomHistoryFragment_to_settingRoomForUserFragment"
+            app:destination="@id/settingRoomForUserFragment" />
+
+
+        <action
+            android:id="@+id/action_alarmRoomHistoryFragment_to_pushDetailFragment"
+            app:destination="@id/pushDetailFragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.depromeet.knockknock.ui.mypage.MypageFragment"
+        android:label="MypageFragment">
+        <action
+            android:id="@+id/action_myPageFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_myPageFragment_to_alarmSettingFragment"
+            app:destination="@id/alarmSettingFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_myPageFragment_to_bookmarkFragment"
+            app:destination="@id/bookmarkFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_myPageFragment_to_friendListFragment"
+            app:destination="@id/friendListFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_myPageFragment_to_informationFragment"
+            app:destination="@id/informationFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.depromeet.knockknock.ui.editprofile.EditProfileFragment"
+        android:label="EditProfileFragment">
+        <action
+            android:id="@+id/action_editProfileFragment_to_saveProfileFragment"
+            app:destination="@id/saveProfileFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/saveProfileFragment"
+        android:name="com.depromeet.knockknock.ui.editprofile.SaveProfileFragment"
+        android:label="SaveProfileFragment" />
+
+    <fragment
+        android:id="@+id/alarmSettingFragment"
+        android:name="com.depromeet.knockknock.ui.alarmsetting.AlarmSettingFragment"
+        android:label="AlarmSettingFragment" />
+
+    <fragment
+        android:id="@+id/bookmarkFragment"
+        android:name="com.depromeet.knockknock.ui.bookmark.BookmarkFragment"
+        android:label="BookmarkFragment">
+        <action
+            android:id="@+id/action_bookmarkFragment_to_editBookmarkFragment"
+            app:destination="@id/editBookmarkFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editBookmarkFragment"
+        android:name="com.depromeet.knockknock.ui.editbookmark.EditBookmarkFragment"
+        android:label="EditBookmarkFragment">
+        <argument
+            android:name="room_clicked"
+            app:argType="integer[]" />
+        <argument
+            android:name="period_clicked"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/friendListFragment"
+        android:name="com.depromeet.knockknock.ui.friendlist.FriendListFragment"
+        android:label="FriendListFragment">
+        <action
+            android:id="@+id/action_friendListFragment_to_addFriendFragment"
+            app:destination="@id/addFriendFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addFriendFragment"
+        android:name="com.depromeet.knockknock.ui.addfriend.AddFriendFragment"
+        android:label="AddFriendFragment" />
+
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.depromeet.knockknock.ui.information.InformationFragment"
+        android:label="InformationFragment" >
+        <action
+            android:id="@+id/action_informationFragment_to_makersFragment"
+            app:destination="@id/makersFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboardFragment"
+        android:name="com.depromeet.knockknock.ui.onboard.OnboardFragment"
+        android:label="OnboardFragment">
+        <action
+            android:id="@+id/action_onboardFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.depromeet.knockknock.ui.register.RegisterFragment"
+        android:label="RegisterFragment">
+        <action
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_registerFragment_to_setProfileFragment"
+            app:destination="@id/setProfileFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/setProfileFragment"
+        android:name="com.depromeet.knockknock.ui.setprofile.SetProfileFragment"
+        android:label="SetProfileFragment">
+        <action
+            android:id="@+id/action_setProfileFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingRoomFragment"
+        android:name="com.depromeet.knockknock.ui.settingroom.SettingRoomFragment"
+        android:label="SettingRoomFragment">
+
+        <action
+            android:id="@+id/action_settingRoomFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_settingRoomFragment_to_editRoomDetailsFragment"
+            app:destination="@id/editRoomDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_settingRoomFragment_to_inviteFriendToRoomFragment"
+            app:destination="@id/inviteFriendToRoomFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.depromeet.knockknock.ui.category.CategoryFragment"
+        android:label="CategoryFragment">
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+        <argument
+            android:name="group_title"
+            app:argType="string" />
+
+        <argument
+            android:name="group_description"
+            app:argType="string" />
+
+        <argument
+            android:name="group_thumbnail_path"
+            app:argType="string" />
+
+        <argument
+            android:name="group_background_path"
+            app:argType="string" />
+
+        <argument
+            android:name="group_public_access"
+            app:argType="boolean" />
+
+        <argument
+            android:name="group_category_id"
+            app:argType="integer" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/editRoomDetailsFragment"
+        android:name="com.depromeet.knockknock.ui.editroomdetails.EditRoomDetailsFragment"
+        android:label="EditRoomDetailsFragment">
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+        <argument
+            android:name="group_title"
+            app:argType="string" />
+
+        <argument
+            android:name="group_description"
+            app:argType="string" />
+
+        <argument
+            android:name="group_thumbnail_path"
+            app:argType="string" />
+
+        <argument
+            android:name="group_background_path"
+            app:argType="string" />
+
+        <argument
+            android:name="group_public_access"
+            app:argType="boolean" />
+
+        <argument
+            android:name="group_category_id"
+            app:argType="integer" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/alarmRoomSearchFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroomsearch.AlarmRoomSearchFragment"
+        android:label="AlarmRoomSearchFragment" >
+        <action
+            android:id="@+id/action_alarmRoomSearchFragment_to_alarmRoomHistoryFragment"
+            app:destination="@id/alarmRoomHistoryFragment" />
+        <action
+            android:id="@+id/action_alarmRoomSearchFragment_to_aloneRoomMakeCategoryFragment"
+            app:destination="@id/aloneRoomMakeCategoryFragment" />
+        <action
+            android:id="@+id/action_alarmRoomSearchFragment_to_createRoomWithFriendFragment"
+            app:destination="@id/createRoomWithFriendFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inviteFriendToRoomFragment"
+        android:name="com.depromeet.knockknock.ui.invitefriendtoroom.InviteFriendToRoomFragment"
+        android:label="InviteFriendToRoomFragment">
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/createRoomWithFriendFragment"
+        android:name="com.depromeet.knockknock.ui.createroomwithfriend.CreateRoomWithFriendFragment"
+        android:label="CreateRoomWithFriendFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingRoomForUserFragment"
+        android:name="com.depromeet.knockknock.ui.settingroomforuser.SettingRoomForUserFragment"
+        android:label="SettingRoomForUserFragment">
+        <action
+            android:id="@+id/action_settingRoomForUserFragment_to_inviteFriendToRoomFragment"
+            app:destination="@id/inviteFriendToRoomFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/alarmRoomJoinedFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroomjoined.AlarmRoomJoinedFragment"
+        android:label="AlarmRoomJoinedFragment" />
+    <fragment
+        android:id="@+id/alarmRoomExploreFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroomexplore.AlarmRoomExploreFragment"
+        android:label="AlarmRoomExploreFragment">
+        <action
+            android:id="@+id/action_alarmRoomExploreFragment_to_alarmRoomSearchFragment"
+            app:destination="@id/alarmRoomSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alarmRoomTabFragment"
+        android:name="com.depromeet.knockknock.ui.alarmroomtab.AlarmRoomTabFragment"
+        android:label="AlarmRoomTabFragment" >
+        <action
+            android:id="@+id/action_alarmRoomTabFragment_to_aloneRoomMakeCategoryFragment"
+            app:destination="@id/aloneRoomMakeCategoryFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_alarmRoomTabFragment_to_createRoomWithFriendFragment"
+            app:destination="@id/createRoomWithFriendFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomHistoryFragment"
+            app:destination="@id/alarmRoomHistoryFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <action
+        android:id="@+id/action_alarmRoomTabFragment_to_alarmRoomSearchFragment"
+        app:destination="@id/alarmRoomSearchFragment" />
+    <fragment
+        android:id="@+id/makersFragment"
+        android:name="com.depromeet.knockknock.ui.makers.MakersFragment"
+        android:label="MakersFragment" />
+    <fragment
+        android:id="@+id/aloneRoomMakeCategoryFragment"
+        android:name="com.depromeet.knockknock.ui.aloneroommakecategory.AloneRoomMakeCategoryFragment"
+        android:label="AloneRoomMakeCategoryFragment">
+        <action
+            android:id="@+id/action_aloneRoomMakeCategoryFragment_to_aloneRoomDetailsFragment"
+            app:destination="@id/aloneRoomDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/aloneRoomDetailsFragment"
+        android:name="com.depromeet.knockknock.ui.aloneroomdetails.AloneRoomDetailsFragment"
+        android:label="AloneRoomDetailsFragment">
+
+        <argument
+            android:name="category_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_aloneRoomDetailsFragment_to_aloneRoomInviteFriendFragment"
+            app:destination="@id/aloneRoomInviteFriendFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/aloneRoomInviteFriendFragment"
+        android:name="com.depromeet.knockknock.ui.aloneroominvitefriend.AloneRoomInviteFriendFragment"
+        android:label="AloneRoomInviteFriendFragment">
+
+        <argument
+            android:name="group_title"
+            app:argType="string" />
+
+        <argument
+            android:name="group_description"
+            app:argType="string" />
+
+        <argument
+            android:name="group_thumbnail_path"
+            app:argType="string" />
+
+        <argument
+            android:name="group_background_path"
+            app:argType="string" />
+
+        <argument
+            android:name="group_public_access"
+            app:argType="boolean" />
+
+        <argument
+            android:name="group_category_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_aloneRoomInviteFriendFragment_to_alarmRoomHistoryFragment"
+            app:destination="@id/alarmRoomHistoryFragment"
+            app:popUpTo="@id/alarmRoomTabFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pushDetailFragment"
+        android:name="com.depromeet.knockknock.ui.pushdetail.PushDetailFragment"
+        android:label="PushDetailFragment">
+
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+        <argument
+            android:name="username"
+            app:argType="string" />
+
+        <argument
+            android:name="dateTime"
+            app:argType="string" />
+
+        <argument
+            android:name="contents"
+            app:argType="string" />
+
+        <argument
+            android:name="imgContent"
+            app:argType="string" />
+
+    </fragment>
+</navigation>

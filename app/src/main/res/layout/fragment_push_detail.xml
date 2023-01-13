@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.depromeet.knockknock.ui.pushdetail.PushDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_makers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/ToolBarStyle" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_makers"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_detail_profile"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/img_circle_knockknock"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/constraint_detail" />
+
+                <TextView
+                    android:id="@+id/tv_detail_name"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.UserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="주호민"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_detail_profile"
+                    app:layout_constraintStart_toEndOf="@+id/iv_detail_profile"
+                    app:layout_constraintTop_toTopOf="@id/iv_detail_profile" />
+
+                <TextView
+                    android:id="@+id/tv_detail_time"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.DateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="오후 09:10"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_detail_profile"
+                    app:layout_constraintStart_toEndOf="@+id/tv_detail_name"
+                    app:layout_constraintTop_toTopOf="@+id/iv_detail_profile" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_detail_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="12dp"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_detail_profile">
+
+                    <ImageView
+                        android:id="@+id/iv_detail_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/felix" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tv_detail_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="12dp"
+                    android:maxLength="200"
+                    android:text="푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다.푸시알림 최대 글자수는 200자입니다. 푸시알림 최대 글자수는 200자입니다. 푸시알림 최대 글자수는 200자입니다. 푸시알림 최대 글자수는 200자입니다. 푸시알림 최대 글자수는 200자입니다. 푸시알림 최대 글자수는 200자입니다. 푸시알림 최대 글자수는 200자입니다. 푸시알림 최대 글자수는 200자입니다. .."
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cv_detail_image" />
+
+                <View
+                    android:id="@+id/view_detail_space"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/gray03"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_detail_content" />
+
+                <TextView
+                    android:id="@+id/tv_detail_question"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.UserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="푸시알림에 공감하셨나요?"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_detail_space" />
+
+                <ImageView
+                    android:id="@+id/iv_detail_happy"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/img_user_profile_happy"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_disgusting"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_question" />
+
+                <ImageView
+                    android:id="@+id/iv_detail_disgusting"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/img_reaction_disgust"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_sad"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iv_detail_happy"
+                    app:layout_constraintTop_toTopOf="@+id/iv_detail_happy" />
+
+                <ImageView
+                    android:id="@+id/iv_detail_sad"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/img_reaction_sad"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_angry"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iv_detail_disgusting"
+                    app:layout_constraintTop_toTopOf="@+id/iv_detail_happy" />
+
+                <ImageView
+                    android:id="@+id/iv_detail_angry"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/img_reaction_angry"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iv_detail_sad"
+                    app:layout_constraintTop_toTopOf="@+id/iv_detail_happy" />
+
+                <TextView
+                    android:id="@+id/tv_detail_happy"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1"
+                    app:layout_constraintEnd_toEndOf="@id/iv_detail_happy"
+                    app:layout_constraintStart_toStartOf="@id/iv_detail_happy"
+                    app:layout_constraintTop_toBottomOf="@id/iv_detail_happy" />
+
+                <TextView
+                    android:id="@+id/tv_detail_disgusting"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1"
+                    app:layout_constraintEnd_toEndOf="@id/iv_detail_disgusting"
+                    app:layout_constraintStart_toStartOf="@id/iv_detail_disgusting"
+                    app:layout_constraintTop_toBottomOf="@id/iv_detail_disgusting" />
+
+                <TextView
+                    android:id="@+id/tv_detail_sad"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1"
+                    app:layout_constraintEnd_toEndOf="@id/iv_detail_sad"
+                    app:layout_constraintStart_toStartOf="@id/iv_detail_sad"
+                    app:layout_constraintTop_toBottomOf="@id/iv_detail_sad" />
+
+                <TextView
+                    android:id="@+id/tv_detail_angry"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1"
+                    app:layout_constraintEnd_toEndOf="@id/iv_detail_angry"
+                    app:layout_constraintStart_toStartOf="@id/iv_detail_angry"
+                    app:layout_constraintTop_toBottomOf="@id/iv_detail_angry" />
+
+                <ImageView
+                    android:id="@+id/iv_detail_sorry"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/img_reaction_sorry"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_wink"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_happy" />
+
+                <ImageView
+                    android:id="@+id/iv_detail_wink"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/img_reaction_wink"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_greedy"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iv_detail_sorry"
+                    app:layout_constraintTop_toTopOf="@+id/iv_detail_sorry" />
+
+                <ImageView
+                    android:id="@+id/iv_detail_greedy"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/img_reaction_greedy"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_sunglasses"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iv_detail_wink"
+                    app:layout_constraintTop_toTopOf="@+id/iv_detail_sorry" />
+
+                <ImageView
+                    android:id="@+id/iv_detail_sunglasses"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/img_reaction_sunglasses"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iv_detail_greedy"
+                    app:layout_constraintTop_toTopOf="@+id/iv_detail_sorry" />
+
+                <TextView
+                    android:id="@+id/tv_detail_sorry"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1"
+                    app:layout_constraintEnd_toEndOf="@id/iv_detail_sorry"
+                    app:layout_constraintStart_toStartOf="@id/iv_detail_sorry"
+                    app:layout_constraintTop_toBottomOf="@id/iv_detail_sorry" />
+
+                <TextView
+                    android:id="@+id/tv_detail_wink"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1"
+                    app:layout_constraintEnd_toEndOf="@id/iv_detail_wink"
+                    app:layout_constraintStart_toStartOf="@id/iv_detail_wink"
+                    app:layout_constraintTop_toBottomOf="@id/iv_detail_wink" />
+
+                <TextView
+                    android:id="@+id/tv_detail_greedy"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1"
+                    app:layout_constraintEnd_toEndOf="@id/iv_detail_greedy"
+                    app:layout_constraintStart_toStartOf="@id/iv_detail_greedy"
+                    app:layout_constraintTop_toBottomOf="@id/iv_detail_greedy" />
+
+                <TextView
+                    android:id="@+id/tv_detail_sunglasses"
+                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1"
+                    app:layout_constraintEnd_toEndOf="@id/iv_detail_sunglasses"
+                    app:layout_constraintStart_toStartOf="@id/iv_detail_sunglasses"
+                    app:layout_constraintTop_toBottomOf="@id/iv_detail_sunglasses" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_sorry" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.depromeet.knockknock.ui.register.RegisterAlertDialogModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_white_radius20"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:id="@+id/alert_title"
+            style="@style/Theme.AppCompat.Alert.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textVisibleCheck="@{model.title}"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/alert_description"
+            style="@style/Theme.AppCompat.Alert.Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alert_title"
+            app:textVisibleCheck="@{model.description}"
+            android:gravity="center"/>
+
+
+        <ImageView
+            android:id="@+id/alert_image"
+            style="@style/Theme.AppCompat.Alert.Description"
+            android:src="@drawable/onboard_after_write_modal"
+            android:layout_width="122dp"
+            android:layout_height="115dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alert_description"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/alert_image"
+            tools:layout_editor_absoluteX="24dp">
+
+            <TextView
+                android:id="@+id/negative_btn"
+                style="@style/Theme.AppCompat.Yellow.Alert.TextView.Button.Negative"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:text="@{model.negativeContents}"
+                app:layout_constraintTop_toBottomOf="@+id/alert_description"
+                tools:layout_editor_absoluteX="24dp" />
+
+            <TextView
+                android:id="@+id/positive_btn"
+                style="@style/Theme.AppCompat.Yellow.Alert.TextView.Button.Positive"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:text="@{model.positiveContents}"
+                app:layout_constraintTop_toBottomOf="@+id/alert_description"
+                tools:layout_editor_absoluteX="24dp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -13,4 +13,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
     implementation "javax.inject:javax.inject:1"
     implementation "com.squareup.okhttp3:okhttp:3.8.1"
+
+    // GsonConverter & Retrofit2 & Okhttp3 For Network Connection
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation "com.squareup.okhttp3:okhttp:4.9.2"
 }

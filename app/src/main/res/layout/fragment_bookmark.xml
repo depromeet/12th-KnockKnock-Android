@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.depromeet.knockknock.ui.bookmark.BookmarkViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/edit_btn"
+            style="@style/Theme.AppCompat.TextView.Bookmark.Edit.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar"
+            app:layout_constraintEnd_toEndOf="@id/toolbar"
+            android:text="@string/bookmark_edit_btn">
+        </TextView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_marginTop="16dp"
+            android:paddingStart="8dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/reset_btn"
+                style="@style/Theme.AppCompat.Bookmark.Filter.Reset"
+                android:background="@drawable/custom_backgroundwhite_radius80"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/filter_room"
+                app:layout_constraintBottom_toBottomOf="@id/filter_room"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:onClick="@{() -> viewmodel.onFilterResetClicked()}"
+                app:resetVisible="@{viewmodel.filterChecked}">
+                <TextView
+                    android:id="@+id/reset_contents"
+                    style="@style/Theme.AppCompat.TextView.Bookmark.Filter.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/reset">
+                </TextView>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/reset_contents"
+                    android:src="@drawable/ic_reset">
+                </ImageView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/filter_room"
+                style="@style/Theme.AppCompat.Bookmark.Filter.View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/reset_btn"
+                android:layout_marginStart="8dp"
+                android:onClick="@{() -> viewmodel.onFilterRoomClicked()}"
+                app:roomFilterBackground="@{viewmodel.roomClicked.size()}">
+
+                <TextView
+                    android:id="@+id/filter_room_contents"
+                    style="@style/Theme.AppCompat.TextView.Bookmark.Filter.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:roomCountChecked="@{viewmodel.roomClicked.size()}">
+                </TextView>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/filter_room_contents"
+                    app:layout_constraintBottom_toBottomOf="@id/filter_room_contents"
+                    app:layout_constraintStart_toEndOf="@id/filter_room_contents"
+                    android:src="@drawable/ic_filter_btn"
+                    android:layout_marginStart="10dp">
+                </ImageView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/filter_period"
+                style="@style/Theme.AppCompat.Bookmark.Filter.View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/filter_room"
+                app:layout_constraintBottom_toBottomOf="@id/filter_room"
+                app:layout_constraintStart_toEndOf="@id/filter_room"
+                android:layout_marginStart="8dp"
+                android:onClick="@{() -> viewmodel.onFilterPeriodClicked()}"
+                app:periodFilterBackground="@{viewmodel.periodClicked}">
+
+                <TextView
+                    android:id="@+id/filter_period_contents"
+                    style="@style/Theme.AppCompat.TextView.Bookmark.Filter.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:periodCountChecked="@{viewmodel.periodClicked}">
+                </TextView>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/filter_period_contents"
+                    app:layout_constraintBottom_toBottomOf="@id/filter_period_contents"
+                    app:layout_constraintStart_toEndOf="@id/filter_period_contents"
+                    android:src="@drawable/ic_filter_btn"
+                    android:layout_marginStart="10dp">
+                </ImageView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bookmark_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_filter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="4dp"
+            android:overScrollMode="never"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/holder_bookmark">
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

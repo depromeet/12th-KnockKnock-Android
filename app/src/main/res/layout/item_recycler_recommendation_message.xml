@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.depromeet.domain.model.RecommendMessage" />
+
+        <variable
+            name="eventListener"
+            type="com.depromeet.knockknock.ui.alarmcreate.AlarmCreateActionHandler" />
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/recommendation_message_card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="1dp"
+        android:backgroundTint="@color/gray02"
+        android:elevation="0dp"
+        android:onClick="@{() -> eventListener.onRecommendationMessageClicked(model.content)}"
+        app:cardCornerRadius="6dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="center"
+            android:text="@{model.content}"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
