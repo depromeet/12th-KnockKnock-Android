@@ -138,10 +138,12 @@
             app:destination="@id/alarmCreateFragment" />
         <action
             android:id="@+id/action_alarmRoomHistoryFragment_to_settingRoomFragment"
-            app:destination="@id/settingRoomFragment" />
+            app:destination="@id/settingRoomFragment"
+            app:popUpTo="@id/alarmRoomTabFragment"/>
         <action
             android:id="@+id/action_alarmRoomHistoryFragment_to_settingRoomForUserFragment"
-            app:destination="@id/settingRoomForUserFragment" />
+            app:destination="@id/settingRoomForUserFragment"
+            app:popUpTo="@id/alarmRoomTabFragment"/>
 
 
         <action
@@ -392,6 +394,7 @@
         <argument
             android:name="group_category_id"
             app:argType="integer" />
+
 
     </fragment>
     <fragment

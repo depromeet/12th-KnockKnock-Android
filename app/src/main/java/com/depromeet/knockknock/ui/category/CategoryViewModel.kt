@@ -23,8 +23,8 @@ class CategoryViewModel @Inject constructor(
     private val _clickCategory: MutableStateFlow<Int> = MutableStateFlow<Int>(1)
     val clickCategory: StateFlow<Int> = _clickCategory.asStateFlow()
 
-    private val _onSaveSuccess: MutableSharedFlow<Unit> = MutableSharedFlow<Unit>()
-    val onSaveSuccess: SharedFlow<Unit> = _onSaveSuccess.asSharedFlow()
+    private val _onSaveSuccess: MutableSharedFlow<Boolean> = MutableSharedFlow<Boolean>()
+    val onSaveSuccess: SharedFlow<Boolean> = _onSaveSuccess.asSharedFlow()
 
     var group_id = MutableStateFlow<Int>(1)
     var group_title = MutableStateFlow<String>("방 이름")
@@ -64,7 +64,7 @@ class CategoryViewModel @Inject constructor(
                 background_image_path = group_background_path.value,
                 category_id = group_category_id.value
             ,)
-            _onSaveSuccess.emit(Unit)
+            _onSaveSuccess.emit(true)
         }
     }
 

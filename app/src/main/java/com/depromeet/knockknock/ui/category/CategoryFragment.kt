@@ -9,6 +9,7 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentCategoryBinding
 import com.depromeet.knockknock.ui.category.adapter.CategoryAdapter
+import com.depromeet.knockknock.ui.category.adapter.beforeClicked
 import com.depromeet.knockknock.ui.invitefriendtoroom.InviteFriendToRoomFragmentArgs
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
@@ -53,6 +54,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
     override fun initDataBinding() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.onSaveSuccess.collectLatest {
+                toastMessage("변경사항이 저장되었어요!")
+                beforeClicked = 0
                 navController.popBackStack()
             }
         }
