@@ -21,22 +21,22 @@ fun ImageView.bindHomeImage(number: Int) {
     when(number) {
         1 -> {
             Glide.with(context)
-                .load(R.mipmap.img_home_1_foreground)
+                .load(R.drawable.home_1)
                 .transform(CenterCrop())
                 .into(this) }
         2 -> {
             Glide.with(context)
-                .load(R.mipmap.img_home_2_foreground)
+                .load(R.drawable.home_2)
                 .transform(CenterCrop())
                 .into(this)}
         3 -> {
             Glide.with(context)
-                .load(R.mipmap.img_home_3_foreground)
+                .load(R.drawable.home_3)
                 .transform(CenterCrop())
                 .into(this)}
         4 -> {
             Glide.with(context)
-                .load(R.mipmap.img_home_4_foreground)
+                .load(R.drawable.home_4)
                 .transform(CenterCrop())
                 .into(this)}
     }
