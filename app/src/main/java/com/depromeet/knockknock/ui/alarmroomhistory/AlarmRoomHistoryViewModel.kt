@@ -177,6 +177,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 reaction_id = reaction_id
             )
                 .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
+                .onError {
+                    Log.d("ttt", "$it 리액션 등록 실패")
+                }
             dismissLoading()
         }
     }
@@ -188,6 +191,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 notification_reaction_id = notification_reaction_id
             )
                 .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
+                .onError {
+                    Log.d("ttt", "$it 리액션 삭제 실패")
+                }
             dismissLoading()
         }
     }
@@ -201,6 +207,9 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 reaction_id = reaction_id
             )
                 .onSuccess { _navigationEvent.emit(AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset) }
+                .onError {
+                    Log.d("ttt", "$it 리액션 변경 실패")
+                }
             dismissLoading()
         }
     }
@@ -217,12 +226,14 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
     }
 
-    override fun onReactionClicked(notification_id: Int, reaction_id: Int) {
+    override fun onReactionClicked(notification_id: Int, reaction_id: Int, notification_reaction_id: Int) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToReaction(
                     notification_id = notification_id,
-                    reaction_id = reaction_id
+                    reaction_id = reaction_id,
+                    notification_reaction_id = notification_reaction_id
+
                 )
             )
         }

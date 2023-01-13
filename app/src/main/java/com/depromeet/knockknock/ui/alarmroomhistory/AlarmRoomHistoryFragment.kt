@@ -123,12 +123,18 @@ class AlarmRoomHistoryFragment :
                     )
                     is AlarmRoomHistoryNavigationAction.NavigateToReaction -> reactionBottomSheet(
                         notification_id = it.notification_id,
-                        reaction_id = it.reaction_id
+                        reaction_id = it.reaction_id,
+                        notification_reaction_id = it.notification_reaction_id
                     )
-                    is AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset -> {}
+                    is AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset -> {
+                        viewModel.getPushAlarm()
+                        initAdapter()
+                    }
                     is AlarmRoomHistoryNavigationAction.NavigateToSettingRoomForUser -> {
                         navigate(
-                            AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToSettingRoomForUserFragment(it.alarmId)
+                            AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToSettingRoomForUserFragment(
+                                it.alarmId
+                            )
                         )
                     }
                     is AlarmRoomHistoryNavigationAction.NavigateToSettingRoom -> {
@@ -143,24 +149,33 @@ class AlarmRoomHistoryFragment :
         }
     }
 
-    private fun reactionBottomSheet(notification_id: Int, reaction_id: Int) {
+    private fun reactionBottomSheet(
+        notification_id: Int,
+        reaction_id: Int,
+        notification_reaction_id: Int
+    ) {
         val bottomSheet = DefaultReactionDialog(reaction_id) {
             when (reaction_id) {
                 0 -> {
                     viewModel.postReaction(reaction_id = it, notification_id = notification_id)
                 }
                 it -> {
-                    viewModel.deleteReaction(notification_reaction_id = it)
+                    viewModel.deleteReaction(notification_reaction_id = notification_reaction_id)
                 }
                 else -> {
-                    viewModel.patchReaction(notification_reaction_id = it, reaction_id = reaction_id, notification_id = notification_id)
+                    viewModel.patchReaction(
+                        notification_reaction_id = notification_reaction_id,
+                        reaction_id = it,
+                        notification_id = notification_id
+                    )
                 }
             }
+
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 
-    private fun initAlarmMoreBottomSheet(sendUserId:Int, alarmId: Int, message: String) {
+    private fun initAlarmMoreBottomSheet(sendUserId: Int, alarmId: Int, message: String) {
         val dialog: BottomAlarmMore = BottomAlarmMore {
             when (it) {
                 is AlarmMoreType.Copy -> roomFilter(message)
@@ -222,7 +237,7 @@ class AlarmRoomHistoryFragment :
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 
-    private fun reportDialog(alarmId : Int) {
+    private fun reportDialog(alarmId: Int) {
         val bottomSheet = BottomAlarmReport(
         ) { reportReason ->
             toastMessage("알림을 신고했습니다.")
@@ -247,6 +262,7 @@ class AlarmRoomHistoryFragment :
     private fun initAdapter() {
         lifecycleScope.launchWhenStarted {
             viewModel.pushAlarmList.collectLatest {
+                Log.d("ttt 알람 히스토리 데이터 변경", "알람 히스토리 데이터 변경")
                 alarmRoomHistoryMessageAdapter.submitData(it)
             }
         }
@@ -269,6 +285,8 @@ class AlarmRoomHistoryFragment :
 
     override fun onResume() {
         viewModel.getPushAlarm()
+        binding.rvList.adapter = alarmRoomHistoryMessageAdapter
+
         super.onResume()
     }
 }

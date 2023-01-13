@@ -61,8 +61,6 @@ class DefaultReactionDialog(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        Log.d("Ttt", isCheckedImage.toString())
-
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             launch {
                 viewModel.imageList.collectLatest {
@@ -73,7 +71,7 @@ class DefaultReactionDialog(
             launch {
                 viewModel.clickImageUrl.collectLatest {
                     it?.let {
-                        callback.invoke(checkedId)
+//                        callback.invoke(checkedId)
                         callback.invoke(it!!)
                         dismiss()
                     }

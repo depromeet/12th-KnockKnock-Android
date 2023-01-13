@@ -13,7 +13,7 @@ import com.depromeet.domain.model.Notification
 import com.depromeet.knockknock.R
 import com.depromeet.knockknock.databinding.ItemRecyclerHistoryBundleBinding
 import com.depromeet.knockknock.databinding.ItemRecyclerHistoryMessageBinding
-import com.depromeet.knockknock.ui.alarmroomhistory.    AlarmRoomHistoryActionHandler
+import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel
 import com.depromeet.knockknock.ui.bookmark.adapter.ReactionAdapter
 import java.time.LocalDate
@@ -76,15 +76,21 @@ class AlarmRoomHistoryMessageAdapter(
             viewModel: AlarmRoomHistoryViewModel,
             date: String
         ) {
-            
+
             binding.apply {
                 model = item
                 executePendingBindings()
                 reactionBtn.setOnClickListener {
-                    Log.d("ttt",item.reactions.my_reaction_info.reaction_id.toString())
-//                    if (item.reactions.my_reaction_info.reaction_id == null) viewModel.onReactionClicked(item.notification_id, 0)
-                     viewModel.onReactionClicked(item.notification_id, item.reactions.my_reaction_info.reaction_id)
-
+                    if (item.reactions.my_reaction_info == null) viewModel.onReactionClicked(
+                        notification_id = item.notification_id,
+                        reaction_id = 0,
+                        notification_reaction_id = 0
+                    )
+                    else viewModel.onReactionClicked(
+                        notification_id =  item.notification_id,
+                        reaction_id= item.reactions.my_reaction_info!!.reaction_id,
+                        notification_reaction_id= item.reactions.my_reaction_info!!.notification_reaction_id
+                    )
                 }
                 vm = viewModel
                 viewModel.alarmDateEvent.value = date

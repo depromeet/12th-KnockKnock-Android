@@ -5,7 +5,7 @@ sealed class AlarmRoomHistoryNavigationAction {
     object NavigateToBookmarkFilterReset : AlarmRoomHistoryNavigationAction()
     object NavigateToBookmarkFilterRoom : AlarmRoomHistoryNavigationAction()
     object NavigateToBookmarkFilterPeriod : AlarmRoomHistoryNavigationAction()
-    class NavigateToReaction(val notification_id: Int, val reaction_id: Int) :
+    class NavigateToReaction(val notification_id: Int, val reaction_id: Int, val notification_reaction_id: Int) :
         AlarmRoomHistoryNavigationAction()
     class NavigateToAlarmMore(val sendUserId: Int, val alarmId: Int, val message: String) :
         AlarmRoomHistoryNavigationAction()
