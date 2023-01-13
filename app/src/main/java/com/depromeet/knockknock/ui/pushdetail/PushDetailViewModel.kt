@@ -26,6 +26,13 @@ class PushDetailViewModel @Inject constructor(
 
     val userProfile: MutableStateFlow<UserProfile?> = MutableStateFlow(null)
 
+    var groupId = MutableStateFlow<Int>(0)
+    var title = MutableStateFlow<String>("")
+    var username = MutableStateFlow<String>("")
+    var dateTime = MutableStateFlow<String>("")
+    var contents = MutableStateFlow<String>("")
+    var img_url = MutableStateFlow<String>("")
+
     init {
         baseViewModelScope.launch {
             showLoading()

@@ -83,6 +83,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/iv_detail_profile">
 
                     <ImageView
+                        android:id="@+id/iv_detail_content"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
