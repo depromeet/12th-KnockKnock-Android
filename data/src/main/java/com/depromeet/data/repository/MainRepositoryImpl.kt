@@ -184,7 +184,7 @@ class MainRepositoryImpl @Inject constructor(
         notification_id: Int,
         reaction_id: Int
     ): NetworkResult<Unit> {
-        val body = PostReactionRequest(notification_id = notification_id, reaction_id = notification_reaction_id)
+        val body = PostReactionRequest(notification_id = notification_id, reaction_id = reaction_id)
         return handleApi { mainAPIService.patchReaction(
             notification_reaction_id = notification_reaction_id,
             body = body)

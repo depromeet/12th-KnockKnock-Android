@@ -123,7 +123,8 @@ class AlarmRoomHistoryFragment :
                     )
                     is AlarmRoomHistoryNavigationAction.NavigateToReaction -> reactionBottomSheet(
                         notification_id = it.notification_id,
-                        reaction_id = it.reaction_id
+                        reaction_id = it.reaction_id,
+                        notification_reaction_id = it.notification_reaction_id
                     )
                     is AlarmRoomHistoryNavigationAction.NavigateToBookmarkFilterReset -> {}
                     is AlarmRoomHistoryNavigationAction.NavigateToSettingRoomForUser -> {
@@ -143,7 +144,11 @@ class AlarmRoomHistoryFragment :
         }
     }
 
-    private fun reactionBottomSheet(notification_id: Int, reaction_id: Int) {
+    private fun reactionBottomSheet(
+        notification_id: Int,
+        reaction_id: Int,
+        notification_reaction_id: Int
+    ) {
         val bottomSheet = DefaultReactionDialog(reaction_id) {
             Log.d("Ttt reaction_id", reaction_id.toString())
             Log.d("Ttt notification_id", notification_id.toString())
@@ -154,12 +159,17 @@ class AlarmRoomHistoryFragment :
                     viewModel.postReaction(reaction_id = it, notification_id = notification_id)
                 }
                 it -> {
-                    viewModel.deleteReaction(notification_reaction_id = it)
+                    viewModel.deleteReaction(notification_reaction_id = notification_reaction_id)
                 }
                 else -> {
-                    viewModel.patchReaction(notification_reaction_id = it, reaction_id = reaction_id, notification_id = notification_id)
+                    viewModel.patchReaction(
+                        notification_reaction_id = notification_reaction_id,
+                        reaction_id = it,
+                        notification_id = notification_id
+                    )
                 }
             }
+
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

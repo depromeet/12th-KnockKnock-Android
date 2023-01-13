@@ -226,12 +226,14 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
     }
 
-    override fun onReactionClicked(notification_id: Int, reaction_id: Int) {
+    override fun onReactionClicked(notification_id: Int, reaction_id: Int, notification_reaction_id: Int) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToReaction(
                     notification_id = notification_id,
-                    reaction_id = reaction_id
+                    reaction_id = reaction_id,
+                    notification_reaction_id = notification_reaction_id
+
                 )
             )
         }

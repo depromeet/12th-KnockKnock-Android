@@ -82,12 +82,14 @@ class AlarmRoomHistoryMessageAdapter(
                 executePendingBindings()
                 reactionBtn.setOnClickListener {
                     if (item.reactions.my_reaction_info == null) viewModel.onReactionClicked(
-                        item.notification_id,
-                        0
+                        notification_id = item.notification_id,
+                        reaction_id = 0,
+                        notification_reaction_id = 0
                     )
                     else viewModel.onReactionClicked(
-                        item.notification_id,
-                        item.reactions.my_reaction_info!!.reaction_id
+                        notification_id =  item.notification_id,
+                        reaction_id= item.reactions.my_reaction_info!!.reaction_id,
+                        notification_reaction_id= item.reactions.my_reaction_info!!.notification_reaction_id
                     )
                 }
                 vm = viewModel
