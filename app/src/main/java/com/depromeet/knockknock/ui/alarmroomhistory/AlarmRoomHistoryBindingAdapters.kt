@@ -5,6 +5,9 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.depromeet.domain.model.Admission
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmInviteRoomAdapter
 
@@ -44,8 +47,10 @@ fun ImageView.bindViewMessageVisible(isMessage : Boolean, isPublicAccess : Boole
     }
 }
 
-@BindingAdapter("bindViewVisible")
-fun ConstraintLayout.bindViewVisible(isPublicAccess : Boolean) {
-    if (isPublicAccess) this.visibility = View.GONE
-    else this.visibility = View.VISIBLE
+@BindingAdapter("isPublicAccess", "participation")
+fun ConstraintLayout.bindViewVisible(isPublicAccess : Boolean, participation : Boolean) {
+    if (!participation){
+        if (isPublicAccess) this.visibility = View.GONE
+        else this.visibility = View.VISIBLE
+    }
 }

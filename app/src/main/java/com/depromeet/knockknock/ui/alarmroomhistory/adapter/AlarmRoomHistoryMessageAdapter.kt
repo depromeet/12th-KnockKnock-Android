@@ -90,15 +90,25 @@ class AlarmRoomHistoryMessageAdapter(
             date: String
         ) {
 
-
             binding.apply {
                 model = item
                 executePendingBindings()
-
+                reactionBtn.setOnClickListener {
+                    if (item.reactions.my_reaction_info == null) viewModel.onReactionClicked(
+                        notification_id = item.notification_id,
+                        reaction_id = 0,
+                        notification_reaction_id = 0
+                    )
+                    else viewModel.onReactionClicked(
+                        notification_id =  item.notification_id,
+                        reaction_id= item.reactions.my_reaction_info!!.reaction_id,
+                        notification_reaction_id= item.reactions.my_reaction_info!!.notification_reaction_id
+                    )
+                }
                 vm = viewModel
                 viewModel.alarmDateEvent.value = date
-//                reactionRecycler.adapter = reactionAdapter
-//                reactionAdapter.submitList(item.reactions.reaction_count_infos)
+                reactionRecycler.adapter = reactionAdapter
+                reactionAdapter.submitList(item.reactions.reaction_count_infos)
                 expandBtn.setOnClickListener {
                     model!!.isExpanded = !(model!!.isExpanded)
 

@@ -109,7 +109,10 @@ class AlarmCreateViewModel @Inject constructor(
                     image_url = messageImgUri.value
                 ).onSuccess {
                     _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
-                }.onError {}
+                }.onError {
+
+                    Log.d("ttt 알림 보내기 실패", it.toString())
+                }
             }
         }
     }

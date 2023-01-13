@@ -80,7 +80,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/user_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_more_black"
-                android:onClick="@{() -> eventListener.onRecentAlarmMoreClicked(model.notification_id, model.content)}">
+                android:onClick="@{() -> eventListener.onRecentAlarmMoreClicked(model.send_user_id , model.notification_id, model.content)}">
 
             </ImageView>
 
@@ -131,8 +131,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="6dp"
             android:orientation="horizontal"
             android:overScrollMode="never"
+            android:background="@drawable/custom_gray08_radius100"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/reaction_btn"
@@ -153,8 +155,7 @@
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
             android:paddingTop="6dp"
-            android:paddingBottom="6dp"
-            android:onClick="@{() -> eventListener.onReactionClicked(model.notification_id, model.reactions.my_reaction_info.reaction_id)}">
+            android:paddingBottom="6dp">
             <TextView
                 style="@style/Theme.AppCompat.TextView.Item.Reaction"
                 android:layout_width="wrap_content"
