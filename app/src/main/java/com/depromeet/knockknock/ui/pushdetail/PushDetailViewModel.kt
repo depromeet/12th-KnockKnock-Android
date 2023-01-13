@@ -28,7 +28,9 @@ class PushDetailViewModel @Inject constructor(
 
     var groupId = MutableStateFlow<Int>(0)
     var title = MutableStateFlow<String>("")
-    var content = MutableStateFlow<String>("")
+    var username = MutableStateFlow<String>("")
+    var dateTime = MutableStateFlow<String>("")
+    var contents = MutableStateFlow<String>("")
     var img_url = MutableStateFlow<String>("")
 
     init {
@@ -37,10 +39,6 @@ class PushDetailViewModel @Inject constructor(
             mainRepository.getUserProfile()
                 .onSuccess { profile ->
                     userProfile.emit(profile)
-                }
-            val notifications = mainRepository.getNotifications()
-                .onSuccess {
-
                 }
             dismissLoading()
         }

@@ -27,11 +27,18 @@ class PushDetailFragment :
 
     override fun initStartView() {
         viewModel.groupId.value = args.groupId
-        Log.d(TAG, "initStartView: ${viewModel.groupId.value}")
+        viewModel.username.value = args.username
+        viewModel.dateTime.value = args.dateTime
+        viewModel.contents.value = args.contents
+        Log.d(TAG, "initStartView: ${viewModel.groupId.value} ${viewModel.username.value}")
 
         binding.apply {
             this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
+
+            tvDetailName.text = viewModel.username.value
+            tvDetailTime.text = viewModel.dateTime.value
+            tvDetailContent.text = viewModel.contents.value
         }
         exception = viewModel.errorEvent
         initToolbar()

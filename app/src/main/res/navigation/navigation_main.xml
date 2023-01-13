@@ -533,5 +533,17 @@
             android:name="group_id"
             app:argType="integer" />
 
+        <argument
+            android:name="username"
+            app:argType="string" />
+
+        <argument
+            android:name="dateTime"
+            app:argType="string" />
+
+        <argument
+            android:name="contents"
+            app:argType="string" />
+
     </fragment>
 </navigation>

@@ -117,7 +117,11 @@ class AlarmRoomHistoryMessageAdapter(
                 // 상세 페이지로 이동
                 layoutMain.setOnClickListener {
                     val fragment = it.findFragment<AlarmRoomHistoryFragment>()
-                    val action = AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToPushDetailFragment(fragment.viewModel.groupId.value)
+                    val username = userNameText.text.toString()
+                    val dateTime = dateTimeText.text.toString()
+                    val contents = contents.text.toString()
+                    val action = AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToPushDetailFragment(fragment.viewModel.groupId.value,
+                    username, dateTime, contents)
                     // findNavController(fragment).navigate(R.id.action_alarmRoomHistoryFragment_to_pushDetailFragment)
                     findNavController(fragment).navigate(action)
                 }
