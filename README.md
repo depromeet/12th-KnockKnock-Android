@@ -7,10 +7,11 @@
 
 ## 🤔 Knocknock?
 ![readme 0](https://user-images.githubusercontent.com/69616347/212331503-4792fc36-7c13-4e13-a33c-3344a6da9841.png)
-![readme 01](https://user-images.githubusercontent.com/69616347/212331602-64d6fb4d-a37d-4e77-a567-b4d5acb18a07.png)
+![readme 1](https://user-images.githubusercontent.com/69616347/212340895-e3497c77-1507-4e9f-ade7-7dfd163c3c42.png)
 ![readme 2](https://user-images.githubusercontent.com/69616347/212331688-b6bb9863-6f6b-41a9-8b1b-bd43f1f257ab.png)
 ![readme 3](https://user-images.githubusercontent.com/69616347/212331741-3050adbe-69d2-4cc6-9c9d-5a0ade6cfb00.png)
-![readme 4](https://user-images.githubusercontent.com/69616347/212331714-7bf2b4d2-1bb5-4064-88f8-40c21b592cd7.png)
+![readme 4](https://user-images.githubusercontent.com/69616347/212340561-487980b4-5f39-47af-b4f3-92fc0227ff85.png)
+
 
 ## 📸 UI
 <p align="center">
