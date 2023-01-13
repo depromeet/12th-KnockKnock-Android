@@ -18,7 +18,7 @@ sealed class AlarmRoomHistoryNavigationAction {
     ) : AlarmRoomHistoryNavigationAction()
     class NavigateToSettingRoom(val alarmId: Int) : AlarmRoomHistoryNavigationAction()
     object NavigateToSettingRoomForUser : AlarmRoomHistoryNavigationAction()
-
+    class NavigateToPushDetail(val alarmId: Int) : AlarmRoomHistoryNavigationAction()
 
 
 }

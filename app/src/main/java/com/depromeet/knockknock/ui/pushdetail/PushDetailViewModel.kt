@@ -26,8 +26,6 @@ class PushDetailViewModel @Inject constructor(
 
     val userProfile: MutableStateFlow<UserProfile?> = MutableStateFlow(null)
 
-    var groupId = MutableStateFlow<Int>(0)
-
     init {
         baseViewModelScope.launch {
             showLoading()

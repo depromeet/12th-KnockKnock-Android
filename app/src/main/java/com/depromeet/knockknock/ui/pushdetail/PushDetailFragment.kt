@@ -19,13 +19,12 @@ class PushDetailFragment :
     private val args: PushDetailFragmentArgs by navArgs()
 
     override val layoutResourceId: Int
-        get() = R.layout.fragment_makers
+        get() = R.layout.fragment_push_detail
     private val navController by lazy { findNavController() }
 
     override val viewModel: PushDetailViewModel by viewModels()
 
     override fun initStartView() {
-        viewModel.groupId.value = args.groupId
         binding.apply {
             this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner

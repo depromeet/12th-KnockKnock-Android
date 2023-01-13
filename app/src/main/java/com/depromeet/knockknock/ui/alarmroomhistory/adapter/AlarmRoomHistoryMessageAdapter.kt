@@ -1,25 +1,31 @@
 package com.depromeet.knockknock.ui.alarmroomhistory.adapter
 
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.findFragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.depromeet.domain.model.Notification
 import com.depromeet.knockknock.R
-import com.depromeet.knockknock.databinding.ItemRecyclerHistoryBundleBinding
 import com.depromeet.knockknock.databinding.ItemRecyclerHistoryMessageBinding
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryActionHandler
+import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryFragment
 import com.depromeet.knockknock.ui.alarmroomhistory.AlarmRoomHistoryViewModel
 import com.depromeet.knockknock.ui.bookmark.adapter.ReactionAdapter
+import com.depromeet.knockknock.ui.pushdetail.PushDetailFragment
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+
 
 class AlarmRoomHistoryMessageAdapter(
     private val eventListener: AlarmRoomHistoryActionHandler,
@@ -100,6 +106,11 @@ class AlarmRoomHistoryMessageAdapter(
                         }
                         contents.maxLines = 2
                     }
+                }
+
+                layoutMain.setOnClickListener {
+                    val fragment = it.findFragment<AlarmRoomHistoryFragment>()
+                    findNavController(fragment).navigate(R.id.action_alarmRoomHistoryFragment_to_pushDetailFragment)
                 }
             }
         }
