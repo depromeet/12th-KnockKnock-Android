@@ -270,7 +270,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate(
-                    roomId,
+                    groupId.value,
                     alarmRoomTitleEvent.value,
                     title,
                     copyMessage,
