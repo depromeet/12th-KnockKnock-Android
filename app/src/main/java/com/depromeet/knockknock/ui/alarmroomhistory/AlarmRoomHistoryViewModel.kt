@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.alarmroomhistory
 
 import android.util.Log
+import android.widget.Toast
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.Admission
@@ -52,6 +53,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var userId = MutableStateFlow<Int>(0)
     var participation = MutableStateFlow<Boolean>(false)
     var roomImgUri = MutableStateFlow<String>("")
+    var isAdmissionBtnVisible = MutableStateFlow<Boolean>(false)
 
 
     init {
@@ -128,7 +130,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         baseViewModelScope.launch {
             mainRepository.postGroupAdmissions(groupId.value).onSuccess {
                 Log.d("ttt", "입장하기 성공")
-
+                isAdmissionBtnVisible.emit(false)
             }.onError {
                 Log.d("ttt", "입장하기 실패")
             }
