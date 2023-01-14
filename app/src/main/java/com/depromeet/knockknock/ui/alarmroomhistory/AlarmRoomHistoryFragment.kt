@@ -275,7 +275,14 @@ class AlarmRoomHistoryFragment :
         }
     }
 
-    override fun initDataBinding() {}
+    override fun initDataBinding() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.isAdmissionBtnVisible.collectLatest {
+                if(it) binding.gradientDetail.visibility = View.VISIBLE
+                else binding.gradientDetail.visibility = View.GONE
+            }
+        }
+    }
 
     override fun initAfterBinding() {
         binding.rvInviteList.adapter = alarmInviteRoomAdapter
@@ -286,7 +293,7 @@ class AlarmRoomHistoryFragment :
     override fun onResume() {
         viewModel.getPushAlarm()
         binding.rvList.adapter = alarmRoomHistoryMessageAdapter
-
+        viewModel.isAdmissionBtnVisible.value = false
         super.onResume()
     }
 }
