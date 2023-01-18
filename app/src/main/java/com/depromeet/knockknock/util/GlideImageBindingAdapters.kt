@@ -1,5 +1,7 @@
 package com.depromeet.knockknock.util
 
+import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -24,6 +26,27 @@ fun ImageView.bindBookmarkContentsImage(contentsImageUri: String?) {
             .transform(CenterCrop(), RoundedCorners(50))
             .into(this)
     }
+}
+
+@BindingAdapter("reservationContentsImage")
+fun ImageView.bindReservationContentsImage(contentsImageUri: String?) {
+    if (contentsImageUri!!.isNotEmpty()){
+        contentsImageUri.let {
+            Glide.with(context)
+                .load(it)
+                .transform(CenterCrop(), RoundedCorners(50))
+                .into(this)
+        }
+    }else{
+        Log.d("ttt", "hi")
+
+        this.visibility = View.GONE
+
+    }
+    Log.d("ttt reservation image", contentsImageUri.toString())
+    Log.d("ttt reservation image", contentsImageUri!!.length.toString())
+
+
 }
 
 @BindingAdapter("roomImageImage")

@@ -72,6 +72,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                         participation.value = true
                     }
                 }
+                Log.d("ttt", "그룹 확인 성공")
 
 
             }.onError {

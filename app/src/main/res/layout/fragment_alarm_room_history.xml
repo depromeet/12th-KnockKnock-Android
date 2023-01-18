@@ -196,7 +196,7 @@
                 android:id="@+id/iv_item_reservation_up"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_up"
+                android:src="@drawable/ic_arrow_down"
                 app:layout_constraintBottom_toBottomOf="@id/iv_item_reservation_timer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/iv_item_reservation_timer" />
@@ -215,114 +215,129 @@
                 app:layout_constraintStart_toStartOf="@id/iv_item_reservation_timer"
                 app:layout_constraintTop_toBottomOf="@id/tv_item_reservation_title" />
 
-            <ImageView
-                android:id="@+id/contents_img"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/reservation_contents"
                 android:layout_width="match_parent"
-                android:layout_height="296dp"
-                android:layout_marginTop="8dp"
-                app:bookmarkContentsImage="@{vm.reservationMessageImgUri}"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_reservation_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_item_reservation_content" />
+                android:visibility="gone"
+                >
 
-            <LinearLayout
-                android:id="@+id/reservation_btn_layout"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal"
-                android:visibility="visible"
-                app:layout_constraintTop_toBottomOf="@+id/contents_img"
-                tools:layout_editor_absoluteX="16dp">
-
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/reservation_delete_btn"
-                    style="@style/Theme.AppCompat.TextView.Notification.Button.Negative"
-                    onSingleClick="@{() -> vm.onDeleteReservationAlarmClicked(vm.reservationId)}"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/white"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <ImageView
+                    android:id="@+id/contents_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="296dp"
+                    android:visibility="visible"
+                    android:layout_marginTop="8dp"
+                    app:reservationContentsImage="@{vm.reservationMessageImgUri}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/alert_description">
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/reservation_btn_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@+id/contents_img"
+                    tools:layout_editor_absoluteX="16dp">
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/reservation_delete_btn"
+                        style="@style/Theme.AppCompat.TextView.Notification.Button.Negative"
+                        onSingleClick="@{() -> vm.onDeleteReservationAlarmClicked(vm.reservationId)}"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/alert_description">
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/trash_full" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6.25dp"
-                            android:fontFamily="@font/pretendard_regular"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:lineSpacingExtra="4sp"
-                            android:text="삭제하기"
-                            android:textColor="@color/gray08"
-                            android:textSize="14dp" />
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/trash_full" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6.25dp"
+                                android:fontFamily="@font/pretendard_regular"
+                                android:gravity="center"
+                                android:lineSpacingExtra="4sp"
+                                android:text="삭제하기"
+                                android:textColor="@color/gray08"
+                                android:textSize="14dp" />
 
 
-                    </LinearLayout>
+                        </LinearLayout>
 
 
-                </com.google.android.material.card.MaterialCardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/reservation_edit_btn"
-                    style="@style/Theme.AppCompat.TextView.Notification.Button.Negative"
-                    onSingleClick="@{() -> vm.onAlarmCreateClicked(vm.reservationId,vm.reservationTitleEvent, vm.reservationMessageEvent, vm.reservationId)}"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/white"
-                    android:text="시간 수정하기"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/alert_description">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/reservation_edit_btn"
+                        style="@style/Theme.AppCompat.TextView.Notification.Button.Negative"
+                        onSingleClick="@{() -> vm.onAlarmCreateClicked(vm.reservationId,vm.reservationTitleEvent, vm.reservationMessageEvent, vm.reservationId)}"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/white"
+                        android:text="시간 수정하기"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/alert_description">
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/vector__2_" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6.25dp"
-                            android:fontFamily="@font/pretendard_regular"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:lineSpacingExtra="4sp"
-                            android:text="시간 수정하기"
-                            android:textColor="@color/black"
-                            android:textSize="14dp" />
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/vector__2_" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6.25dp"
+                                android:fontFamily="@font/pretendard_regular"
+                                android:gravity="center"
+                                android:lineSpacingExtra="4sp"
+                                android:text="시간 수정하기"
+                                android:textColor="@color/black"
+                                android:textSize="14dp" />
 
 
-                    </LinearLayout>
+                        </LinearLayout>
 
 
-                </com.google.android.material.card.MaterialCardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-            </LinearLayout>
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

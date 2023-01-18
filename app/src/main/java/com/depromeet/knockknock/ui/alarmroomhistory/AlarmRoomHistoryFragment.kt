@@ -81,14 +81,17 @@ class AlarmRoomHistoryFragment :
                 if (tvItemReservationContent.maxLines == 2) {
                     tvItemReservationContent.maxLines = 9999
                     ivItemReservationUp.animate().setDuration(200).rotation(180f)
-                    reservationBtnLayout.visibility = View.VISIBLE
-                    contentsImg.visibility = View.VISIBLE
+                    reservationContents.visibility= View.VISIBLE
+//                    reservationBtnLayout.visibility = View.VISIBLE
+//                    contentsImg.visibility = View.VISIBLE
 
                 } else {
                     tvItemReservationContent.maxLines = 2
                     ivItemReservationUp.animate().setDuration(200).rotation(0f)
-                    reservationBtnLayout.visibility = View.GONE
-                    contentsImg.visibility = View.GONE
+                    reservationContents.visibility= View.GONE
+
+//                    reservationBtnLayout.visibility = View.GONE
+//                    contentsImg.visibility = View.GONE
                 }
             }
 
@@ -284,7 +287,7 @@ class AlarmRoomHistoryFragment :
     }
 
     override fun onResume() {
-        viewModel.getPushAlarm()
+//        viewModel.getPushAlarm()
         binding.rvList.adapter = alarmRoomHistoryMessageAdapter
 
         super.onResume()
