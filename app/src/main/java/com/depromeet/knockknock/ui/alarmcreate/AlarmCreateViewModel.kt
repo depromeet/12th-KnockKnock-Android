@@ -1,6 +1,7 @@
 package com.depromeet.knockknock.ui.alarmcreate
 
 import android.util.Log
+import com.depromeet.data.model.error.InvalidAccessTokenException
 import com.depromeet.domain.model.RecommendMessageList
 import com.depromeet.domain.onError
 import com.depromeet.domain.onSuccess
@@ -129,7 +130,13 @@ class AlarmCreateViewModel @Inject constructor(
                 ).onSuccess {
                     _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
                 }.onError {
-                    _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToNoReservationAlarm)
+                    Log.d("ttt 예약 알림 보내기 실패", it.toString())
+                    when (it) {
+                        // 이미 예약했다면
+                        is InvalidAccessTokenException -> _navigationEvent.emit(
+                            AlarmCreateNavigationAction.NavigateToNoReservationAlarm
+                        )
+                    }
                 }
             }
         }
@@ -143,7 +150,10 @@ class AlarmCreateViewModel @Inject constructor(
                     send_at = sendAt,
                 ).onSuccess {
                     _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
-                }.onError {}
+                }.onError {
+                    Log.d("ttt 예약 알림 수정하기 실패", it.toString())
+
+                }
             }
         }
     }

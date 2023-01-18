@@ -152,6 +152,7 @@ class AlarmCreateFragment :
              * fcm API!!
              * */
             toastMessage("푸시알림을 발송했습니다!")
+            Log.d("ttt send at", it.toString())
             viewModel.onReservationAlarmPushClicked(it.toString())
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
@@ -164,7 +165,7 @@ class AlarmCreateFragment :
              * 예약 푸쉬알림을 업데이트 했습니다!
              * fcm API!!
              * */
-            Log.d("ttt", it.toString())
+            toastMessage("푸시알림이 예약되었어요!")
             viewModel.onUpdateReservationAlarmPushClicked(reservationId, it.toString())
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)

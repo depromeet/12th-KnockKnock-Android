@@ -2,6 +2,7 @@ package com.depromeet.knockknock.ui.alarmcreate.bottom
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,12 +18,14 @@ import com.depromeet.knockknock.ui.alarmcreate.model.ReservationAlarm
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 
 class BottomAlarmReservationPicker(
-    val callback: (sendPosition: ReservationAlarm) -> Unit
+    val callback: (sendPosition: LocalDateTime) -> Unit
 ) : BottomSheetDialogFragment(
 
 ) {
@@ -100,21 +103,15 @@ class BottomAlarmReservationPicker(
 
         val thisTimeSendCardView =
             requireView().findViewById<CardView>(R.id.this_time_send_card_view)
+
         thisTimeSendCardView.setOnClickListener {
             callback.invoke(
-                ReservationAlarm(
-                    reservationDate = reservationDate!!,
-                    reservationTime = reservationTime!!
+                LocalDateTime.of(
+                    LocalDate.parse(reservationDate!!),
+                    LocalTime.parse(reservationTime!!)
                 )
             )
-            Toast.makeText(
-                requireContext(), ReservationAlarm(
-                    reservationDate = reservationDate!!,
-                    reservationTime = reservationTime!!
-                ).toString(), Toast.LENGTH_SHORT
-            ).show()
             dismiss()
-        } // 예약 보내기 버튼 클릭시
+        }
     }
 }
-
