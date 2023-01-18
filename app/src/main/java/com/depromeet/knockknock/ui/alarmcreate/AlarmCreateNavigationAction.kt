@@ -10,6 +10,7 @@ sealed class AlarmCreateNavigationAction {
     class NavigateToPreview(val title: String, val message: String, val uri: String) :
         AlarmCreateNavigationAction()
     object NavigateToPushAlarm : AlarmCreateNavigationAction()
+    object NavigateToReservationPushAlarm : AlarmCreateNavigationAction()
     object NavigateToNoReservationAlarm : AlarmCreateNavigationAction()
 
 

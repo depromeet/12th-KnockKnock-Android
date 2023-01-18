@@ -128,7 +128,7 @@ class AlarmCreateViewModel @Inject constructor(
                     image_url = messageImgUri.value,
                     send_at = sendAt,
                 ).onSuccess {
-                    _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
+                    _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToReservationPushAlarm)
                 }.onError {
                     Log.d("ttt 예약 알림 보내기 실패", it.toString())
                     when (it) {
@@ -149,7 +149,7 @@ class AlarmCreateViewModel @Inject constructor(
                     reservation_id = reservationId,
                     send_at = sendAt,
                 ).onSuccess {
-                    _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToPushAlarm)
+                    _navigationEvent.emit(AlarmCreateNavigationAction.NavigateToReservationPushAlarm)
                 }.onError {
                     Log.d("ttt 예약 알림 수정하기 실패", it.toString())
 
