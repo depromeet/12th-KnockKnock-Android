@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.findFragment
@@ -109,6 +110,8 @@ class AlarmRoomHistoryMessageAdapter(
                 viewModel.alarmDateEvent.value = date
                 reactionRecycler.adapter = reactionAdapter
                 reactionAdapter.submitList(item.reactions.reaction_count_infos)
+
+                isEllipsis(contents)
                 expandBtn.setOnClickListener {
                     model!!.isExpanded = !(model!!.isExpanded)
 
@@ -139,7 +142,21 @@ class AlarmRoomHistoryMessageAdapter(
                 }
             }
         }
+
+        // 1이 나온다는 것은 글씨가 줄여졌다는 것이다.
+        fun isEllipsis(textView: TextView) {
+            textView.post {
+                if (textView.layout.lineCount > 0) {
+                    if (textView.layout.getEllipsisCount(textView.layout.lineCount - 1) > 0) {
+                        binding.expandBtn.visibility = View.VISIBLE
+                    } else {
+                        binding.expandBtn.visibility = View.GONE
+                    }
+                }
+            }
+        }
     }
+
 }
 
 internal object AlarmRoomHistoryMessageItemDiffCallback : DiffUtil.ItemCallback<Notification>() {
