@@ -56,7 +56,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
     init {
         getProfile()
-        getGroups()
+//        getGroups()
     }
 
     fun getGroups() {
@@ -68,6 +68,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 membersEvent.value = it.members.size.toString()
                 isHost.value = it.ihost
                 roomImgUri.value = it.background_image_path
+                Log.d("ttt bg img path",it.background_image_path )
                 for (i in 0..it.members.size) {
                     if (userId.value == it.members[i].user_id) {
                         participation.value = true
