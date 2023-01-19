@@ -91,7 +91,15 @@ class AlarmCreateFragment :
                             it.uri
                         )
                     )
-                    is AlarmCreateNavigationAction.NavigateToPushAlarm -> navController.popBackStack()
+                    is AlarmCreateNavigationAction.NavigateToPushAlarm -> {
+                        toastMessage("푸시알림을 발송했습니다!")
+                        navController.popBackStack()
+                    }
+                    is AlarmCreateNavigationAction.NavigateToReservationPushAlarm -> {
+                        toastMessage("푸시알림이 예약되었어요!")
+                        navController.popBackStack()
+                    }
+
                     is AlarmCreateNavigationAction.NavigateToNoReservationAlarm -> alarmNoReservationDialog()
                     is AlarmCreateNavigationAction.NavigateToBackStack -> navController.popBackStack()
                 }
@@ -137,7 +145,6 @@ class AlarmCreateFragment :
                      * 푸쉬알림을 발송했습니다!
                      * fcm API!!
                      * */
-                    toastMessage("푸시알림을 발송했습니다!")
                     viewModel.onAlarmPushClicked()
                 }
             }
@@ -151,7 +158,7 @@ class AlarmCreateFragment :
              * 예약 푸쉬알림을 발송했습니다!
              * fcm API!!
              * */
-            toastMessage("푸시알림을 발송했습니다!")
+            Log.d("ttt send at", it.toString())
             viewModel.onReservationAlarmPushClicked(it.toString())
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
@@ -164,7 +171,6 @@ class AlarmCreateFragment :
              * 예약 푸쉬알림을 업데이트 했습니다!
              * fcm API!!
              * */
-            Log.d("ttt", it.toString())
             viewModel.onUpdateReservationAlarmPushClicked(reservationId, it.toString())
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
