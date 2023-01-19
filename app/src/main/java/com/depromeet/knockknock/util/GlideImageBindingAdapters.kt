@@ -45,6 +45,25 @@ fun ImageView.bindReservationContentsImage(contentsImageUri: String?) {
     }
     Log.d("ttt reservation image", contentsImageUri.toString())
     Log.d("ttt reservation image", contentsImageUri!!.length.toString())
+}
+
+@BindingAdapter("alarmContentsImage")
+fun ImageView.bindAlarmContentsImage(contentsImageUri: String?) {
+    if (contentsImageUri!!.isNotEmpty()){
+        contentsImageUri.let {
+            Glide.with(context)
+                .load(it)
+                .transform(CenterCrop(), RoundedCorners(50))
+                .into(this)
+        }
+    }else{
+        Log.d("ttt", "hi")
+
+        this.visibility = View.GONE
+
+    }
+    Log.d("ttt reservation image", contentsImageUri.toString())
+    Log.d("ttt reservation image", contentsImageUri!!.length.toString())
 
 
 }

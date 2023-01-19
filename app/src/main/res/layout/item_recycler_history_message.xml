@@ -116,7 +116,7 @@
 
             <ImageView
                 android:id="@+id/contents_img"
-                app:bookmarkContentsImage="@{model.image_url}"
+                app:alarmContentsImage="@{model.image_url}"
                 android:layout_width="match_parent"
                 android:layout_height="296dp"
                 android:layout_marginEnd="12dp"

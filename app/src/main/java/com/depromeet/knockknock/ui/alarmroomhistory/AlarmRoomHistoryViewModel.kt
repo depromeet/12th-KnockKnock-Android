@@ -56,6 +56,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
 
     init {
         getProfile()
+        getGroups()
     }
 
     fun getGroups() {

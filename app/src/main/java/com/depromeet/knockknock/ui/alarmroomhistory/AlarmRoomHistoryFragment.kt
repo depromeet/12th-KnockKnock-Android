@@ -50,7 +50,7 @@ class AlarmRoomHistoryFragment :
         viewModel.groupId.value = args.groupId
         viewModel.getGroupAdmissions()
         viewModel.getPushAlarm()
-        viewModel.getGroups()
+//        viewModel.getGroups()
 
         binding.apply {
             this.vm = viewModel
