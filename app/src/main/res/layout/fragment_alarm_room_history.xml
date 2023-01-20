@@ -16,14 +16,13 @@
         android:layout_height="match_parent">
 
         <ImageView
-            app:roomBackgroundImage="@{vm.roomImgUri}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:roomBackgroundImage="@{vm.roomImgUri}" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -219,22 +218,21 @@
                 android:id="@+id/reservation_contents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_item_reservation_content"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:visibility="gone"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_reservation_content">
 
                 <ImageView
                     android:id="@+id/contents_img"
                     android:layout_width="match_parent"
                     android:layout_height="296dp"
-                    android:visibility="visible"
                     android:layout_marginTop="8dp"
-                    app:reservationContentsImage="@{vm.reservationMessageImgUri}"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:reservationContentsImage="@{vm.reservationMessageImgUri}" />
 
                 <LinearLayout
                     android:id="@+id/reservation_btn_layout"
@@ -338,8 +336,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -399,6 +395,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
                     android:orientation="vertical"
+                    app:alarmInviteRoomBundleAdapter="@{vm.alarmInviteRoomEvent}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_recycler_invite_room" />
 
@@ -416,9 +413,9 @@
                     app:layout_constraintVertical_bias="0.0"
                     tools:listitem="@layout/item_recycler_history_message" />
 
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/gradient_detail"
@@ -450,6 +447,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <ImageView
             isMessage="@{vm.isMessage}"
             isPublicAccess="@{vm.isPublicAccess}"
@@ -463,6 +461,8 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
+            groupType="@{vm.groupType}"
+            ihost="@{vm.isHost()}"
             onSingleClick="@{() -> vm.onAlarmCreateClicked(1, vm.reservationTitleEvent, vm.emptyMessage, 0)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

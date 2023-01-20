@@ -47,6 +47,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     var isPublicAccess = MutableStateFlow<Boolean>(true)
     var membersEvent = MutableStateFlow<String>("")
     var isHost = MutableStateFlow<Boolean>(true)
+    var groupType = MutableStateFlow<String>("")
     var isMessage = MutableStateFlow<Boolean>(true)
     var editTextReportEvent = MutableStateFlow<String>("")
     var userId = MutableStateFlow<Int>(0)
@@ -60,6 +61,7 @@ class AlarmRoomHistoryViewModel @Inject constructor(
     }
 
     fun getGroups() {
+        Log.d("ttt group id", groupId.value.toString())
         baseViewModelScope.launch {
             mainRepository.getGroup(groupId.value).onSuccess {
                 alarmRoomTitleEvent.value = it.title
@@ -68,17 +70,20 @@ class AlarmRoomHistoryViewModel @Inject constructor(
                 membersEvent.value = it.members.size.toString()
                 isHost.value = it.ihost
                 roomImgUri.value = it.background_image_path
-                Log.d("ttt bg img path",it.background_image_path )
-                for (i in 0..it.members.size) {
+                groupType.value = it.group_type
+
+                for (i in it.members.indices) {
                     if (userId.value == it.members[i].user_id) {
                         participation.value = true
                     }
                 }
-                Log.d("ttt", "그룹 확인 성공")
+                Log.d("ttt participation", participation.value.toString())
+
+                Log.d("ttt group", "그룹 확인 성공")
 
 
             }.onError {
-                Log.d("ttt", "그룹 확인 실패")
+                Log.d("ttt group", "그룹 확인 실패")
             }
         }
     }

@@ -46,6 +46,10 @@ class AlarmRoomHistoryFragment :
     }
     private val alarmInviteRoomAdapter by lazy { AlarmInviteRoomAdapter(viewModel, viewModel) }
 
+    init {
+        setupEvent()
+    }
+
     override fun initStartView() {
         viewModel.groupId.value = args.groupId
         viewModel.getGroupAdmissions()
@@ -59,7 +63,6 @@ class AlarmRoomHistoryFragment :
         exception = viewModel.errorEvent
         initToolbar()
         initAdapter()
-        setupEvent()
         binding.apply {
 
             // 방 설명 더보기/접기
