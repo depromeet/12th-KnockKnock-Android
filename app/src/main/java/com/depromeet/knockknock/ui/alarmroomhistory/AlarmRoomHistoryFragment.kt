@@ -81,14 +81,14 @@ class AlarmRoomHistoryFragment :
                 if (tvItemReservationContent.maxLines == 2) {
                     tvItemReservationContent.maxLines = 9999
                     ivItemReservationUp.animate().setDuration(200).rotation(180f)
-                    reservationContents.visibility= View.VISIBLE
+                    reservationContents.visibility = View.VISIBLE
 //                    reservationBtnLayout.visibility = View.VISIBLE
 //                    contentsImg.visibility = View.VISIBLE
 
                 } else {
                     tvItemReservationContent.maxLines = 2
                     ivItemReservationUp.animate().setDuration(200).rotation(0f)
-                    reservationContents.visibility= View.GONE
+                    reservationContents.visibility = View.GONE
 
 //                    reservationBtnLayout.visibility = View.GONE
 //                    contentsImg.visibility = View.GONE
@@ -113,7 +113,7 @@ class AlarmRoomHistoryFragment :
                 when (it) {
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmMore -> initAlarmMoreBottomSheet(
                         sendUserId = it.sendUserId,
-                        alarmId = it.alarmId, message = it.message
+                        alarmId = it.alarmId, title = it.title, message = it.message
                     )
                     is AlarmRoomHistoryNavigationAction.NavigateToAlarmCreate -> navigate(
                         AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToAlarmCreateFragment(
@@ -178,10 +178,15 @@ class AlarmRoomHistoryFragment :
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
 
-    private fun initAlarmMoreBottomSheet(sendUserId: Int, alarmId: Int, message: String) {
+    private fun initAlarmMoreBottomSheet(
+        sendUserId: Int,
+        alarmId: Int,
+        title: String,
+        message: String
+    ) {
         val dialog: BottomAlarmMore = BottomAlarmMore {
             when (it) {
-                is AlarmMoreType.Copy -> roomFilter(message)
+                is AlarmMoreType.Copy -> roomFilter(title, message)
                 is AlarmMoreType.Save -> {
                     viewModel.onAlarmSaveClicked(alarmId)
                 }
@@ -233,9 +238,9 @@ class AlarmRoomHistoryFragment :
         dialog.show(childFragmentManager, TAG)
     }
 
-    private fun roomFilter(copyMessage: String) {
+    private fun roomFilter(copyTitle: String, copyMessage: String) {
         val bottomSheet = BottomAlarmCopyRoom { clickedRoom ->
-            viewModel.onAlarmCreateClicked(clickedRoom, "", copyMessage, 0)
+            viewModel.onAlarmCreateClicked(clickedRoom, copyTitle, copyMessage, 0)
         }
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }

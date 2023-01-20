@@ -309,12 +309,13 @@ class AlarmRoomHistoryViewModel @Inject constructor(
         }
     }
 
-    override fun onRecentAlarmMoreClicked(sendUserId: Int, alarmId: Int, message: String) {
+    override fun onRecentAlarmMoreClicked(sendUserId: Int, alarmId: Int, title: String, message: String) {
         baseViewModelScope.launch {
             _navigationEvent.emit(
                 AlarmRoomHistoryNavigationAction.NavigateToAlarmMore(
                     sendUserId,
                     alarmId,
+                    title,
                     message
                 )
             )
