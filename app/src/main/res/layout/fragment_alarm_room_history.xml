@@ -419,8 +419,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/gradient_detail"
-            isPublicAccess="@{vm.isPublicAccess}"
-            participation="@{vm.participation}"
+            app:viewParticipationVisible="@{vm.participation}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/bg_gradient"

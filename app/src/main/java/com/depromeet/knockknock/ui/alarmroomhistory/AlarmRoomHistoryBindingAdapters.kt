@@ -6,9 +6,6 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.depromeet.domain.model.Admission
 import com.depromeet.knockknock.ui.alarmroomhistory.adapter.AlarmInviteRoomAdapter
 
@@ -27,8 +24,6 @@ fun ConstraintLayout.bindViewVisible(data: String) {
     else this.visibility = View.VISIBLE
 }
 
-
-//
 @BindingAdapter("bindViewVisible")
 fun ConstraintLayout.bindViewVisible(data: List<Admission>) {
     if (data.isEmpty()) this.visibility = View.GONE
@@ -43,19 +38,14 @@ fun ImageView.bindViewVisible(isPublicAccess: Boolean) {
 
 @BindingAdapter("isMessage", "isPublicAccess")
 fun ImageView.bindViewMessageVisible(isMessage: Boolean, isPublicAccess: Boolean) {
-    Log.d("ttt isPublicAccess", isPublicAccess.toString())
-    Log.d("ttt isMessage", isMessage.toString())
-
     if (isPublicAccess) {
         if (isMessage) this.visibility = View.GONE
         else this.visibility = View.VISIBLE
     }
 }
 
-@BindingAdapter("isPublicAccess", "participation")
-fun ConstraintLayout.bindViewParticipationVisible(isPublicAccess: Boolean, participation: Boolean) {
-    Log.d("ttt participation", participation.toString())
-
+@BindingAdapter("viewParticipationVisible")
+fun ConstraintLayout.bindViewParticipationVisible(participation: Boolean) {
     if (participation) {
         this.visibility = View.GONE
     } else {
