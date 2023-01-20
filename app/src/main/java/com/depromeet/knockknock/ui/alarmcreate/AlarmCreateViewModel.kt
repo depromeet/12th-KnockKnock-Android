@@ -34,21 +34,29 @@ class AlarmCreateViewModel @Inject constructor(
     val recommendationMessageEvent: StateFlow<RecommendMessageList> = _recommendationMessageEvent
 
     init {
+        Log.d("ttt init", editTextTitleEvent.value.toString())
+        initEditTextMessageEvent()
+        getRecommendMessage()
+
+    }
+
+    fun initEditTextMessageEvent(){
         baseViewModelScope.launch {
             editTextMessageEvent.debounce(0).collectLatest {
                 onEditTextCount(it.codePointCount(0, it.length))
             }
         }
 
+
+    }
+    fun initEditTextTitleEvent(){
         if (editTextTitleEvent.value == "") {
             baseViewModelScope.launch {
                 mainRepository.getUserProfile().onSuccess {
                     editTextTitleEvent.emit(it.nickname)
                 }
-
             }
         }
-        getRecommendMessage()
     }
 
     private fun getRecommendMessage() {

@@ -51,6 +51,10 @@ class AlarmCreateFragment :
     override val viewModel: AlarmCreateViewModel by viewModels()
     private val recommendationAdapter by lazy { RecommendationAdapter(viewModel) }
 
+    init {
+        setupEvent()
+    }
+
     override fun initStartView() {
         binding.apply {
             this.vm = viewModel
@@ -60,16 +64,17 @@ class AlarmCreateFragment :
         val args: AlarmCreateFragmentArgs by navArgs()
         viewModel.groupId.value = args.alarmId
         viewModel.groupTitle.value = args.roomTitle
-        viewModel.editTextTitleEvent.value = args.title
-        viewModel.editTextMessageEvent.value = args.message
-
+        if (args.title != "") viewModel.editTextTitleEvent.value = args.title else viewModel.initEditTextTitleEvent()
+        if (args.message != "") viewModel.editTextMessageEvent.value = args.message
         if (args.reservation != 0) updateReservationAlarmSend(args.reservation)
+
+        Log.d("ttt editTextTitleEvent", viewModel.editTextTitleEvent.value)
+        Log.d("ttt title", args.title)
 
         initEditText()
         initRegisterForActivityResult()
         initToolbar()
         initAdapter()
-        setupEvent()
         setOnTouchListenerEditText()
     }
 
@@ -134,6 +139,7 @@ class AlarmCreateFragment :
     }
 
     private fun alarmSend() {
+        Log.d("ttt", "alarmSend 실행")
         val bottomSheet = BottomAlarmSend(callback = {
             when (it) {
                 0 -> {
@@ -299,5 +305,10 @@ class AlarmCreateFragment :
     private fun initToolbar() {
         with(binding.toolbar) {
         }
+    }
+
+    override fun onResume() {
+//        viewModel.initText()
+        super.onResume()
     }
 }
