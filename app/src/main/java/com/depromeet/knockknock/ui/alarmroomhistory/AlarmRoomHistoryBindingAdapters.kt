@@ -18,24 +18,36 @@ fun RecyclerView.bindAlarmInviteRoom(itemList: List<Admission>) {
     }
 }
 
-@BindingAdapter("bindViewVisible")
-fun ConstraintLayout.bindViewVisible(data: String) {
+/**
+ * 예약 메시지 알림여부에 따른 동적 UI
+ * **/
+@BindingAdapter("bindReservationViewVisible")
+fun ConstraintLayout.bindReservationViewVisible(data: String) {
     if (data == "") this.visibility = View.GONE
     else this.visibility = View.VISIBLE
 }
 
-@BindingAdapter("bindViewVisible")
-fun ConstraintLayout.bindViewVisible(data: List<Admission>) {
+/**
+ * 입장 요청에 따른 동적 UI
+ * **/
+@BindingAdapter("bindAdmissionViewVisible")
+fun ConstraintLayout.bindAdmissionViewVisible(data: List<Admission>) {
     if (data.isEmpty()) this.visibility = View.GONE
     else this.visibility = View.VISIBLE
 }
 
-@BindingAdapter("bindViewVisible")
-fun ImageView.bindViewVisible(isPublicAccess: Boolean) {
+/**
+ * 알림방 타입에 따른 동적 UI
+ * **/
+@BindingAdapter("bindViewPublicAccessVisible")
+fun ImageView.bindViewPublicAccessVisible(isPublicAccess: Boolean) {
     if (isPublicAccess) this.visibility = View.GONE
     else this.visibility = View.VISIBLE
 }
 
+/**
+ * 알림 메시지 여부에 따른 동적 UI
+ * **/
 @BindingAdapter("isMessage", "isPublicAccess")
 fun ImageView.bindViewMessageVisible(isMessage: Boolean, isPublicAccess: Boolean) {
     if (isPublicAccess) {
@@ -44,6 +56,9 @@ fun ImageView.bindViewMessageVisible(isMessage: Boolean, isPublicAccess: Boolean
     }
 }
 
+/**
+ * 알림방에 참여했는지에 따른 동적 UI
+ * **/
 @BindingAdapter("viewParticipationVisible")
 fun ConstraintLayout.bindViewParticipationVisible(participation: Boolean) {
     if (participation) {
@@ -53,6 +68,9 @@ fun ConstraintLayout.bindViewParticipationVisible(participation: Boolean) {
     }
 }
 
+/**
+ * 알림방 타입과 호스트인지에 따른 동적 UI
+ * **/
 @BindingAdapter("groupType", "ihost")
 fun ImageView.bindViewAlarmPushVisible(groupType: String, ihost: Boolean) {
     if (groupType == "OPEN" && ihost) this.visibility = View.VISIBLE

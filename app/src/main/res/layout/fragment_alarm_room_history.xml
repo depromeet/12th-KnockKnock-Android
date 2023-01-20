@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
             android:src="@drawable/secret"
-            app:bindViewVisible="@{vm.isPublicAccess}"
+            app:bindViewPublicAccessVisible="@{vm.isPublicAccess}"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent">
@@ -163,7 +163,7 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/bg_yellow_radius10"
             android:padding="16dp"
-            app:bindViewVisible="@{vm.reservationMessageEvent}"
+            app:bindReservationViewVisible="@{vm.reservationMessageEvent}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -359,7 +359,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:bindViewVisible="@{vm.alarmInviteRoomEvent}">
+                    app:bindAdmissionViewVisible="@{vm.alarmInviteRoomEvent}">
 
                     <TextView
                         android:id="@+id/tv_invite_title"
@@ -424,6 +424,7 @@
             android:layout_height="0dp"
             android:background="@drawable/bg_gradient"
             android:elevation="10dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent=".5"
