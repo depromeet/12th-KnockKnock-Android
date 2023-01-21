@@ -3,6 +3,7 @@ package com.depromeet.knockknock.ui.alarmroomjoined
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.depromeet.domain.model.GroupContent
+import com.depromeet.domain.onSuccess
 import com.depromeet.domain.repository.MainRepository
 import com.depromeet.knockknock.base.BaseViewModel
 import com.depromeet.knockknock.ui.alarmroomjoined.adapter.createAlarmRoomJoinedPager
@@ -36,7 +37,8 @@ class AlarmRoomJoinedViewModel @Inject constructor(
     private val _roomAloneClicked : MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val roomAloneClicked : StateFlow<Boolean> = _roomAloneClicked.asStateFlow()
 
-    var currentRoomCount : MutableStateFlow<Int> = MutableStateFlow<Int>(1)
+    var currentRoomCount : MutableStateFlow<Int> = MutableStateFlow<Int>(0)
+    var _joinedRoomList : MutableStateFlow<List<GroupContent>> = MutableStateFlow(emptyList())
     var joinedRoomList: Flow<PagingData<GroupContent>> = emptyFlow()
     var initJoinedRoomType : MutableStateFlow<String> = MutableStateFlow("ALL")
 
@@ -44,13 +46,23 @@ class AlarmRoomJoinedViewModel @Inject constructor(
         getJoinedGroups()
     }
 
-    fun getJoinedGroups(){
-            joinedRoomList = createAlarmRoomJoinedPager(
-                mainRepository = mainRepository,
-                roomType = initJoinedRoomType
-            ).flow.cachedIn(baseViewModelScope)
-
+    fun getJoinedGroups() {
+//            joinedRoomList = createAlarmRoomJoinedPager(
+//                mainRepository = mainRepository,
+//                roomType = initJoinedRoomType
+//            ).flow.cachedIn(baseViewModelScope)\
+        baseViewModelScope.launch {
+            mainRepository.getJoinedGroups("ALL", 0, 30)
+                .onSuccess {
+                    _joinedRoomList.emit(it.groupContent)
+                    if (_joinedRoomList.value.size > 0) {
+                        currentRoomCount.value = 1
+                    }
+                }
+        }
     }
+
+
 
     fun getJoinedGroupCount(){
         baseViewModelScope.launch {

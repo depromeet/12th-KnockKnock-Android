@@ -62,13 +62,13 @@ class AlarmRoomJoinedFragment :
         }
 
         lifecycleScope.launchWhenStarted {
-            viewModel.joinedRoomList.collectLatest {
+            viewModel._joinedRoomList.collectLatest {
 //                toastMessage("collected")
                 val alarmRoomAdapter = AlarmRoomJoinedAdapter(viewModel, viewModel)
                 binding.alarmRoomRecycler.adapter = alarmRoomAdapter
 //                toastMessage(alarmRoomAdapter.snapshot().toString())
 //                println("paging adpater size is ${alarmRoomAdapter.snapshot().size}")
-                alarmRoomAdapter.submitData(it)
+                alarmRoomAdapter.submitList(it)
 //                println("paging adpater size is ${alarmRoomAdapter.itemCount}")
 //                toastMessage(alarmRoomAdapter.itemCount.toString())
             }
@@ -108,6 +108,18 @@ class AlarmRoomJoinedFragment :
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getJoinedGroups()
+        lifecycleScope.launchWhenStarted {
+            viewModel._joinedRoomList.collectLatest {
+                val alarmRoomAdapter = AlarmRoomJoinedAdapter(viewModel, viewModel)
+                binding.alarmRoomRecycler.adapter = alarmRoomAdapter
+                alarmRoomAdapter.submitList(it)
+            }
+        }
+    }
+
     private fun initAdapter() {
         binding.alarmRoomRecycler.adapter = roomAdapter
     }
@@ -118,7 +130,7 @@ class AlarmRoomJoinedFragment :
 //                it.category.id == categoryId
 //            }
 
-            val filteredAlarmRoomList = viewModel.joinedRoomList.map { pagingData ->
+            val filteredAlarmRoomList = viewModel._joinedRoomList.map { pagingData ->
                 pagingData.filter {
                     it.group_type == type
                 }
@@ -127,15 +139,15 @@ class AlarmRoomJoinedFragment :
                 filteredAlarmRoomList.collectLatest {
                     val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel, viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
-                    alarmRoomJoinedAdapter.submitData(it)
+                    alarmRoomJoinedAdapter.submitList(it)
                 }
             }
         } else {
             lifecycleScope.launchWhenStarted {
-                viewModel.joinedRoomList.collectLatest {
+                viewModel._joinedRoomList.collectLatest {
                     val alarmRoomJoinedAdapter = AlarmRoomJoinedAdapter(viewModel, viewModel)
                     binding.alarmRoomRecycler.adapter = alarmRoomJoinedAdapter
-                    alarmRoomJoinedAdapter.submitData(it)
+                    alarmRoomJoinedAdapter.submitList(it)
                 }
             }
         }
