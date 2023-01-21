@@ -66,7 +66,7 @@ class SettingRoomFragment :
                     is SettingRoomNavigationAction.NavigateToExportMember -> {}
                     is SettingRoomNavigationAction.NavigateToRemove -> {
                         toastMessage("알림방을 제거했어요")
-                        navController.popBackStack()}
+                    navController.navigate(SettingRoomFragmentDirections.actionSettingRoomFragmentToAlarmRoomTabFragment())}
                     is SettingRoomNavigationAction.NavigateToEditDetail -> {
                         navigate(
                             SettingRoomFragmentDirections.actionSettingRoomFragmentToEditRoomDetailsFragment(
