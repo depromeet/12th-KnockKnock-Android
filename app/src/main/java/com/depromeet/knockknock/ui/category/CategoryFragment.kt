@@ -9,6 +9,7 @@ import com.depromeet.knockknock.R
 import com.depromeet.knockknock.base.BaseFragment
 import com.depromeet.knockknock.databinding.FragmentCategoryBinding
 import com.depromeet.knockknock.ui.category.adapter.CategoryAdapter
+import com.depromeet.knockknock.ui.category.adapter.beforeClicked
 import com.depromeet.knockknock.ui.invitefriendtoroom.InviteFriendToRoomFragmentArgs
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
@@ -62,6 +63,12 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
                 categoryAdapter.submitList(it)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        beforeClicked = 0
+        viewModel.getCategories()
     }
 
     override fun initAfterBinding() {

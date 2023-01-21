@@ -53,6 +53,15 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
+    fun getCategories(){
+        baseViewModelScope.launch {
+            mainRepository.getGroupCategories()
+                .onSuccess {
+                    _categoryList.emit(it.categories)
+                }
+        }
+    }
+
     override fun onSaveClicked() {
         baseViewModelScope.launch {
             mainRepository.putGroup(
