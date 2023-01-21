@@ -26,7 +26,7 @@ class SettingRoomForUserViewModel @Inject constructor(
 
     private val _categoryInfo: MutableStateFlow<String> = MutableStateFlow<String>("없음")
     val categoryInfo: StateFlow<String> = _categoryInfo.asStateFlow()
-    var receivedRoomId : MutableStateFlow<Int> = MutableStateFlow<Int>(1)
+    var receivedRoomId : MutableStateFlow<Int> = MutableStateFlow<Int>(-1)
 
     private val _roomInfo: MutableStateFlow<Group> = MutableStateFlow(
         Group(
