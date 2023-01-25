@@ -134,7 +134,7 @@ class AlarmRoomHistoryMessageAdapter(
                     val username = userNameText.text.toString()
                     val dateTime = dateTimeText.text.toString()
                     val contents = contents.text.toString()
-                    val imgContent = contentsImg.toString()
+                    val imgContent = item.image_url
                     val action = AlarmRoomHistoryFragmentDirections.actionAlarmRoomHistoryFragmentToPushDetailFragment(fragment.viewModel.groupId.value,
                     username, dateTime, contents, imgContent)
                     // findNavController(fragment).navigate(R.id.action_alarmRoomHistoryFragment_to_pushDetailFragment)

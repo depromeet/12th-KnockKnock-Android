@@ -84,11 +84,11 @@
 
                     <ImageView
                         android:id="@+id/iv_detail_content"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/felix" />
+                        app:roomBackgroundImage ="@{viewmodel.img_url}"
+                       />
 
                 </androidx.cardview.widget.CardView>
 
@@ -116,193 +116,193 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_detail_content" />
 
-                <TextView
-                    android:id="@+id/tv_detail_question"
-                    style="@style/Theme.AppCompat.TextView.Home.Recent.UserName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="푸시알림에 공감하셨나요?"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_detail_space" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_detail_question"-->
+<!--                    style="@style/Theme.AppCompat.TextView.Home.Recent.UserName"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="푸시알림에 공감하셨나요?"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/view_detail_space" />-->
 
-                <ImageView
-                    android:id="@+id/iv_detail_happy"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_marginTop="12dp"
-                    android:src="@drawable/img_user_profile_happy"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_disgusting"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_detail_question" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_detail_happy"-->
+<!--                    android:layout_width="72dp"-->
+<!--                    android:layout_height="72dp"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:src="@drawable/img_user_profile_happy"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_disgusting"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_detail_question" />-->
 
-                <ImageView
-                    android:id="@+id/iv_detail_disgusting"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:src="@drawable/img_reaction_disgust"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_sad"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/iv_detail_happy"
-                    app:layout_constraintTop_toTopOf="@+id/iv_detail_happy" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_detail_disgusting"-->
+<!--                    android:layout_width="72dp"-->
+<!--                    android:layout_height="72dp"-->
+<!--                    android:src="@drawable/img_reaction_disgust"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_sad"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/iv_detail_happy"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/iv_detail_happy" />-->
 
-                <ImageView
-                    android:id="@+id/iv_detail_sad"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:src="@drawable/img_reaction_sad"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_angry"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/iv_detail_disgusting"
-                    app:layout_constraintTop_toTopOf="@+id/iv_detail_happy" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_detail_sad"-->
+<!--                    android:layout_width="72dp"-->
+<!--                    android:layout_height="72dp"-->
+<!--                    android:src="@drawable/img_reaction_sad"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_angry"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/iv_detail_disgusting"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/iv_detail_happy" />-->
 
-                <ImageView
-                    android:id="@+id/iv_detail_angry"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:src="@drawable/img_reaction_angry"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/iv_detail_sad"
-                    app:layout_constraintTop_toTopOf="@+id/iv_detail_happy" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_detail_angry"-->
+<!--                    android:layout_width="72dp"-->
+<!--                    android:layout_height="72dp"-->
+<!--                    android:src="@drawable/img_reaction_angry"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/iv_detail_sad"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/iv_detail_happy" />-->
 
-                <TextView
-                    android:id="@+id/tv_detail_happy"
-                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="1"
-                    app:layout_constraintEnd_toEndOf="@id/iv_detail_happy"
-                    app:layout_constraintStart_toStartOf="@id/iv_detail_happy"
-                    app:layout_constraintTop_toBottomOf="@id/iv_detail_happy" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_detail_happy"-->
+<!--                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="1"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/iv_detail_happy"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/iv_detail_happy"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/iv_detail_happy" />-->
 
-                <TextView
-                    android:id="@+id/tv_detail_disgusting"
-                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="1"
-                    app:layout_constraintEnd_toEndOf="@id/iv_detail_disgusting"
-                    app:layout_constraintStart_toStartOf="@id/iv_detail_disgusting"
-                    app:layout_constraintTop_toBottomOf="@id/iv_detail_disgusting" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_detail_disgusting"-->
+<!--                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="1"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/iv_detail_disgusting"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/iv_detail_disgusting"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/iv_detail_disgusting" />-->
 
-                <TextView
-                    android:id="@+id/tv_detail_sad"
-                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="1"
-                    app:layout_constraintEnd_toEndOf="@id/iv_detail_sad"
-                    app:layout_constraintStart_toStartOf="@id/iv_detail_sad"
-                    app:layout_constraintTop_toBottomOf="@id/iv_detail_sad" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_detail_sad"-->
+<!--                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="1"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/iv_detail_sad"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/iv_detail_sad"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/iv_detail_sad" />-->
 
-                <TextView
-                    android:id="@+id/tv_detail_angry"
-                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="1"
-                    app:layout_constraintEnd_toEndOf="@id/iv_detail_angry"
-                    app:layout_constraintStart_toStartOf="@id/iv_detail_angry"
-                    app:layout_constraintTop_toBottomOf="@id/iv_detail_angry" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_detail_angry"-->
+<!--                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="1"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/iv_detail_angry"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/iv_detail_angry"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/iv_detail_angry" />-->
 
-                <ImageView
-                    android:id="@+id/iv_detail_sorry"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_marginTop="12dp"
-                    android:src="@drawable/img_reaction_sorry"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_wink"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_detail_happy" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_detail_sorry"-->
+<!--                    android:layout_width="72dp"-->
+<!--                    android:layout_height="72dp"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:src="@drawable/img_reaction_sorry"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_wink"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_detail_happy" />-->
 
-                <ImageView
-                    android:id="@+id/iv_detail_wink"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:src="@drawable/img_reaction_wink"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_greedy"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/iv_detail_sorry"
-                    app:layout_constraintTop_toTopOf="@+id/iv_detail_sorry" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_detail_wink"-->
+<!--                    android:layout_width="72dp"-->
+<!--                    android:layout_height="72dp"-->
+<!--                    android:src="@drawable/img_reaction_wink"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_greedy"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/iv_detail_sorry"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/iv_detail_sorry" />-->
 
-                <ImageView
-                    android:id="@+id/iv_detail_greedy"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:src="@drawable/img_reaction_greedy"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_sunglasses"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/iv_detail_wink"
-                    app:layout_constraintTop_toTopOf="@+id/iv_detail_sorry" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_detail_greedy"-->
+<!--                    android:layout_width="72dp"-->
+<!--                    android:layout_height="72dp"-->
+<!--                    android:src="@drawable/img_reaction_greedy"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/iv_detail_sunglasses"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/iv_detail_wink"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/iv_detail_sorry" />-->
 
-                <ImageView
-                    android:id="@+id/iv_detail_sunglasses"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:src="@drawable/img_reaction_sunglasses"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/iv_detail_greedy"
-                    app:layout_constraintTop_toTopOf="@+id/iv_detail_sorry" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_detail_sunglasses"-->
+<!--                    android:layout_width="72dp"-->
+<!--                    android:layout_height="72dp"-->
+<!--                    android:src="@drawable/img_reaction_sunglasses"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/iv_detail_greedy"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/iv_detail_sorry" />-->
 
-                <TextView
-                    android:id="@+id/tv_detail_sorry"
-                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="1"
-                    app:layout_constraintEnd_toEndOf="@id/iv_detail_sorry"
-                    app:layout_constraintStart_toStartOf="@id/iv_detail_sorry"
-                    app:layout_constraintTop_toBottomOf="@id/iv_detail_sorry" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_detail_sorry"-->
+<!--                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="1"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/iv_detail_sorry"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/iv_detail_sorry"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/iv_detail_sorry" />-->
 
-                <TextView
-                    android:id="@+id/tv_detail_wink"
-                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="1"
-                    app:layout_constraintEnd_toEndOf="@id/iv_detail_wink"
-                    app:layout_constraintStart_toStartOf="@id/iv_detail_wink"
-                    app:layout_constraintTop_toBottomOf="@id/iv_detail_wink" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_detail_wink"-->
+<!--                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="1"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/iv_detail_wink"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/iv_detail_wink"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/iv_detail_wink" />-->
 
-                <TextView
-                    android:id="@+id/tv_detail_greedy"
-                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="1"
-                    app:layout_constraintEnd_toEndOf="@id/iv_detail_greedy"
-                    app:layout_constraintStart_toStartOf="@id/iv_detail_greedy"
-                    app:layout_constraintTop_toBottomOf="@id/iv_detail_greedy" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_detail_greedy"-->
+<!--                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="1"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/iv_detail_greedy"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/iv_detail_greedy"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/iv_detail_greedy" />-->
 
-                <TextView
-                    android:id="@+id/tv_detail_sunglasses"
-                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="1"
-                    app:layout_constraintEnd_toEndOf="@id/iv_detail_sunglasses"
-                    app:layout_constraintStart_toStartOf="@id/iv_detail_sunglasses"
-                    app:layout_constraintTop_toBottomOf="@id/iv_detail_sunglasses" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_detail_sunglasses"-->
+<!--                    style="@style/Theme.AppCompat.TextView.Home.Recent.Contents"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="1"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/iv_detail_sunglasses"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/iv_detail_sunglasses"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/iv_detail_sunglasses" />-->
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_detail_sorry" />
+<!--                <Space-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_detail_sorry" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -33,11 +33,12 @@ class PushDetailFragment :
         viewModel.contents.value = args.contents
         viewModel.img_url.value = args.imgContent
 
+
         binding.apply {
             this.viewmodel = viewModel
             this.lifecycleOwner = viewLifecycleOwner
 
-            Log.d(TAG, "initStartView: $viewModel.img_url.value")
+            Log.d(TAG, "initStartView: ${viewModel.img_url.value}")
             
             tvDetailName.text = viewModel.username.value
             tvDetailTime.text = viewModel.dateTime.value

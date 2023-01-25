@@ -31,7 +31,7 @@ class PushDetailViewModel @Inject constructor(
     var username = MutableStateFlow<String>("")
     var dateTime = MutableStateFlow<String>("")
     var contents = MutableStateFlow<String>("")
-    var img_url = MutableStateFlow<String>("")
+    var img_url = MutableStateFlow<String>("https://user-images.githubusercontent.com/13329304/207665701-5e940985-f612-46d0-a376-1e151368d160.png")
 
     init {
         baseViewModelScope.launch {
