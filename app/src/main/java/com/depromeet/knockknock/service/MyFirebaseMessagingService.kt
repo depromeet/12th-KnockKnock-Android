@@ -80,7 +80,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // 알림에 대한 UI 정보, 작업
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
 //            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_todo_check))
-            .setSmallIcon(R.mipmap.img_app_logo_foreground) // 아이콘 설정
+            .setSmallIcon(R.drawable.app_logo_foreground) // 아이콘 설정
             .setContentTitle(remoteMessage.data["title"].toString()) // 제목
             .setContentText(remoteMessage.data["body"].toString()) // 메시지 내용
             .setAutoCancel(true) // 알람클릭시 삭제여부

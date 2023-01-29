@@ -97,7 +97,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:src="@mipmap/img_app_maker_foreground"
+                android:src="@drawable/img_app_makers_foreground_release"
                 android:scaleType="centerCrop">
             </ImageView>
 
